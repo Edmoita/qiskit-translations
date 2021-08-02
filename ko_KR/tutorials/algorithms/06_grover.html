@@ -574,7 +574,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="그로버-알고리즘과-진폭-증폭">
 <h1>그로버 알고리즘과 진폭 증폭<a class="headerlink" href="#그로버-알고리즘과-진폭-증폭" title="제목 주소">¶</a></h1>
-<p>Grover’s algorithm is one of the most famous quantum algorithms introduced by Lov Grover in 1996 [1]. It has initially been proposed for unstructured search problems, i.e. for finding a marked element in a unstructured database. However, Grover’s algorithm is now a subroutine to several other algorithms, such as Grover Adaptive Search [2]. For the details of Grover’s algorithm, please see <a class="reference external" href="https://qiskit.org/textbook/ch-algorithms/grover.html">Grover’s Algorithm</a> in the Qiskit textbook.</p>
+<p>Grover’s 알고리즘은 1996년[1]에 Lov Grover가 도입한 가장 유명한 양자 알고리즘들 중 하나이다. 구조화되지 않은 데이터베이스에서 표시된 요소를 찾는, 구조화되지 않은 검색 문제들에 대해 처음 제안되었다. 하지만 Grover’s 알고리즘은 이제 Grover’s 적응 탐색 (Grover Adaptive Search)[2]과 같은 여러 다른 알고리즘들의 서브루틴이다. Grover’s 알고리즘에 대한 자세한 내용은 Qiskit 교재에서 <a class="reference external" href="https://qiskit.org/textbook/ch-algorithms/grover.html">Grover’s 알고리즘</a> 을 참조하기 바란다.</p>
 <p>키스킷은 <code class="docutils literal notranslate"><span class="pre">Grover</span></code> 클래스에서 Grover의 알고리즘을 구현한다. 이 클래스에는 일반화된 버전인 진폭 증폭 [3] 이 포함되며, 개별 반복 및 기타 메타 설정을 Grover의 알고리즘으로 설정할 수 있다.</p>
 <p><strong>참조:</strong></p>
 <p>[1]: L. K. Grover, A fast quantum mechanical algorithm for database search. Proceedings 28th Annual Symposium on the Theory of Computing (STOC) 1996, pp. 212-219. <a class="reference external" href="https://arxiv.org/abs/quant-ph/9605043">https://arxiv.org/abs/quant-ph/9605043</a></p>
@@ -741,17 +741,17 @@ Top measurement: 11
 </div>
 </div>
 <p>이 오라클은 실제로 2개가 아닌 3개의 큐비트로 구현된다는 걸 알 수 있다!</p>
-<p>That is because the <code class="docutils literal notranslate"><span class="pre">PhaseOracle</span></code> is not a phase-flip oracle (which flips the phase of the good state) but a bit-flip oracle. This means it flips the state of an auxiliary qubit if the other qubits satisfy the condition. For Grover’s algorithm, however, we require a phase-flip oracle. To convert the bit-flip oracle to a phase-flip oracle we sandwich the controlled-NOT by <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(H\)</span> gates, as you can see in the circuit above.</p>
+<p>이는 <code class="docutils literal notranslate"><span class="pre">PhaseOracle</span></code> 이 (좋은 상태의 위상을 뒤집는) 위상 반전 오라클이 아니라 비트 플립 오라클이기 때문이다. 즉, 다른 큐비트가 조건을 충족하면 보조(auxiliary) 큐비트의 상태를 뒤집는다. 그러나 그로버 알고리즘의 경우 위상 반전 오라클이 필요하다. 비트 플립 오라클을 위상 플립 오라클로 변환하기 위하여 위의 회로에서 볼 수 있듯 controlled–NOT 게이트의 좌우에 <span class="math notranslate nohighlight">\(X\)</span> 와 <span class="math notranslate nohighlight">\(H\)</span> 게이트를 배치하여 샌드위치 형태로 감싼다.</p>
 <p><strong>참고:</strong> 비트-플립에서 위상-플립 오라클로의 이러한 변환은 일반적으로 유지되며, 이를 사용하여 오라클을 올바른 표현으로 변환할 수 있다.</p>
 </section>
 </section>
 <section id="진폭-증폭">
 <h2>진폭 증폭<a class="headerlink" href="#진폭-증폭" title="제목 주소">¶</a></h2>
-<p>Grover’s algorithm uses Hadamard gates to create the uniform superposition of all the states at the beginning of the Grover operator <span class="math notranslate nohighlight">\(\mathcal{Q}\)</span>. If some information on the good states is available, it might be useful to not start in a uniform superposition but only initialize specific states. This, generalized, version of Grover’s algorithm is referred to <em>Amplitude Amplification</em>.</p>
+<p>Grover 알고리즘은 하다마드 (Hadamard) 게이트를 사용하여 Grover 연산자 <span class="math notranslate nohighlight">\(\mathcal{Q}\)</span> 의 시작 부분에 모든 상태의 균일 중첩을 만든다. 좋은 상태에 대한 일부 정보를 사용할 수 있는 경우 균일 중첩 상태에서 시작하지 않고 특정 상태만 초기화하는 것이 유용할 수 있다. 이와 같이 일반화된 버전의 Grover 알고리즘을 <em>Amplitude Amplification</em> 이라고 한다.</p>
 <p>키스킷에서 초기 중첩 상태는 <code class="docutils literal notranslate"><span class="pre">state_preparation</span></code> 전달인자를 설정하여 쉽게 조정할 수 있다.</p>
 <section id="상태-준비">
 <h3>상태 준비<a class="headerlink" href="#상태-준비" title="제목 주소">¶</a></h3>
-<p>A <code class="docutils literal notranslate"><span class="pre">state_preparation</span></code> argument is used to specify a quantum circuit that prepares a quantum state for the start point of the amplitude amplification. By default, a circuit with $H^{<span class="math">\otimes `n} $ is used to prepare uniform superposition (so it will be Grover’s search). The diffusion circuit of the amplitude amplification reflects ``state_preparation`</span> automatically.</p>
+<p><code class="docutils literal notranslate"><span class="pre">state_preparation</span></code> 인수는 진폭 증폭의 시작점인 양자 상태를 준비하는 양자 회로를 명시하기 위해 사용된다. 기본적으로 $H^{<span class="math">\otimes `n} $ 을 포함한 회로는 (그로버의 검색을 위한) 균일한 중첩 상태를 준비하기 위해 사용된다. 진폭 증폭의 확산 (diffusion) 회로는 자동으로 ``state_preparation`</span> 를 반영한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -823,7 +823,7 @@ Top measurement: 111
 <section id="완전한-유연성">
 <h3>완전한 유연성<a class="headerlink" href="#완전한-유연성" title="제목 주소">¶</a></h3>
 <p>고급 사용을 위해서는 <code class="docutils literal notranslate"><span class="pre">grover_operator</span></code> 인수를 설정하여 전체 그로버 연산자를 지정할 수도 있다. 이는 0을 기준으로 한 반사, 오라클및 상태 준비를 통해 기본 구성보다 <span class="math notranslate nohighlight">\(\mathcal{Q}\)</span> 의 효율적인 구현을 알고 있는 경우에 유용할 수 있다.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">qiskit.circuit.library.GroverOperator</span></code> can be a good starting point and offers more options for an automated construction of the Grover operator. You can for instance * set the <code class="docutils literal notranslate"><span class="pre">mcx_mode</span></code> * ignore qubits in the zero reflection by setting <code class="docutils literal notranslate"><span class="pre">reflection_qubits</span></code> * explicitly exchange the <span class="math notranslate nohighlight">\(\mathcal{S_f}, \mathcal{S_0}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> operations using the <code class="docutils literal notranslate"><span class="pre">oracle</span></code>, <code class="docutils literal notranslate"><span class="pre">zero_reflection</span></code> and <code class="docutils literal notranslate"><span class="pre">state_preparation</span></code> arguments</p>
+<p><code class="docutils literal notranslate"><span class="pre">qiskit.circuit.library.GroverOperator</span></code> 는 좋은 출발점이 될 수 있으며 Grover 오퍼레이터의 자동화된 구성을 위한 더 많은 옵션을 제공한다. 예를 들어 <code class="docutils literal notranslate"><span class="pre">reflection_qubits</span></code> 가 <code class="docutils literal notranslate"><span class="pre">oracle</span></code>, <code class="docutils literal notranslate"><span class="pre">zero_reflection</span></code> 및 <code class="docutils literal notranslate"><span class="pre">state_preparation</span></code> 인수를 사용하여 <span class="math notranslate nohighlight">\(\mathcal{S_f}, \mathcal{S_0}\)</span> 및 <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> 연산을 명시적으로 교환하도록 설정하여 zero reflection에서 큐비트를 무시하도록 <code class="docutils literal notranslate"><span class="pre">mcx_mode</span></code> 를 설정할 수 있다.</p>
 <p>예를 들어, 좋은 상태는 3개의 큐비트 상태 ( <span class="math notranslate nohighlight">\(|111\rangle\)</span>) 이지만, 2개의 추가적인 큐비트를 사용했다고 가정해보자.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -891,7 +891,7 @@ Top measurement: 111
 <p><code class="docutils literal notranslate"><span class="pre">Grover</span></code> 는 <code class="docutils literal notranslate"><span class="pre">oracle</span></code> 과 <code class="docutils literal notranslate"><span class="pre">state_preparation</span></code> 이외에도 여러 인수들을 가지고 있다. 이 섹션에서는 이에 대하여 설명할 것이다.</p>
 <section id="good_state-를-지정하기">
 <h3><code class="docutils literal notranslate"><span class="pre">good_state</span></code> 를 지정하기<a class="headerlink" href="#good_state-를-지정하기" title="제목 주소">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">good_state</span></code> is used to check whether the measurement result is correct or not internally. It can be a list of binary strings, a list of integer, <code class="docutils literal notranslate"><span class="pre">Statevector</span></code>, and Callable. If the input is a list of bitstrings, each bitstrings in the list represents a good state. If the input is a list of integer, each integer represent the index of the good state to be <span class="math notranslate nohighlight">\(|1\rangle\)</span>. If it is a <code class="docutils literal notranslate"><span class="pre">Statevector</span></code>, it represents a superposition of all good states.</p>
+<p><code class="docutils literal notranslate"><span class="pre">good_state</span></code> 는 측정 결과가 내부적으로 올바른지 여부를 확인하는 데 사용된다. 이는 바이너리 문자열 리스트, 정수 리스트, <code class="docutils literal notranslate"><span class="pre">Statevector</span></code> 및 Callable일 수 있다. 입력이 비트 문자열 리스트인 경우 리스트의 각 비트 문자열은 좋은 상태(good state)를 나타낸다. 입력이 정수 리스트인 경우 각 정수는 좋은 상태의 인덱스가 <span class="math notranslate nohighlight">\(|1\rangle\)</span> 임을 나타낸다. 입력이 <code class="docutils literal notranslate"><span class="pre">Statevector</span></code> 이면 모든 좋은 상태의 중첩을 나타낸다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -989,7 +989,7 @@ True
 </section>
 <section id="iterations-의-횟수">
 <h3><code class="docutils literal notranslate"><span class="pre">iterations</span></code> 의 횟수<a class="headerlink" href="#iterations-의-횟수" title="제목 주소">¶</a></h3>
-<p>The number of repetition of applying the Grover operator is important to obtain the correct result with Grover’s algorithm. The number of iteration can be set by the <code class="docutils literal notranslate"><span class="pre">iteration</span></code> argument of <code class="docutils literal notranslate"><span class="pre">Grover</span></code>. The following inputs are supported: * an integer to specify a single power of the Grover operator that’s applied * or a list of integers, in which all these different powers of the Grover operator are run consecutively and after each time we check if a correct solution has been found</p>
+<p>Grover 알고리즘을 사용하여 올바른 결과를 얻으려면 Grover 연산자를 적용하는 반복 횟수가 중요하다. 반복 횟수는 <code class="docutils literal notranslate"><span class="pre">Grover</span></code> 의 <code class="docutils literal notranslate"><span class="pre">iteration</span></code> 인수로 설정할 수 있다. 다음과 같은 입력이 지원된다: * 적용되는 Grover 연산자의 단일 거듭 제곱(a single power) 을 지정하는 정수 * 또는 Grover 연산자의 이러한 모든 서로 다른 거듭 제곱이 연속적으로 실행되며 올바른 솔루션을 찾았다면 매번 다음과 같은지 확인한다.</p>
 <p>이와 더불어 <code class="docutils literal notranslate"><span class="pre">sample_from_iterations</span></code> 인수가 있다. <code class="docutils literal notranslate"><span class="pre">True</span></code> 이면 <code class="docutils literal notranslate"><span class="pre">iterations</span></code> 의 특정 거듭 제곱 대신 0과 <code class="docutils literal notranslate"><span class="pre">iterations</span></code> 의 값 사이의 임의의 정수가 그로버 연산자의 제곱으로 사용된다. 이러한 접근 방식은 솔루션의 개수를 모를 때 조차도 유용하다.</p>
 <p><code class="docutils literal notranslate"><span class="pre">sample_from_iterations</span></code> 를 사용하는 알고리즘에 대한 자세한 내용은 [4] 를 참조하라.</p>
 <p><strong>참조:</strong></p>
@@ -1134,7 +1134,7 @@ True
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      최종 업데이트: 2021/07/28
+      최종 업데이트: 2021/08/02
 
     </p>
   </div>

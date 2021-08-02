@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>VQE on Aer simulator with noise &mdash; Qiskit 0.28.0 documentation</title>
+  <title>এয়ার (Aer) সিমুলেটরে ত্রুটি-যুক্ত ভি.কিউ.ই &mdash; Qiskit 0.28.0 documentation</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>VQE on Aer simulator with noise</li>
+      <li>এয়ার (Aer) সিমুলেটরে ত্রুটি-যুক্ত ভি.কিউ.ই</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -572,8 +572,8 @@ div.rendered_html tbody tr:hover {
 <p class="admonition-title">নোট</p>
 <p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/algorithms/03_vqe_simulation_with_noise.ipynb">tutorials/algorithms/03_vqe_simulation_with_noise.ipynb</a>.</p>
 </div>
-<section id="VQE-on-Aer-simulator-with-noise">
-<h1>VQE on Aer simulator with noise<a class="headerlink" href="#VQE-on-Aer-simulator-with-noise" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<section id="এয়ার-(Aer)-সিমুলেটরে-ত্রুটি-যুক্ত-ভি.কিউ.ই">
+<h1>এয়ার (Aer) সিমুলেটরে ত্রুটি-যুক্ত ভি.কিউ.ই<a class="headerlink" href="#এয়ার-(Aer)-সিমুলেটরে-ত্রুটি-যুক্ত-ভি.কিউ.ই" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
 <p>This notebook demonstrates using the <a class="reference external" href="https://qiskit.org/documentation/the_elements.html#aer">Qiskit Aer</a> <code class="docutils literal notranslate"><span class="pre">aer_simulator</span></code> to run a simulation with noise, based on a given noise model. This can be useful to investigate behavior under different noise conditions. Aer not only allows you to define your own custom noise model, but also allows a noise model to be easily created based on the properties of a real quantum device. The latter is what this notebook will demonstrate since the goal is to
 show VQE with noise and not the more complex task of how to build custom noise models.</p>
 <p><a class="reference external" href="https://qiskit.org/documentation/apidoc/ignis.html">Qiskit Ignis</a> provides a solution to mitigate the measurement error when running on a noisy simulation or a real quantum device. This solution is leveraged by the <code class="docutils literal notranslate"><span class="pre">QuantumInstance</span></code> module which allows any algorithm using it to automatically have measurement noise mitigation applied.</p>
@@ -621,7 +621,7 @@ show VQE with noise and not the more complex task of how to build custom noise m
 Number of qubits: 2
 </pre></div></div>
 </div>
-<p>As the above problem is still easily tractable classically we can use NumPyMinimumEigensolver to compute a reference value so we can compare later the results.</p>
+<p>যেহেতু উপরের সমস্যাটি এখনও ক্লাসিকভাবে সহজেই ট্র্যাক্টেবল আমরা একটি তথ্যসূত্র (রেফারেন্স) মান গণনা করতে NumPyMinimumEigensolver ব্যবহার করতে পারি যাতে আমরা পরে ফলাফলগুলির তুলনা করতে পারি।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -936,7 +936,7 @@ VQE on Aer qasm simulator (with noise and measurement error mitigation): -1.8343
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/07/28 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/08/02 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>
@@ -955,7 +955,7 @@ VQE on Aer qasm simulator (with noise and measurement error mitigation): -1.8343
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">VQE on Aer simulator with noise</a><ul>
+<li><a class="reference internal" href="#">এয়ার (Aer) সিমুলেটরে ত্রুটি-যুক্ত ভি.কিউ.ই</a><ul>
 <li><a class="reference internal" href="#Performance-without-noise">Performance <em>without</em> noise</a></li>
 <li><a class="reference internal" href="#Performance-with-noise">Performance <em>with</em> noise</a></li>
 <li><a class="reference internal" href="#Performance-with-noise-and-measurement-error-mitigation">Performance <em>with</em> noise and measurement error mitigation</a></li>

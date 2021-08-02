@@ -606,8 +606,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="초기-지점">
 <h2>초기 지점<a class="headerlink" href="#초기-지점" title="제목 주소">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">initial_point</span></code> parameter allows the optimization to begin at the given point, where the point is a list of parameters that will configure the ansatz. By default the initial point is <code class="docutils literal notranslate"><span class="pre">None</span></code> which means that VQE will choose one. The choice in in this case is if the supplied ansatz has a preferred point, based on the initial state provided to it, then this will be chosen, otherwise a random initial point that fits with any bounds the ansatz has will be chosen. If an initial point is
-supplied it will take priority though and be used - note though it must match in length to the number of parameters in the ansatz circuit.</p>
+<p><code class="docutils literal notranslate"><span class="pre">initial_point</span></code> 매개변수를 사용하면 주어진 지점에서 최적화를 시작할 수 있다. 여기서 지점이란 ansatz을 구성할 매개변수의 목록이다. 기본적으로 초기 지점은 <code class="docutils literal notranslate"><span class="pre">None</span></code> 이며, 이는 VQE가 한 가지를 선택할 것임을 의미한다. 이 경우, 선택은 (초기 상태를 기반으로) ansatz에 제공된 선호 지점이 있을 경우 그 지점이 선택되며, 그렇지 않다면 ansatz의 경계와 맞닿는 지점에 위치한 임의의 초기 지점이 선택된다. 초기 지점이 제공되면 우선적으로 사용된다. 이때, 제공된 초기 지점은 ansatz 회로의 매개변수 개수 길이가 동일해야 함에 유의하라.</p>
 <p>초기 지점을 사용하는 이유는 무엇인가? 한 가지 이유는 문제에 대한 합리적인 시작 지점을 추측할 수 있었거나 이전 실험을 통해 얻은 정보가 있는 경우일 것이다.</p>
 <p>사용법을 보여주기 위하여 먼저 알고리즘 소개 사용 지침서의 첫 번째 예제를 단순 반복하여 솔루션의 최적 지점을 얻는다.</p>
 <div class="nbinput docutils container">
@@ -707,10 +706,8 @@ optimizer_evals is 9 with initial point versus 65 without it.
 </section>
 <section id="기대">
 <h2>기대<a class="headerlink" href="#기대" title="제목 주소">¶</a></h2>
-<p>The energy of the Hamiltonian operator that VQE is working on is the expectation value when evaluated with the parameterized ansatz. To compute the expectation value VQE uses an instance of an <a class="reference external" href="https://qiskit.org/documentation/apidoc/qiskit.opflow.expectations.html">expectation</a> object. Such an instance may be supplied via the <code class="docutils literal notranslate"><span class="pre">expectation</span></code> parameter, or in the default case, where it has a value of <code class="docutils literal notranslate"><span class="pre">None</span></code>, VQE will use the
-<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.opflow.expectations.ExpectationFactory.html">ExpectationFactory</a> to create itself a suitable instance based on the supplied backend.</p>
-<p>For most cases letting VQE create a suitable instance is sufficient. However the Qiskit Aer aer_simulator supports a snapshot instruction that can be used in conjunction with the operator expectation computation. If used then the outcome is ideal, i.e. like the statevector simulator, and has no shot noise. Since people normally choose the aer_simulator to have shot noise (sampling noise), and be more like a real-device outcome, VQE has an <code class="docutils literal notranslate"><span class="pre">include_custom</span></code> flag that is passed on to the
-ExpectationFactory. When using Aer qasm simulator, and this is set <code class="docutils literal notranslate"><span class="pre">True</span></code>, the factory will return <code class="docutils literal notranslate"><span class="pre">AerPauliExpectation</span></code> which uses the snapshot instruction, when <code class="docutils literal notranslate"><span class="pre">False</span></code>, default, then the regular <code class="docutils literal notranslate"><span class="pre">PauliExpectation</span></code> is returned.</p>
+<p>VQE가 작업하고 있는 Hamiltonian 연산자의 에너지는 파라미터화된 ansatz과 함께 평가될 때의 기댓값이다. 기댓값을 계산하기 위해, VQE는 <a class="reference external" href="https://qiskit.org/documentation/apidoc/qiskit.opflow.expectations.html">expectation</a> 객체의 인스턴스를 사용한다. 이러한 인스턴스는 <code class="docutils literal notranslate"><span class="pre">expectation</span></code> 매개변수를 통해 제공되거나, 디폴트(<code class="docutils literal notranslate"><span class="pre">None</span></code>)값인 경우, VQE는 제공된 백엔드를 기반으로 적절한 인스턴스를 생성하기 위하여 <a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.opflow.expectations.ExpectationFactory.html">ExpectationFactory</a> 를 사용할 것이다.</p>
+<p>대부분의 경우 VQE가 적절한 인스턴스를 생성하도록 하는 것으로 충분하다. 그러나 Qiskit Aer aer_simulator는 연산자 기대값 연산과 함께 사용할 수 있는 snapshot 명령어을 제공한다. 이를 사용하면 이상적인 (즉, 상태 벡터 시뮬레이터와 같이) 결과를 얻을 수 있으며 shot 노이즈가 없다. 사람들은 일반적으로 aer_simulator를 선택하여 shot 노이즈 (샘플링 노이즈)를 갖고, 이는 실제 장치의 결과와 유사하기 때문에, VQE에는 ExpectationFactory에 전달되는 <code class="docutils literal notranslate"><span class="pre">include_custom</span></code> 플래그가 있다. Aer qasm simulator를 사용할 때, 플래그를 <code class="docutils literal notranslate"><span class="pre">True</span></code> 로 설정하면 ExpectationFactory는 스냅숏 명령어을 사용하는 <code class="docutils literal notranslate"><span class="pre">AerPauliExpectation</span></code> 를 반환할 것이고, <code class="docutils literal notranslate"><span class="pre">False</span></code> (디폴트)로 설정하면, <code class="docutils literal notranslate"><span class="pre">PauliExpectation</span></code> 를 반환할 것이다.</p>
 <p>다음 예제는 결과가 상태 벡터 시뮬레이터와 일치하는 <code class="docutils literal notranslate"><span class="pre">include_custom=True</span></code> 를 보여준다. 사실 statevector_simulator를 직접 사용하는 것보다 이 작업을 수행하는 것이 더 좋고/빠를 수 있다. 이는 (Pauli 합인 Hamiltonian이 행렬 형식으로 변환되어야 하는) 후자의 경우, include_custom이 True일 때 snapshot 명령을 수행하면 이를 방지할 수 있기 때문이다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -892,8 +889,7 @@ The optimal value can be seen to be wrong too, i.e. -1.074 versus the correct -1
     &#39;optimizer_time&#39;: 0.20196986198425293}
 </pre></div></div>
 </div>
-<p>By default, the <code class="docutils literal notranslate"><span class="pre">PauliExpectation</span></code> object, that would have be chosen when include_custom is False (or when using Aer aer_simulator, or a real device) groups Paulis into commuting sets. This is efficient as it runs less circuits to compute the expectation. However, if for some reason you wanted to run a circuit for each Pauli then then grouping can be turned off when constructing the PauliExpectation. You need to explicitly pass in such an expectation instance to VQE to have it work this way
-though as shown below.</p>
+<p>기본적으로, include_custom이 False (이거나 Aer의 aer_simultor 혹은 실제 디바이스를 사용할 때), <code class="docutils literal notranslate"><span class="pre">PauliExpectation</span></code> 객체는 Paulis를 commuting set로 그룹화한다. 이는 기댓값을 계산하기 위하여 더 적은 회로를 실행하므로 효율적이다. 그러나 어떤 이유로든 각 Pauli에 대하여 회로를 실행하려는 경우 PauliExpectation을 구성할 때 그룹화를 수행하지 않을 수 있다. 이러한 방식으로 작업을 수행하려면, 아래에 보여지는 바와 같이 기댓값 인스턴스를 VQE에 명시적으로 전달해야 한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -945,7 +941,7 @@ though as shown below.</p>
 </section>
 <section id="양자-인스턴스-및-고급-시뮬레이션">
 <h2>양자 인스턴스 및 고급 시뮬레이션<a class="headerlink" href="#양자-인스턴스-및-고급-시뮬레이션" title="제목 주소">¶</a></h2>
-<p>While you may be familiar with passing a QuantumInstancen created from a <code class="docutils literal notranslate"><span class="pre">aer_simulator_statevector</span></code> a <code class="docutils literal notranslate"><span class="pre">aer_simulator</span></code> or real device backend, it is possible to use the advanced simulation modes of Aer too when applicable. For instance we can easily use the Aer <a class="reference internal" href="../simulators/7_matrix_product_state_method.html"><span class="doc">Matrix Product State</span></a> method, that has the potential to scale to larger numbers of qubits.</p>
+<p><code class="docutils literal notranslate"><span class="pre">aer_simulator_statevector</span></code>, <code class="docutils literal notranslate"><span class="pre">aer_simulator</span></code>, 또는 실제 장치 백엔드에서 생성된 QuantumInstance을 전달하는 데 익숙할 수 있지만, 적용 가능한 경우에는 Aer의 고급 시뮬레이션 모드도 사용할 수 있다. 예를 들어, Aer의 <a class="reference internal" href="../simulators/7_matrix_product_state_method.html"><span class="doc">행렬 곱 상태</span></a> 메서드를 우리는 쉽게 사용하여 더 많은 개수의 큐비트로 확장시킬 수 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -1040,7 +1036,7 @@ though as shown below.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      최종 업데이트: 2021/07/28
+      최종 업데이트: 2021/08/02
 
     </p>
   </div>

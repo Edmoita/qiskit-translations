@@ -623,7 +623,7 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_algorithms_05_qaoa_4_0.png" src="../../_images/tutorials_algorithms_05_qaoa_4_0.png" />
 </div>
 </div>
-<p>The brute-force method is as follows. Basically, we exhaustively try all the binary assignments. In each binary assignment, the entry of a vertex is either 0 (meaning the vertex is in the first partition) or 1 (meaning the vertex is in the second partition). We print the binary assignment that satisfies the definition of the graph partition and corresponds to the minimal number of crossing edges.</p>
+<p>억지 방법(brute-force method) 은 다음과 같다. 기본적으로 철저히 모든 경우의 수에 대하여 바이너리 할당(binary assignment) 을 시도한다. 각 바이너리 할당에서 꼭짓점의 항목은 0 (꼭짓점이 첫 번째 분할 영역에 있음을 의미) 또는 1 (꼭짓점이 두 번째 분할 영역에 있음을 의미) 이다. 그래프 분할의 정의를 충족하면서 모서리 교차횟수가 최소인 바이너리 할당 결과를 출력한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -668,7 +668,7 @@ div.rendered_html tbody tr:hover {
 Objective value computed by the brute-force method is 3
 </pre></div></div>
 </div>
-<p>The graph partition problem can be converted to an Ising Hamiltonian. Qiskit has different capabilities in the Optimization module to do this. Here, since the goal is to show QAOA, the module is used without further explanation to create the operator. The paper <a class="reference external" href="https://arxiv.org/abs/1302.5843">Ising formulations of many NP problems</a> may be of interest if you would like to understand the technique further.</p>
+<p>그래프 분할 문제는 이징 해밀토니안 (Ising Hamiltonian) 으로 변환할 수 있다. Qiskit은 이를 수행하기 위하여 최적화 모듈에서 다양한 기능을 제공한다. 여기서 목표는 QAOA를 보여주는 것이므로 추가 설명 없이 모듈을 사용하여 연산자를 생성한다. 위의 기술을 더 이해하고 싶다면 다음의 논문 <a class="reference external" href="https://arxiv.org/abs/1302.5843">Ising formulations of many NP problems</a> 이 흥미로울 것이다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -899,7 +899,7 @@ Objective value computed by VQE is 3.0
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      최종 업데이트: 2021/07/28
+      최종 업데이트: 2021/08/02
 
     </p>
   </div>

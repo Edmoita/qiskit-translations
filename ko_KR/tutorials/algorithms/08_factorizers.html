@@ -591,7 +591,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="쇼어의-소인수분해-알고리즘">
 <h2>쇼어의 소인수분해 알고리즘<a class="headerlink" href="#쇼어의-소인수분해-알고리즘" title="제목 주소">¶</a></h2>
-<p><a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.algorithms.Shor.html">Shor’s Factoring algorithm</a> is one of the most well-known quantum algorithms and finds the prime factors for input integer <span class="math notranslate nohighlight">\(N\)</span> in polynomial time. The algorithm implementation in Qiskit is simply provided a target integer to be factored and run, as follows:</p>
+<p><a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.algorithms.Shor.html">Shor’s 인수분해 알고리즘</a> 은 가장 잘 알려진 양자 알고리즘 중 하나로 다항식 시간 내에 입력된 정수 <span class="math notranslate nohighlight">\(N\)</span> 의 소인수 (prime factor)를 찾는다. Qiskit에서 구현된 알고리즘은 단순히 목표 정수를 입력받아 다음과 같이 실행한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -614,7 +614,7 @@ div.rendered_html tbody tr:hover {
 The list of factors of 15 as computed by the Shor&#39;s algorithm is [3, 5].
 </pre></div></div>
 </div>
-<p>Note: this implementation of Shor’s algorithm uses <span class="math notranslate nohighlight">\(4n + 2\)</span> qubits, where <span class="math notranslate nohighlight">\(n\)</span> is the number of bits representing the integer in binary. So in practice, for now, this implementation is restricted to factorizing small integers. Given the above value of N we compute <span class="math notranslate nohighlight">\(4n +2\)</span> below and confirm the size from the actual circuit.</p>
+<p>참고: Shor’s 알고리즘 구현은 <span class="math notranslate nohighlight">\(4n + 2\)</span> 큐비트를 사용하며 여기서 <span class="math notranslate nohighlight">\(n\)</span> 은 정수의 바이너리 비트 개수이다. 따라서 실제로 현재 이 구현은 크기가 작은 정수를 소인수 분해하는 것으로 제한된다. 위의 N 값이 주어지면 <span class="math notranslate nohighlight">\(4n +2\)</span> 를 계산하고 실제 회로에서 크기를 확인한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -677,7 +677,7 @@ Actual number of qubits of circuit: 18
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      최종 업데이트: 2021/07/28
+      최종 업데이트: 2021/08/02
 
     </p>
   </div>

@@ -621,7 +621,7 @@ Schedule(, name=&#34;my_example&#34;)
 <li><p><code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code>들은 읽은 (아날로그 신호를 디지털 신호로 바꾸어) 신호를 수집하는 디지타이저(digitizer)를 동작시키는데 사용된다.</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code>들, <code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>들 그리고 <code class="docutils literal notranslate"><span class="pre">MeasureChannel</span></code>들은 모두 <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code>들이다. 이는 그들이 펄스의 <em>전송</em> 을 지원하는 반면, <code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code>은 수신 채널일 뿐 파형을 발생시킬 수는 없다는 뜻이다.</p>
-<p>For the following examples, we will create one <code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code> instance for each <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> that accepts a <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code>. Channels take one integer <code class="docutils literal notranslate"><span class="pre">index</span></code> argument. Except for <code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>s, the index maps trivially to the qubit label.</p>
+<p>다음 예제들에서는 <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code> 을 허용하는 각 <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> 에 대해 하나의 <code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code> 인스턴스를 생성한다. 채널은 하나의 정수로된 <code class="docutils literal notranslate"><span class="pre">index</span></code> 인수를 사용한다. <code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>s들을 제외하고 인덱스는 큐비트 레이블에 맞추어 매핑된다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -633,7 +633,7 @@ Schedule(, name=&#34;my_example&#34;)
 </pre></div>
 </div>
 </div>
-<p>The pulse <code class="docutils literal notranslate"><span class="pre">Schedule</span></code> is independent of the backend it runs on. However, we can build our program in a context that is aware of the target backend by supplying it to <code class="docutils literal notranslate"><span class="pre">pulse.build</span></code>. When possible you should supply a backend. By using the channel accessors <code class="docutils literal notranslate"><span class="pre">pulse.&lt;type&gt;_channel(&lt;idx&gt;)</span></code> we can make sure we are only using available device resources.</p>
+<p>이 펄스의 <code class="docutils literal notranslate"><span class="pre">Schedule</span></code> 은 그것이 실행되는 백엔드와는 독립적이다. 그러나 대상 백엔드를 <code class="docutils literal notranslate"><span class="pre">pulse.build</span></code> 에 제공함으로써 컨텍스트가 대상 백엔드를 인식하고 있는 상황에서 프로그램을 구현할 수 있다. 가능하면 백엔드를 제공하는 게 좋다. 채널 접근자 <code class="docutils literal notranslate"><span class="pre">pulse.&lt;type&gt;_channel(&lt;idx&gt;)</span></code> 를 사용함으로써 사용 가능한 장치 자원들만 사용하고 있는지 확인할 수 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -661,9 +661,9 @@ Schedule(, name=&#34;my_example&#34;)
 </div>
 <section id="delay">
 <h2><code class="docutils literal notranslate"><span class="pre">delay</span></code><a class="headerlink" href="#delay" title="제목 주소">¶</a></h2>
-<p>One of the simplest instructions we can build is <code class="docutils literal notranslate"><span class="pre">delay</span></code>. This is a blocking instruction that tells the control electronics to output no signal on the given channel for the duration specified. It is useful for controlling the timing of other instructions.</p>
-<p>The duration here and elsewhere is in terms of the backend’s cycle time (1 / sample rate), <code class="docutils literal notranslate"><span class="pre">dt</span></code>. It must take an integer value.</p>
-<p>To add a <code class="docutils literal notranslate"><span class="pre">delay</span></code> instruction, we pass a duration and a channel, where <code class="docutils literal notranslate"><span class="pre">channel</span></code> can be any kind of channel, including <code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code>. We use <code class="docutils literal notranslate"><span class="pre">pulse.build</span></code> to begin a Pulse Builder context. This automatically schedules our delay into the schedule <code class="docutils literal notranslate"><span class="pre">delay_5dt</span></code>.</p>
+<p>가장 간단한 명령어 중 하나는 <code class="docutils literal notranslate"><span class="pre">delay</span></code> 이다. 이것은 제어 전자 장치가 지정된 (지속) 시간 동안 주어진 채널에 신호를 출력하지 않도록 하는 차단 명령이다. 다른 명령어의 타이밍을 조절하는 데 유용하다.</p>
+<p>여기서 및 다른 곳에서의 지속 시간은 백엔드의 사이클 시간 (샘플링 속도의 역수), <code class="docutils literal notranslate"><span class="pre">dt</span></code> 로 나타난다. 이는 정수를 사용해야 한다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">delay</span></code> 명령어를 추가하려면 지속 시간과 채널을 전달하는데, 여기서 <code class="docutils literal notranslate"><span class="pre">channel</span></code> 은 <code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code> 을 포함한 어떤 종류의 채널도 될 수 있다. 펄스 빌더 컨텍스트를 시작할 때 <code class="docutils literal notranslate"><span class="pre">pulse.build</span></code> 를 사용한다. 이것은 자동으로 <code class="docutils literal notranslate"><span class="pre">delay_5dt</span></code> 스케줄에 지연을 예정시킨다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -674,11 +674,11 @@ Schedule(, name=&#34;my_example&#34;)
 </pre></div>
 </div>
 </div>
-<p>That’s all there is to it. Any instruction added after this delay on the same channel will execute five timesteps later than it would have without this delay.</p>
+<p>그게 전부이다. 동일한 채널에서 이 지연 이후에 추가된 모든 명령어들은 이 지연이 없는 경우보다 5개의 시간 간격 이후에 실행된다.</p>
 </section>
 <section id="play">
 <h2><code class="docutils literal notranslate"><span class="pre">play</span></code><a class="headerlink" href="#play" title="제목 주소">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">play</span></code> instruction is responsible for executing <em>pulses</em>. It’s straightforward to add a play instruction:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Play</span></code> 명령어는 <em>펄스</em> 를 발생시키는 역할을 담당한다. 이 명령어를 추가하는 과정은 간단하다.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>with pulse.build() as sched:
     pulse.play(pulse, channel)
 </pre></div>
@@ -686,13 +686,12 @@ Schedule(, name=&#34;my_example&#34;)
 <p><code class="docutils literal notranslate"><span class="pre">pulse</span></code> 의 전달인자가 무엇인지를 분명히 하고, 이를 만드는 몇 가지 다른 방법들을 탐구해보자.</p>
 <section id="펄스">
 <h3>펄스<a class="headerlink" href="#펄스" title="제목 주소">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Pulse</span></code> 는 임의의 펄스 <em>envelope</em> 로 지정한다. 출력 파형의 변조 주파수와 위상은 다음에 다룰 <code class="docutils literal notranslate"><span class="pre">SetFrequency</span></code> 와 <code class="docutils literal notranslate"><span class="pre">ShiftPhase</span></code> 의 명령어에 의해 제어된다.</p>
-<p>The image below may provide some intuition for why they are specified separately. Think of the pulses which describe their envelopes as input to an arbitrary waveform generator (AWG), a common lab instrument – this is depicted in the left image. Notice the limited sample rate discritizes the signal. The signal produced by the AWG may be mixed with a continuous sine wave generator. The frequency of its output is controlled by instructions to the sine wave generator; see the middle image. Finally,
-the signal sent to the qubit is demonstrated by the right side of the image below.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pulse</span></code> 는 임의의 펄스 <em>포락선(envelope)</em> 을 지정한다. 출력 파형의 변조 주파수와 위상은 다음에 다룰 <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> 와 <code class="docutils literal notranslate"><span class="pre">shift_phase</span></code> 로 제어된다.</p>
+<p>아래의 그림은 왜 그들을 따로 지정해야하는지에 대한 직관을 제공할 수 있다. 펄스의 포락선이 일반적인 실험실 장비인 임의 파형 발생기(arbitrary waveform generator, AWG)에 입력되어 왼쪽 그림과 같이 나타나는 것을 생각해 보라. 제한된 샘플링율이 신호를 이산화(디지털화)시키는 것에 유의하라. AWG가 발생시킨 신호는 연속 사인파 발생기와 혼합될 수 있다. 출력 주파수는 사인파 발생기에 주어진 명령으로 제어된다 (가운데 그림을 보라). 마지막으로 큐비트에 전송되는 신호는 아래 그림의 오른쪽 그림으로 설명될 수 있다.</p>
 <p><strong>Note</strong>: 하드웨어는 다른 방식으로 구현될 수 있지만, 명령어를 분리해서 설정하면 변조 주파수의 값과 같은 명시적 정보가 손실되는 것을 피할 수 있다.</p>
 <p><img alt="alt text" src="../../_images/pulse_modulation.png" /></p>
-<p>There are many methods available to us for building up pulses. Our <code class="docutils literal notranslate"><span class="pre">library</span></code> within Qiskit Pulse contains helpful methods for building <code class="docutils literal notranslate"><span class="pre">Pulse</span></code>s. Let’s take for example a simple Gaussian pulse – a pulse with its envelope described by a sampled Gaussian function. We arbitrarily choose an amplitude of 1, standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> of 10, and 128 sample points.</p>
-<p><strong>Note</strong>: The amplitude norm is arbitrarily limited to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Each backend system may also impose further constraints – for instance, a minimum pulse size of 64. These additional constraints, if available, would be provided through the <code class="docutils literal notranslate"><span class="pre">BackendConfiguration</span></code> which is described here.</p>
+<p>펄스를 생성할 수 있는 많은 방법들이 있다. Qiskit Pulse 내의 <code class="docutils literal notranslate"><span class="pre">library</span></code> 에는 <code class="docutils literal notranslate"><span class="pre">Pulse</span></code>들을 생성하는 유용한 방법이 포함되어 있다. 가우시안 펄스 (Gaussian pulse, 가우스 함수를 샘플링하여 포락선을 갖는다)를 예로 들어보자. 임의로 진폭을 1, 표준 편차 <span class="math notranslate nohighlight">\(\sigma\)</span> 를 10으로 하여 128개의 샘플 개수를 선택한다.</p>
+<p><strong>참고</strong>: 진폭 크기는 <code class="docutils literal notranslate"><span class="pre">1.0</span></code> 로 제한된다. 또한 각 백엔드 시스템은 최소 펄스 크기를 64로 두는 것과 같은 추가적인 제약을 가할 수 있다. 이러한 추가적인 제약 조건들은 여기 에 기술된 <code class="docutils literal notranslate"><span class="pre">BackendConfiguration</span></code> 를 통해 제공된다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -706,11 +705,11 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 </pre></div>
 </div>
 </div>
-<section id="매개-변수-펄스">
-<h4>매개 변수 펄스<a class="headerlink" href="#매개-변수-펄스" title="제목 주소">¶</a></h4>
-<p>Let’s build our Gaussian pulse using the <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code> parametric pulse. A parametric pulse sends the name of the function and its parameters to the backend, rather than every individual sample. Using parametric pulses makes the jobs you send to the backend much smaller. IBM Quantum backends limit the maximum job size that they accept, so parametric pulses may allow you to run larger programs.</p>
-<p>Other parametric pulses in the <code class="docutils literal notranslate"><span class="pre">library</span></code> include <code class="docutils literal notranslate"><span class="pre">GaussianSquare</span></code>, <code class="docutils literal notranslate"><span class="pre">Drag</span></code>, and <code class="docutils literal notranslate"><span class="pre">Constant</span></code>.</p>
-<p><strong>Note</strong>: The backend is responsible for deciding exactly how to sample the parametric pulses. It is possible to draw parametric pulses, but the samples displayed are not guaranteed to be the same as those executed on the backend.</p>
+<section id="매개변수-펄스">
+<h4>매개변수 펄스<a class="headerlink" href="#매개변수-펄스" title="제목 주소">¶</a></h4>
+<p>가우시안 펄스를 <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code> 매개변수 펄스를 이용해 만들어 보자. 매개변수 펄스는 개별적인 샘플들이 아니라 함수의 이름과 매개변수들을 백엔드에 전송한다. 매개변식 펄스를 사용하면 백엔드에 보내는 작업이 훨씬 작아지게 된다. IBM 양자 백엔드는 수용하는 최대 작업 크기를 제한하므로, 매개변수 펄스로 더 큰 프로그램을 실행할 수 있다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">library</span></code> 에 포함된 다른 매개변수 펄스들은 <code class="docutils literal notranslate"><span class="pre">GaussianSquare</span></code>, <code class="docutils literal notranslate"><span class="pre">Drag</span></code>, 그리고 <code class="docutils literal notranslate"><span class="pre">Constant</span></code> 이다.</p>
+<p><strong>참고</strong>: 백엔드가 매개변수 펄스를 샘플링하는 방법을 결정한다. 매개변수 펄스를 그리는 것은 가능하지만, 그려진 샘플들이 백엔드에서 실행된 것과 동일하다는 것은 보장되진 않는다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -731,9 +730,9 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 </div>
 </div>
 </section>
-<section id="Pulse-waveforms-described-by-samples">
-<h4>Pulse waveforms described by samples<a class="headerlink" href="#Pulse-waveforms-described-by-samples" title="제목 주소">¶</a></h4>
-<p>A <code class="docutils literal notranslate"><span class="pre">Waveform</span></code> is a pulse signal specified as an array of time-ordered complex amplitudes, or <em>samples</em>. Each sample is played for one cycle, a timestep <code class="docutils literal notranslate"><span class="pre">dt</span></code>, determined by the backend. If we want to know the real-time dynamics of our program, we need to know the value of <code class="docutils literal notranslate"><span class="pre">dt</span></code>. The (zero-indexed) <span class="math notranslate nohighlight">\(i^{th}\)</span> sample will play from time <code class="docutils literal notranslate"><span class="pre">i*dt</span></code> up to <code class="docutils literal notranslate"><span class="pre">(i</span> <span class="pre">+</span> <span class="pre">1)*dt</span></code>, modulated by the qubit frequency.</p>
+<section id="샘플로-묘사되는-펄스-파형">
+<h4>샘플로 묘사되는 펄스 파형<a class="headerlink" href="#샘플로-묘사되는-펄스-파형" title="제목 주소">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">Waveform</span></code> 은 시간 순서의 복소 진폭이나 <em>샘플</em> 들의 배열로 지정된 펄스 신호이다. 각 샘플은 한 주기로 발생하며 시간 간격 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 는 백엔드가 결정한다. 프로그램의 실시간 동역학을 알고 싶다면 <code class="docutils literal notranslate"><span class="pre">dt</span></code> 의 값을 알아야 한다. (0부터 시작하는) <span class="math notranslate nohighlight">\(i^{th}\)</span> 번째 샘플은 시간이 <code class="docutils literal notranslate"><span class="pre">i*dt</span></code> 일 때부터 <code class="docutils literal notranslate"><span class="pre">(i</span> <span class="pre">+</span> <span class="pre">1)*dt</span></code> 까지 발생하며, 큐비트 주파수로 변조된다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -760,7 +759,7 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 </section>
 <section id="펄스-라이브러리-함수">
 <h4>펄스 라이브러리 함수<a class="headerlink" href="#펄스-라이브러리-함수" title="제목 주소">¶</a></h4>
-<p>Our own pulse library has sampling methods to build a <code class="docutils literal notranslate"><span class="pre">Waveform</span></code> from common functions.</p>
+<p>제공되는 펄스 라이브러리는 일반적인 함수로부터 <code class="docutils literal notranslate"><span class="pre">Waveform</span></code> 을 만들기 위한 샘플링 방법을 가지고 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -779,7 +778,7 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 <img alt="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_16_0.png" src="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_16_0.png" />
 </div>
 </div>
-<p>Regardless of which method you use to specify your <code class="docutils literal notranslate"><span class="pre">pulse</span></code>, <code class="docutils literal notranslate"><span class="pre">play</span></code> is added to your schedule the same way:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pulse</span></code> 를 특정하기 위해 어떤 방법을 사용하든 <code class="docutils literal notranslate"><span class="pre">play</span></code> 는 같은 방식으로 스케줄에 추가된다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -799,7 +798,7 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 <img alt="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_18_0.png" src="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_18_0.png" />
 </div>
 </div>
-<p>You may also supply a complex list or array directly to <code class="docutils literal notranslate"><span class="pre">play</span></code></p>
+<p>또한, 복소수 리스트나 배열을 <code class="docutils literal notranslate"><span class="pre">play</span></code> 에 직접 제공할 수도 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -819,16 +818,16 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 <img alt="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_20_0.png" src="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_20_0.png" />
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">play</span></code> instruction gets its duration from its <code class="docutils literal notranslate"><span class="pre">Pulse</span></code>: the duration of a parametrized pulse is an explicit argument, and the duration of a <code class="docutils literal notranslate"><span class="pre">Waveform</span></code> is the number of input samples.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Play</span></code> 명령어의 지속 시간(duration)은 <code class="docutils literal notranslate"><span class="pre">Pulse</span></code> 에서 가져온다: 매개변수화된 펄스의 지속 시간은 명시적으로 인자에 전달되고, <code class="docutils literal notranslate"><span class="pre">Waveform</span></code> 의 지속 시간은 입력 샘플의 수이다.</p>
 </section>
 </section>
 </section>
 <section id="set_frequency">
 <h2><code class="docutils literal notranslate"><span class="pre">set_frequency</span></code><a class="headerlink" href="#set_frequency" title="제목 주소">¶</a></h2>
-<p>As explained previously, the output pulse waveform envelope is also modulated by a frequency and phase. Each channel has a default frequency listed in the backend.defaults().</p>
-<p>The frequency of a channel can be updated at any time within a <code class="docutils literal notranslate"><span class="pre">Schedule</span></code> by the <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> instruction. It takes a float <code class="docutils literal notranslate"><span class="pre">frequency</span></code> and a <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code> <code class="docutils literal notranslate"><span class="pre">channel</span></code> as input. All pulses on a channel following a <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> instruction will be modulated by the given frequency until another <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> instruction is encountered or until the program ends.</p>
+<p>앞서 설명한 바와 같이, 출력 펄스의 파형 포락선 또한 주파수와 위상에 변조된다. 각 채널은 backend.defaults()에 나열된 기본 주파수 를 가진다.</p>
+<p>채널의 주파수는 <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> 명령어를 사용해 <code class="docutils literal notranslate"><span class="pre">Schedule</span></code> 내에서 언제든지 갱신할 수 있다. 이는 부동소숫점(float) 타입의 <code class="docutils literal notranslate"><span class="pre">frequency</span></code> 와 <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code>, <code class="docutils literal notranslate"><span class="pre">channel</span></code> 을 입력으로 받는다. <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> 명령어가 적용되는 채널 안의 모든 펄스는 다른 <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> 명령을 만나거나 프로그램이 종료될 때까지 주어진 주파수에 의해 변조된다.</p>
 <p>명령어는 암묵적으로 <code class="docutils literal notranslate"><span class="pre">0</span></code> 의 지속시간을 갖는다.</p>
-<p><strong>Note</strong>: The frequencies that can be requested are limited by the total bandwidth and the instantaneous bandwidth of each hardware channel. In the future, these will be reported by the <code class="docutils literal notranslate"><span class="pre">backend</span></code>.</p>
+<p><strong>참고</strong>: 요청할 수 있는 주파수는 총 대역폭과 각 하드웨어 채널의 순간 대역폭에 의해 제한된다. 향후 이러한 정보는 <code class="docutils literal notranslate"><span class="pre">backend</span></code> 를 통해 보고 받을 수 있을 것이다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -842,8 +841,8 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 </section>
 <section id="shift_phase">
 <h2><code class="docutils literal notranslate"><span class="pre">shift_phase</span></code><a class="headerlink" href="#shift_phase" title="제목 주소">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">shift_phase</span></code> instruction will increase the phase of the frequency modulation by <code class="docutils literal notranslate"><span class="pre">phase</span></code>. Like <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code>, this phase shift will affect all following instructions on the same channel until the program ends. To undo the affect of a <code class="docutils literal notranslate"><span class="pre">shift_phase</span></code>, the negative <code class="docutils literal notranslate"><span class="pre">phase</span></code> can be passed to a new instruction.</p>
-<p>Like <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code>, the instruction has an implicit duration of <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">shift_phase</span></code> 명령어는 주파수 변조의 위상을 <code class="docutils literal notranslate"><span class="pre">phase</span></code> 만큼 증가시킨다. <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> 와 마찬가지로 이 위상 이동은 프로그램이 끝날 때까지 동일한 채널의 모든 후속 명령에 영향을 미친다. <code class="docutils literal notranslate"><span class="pre">shift_phase</span></code> 의 영향을 되돌리려면 음수로 된 <code class="docutils literal notranslate"><span class="pre">phase</span></code> 를 새로운 명령어로 전달할 수 있다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> 와 같이, 이 명령어는 암묵적으로 <code class="docutils literal notranslate"><span class="pre">0</span></code> 의 지속 시간을 갖는다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -1065,7 +1064,7 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      최종 업데이트: 2021/07/28
+      최종 업데이트: 2021/08/02
 
     </p>
   </div>
@@ -1089,8 +1088,8 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 <li><a class="reference internal" href="#delay"><code class="docutils literal notranslate"><span class="pre">delay</span></code></a></li>
 <li><a class="reference internal" href="#play"><code class="docutils literal notranslate"><span class="pre">play</span></code></a><ul>
 <li><a class="reference internal" href="#펄스">펄스</a><ul>
-<li><a class="reference internal" href="#매개-변수-펄스">매개 변수 펄스</a></li>
-<li><a class="reference internal" href="#Pulse-waveforms-described-by-samples">Pulse waveforms described by samples</a></li>
+<li><a class="reference internal" href="#매개변수-펄스">매개변수 펄스</a></li>
+<li><a class="reference internal" href="#샘플로-묘사되는-펄스-파형">샘플로 묘사되는 펄스 파형</a></li>
 <li><a class="reference internal" href="#펄스-라이브러리-함수">펄스 라이브러리 함수</a></li>
 </ul>
 </li>

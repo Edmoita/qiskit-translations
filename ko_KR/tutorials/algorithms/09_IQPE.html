@@ -621,8 +621,8 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_algorithms_09_IQPE_4_0.png" src="../../_images/tutorials_algorithms_09_IQPE_4_0.png" />
 </div>
 </div>
-<p>We highlight that the method c_if expects as the first argument a whole classical register, not a single classical bit (or a list of classical bits), and as the second argument a value in decimal representation (a non-negative integer), not the value of a single bit, 0, or 1 (or a list/string of binary digits).</p>
-<p>Let’s make another example. Consider that we want to perform a bit flip on the third qubit after the measurements in the following circuit, when the results of the measurement of <span class="math notranslate nohighlight">\(q_0\)</span> and <span class="math notranslate nohighlight">\(q_1\)</span> are both <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>강조할만한 것은 메서드 c_if는 하나의 고전 비트 (또는 고전 비트의 리스트) 가 아닌, 전체 고전 레지스트를 첫 번째 인수로 가지고, 하나의 비트값 0 또는 1 (또는 이진수 리스트/문자열) 이 아닌 (음수가 아닌) 십진수 표현 값을 두 번째 인수로 가질 것으로 기대한다는 것이다.</p>
+<p>다른 예제를 보자. 아래의 회로를 측정하여 <span class="math notranslate nohighlight">\(q_0\)</span> 와 <span class="math notranslate nohighlight">\(q_1\)</span> 의 측정 값이 모두 <span class="math notranslate nohighlight">\(1\)</span> 일 때, 세 번째 큐비트를 비트 플립 (bit flip) 을 수행하는 경우를 생각해 본다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[83]:
 </pre></div>
@@ -651,7 +651,7 @@ div.rendered_html tbody tr:hover {
 <p><span class="math notranslate nohighlight">\(q_1\)</span> 와 <span class="math notranslate nohighlight">\(q_2\)</span> 인 경우에만 <span class="math notranslate nohighlight">\(X\)</span> 게이트를 적용할 것이다. 이것은 c_if 메서드를 이용하여 c_if에 전달되는 인자 값에 따라 조건부로 :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>X`를 적용하도록 할 수 있다.</p>
 <p>가장 오른쪽 위치에 무엇이 오든 중요하지 않기 때문에, (이진수 표현에서) 011 과 111의 값을 확인하도록 c_if 메서드에 전달될 값을 작성해야 한다.</p>
 <p>두 정숫값의 십진수 표현은 다음과 같다:</p>
-<p><img alt="9cf7a058b2dc40d8b64d69684a580a4a" class="no-scaled-link" src="tutorials/algorithms/../../images/binary.png" style="width: 50%;" /></p>
+<p><img alt="032e26d176104342ab4e3bd1fef578b4" class="no-scaled-link" src="tutorials/algorithms/../../images/binary.png" style="width: 50%;" /></p>
 <p>Python의 bin() 메서드를 통해 답을 확인할 수 있다 (접두어 <code class="docutils literal notranslate"><span class="pre">0b</span></code> 는 이진수 형식을 나타낸다).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
@@ -710,7 +710,7 @@ div.rendered_html tbody tr:hover {
 <section id="U-에-대한-1-큐비트-게이트의-IPE-예제">
 <h2><span class="math notranslate nohighlight">\(U\)</span> 에 대한 1-큐비트 게이트의 IPE 예제<a class="headerlink" href="#U-에-대한-1-큐비트-게이트의-IPE-예제" title="제목 주소">¶</a></h2>
 <p>1-큐비트 연산자 <span class="math notranslate nohighlight">\(U\)</span> 의 위상을 추정하고자 IPE 알고리즘을 적용하고자 한다. 예를 들어, 여기서는 <span class="math notranslate nohighlight">\(S\)</span>-게이트를 사용한다.</p>
-<p>Let’s apply the IPE algorithm to estimate the phase for <span class="math notranslate nohighlight">\(S\)</span>-gate. Its matrix is</p>
+<p><span class="math notranslate nohighlight">\(S\)</span>-게이트의 위상을 추정하고자 IPE 알고리즘을 적용하자. 이때 행렬은 다음과 같다</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} S =
 \begin{bmatrix}
@@ -723,7 +723,7 @@ div.rendered_html tbody tr:hover {
 <p>다음부터는 <a class="reference external" href="https://qiskit.org/textbook/ch-labs/Lab04_IterativePhaseEstimation.html#2-iterative-phase-estimation-ipe-algorithm">랩 4의 2절</a> 의 표기 및 용법을 사용한다.</p>
 <p>고유상태 <span class="math notranslate nohighlight">\(|1\rangle\)</span> 의 위상 <span class="math notranslate nohighlight">\(\phi=\frac{\pi}{2}\)</span> 을 추정하려면, <span class="math notranslate nohighlight">\(\varphi=\frac{1}{4}\)</span> (여기서 <span class="math notranslate nohighlight">\(\phi = 2 \pi \varphi\)</span> 이다) 를 찾아야 한다. 그러므로 위상 추정에는 두 위상 비트 (2 phase bits) 가 필요하다. 다시 말해, <span class="math notranslate nohighlight">\(1/2^2=1/4\)</span> 이므로 <span class="math notranslate nohighlight">\(m=2\)</span> 이다. 그러므로 <span class="math notranslate nohighlight">\(\varphi=0.\varphi_1\varphi_2\)</span> 이다.</p>
 <p>IPE 알고리즘에서 <span class="math notranslate nohighlight">\(m\)</span> 는 반복 회수이기도 한 점을 기억하라. 따라서 <span class="math notranslate nohighlight">\(2\)</span> 번의 반복 또는 단계가 필요하다.</p>
-<p>First, we initialize the circuit. IPE works with only 1 auxiliary qubit, instead of <span class="math notranslate nohighlight">\(m\)</span> counting qubits of the QPE algorithm. Therefore, we need 2 qubits, 1 auxiliary qubit and 1 for the eigenstate of <span class="math notranslate nohighlight">\(U\)</span>-gate, and a classical register of 2 bits, for the phase bits <span class="math notranslate nohighlight">\(\varphi_1\)</span>, <span class="math notranslate nohighlight">\(\varphi_2\)</span>.</p>
+<p>먼저 회로를 초기화한다. IPE는 QPE 알고리즘에서 <span class="math notranslate nohighlight">\(m\)</span> 개의 카운팅 큐비트 (counting qubit) 대신, 1개의 보조 큐비트로 동작한다. 그러므로 1개의 보조 큐비트와 1개의 <span class="math notranslate nohighlight">\(U\)</span>-게이트의 고유 상태인 총 2개의 큐비트와 페이즈 비트 <span class="math notranslate nohighlight">\(\varphi_1\)</span>, :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>varphi_2`를 위한 고전 레지스터 2 비트가 필요하다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
 </pre></div>
@@ -740,7 +740,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="첫-번째-단계">
 <h3>첫 번째 단계<a class="headerlink" href="#첫-번째-단계" title="제목 주소">¶</a></h3>
-<p>Now we build the quantum circuit for the first step, that is, the first iteration of the algorithm, to estimate the least significant phase bit <span class="math notranslate nohighlight">\(\varphi_m\)</span>, in this case <span class="math notranslate nohighlight">\(\varphi_2\)</span>. For the first step we have 3 sub-steps: - initialization - application of the Controlled-<span class="math notranslate nohighlight">\(U\)</span> gates - measure of the auxiliary qubit in x-basis</p>
+<p>첫 번째 단계로써 만들 양자 회로, 즉 첫 번째 반복 알고리즘은 덜 중요한 위상 비트 <span class="math notranslate nohighlight">\(\varphi_m\)</span> 를 추정하는 것이다. 여기서는 <span class="math notranslate nohighlight">\(\varphi_2\)</span> 이다. 첫 번째 단계는 3개의 하위 단계로 나눠진다: - 초기화 - 제어-<span class="math notranslate nohighlight">\(U\)</span> 게이트의 적용 - x 기저에서 보조 큐비트의 측정</p>
 <section id="초기화">
 <h4>초기화<a class="headerlink" href="#초기화" title="제목 주소">¶</a></h4>
 <p>초기화는 Hadamard 게이트를 보조 큐비트에 적용하는 것과 고유 상태 <span class="math notranslate nohighlight">\(|1\rangle\)</span> 를 준비하는 것으로 구성되어 있다.</p>
@@ -764,10 +764,10 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="Application-of-the-Controlled-U-gates">
-<h4>Application of the Controlled-<span class="math notranslate nohighlight">\(U\)</span> gates<a class="headerlink" href="#Application-of-the-Controlled-U-gates" title="제목 주소">¶</a></h4>
-<p>Then we have to apply <span class="math notranslate nohighlight">\(2^t\)</span> times the Controlled-<span class="math notranslate nohighlight">\(U\)</span> operators (see also in the docs <a class="reference external" href="https://qiskit.org/documentation/tutorials/circuits/3_summary_of_quantum_operations.html#Two-qubit-gates">Two qubit gates</a>), that, in this example, is the Controlled-<span class="math notranslate nohighlight">\(S\)</span> gate (<span class="math notranslate nohighlight">\(CS\)</span> for short).</p>
-<p>To implement <span class="math notranslate nohighlight">\(CS\)</span> in the circuit, since <span class="math notranslate nohighlight">\(S\)</span> is a phase gate, we can use the controlled phase gate <span class="math notranslate nohighlight">\(\text{CP}(\theta)\)</span>, with <span class="math notranslate nohighlight">\(\theta=\pi/2\)</span>.</p>
+<section id="Controlled-U-게이트의-적용">
+<h4>Controlled-<span class="math notranslate nohighlight">\(U\)</span> 게이트의 적용<a class="headerlink" href="#Controlled-U-게이트의-적용" title="제목 주소">¶</a></h4>
+<p>그러면 Controlled-<span class="math notranslate nohighlight">\(U\)</span> 연산자들을 <span class="math notranslate nohighlight">\(2^t\)</span> 번 적용해야 한다 (문서 <a class="reference external" href="https://qiskit.org/documentation/tutorials/circuits/3_summary_of_quantum_operations.html#Two-qubit-gates">두 큐비트 게이트</a> 를 참조하라). 여기서는 Controlled-<span class="math notranslate nohighlight">\(S\)</span> 게이트 (줄여서 <span class="math notranslate nohighlight">\(CS\)</span>) 를 적용한다.</p>
+<p><span class="math notranslate nohighlight">\(CS\)</span> 를 회로에 구현할 때, <span class="math notranslate nohighlight">\(S\)</span> 가 위상 게이트이므로 제어 위상 게이트 <span class="math notranslate nohighlight">\(\text{CP}(\theta)\)</span> 와 <span class="math notranslate nohighlight">\(\theta=\pi/2\)</span> 를 사용한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
 </pre></div>
@@ -808,8 +808,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="Measure-in-x-basis">
-<h4>Measure in x-basis<a class="headerlink" href="#Measure-in-x-basis" title="제목 주소">¶</a></h4>
+<section id="x-기저에서-측정">
+<h4>x 기저에서 측정<a class="headerlink" href="#x-기저에서-측정" title="제목 주소">¶</a></h4>
 <p>마지막으로, 보조 큐비트를 x 기저에서 측정한다. 따라서 x_measure를 수행하는 함수를 정의하고 적용한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
@@ -846,10 +846,10 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="후속-단계-(두-번째-단계)">
 <h3>후속 단계 (두 번째 단계)<a class="headerlink" href="#후속-단계-(두-번째-단계)" title="제목 주소">¶</a></h3>
-<p>Now we build the quantum circuit for the other remaining steps, in this example, only the second one. In these steps we have 4 sub-steps: the 3 sub-steps as in the first step and, in the middle, the additional step of the phase correction - initialization with reset - phase correction - application of the Control-<span class="math notranslate nohighlight">\(U\)</span> gates - measure of the auxiliary qubit in x-basis</p>
+<p>이제 나머지 단계들을 위한 양자 회로를 구축한다. 이 예에서는 두 번째 단계만 구축한다. 이 단계에는 4개의 하위 단계가 있다. 첫 번째 단계와 같은 3개의 하위 단계와 중간 단계에는 위상 보정 - 재설정을 통한 초기화 - 위상 보정 - Control-<span class="math notranslate nohighlight">\(U\)</span> 게이트의 활용 - x 축의 보조 큐비트의 측정인 추가 단계가 있다.</p>
 <section id="재설정을-통한-초기화">
 <h4>재설정을 통한 초기화<a class="headerlink" href="#재설정을-통한-초기화" title="제목 주소">¶</a></h4>
-<p>As we want to perform an iterative algorithm in the same circuit, we need to reset the auxiliary qubit <span class="math notranslate nohighlight">\(q0\)</span> after the measument gate and initialize it again as before to recycle the qubit.</p>
+<p>동일한 회로에서 반복적 알고리즘을 수행하려는 경우 측정 게이트 후 보조 큐비트 <span class="math notranslate nohighlight">\(q0\)</span> 를 재설정하고 이전처럼 다시 초기화하여 큐비트를 재활용해야 한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
@@ -872,7 +872,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="위상-보정(2단계)">
 <h4>위상 보정(2단계)<a class="headerlink" href="#위상-보정(2단계)" title="제목 주소">¶</a></h4>
-<p>As seen in the theory, in order to extract the phase bit <span class="math notranslate nohighlight">\(\varphi_{1}\)</span>, we perform a phase correction of <span class="math notranslate nohighlight">\(-\pi\varphi_2/2\)</span>. Of course, we need to apply the phase correction in the circuit only if the phase bit <span class="math notranslate nohighlight">\(\varphi_2=1\)</span>, i.e. we have to apply the phase correction of <span class="math notranslate nohighlight">\(-\pi/2\)</span> only if the classical bit <span class="math notranslate nohighlight">\(c_0\)</span> is 1.</p>
+<p>이론에서 볼 수 있듯이 위상 비트 <span class="math notranslate nohighlight">\(\varphi_{1}\)</span> 를 추출하기 위해 <span class="math notranslate nohighlight">\(-\pi\varphi_2/2\)</span> 의 위상 보정을 수행한다. 물론 위상 비트가 <span class="math notranslate nohighlight">\(\varphi_2=1\)</span> 인 경우에만 회로에 위상 보정을 적용해야 한다. 즉, 고전 비트 <span class="math notranslate nohighlight">\(c_0\)</span> 가 1인 경우에만 <span class="math notranslate nohighlight">\(-\pi/2\)</span> 의 위상 보정을 적용해야 한다.</p>
 <p>따라서 초기화 후에는 <code class="docutils literal notranslate"><span class="pre">c_if</span></code> 매서드를 사용하여 고전 비트 <span class="math notranslate nohighlight">\(c_0\)</span> (<span class="math notranslate nohighlight">\(=\varphi_2\)</span>) 로 조절된 위상 <span class="math notranslate nohighlight">\(\theta=-\pi/2\)</span> 를 사용하여 위상 게이트 <span class="math notranslate nohighlight">\(P(\theta)\)</span> 를 적용한다. 이 튜토리얼의 첫 번째 부분에서 확인한 것처럼, 값이 1인 <code class="docutils literal notranslate"><span class="pre">c_if</span></code> 매서드를 <span class="math notranslate nohighlight">\(1_{10} = 001_{2}\)</span> 로 사용해야 한다(아래에 기입한 <span class="math notranslate nohighlight">\(_{10}\)</span> 및 <span class="math notranslate nohighlight">\(_2\)</span> 은 십진수 및 이진수를 나타냄).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
@@ -895,7 +895,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="Control-U-게이트-및-x-측정-적용(2단계)">
 <h4>Control-<span class="math notranslate nohighlight">\(U\)</span> 게이트 및 x 측정 적용(2단계)<a class="headerlink" href="#Control-U-게이트-및-x-측정-적용(2단계)" title="제목 주소">¶</a></h4>
-<p>We apply the <span class="math notranslate nohighlight">\(CU\)</span> operations as we did in the first step. For the second step we have <span class="math notranslate nohighlight">\(t=m-2\)</span>, hence <span class="math notranslate nohighlight">\(2^t=1\)</span>. So we apply <span class="math notranslate nohighlight">\(\text{CP}(\pi/2)\)</span> once. And then we perform the x-measurment of the qubit <span class="math notranslate nohighlight">\(q_0\)</span>, storing the result, the phase bit <span class="math notranslate nohighlight">\(\varphi_1\)</span>, in the bit <span class="math notranslate nohighlight">\(c_1\)</span> of classical register.</p>
+<p>첫 단계에서 그랬던 것처럼 <span class="math notranslate nohighlight">\(CU\)</span> 연산을 적용한다. 두 번째 단계에는 <span class="math notranslate nohighlight">\(t=m-2\)</span> 가 있고, 따라서 <span class="math notranslate nohighlight">\(2^t=1\)</span> 가 있다. 그래서 우리는 <span class="math notranslate nohighlight">\(\text{CP}(\pi/2)\)</span> 의 x 측정을 수행하여 결과, 위상 비트 <span class="math notranslate nohighlight">\(\varphi_1\)</span> 를 고전적 레지스터의 비트 <span class="math notranslate nohighlight">\(c_1\)</span> 에 저장한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
@@ -927,7 +927,7 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_algorithms_09_IQPE_32_0.png" src="../../_images/tutorials_algorithms_09_IQPE_32_0.png" />
 </div>
 </div>
-<p>Let’s execute the circuit with the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code>, the simulator without noise that run locally.</p>
+<p>로컬로 작동하는 소음 없는 시뮬레이터인 <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> 로 회로를 실행해 보자.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
 </pre></div>
@@ -953,8 +953,8 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_algorithms_09_IQPE_34_0.png" src="../../_images/tutorials_algorithms_09_IQPE_34_0.png" />
 </div>
 </div>
-<p>In the picture we have the same histograms but on the left we have on the x-axis the string with phase bits <span class="math notranslate nohighlight">\(\varphi_1\)</span>, <span class="math notranslate nohighlight">\(\varphi_2\)</span> and on the right the actual phase <span class="math notranslate nohighlight">\(\varphi\)</span> in decimal representation.</p>
-<p>As we expected we have found <span class="math notranslate nohighlight">\(\varphi=\frac{1}{4}=0.25\)</span> with a <span class="math notranslate nohighlight">\(100\%\)</span> probability.</p>
+<p>그림에서 히스토그램은 동일하지만 왼쪽에는 X축에 위상 비트 <span class="math notranslate nohighlight">\(\varphi_1\)</span> , <span class="math notranslate nohighlight">\(\varphi_2\)</span> 가 있는 문자열이 있고 오른쪽에는 10진수 표시의 실제 위상 <span class="math notranslate nohighlight">\(\varphi\)</span> 가 있다.</p>
+<p>예상했던 대로 <span class="math notranslate nohighlight">\(100\%\)</span> 확률을 가진 <span class="math notranslate nohighlight">\(\varphi=\frac{1}{4}=0.25\)</span> 를 찾았다.</p>
 </section>
 </section>
 </section>
@@ -1014,7 +1014,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="id4">
-<h4>Application of the Controlled-<span class="math notranslate nohighlight">\(U\)</span> gates<a class="headerlink" href="#id4" title="제목 주소">¶</a></h4>
+<h4>Controlled-<span class="math notranslate nohighlight">\(U\)</span> 게이트의 적용<a class="headerlink" href="#id4" title="제목 주소">¶</a></h4>
 <p>Then we have to apply multiple times the <span class="math notranslate nohighlight">\(CU\)</span> operator, that, in this example, is the Controlled-<span class="math notranslate nohighlight">\(CT\)</span> gate (<span class="math notranslate nohighlight">\(CCT\)</span> for short).</p>
 <p>To implement <span class="math notranslate nohighlight">\(CCT\)</span> in the circuit, since <span class="math notranslate nohighlight">\(T\)</span> is a phase gate, we can use the multi-controlled phase gate <span class="math notranslate nohighlight">\(\text{MCP}(\theta)\)</span>, with <span class="math notranslate nohighlight">\(\theta=\pi/4\)</span>.</p>
 <div class="nbinput docutils container">
@@ -1058,7 +1058,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="id5">
-<h4>Measure in x-basis<a class="headerlink" href="#id5" title="제목 주소">¶</a></h4>
+<h4>x 기저에서 측정<a class="headerlink" href="#id5" title="제목 주소">¶</a></h4>
 <p>Finally, we perform the measurenment of the auxiliary qubit in x-basis. We can use the <code class="docutils literal notranslate"><span class="pre">x_measurement</span></code> function defined above in the example for 1-qubit gate. In this way we have obtained the phase bit <span class="math notranslate nohighlight">\(\varphi_3\)</span> and stored it in the classical bit <span class="math notranslate nohighlight">\(c_0\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
@@ -1217,7 +1217,7 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_algorithms_09_IQPE_55_0.png" src="../../_images/tutorials_algorithms_09_IQPE_55_0.png" />
 </div>
 </div>
-<p>We have obtained <span class="math notranslate nohighlight">\(100\%\)</span> probability to find <span class="math notranslate nohighlight">\(\varphi=0.125\)</span>, that is, <span class="math notranslate nohighlight">\(1/8\)</span>, as expected.</p>
+<p>예상대로 <span class="math notranslate nohighlight">\(\varphi=0.125\)</span>, 즉 <span class="math notranslate nohighlight">\(1/8\)</span> 를 찾을 수 있는 <span class="math notranslate nohighlight">\(100\%\)</span> 확률을 얻었다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[82]:
 </pre></div>
@@ -1263,7 +1263,7 @@ div.rendered_html tbody tr:hover {
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      최종 업데이트: 2021/07/28
+      최종 업데이트: 2021/08/02
 
     </p>
   </div>
@@ -1288,8 +1288,8 @@ div.rendered_html tbody tr:hover {
 <li><a class="reference internal" href="#U-에-대한-1-큐비트-게이트의-IPE-예제"><span class="math notranslate nohighlight">\(U\)</span> 에 대한 1-큐비트 게이트의 IPE 예제</a><ul>
 <li><a class="reference internal" href="#첫-번째-단계">첫 번째 단계</a><ul>
 <li><a class="reference internal" href="#초기화">초기화</a></li>
-<li><a class="reference internal" href="#Application-of-the-Controlled-U-gates">Application of the Controlled-<span class="math notranslate nohighlight">\(U\)</span> gates</a></li>
-<li><a class="reference internal" href="#Measure-in-x-basis">Measure in x-basis</a></li>
+<li><a class="reference internal" href="#Controlled-U-게이트의-적용">Controlled-<span class="math notranslate nohighlight">\(U\)</span> 게이트의 적용</a></li>
+<li><a class="reference internal" href="#x-기저에서-측정">x 기저에서 측정</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#후속-단계-(두-번째-단계)">후속 단계 (두 번째 단계)</a><ul>
@@ -1303,8 +1303,8 @@ div.rendered_html tbody tr:hover {
 <li><a class="reference internal" href="#2-큐비트-게이트의-IPE-예제">2-큐비트 게이트의 IPE 예제</a><ul>
 <li><a class="reference internal" href="#id2">첫 번째 단계</a><ul>
 <li><a class="reference internal" href="#id3">초기화</a></li>
-<li><a class="reference internal" href="#id4">Application of the Controlled-<span class="math notranslate nohighlight">\(U\)</span> gates</a></li>
-<li><a class="reference internal" href="#id5">Measure in x-basis</a></li>
+<li><a class="reference internal" href="#id4">Controlled-<span class="math notranslate nohighlight">\(U\)</span> 게이트의 적용</a></li>
+<li><a class="reference internal" href="#id5">x 기저에서 측정</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#후속-단계-(2차,-3차)">후속 단계 (2차, 3차)</a><ul>

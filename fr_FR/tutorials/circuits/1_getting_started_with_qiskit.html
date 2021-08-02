@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started with Qiskit &mdash; Documentation Qiskit 0.28.0</title>
+  <title>Démarrer avec Qiskit &mdash; Documentation Qiskit 0.28.0</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Getting Started with Qiskit</li>
+      <li>Démarrer avec Qiskit</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -570,12 +570,11 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits/1_getting_started_with_qiskit.ipynb">tutorials/circuits/1_getting_started_with_qiskit.ipynb</a>.</p>
+<p>Cette page a été générée puis traduite à partir de <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits/1_getting_started_with_qiskit.ipynb">tutorials/circuits/1_getting_started_with_qiskit.ipynb</a>.</p>
 </div>
-<section id="Getting-Started-with-Qiskit">
-<h1>Getting Started with Qiskit<a class="headerlink" href="#Getting-Started-with-Qiskit" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Here, we provide an overview of working with Qiskit. The fundamental package of Qiskit is Terra that provides the basic building blocks necessary to program quantum computers. The fundamental unit of Qiskit is the <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">quantum circuit</a>. A basic workflow using Qiskit consists of two stages: <strong>Build</strong> and <strong>Execute</strong>. <strong>Build</strong> allows you to make different quantum circuits that represent the problem you are solving, and <strong>Execute</strong> that allows you to
-run them on different backends. After the jobs have been run, the data is collected and postprocessed depending on the desired output.</p>
+<section id="Démarrer-avec-Qiskit">
+<h1>Démarrer avec Qiskit<a class="headerlink" href="#Démarrer-avec-Qiskit" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ici, nous présentons une vue d’ensemble de l’utilisation de Qiskit. Le package fondamental de Qiskit est Terra, qui fournit les éléments de base nécessaires à la programmation des ordinateurs quantiques. L’unité fondamentale de Qiskit est le <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">circuit quantique</a>. Un travail de base avec Qiskit se décompose en deux étapes : la <strong>construction</strong> et l”<strong>exécution</strong>. La <strong>construction</strong> permet de construire différents circuits quantiques qui représentent le problème que vous êtes en train de résoudre, tandis que l”<strong>exécution</strong> permet de les executer sur différents backends. Après l’exécution des circuits, les données sont collectées et traitées en fonction du résultat souhaité.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -587,11 +586,11 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<section id="Circuit-Basics">
-<h2>Circuit Basics<a class="headerlink" href="#Circuit-Basics" title="Lien permanent vers ce titre">¶</a></h2>
-<section id="Building-the-circuit">
-<h3>Building the circuit<a class="headerlink" href="#Building-the-circuit" title="Lien permanent vers ce titre">¶</a></h3>
-<p>The basic element needed for your first program is the QuantumCircuit. We begin by creating a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> comprised of three qubits.</p>
+<section id="Principes-de-base-des-circuits">
+<h2>Principes de base des circuits<a class="headerlink" href="#Principes-de-base-des-circuits" title="Lien permanent vers ce titre">¶</a></h2>
+<section id="Construction-du-circuit">
+<h3>Construction du circuit<a class="headerlink" href="#Construction-du-circuit" title="Lien permanent vers ce titre">¶</a></h3>
+<p>L’élément de base dont vous aurez besoin pour ce premier programme est le QuantumCircuit (circuit quantique). Nous commençons par créer un <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> constitué de 3 qubits.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -602,12 +601,15 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<p>After you create the circuit with its registers, you can add gates (“operations”) to manipulate the registers. As you proceed through the tutorials you will find more gates and circuits; below is an example of a quantum circuit that makes a three-qubit GHZ state</p>
+<p>Après avoir créé le circuit avec ses registres, vous pouvez ajouter les portes (« opérations ») pour manipuler lesdits registres. En parcourant les tutoriels vous trouverez davantage de portes et de circuits ; ci-dessous un exemple de circuit quantique qui crée un état GHZ avec 3 qubits</p>
 <div class="math notranslate nohighlight">
 \[|\psi\rangle = \left(|000\rangle+|111\rangle\right)/\sqrt{2}.\]</div>
-<p>To create such a state, we start with a three-qubit quantum register. By default, each qubit in the register is initialized to <span class="math notranslate nohighlight">\(|0\rangle\)</span>. To make the GHZ state, we apply the following gates: - A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0, which puts it into the superposition state <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span>. - A controlled-Not operation (<span class="math notranslate nohighlight">\(C_{X}\)</span>) between qubit 0 and qubit 1. - A controlled-Not operation between qubit 0 and qubit 2.</p>
-<p>On an ideal quantum computer, the state produced by running this circuit would be the GHZ state above.</p>
-<p>In Qiskit, operations can be added to the circuit one by one, as shown below.</p>
+<p>Pour créer un tel état, nous partons d’un registre quantique composé de 3 qubits. Par défaut, chaque qubit du registre est initialisé à <span class="math notranslate nohighlight">\(|0\rangle\)</span>. Pour créer l’état GHZ, on applique les portes suivantes:
+- Une porte Hadamard <span class="math notranslate nohighlight">\(H\)</span> sur le qubit 0, ce qui le place dans un état de superposition <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span>.
+- Une opération « controlled-Not » (NON-contrôlé ou CNOT) (<span class="math notranslate nohighlight">\(C_{X}\)</span>) entre le qubit 0 et le qubit 1.
+- Une opération « controlled-Not » (CNOT) entre le qubit 0 et le qubit 2.</p>
+<p>Dans un calculateur quantique parfait, l’état produit en exécutant ce circuit serait l’état GHZ ci-dessus.</p>
+<p>Dans Qiskit, les opérations peuvent être ajoutées au circuit une par une, comme montré ci-dessous.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -635,9 +637,9 @@ run them on different backends. After the jobs have been run, the data is collec
 </div>
 </section>
 </section>
-<section id="Visualize-Circuit">
-<h2>Visualize Circuit<a class="headerlink" href="#Visualize-Circuit" title="Lien permanent vers ce titre">¶</a></h2>
-<p>You can visualize your circuit using Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>, which plots the circuit in the form found in many textbooks.</p>
+<section id="Visualisation-du-circuit">
+<h2>Visualisation du circuit<a class="headerlink" href="#Visualisation-du-circuit" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Vous pouvez visualiser le circuit en utilisant la méthode <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>, qui dessinera le circuit tel qu’on le voit dans de nombreux ouvrages.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
@@ -655,8 +657,8 @@ run them on different backends. After the jobs have been run, the data is collec
 <img alt="../../_images/tutorials_circuits_1_getting_started_with_qiskit_7_0.png" src="../../_images/tutorials_circuits_1_getting_started_with_qiskit_7_0.png" />
 </div>
 </div>
-<p>In this circuit, the qubits are put in order, with qubit zero at the top and qubit two at the bottom. The circuit is read left to right (meaning that gates that are applied earlier in the circuit show up further to the left).</p>
-<div class="alert alert-block alert-info"><p>When representing the state of a multi-qubit system, the tensor order used in Qiskit is different than that used in most physics textbooks. Suppose there are <span class="math notranslate nohighlight">\(n\)</span> qubits, and qubit <span class="math notranslate nohighlight">\(j\)</span> is labeled as <span class="math notranslate nohighlight">\(Q_{j}\)</span>. Qiskit uses an ordering in which the <span class="math notranslate nohighlight">\(n^{\mathrm{th}}\)</span> qubit is on the left side of the tensor product, so that the basis vectors are labeled as <span class="math notranslate nohighlight">\(Q_{n-1}\otimes \cdots \otimes Q_1\otimes Q_0\)</span>.</p>
+<p>Dans ce circuit, les qubits sont placés dans l’ordre, le qubit 0 étant en haut et le qubit 2 en bas. Le circuit est lu de gauche à droite (ce qui signifie que les portes appliquées les premières sont celles étant le plus à gauche).</p>
+<div class="alert alert-block alert-info"><p>Lorsque l’on représente l’état d’un système à plusieurs qubits, l’ordre des produits tensoriels utilisé dans Qiskit est différent de celui de la plupart des manuels de physique. Supposons qu’il y a <span class="math notranslate nohighlight">\(n\)</span> qubits, et que le qubit de numéro <span class="math notranslate nohighlight">\(j\)</span> soit dénoté par <span class="math notranslate nohighlight">\(Q_{j}\)</span>. Qiskit utilise l’ordre dans lequel le qubit numéro <span class="math notranslate nohighlight">\(n\)</span> est à gauche dans l’expression du produit tensoriel, de telle sorte à ce que les vecteurs de base soient dénotés par :math:` Q_{n-1}otimes cdots otimes Q_1otimes Q_0`.</p>
 <p>For example, if qubit zero is in state 0, qubit 1 is in state 0, and qubit 2 is in state 1, Qiskit would represent this state as <span class="math notranslate nohighlight">\(|100\rangle\)</span>, whereas many physics textbooks would represent it as <span class="math notranslate nohighlight">\(|001\rangle\)</span>.</p>
 <p>This difference in labeling affects the way multi-qubit operations are represented as matrices. For example, Qiskit represents a controlled-X (<span class="math notranslate nohighlight">\(C_{X}\)</span>) operation with qubit 0 being the control and qubit 1 being the target as</p>
 <div class="math notranslate nohighlight">
@@ -942,7 +944,7 @@ q_2: |0>──────────┤ X ├─░──╫──╫─┤M�
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Mis à jour le 2021/07/28.
+      Mis à jour le 2021/08/02.
 
     </p>
   </div>
@@ -961,12 +963,12 @@ q_2: |0>──────────┤ X ├─░──╫──╫─┤M�
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Getting Started with Qiskit</a><ul>
-<li><a class="reference internal" href="#Circuit-Basics">Circuit Basics</a><ul>
-<li><a class="reference internal" href="#Building-the-circuit">Building the circuit</a></li>
+<li><a class="reference internal" href="#">Démarrer avec Qiskit</a><ul>
+<li><a class="reference internal" href="#Principes-de-base-des-circuits">Principes de base des circuits</a><ul>
+<li><a class="reference internal" href="#Construction-du-circuit">Construction du circuit</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Visualize-Circuit">Visualize Circuit</a></li>
+<li><a class="reference internal" href="#Visualisation-du-circuit">Visualisation du circuit</a></li>
 <li><a class="reference internal" href="#Simulating-circuits-using-Qiskit-Aer">Simulating circuits using Qiskit Aer</a><ul>
 <li><a class="reference internal" href="#Statevector-backend">Statevector backend</a></li>
 <li><a class="reference internal" href="#Unitary-backend">Unitary backend</a></li>
