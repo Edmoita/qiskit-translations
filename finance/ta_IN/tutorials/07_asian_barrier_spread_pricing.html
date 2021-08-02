@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Pricing Fixed-Income Assets" href="08_fixed_income_pricing.html" />
     <link rel="prev" title="Pricing Basket Options" href="06_basket_option_pricing.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/07_asian_barrier_spread_pricing.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/07_asian_barrier_spread_pricing.ipynb">docs/tutorials/07_asian_barrier_spread_pricing.ipynb</a>.</p>
 </div>
 <div class="section" id="Pricing-Asian-Barrier-Spreads">
 <h1>Pricing Asian Barrier Spreads<a class="headerlink" href="#Pricing-Asian-Barrier-Spreads" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>An Asian barrier spread is a combination of 3 different option types, and as such, combines multiple possible features that the Qiskit Finance option pricing framework supports:</p>
+<p>ஒரு ஆசிய தடை பரவல் என்பது 3 வெவ்வேறு விருப்ப வகைகளின் கலவையாகும், மேலும், qiskit நிதி விருப்ப விலை நிர்ணய கட்டமைப்பை ஆதரிக்கும் பல சாத்தியமான அம்சங்களை ஒருங்கிணைக்கிறது:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.investopedia.com/terms/a/asianoption.asp">Asian option</a>: The payoff depends on the average price over the considered time horizon.</p></li>
 <li><p><a class="reference external" href="https://www.investopedia.com/terms/b/barrieroption.asp">Barrier Option</a>: The payoff is zero if a certain threshold is exceeded at any time within the considered time horizon.</p></li>

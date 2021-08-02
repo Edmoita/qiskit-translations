@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Pricing Bull Spreads" href="05_bull_spread_pricing.html" />
     <link rel="prev" title="Pricing European Call Options" href="03_european_call_option_pricing.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/04_european_put_option_pricing.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/04_european_put_option_pricing.ipynb">docs/tutorials/04_european_put_option_pricing.ipynb</a>.</p>
 </div>
 <div class="section" id="Pricing-European-Put-Options">
 <h1>Pricing European Put Options<a class="headerlink" href="#Pricing-European-Put-Options" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>Suppose a European put option with strike price <span class="math notranslate nohighlight">\(K\)</span> and an underlying asset whose spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> follows a given random distribution. The corresponding payoff function is defined as:</p>
+<p>வேலைநிறுத்த விலையுடன் ஒரு ஐரோப்பிய புட் விருப்பத்தை வைத்துக்கொள்வோம் <span class="math notranslate nohighlight">\(K\)</span> மற்றும் முதிர்ச்சியில் இடத்தின் விலை <span class="math notranslate nohighlight">\(S_T\)</span> கொடுக்கப்பட்ட சீரற்ற விநியோகத்தைப் பின்பற்றுகிறது. தொடர்புடைய செலுத்துதல் செயல்பாடு பின்வருமாறு வரையறுக்கப்படுகிறது:</p>
 <div class="math notranslate nohighlight">
 \[\max\{K - S_T, 0\}\]</div>
 <p>In the following, a quantum algorithm based on amplitude estimation is used to estimate the expected payoff, i.e., the fair price before discounting, for the option:</p>
@@ -598,8 +598,8 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Payoff-Function">
 <h2>Payoff Function<a class="headerlink" href="#Payoff-Function" title="Permalink to this headline">¶</a></h2>
-<p>The payoff function decreases linearly with an increasing spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> until it reaches zero for a spot price equal to the strike price <span class="math notranslate nohighlight">\(K\)</span>, it stays constant to zero for larger spot prices. The implementation uses a comparator, that flips an ancilla qubit from <span class="math notranslate nohighlight">\(\big|0\rangle\)</span> to <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> if <span class="math notranslate nohighlight">\(S_T \leq K\)</span>, and this ancilla is used to control the linear part of the payoff function.</p>
-<p>The linear part itself is then approximated as follows. We exploit the fact that <span class="math notranslate nohighlight">\(\sin^2(y + \pi/4) \approx y + 1/2\)</span> for small <span class="math notranslate nohighlight">\(|y|\)</span>. Thus, for a given approximation rescaling scaling factor <span class="math notranslate nohighlight">\(c_\text{approx} \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> we consider</p>
+<p>முதிர்ச்சியில் அதிகரிக்கும் ஸ்பாட் விலையுடன் செலுத்துதல் செயல்பாடு நேர்கோட்டில் குறைகிறது <span class="math notranslate nohighlight">\(S_T\)</span> இது வேலைநிறுத்த விலைக்கு சமமான ஸ்பாட் விலைக்கு பூஜ்ஜியத்தை அடையும் வரை <span class="math notranslate nohighlight">\(K\)</span>, இது பெரிய ஸ்பாட் விலைகளுக்கு பூஜ்ஜியத்திற்கு மாறாமல் இருக்கும். செயலாக்கம் ஒரு ஒப்பீட்டாளரைப் பயன்படுத்துகிறது, இது ஒரு கணிதத்தை <span class="math notranslate nohighlight">\(\big|0\rangle\)</span> முதல் <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> என்றால் <span class="math notranslate nohighlight">\(S_T \leq K\)</span>, மற்றும் இந்த துணை செலுத்துதல் செயல்பாட்டின் நேரியல் பகுதியைக் கட்டுப்படுத்தப் பயன்படுகிறது.</p>
+<p>நேரியல் பகுதி பின்வருமாறு தோராயமாக மதிப்பிடப்படுகிறது. <span class="math notranslate nohighlight">\(\sin^2(y + \pi/4) \approx y + 1/2\)</span> சிறியது <span class="math notranslate nohighlight">\(|y|\)</span>. எனவே, கொடுக்கப்பட்ட தோராயமான மீட்பு அளவிடுதல் காரணிக்கு <span class="math notranslate nohighlight">\(c_\text{approx} \in [0, 1]\)</span> மற்றும் <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span></p>
 <div class="math notranslate nohighlight">
 \[\sin^2( \pi/2 * c_\text{approx} * ( x - 1/2 ) + \pi/4) \approx \pi/2 * c_\text{approx} * ( x - 1/2 ) + 1/2\]</div>
 <p>for small <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>.</p>

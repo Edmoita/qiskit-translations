@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Pricing Fixed-Income Assets &mdash; Qiskit Finance 0.2.0 문서</title>
+  <title>가격 고정-수입 자산 &mdash; Qiskit Finance 0.2.0 문서</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
-    <link rel="next" title="Credit Risk Analysis" href="09_credit_risk_analysis.html" />
-    <link rel="prev" title="Pricing Asian Barrier Spreads" href="07_asian_barrier_spread_pricing.html" /> 
+    <link rel="next" title="신용 위험 분석" href="09_credit_risk_analysis.html" />
+    <link rel="prev" title="아시아 통화 가격 하락" href="07_asian_barrier_spread_pricing.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Pricing Fixed-Income Assets</li>
+      <li>가격 고정-수입 자산</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -482,19 +482,18 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/08_fixed_income_pricing.ipynb">docs/tutorials/08_fixed_income_pricing.ipynb</a> 에서 생성되었다.</p>
 </div>
-<div class="section" id="Pricing-Fixed-Income-Assets">
-<h1>Pricing Fixed-Income Assets<a class="headerlink" href="#Pricing-Fixed-Income-Assets" title="이 표제에 대한 퍼머링크">¶</a></h1>
+<div class="section" id="가격-고정-수입-자산">
+<h1>가격 고정-수입 자산<a class="headerlink" href="#가격-고정-수입-자산" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>We seek to price a fixed-income asset knowing the distributions describing the relevant interest rates. The cash flows <span class="math notranslate nohighlight">\(c_t\)</span> of the asset and the dates at which they occur are known. The total value <span class="math notranslate nohighlight">\(V\)</span> of the asset is thus the expectation value of:</p>
 <div class="math notranslate nohighlight">
 \[V = \sum_{t=1}^T \frac{c_t}{(1+r_t)^t}\]</div>
-<p>Each cash flow is treated as a zero coupon bond with a corresponding interest rate <span class="math notranslate nohighlight">\(r_t\)</span> that depends on its maturity. The user must specify the distribution modeling the uncertainty in each <span class="math notranslate nohighlight">\(r_t\)</span> (possibly correlated) as well as the number of qubits he wishes to use to sample each distribution. In this example we expand the value of the asset to first order in the interest rates <span class="math notranslate nohighlight">\(r_t\)</span>. This corresponds to studying the asset in terms of its duration. The approximation of the
-objective function follows the following paper: <a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p>
+<p>각각의 현금 유동성은 그의 성숙에 의존하는 대응하는 이자율 <span class="math notranslate nohighlight">\(r_t\)</span> 을 갖는 제로 쿠폰 결합으로서 취급된다. 사용자는 각각의 <span class="math notranslate nohighlight">\(r_t\)</span> (가능하게는 상관된) 에 대한 불확실성뿐만 아니라 각각의 분포를 샘플링하기 위해 사용하고자 하는 쿼비트들의 수를 모델링하는 것을 명시해야 한다. 이 예제에서는 이자 비율 <span class="math notranslate nohighlight">\(r_t\)</span> 에서 자산의 값을 1차로 확장한다. 이것은 자산의 지속 기간 측면에서 자산을 연구하는 것에 해당한다. 목표 함수의 근사값은 다음과 같은 논문을 따른다. <a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -810,10 +809,10 @@ Confidence interval:    [2.3015, 2.3823]
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="09_credit_risk_analysis.html" class="btn btn-neutral float-right" title="Credit Risk Analysis" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="09_credit_risk_analysis.html" class="btn btn-neutral float-right" title="신용 위험 분석" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="07_asian_barrier_spread_pricing.html" class="btn btn-neutral" title="Pricing Asian Barrier Spreads" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="07_asian_barrier_spread_pricing.html" class="btn btn-neutral" title="아시아 통화 가격 하락" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -845,7 +844,7 @@ Confidence interval:    [2.3015, 2.3823]
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Pricing Fixed-Income Assets</a><ul>
+<li><a class="reference internal" href="#">가격 고정-수입 자산</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
 <li><a class="reference internal" href="#Cash-flow,-payoff-function,-and-exact-expected-value">Cash flow, payoff function, and exact expected value</a></li>

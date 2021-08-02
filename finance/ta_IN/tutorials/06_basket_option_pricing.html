@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Pricing Asian Barrier Spreads" href="07_asian_barrier_spread_pricing.html" />
     <link rel="prev" title="Pricing Bull Spreads" href="05_bull_spread_pricing.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/06_basket_option_pricing.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,9 +482,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/06_basket_option_pricing.ipynb">docs/tutorials/06_basket_option_pricing.ipynb</a>.</p>
 </div>
 <div class="section" id="Pricing-Basket-Options">
 <h1>Pricing Basket Options<a class="headerlink" href="#Pricing-Basket-Options" title="Permalink to this headline">¶</a></h1>
@@ -492,7 +492,7 @@ div.rendered_html tbody tr:hover {
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
 <p>Suppose a basket option with strike price <span class="math notranslate nohighlight">\(K\)</span> and two underlying assets whose spot price at maturity <span class="math notranslate nohighlight">\(S_T^1\)</span>, <span class="math notranslate nohighlight">\(S_T^2\)</span> follow given random distributions. The corresponding payoff function is defined as:</p>
 <div class="math notranslate nohighlight">
-\[\max\{S_T^1 + S_T^2 - K, 0\}\]</div>
+\[\max\ {S_T ^ 1 + S_T ^ 2-K, 0\}\]</div>
 <p>In the following, a quantum algorithm based on amplitude estimation is used to estimate the expected payoff, i.e., the fair price before discounting, for the option:</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{E}\left[ \max\{S_T^1 + S_T^2 - K, 0\} \right].\]</div>
@@ -835,7 +835,7 @@ Mapped Operator value: 0.4969
 Exact Expected Payoff: 0.4870
 </pre></div></div>
 </div>
-<p>Next we use amplitude estimation to estimate the expected payoff.</p>
+<p>அடுத்து எதிர்பார்க்கப்படும் ஊதியத்தை மதிப்பிடுவதற்கு வீச்சு மதிப்பீட்டைப் பயன்படுத்துகிறோம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>

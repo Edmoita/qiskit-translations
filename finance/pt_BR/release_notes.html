@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
     <link rel="index" title="Índice" href="genindex.html" />
-    <link rel="search" title="Buscar" href="search.html" />
+    <link rel="search" title="Pesquisar" href="search.html" />
     <link rel="prev" title="Loading and Processing Stock-Market Time-Series Data" href="tutorials/11_time_series.html" /> 
 
   
@@ -96,7 +96,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Idiomas</dt>
       
         <dd><a class="version" href="/documentation/finance/release_notes.html">English</a></dd>
       
@@ -157,10 +157,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Primeiros Passos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apidocs/qiskit_finance.html">Referências de API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutoriais</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Notas da Versão</a></li>
 </ul>
 
             
@@ -233,8 +233,19 @@
               
   <br><br><br><div class="section" id="release-notes">
 <h1>Release Notes<a class="headerlink" href="#release-notes" title="Link permanente para este título">¶</a></h1>
+<div class="section" id="release-notes-0-2-0-4">
+<span id="id1"></span><h2>0.2.0-4<a class="headerlink" href="#release-notes-0-2-0-4" title="Link permanente para este título">¶</a></h2>
+<div class="section" id="bug-fixes">
+<span id="release-notes-0-2-0-4-bug-fixes"></span><h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link permanente para este título">¶</a></h3>
+<ul class="simple">
+<li><p>Fixed a handling error in the Yahoo provider when only one ticker is entered.
+Added exception error if no ticker is entered.
+Limit yfinance to &gt;=0.1.62 as previous versions have a JSON decoder error.</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="release-notes-0-2-0">
-<span id="id1"></span><h2>0.2.0<a class="headerlink" href="#release-notes-0-2-0" title="Link permanente para este título">¶</a></h2>
+<span id="id2"></span><h2>0.2.0<a class="headerlink" href="#release-notes-0-2-0" title="Link permanente para este título">¶</a></h2>
 <div class="section" id="new-features">
 <span id="release-notes-0-2-0-new-features"></span><h3>New Features<a class="headerlink" href="#new-features" title="Link permanente para este título">¶</a></h3>
 <ul class="simple">
@@ -288,6 +299,10 @@ buy or not.</p></li>
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Release Notes</a><ul>
+<li><a class="reference internal" href="#release-notes-0-2-0-4">0.2.0-4</a><ul>
+<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#release-notes-0-2-0">0.2.0</a><ul>
 <li><a class="reference internal" href="#new-features">New Features</a></li>
 </ul>

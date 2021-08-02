@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Option Pricing with qGANs" href="10_qgan_option_pricing.html" />
     <link rel="prev" title="Pricing Fixed-Income Assets" href="08_fixed_income_pricing.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/09_credit_risk_analysis.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,31 +482,31 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/09_credit_risk_analysis.ipynb">docs/tutorials/09_credit_risk_analysis.ipynb</a>.</p>
 </div>
 <div class="section" id="Credit-Risk-Analysis">
 <h1>Credit Risk Analysis<a class="headerlink" href="#Credit-Risk-Analysis" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial shows how quantum algorithms can be used for credit risk analysis. More precisely, how Quantum Amplitude Estimation (QAE) can be used to estimate risk measures with a quadratic speed-up over classical Monte Carlo simulation. The tutorial is based on the following papers:</p>
+<p>கடன் ஆபத்து பகுப்பாய்விற்கு குவாண்டம் வழிமுறைகள் எவ்வாறு பயன்படுத்தப்படலாம் என்பதை இந்த பயிற்சிகள் காட்டுகிறது. இன்னும் துல்லியமாக, கிளாசிக்கல் மான்டே கார்லோ உருவகப்படுத்துதலின் மீது இருபடி வேகத்துடன் ஆபத்து நடவடிக்கைகளை மதிப்பிடுவதற்கு குவாண்டம் அலைவீச்சு மதிப்பீடு (QAE) எவ்வாறு பயன்படுத்தப்படலாம். பயிற்சிகள் பின்வரும் ஆவணங்களை அடிப்படையாகக் கொண்டது:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.nature.com/articles/s41534-019-0130-6">Quantum Risk Analysis. Stefan Woerner, Daniel J. Egger.</a> [Woerner2019]</p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1907.03044">Credit Risk Analysis using Quantum Computers. Egger et al. (2019)</a> [Egger2019]</p></li>
+<li><p><a class="reference external" href="https://www.nature.com/articles/s41534-019-0130-6">குவாண்டம் இடர் பகுப்பாய்வு. ஸ்டீபன் வோர்னர், டேனியல் ஜே. எகர்.</a> [Woerner2019]</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1907.03044">குவாண்டம் கம்ப்யூட்டர்களைப் பயன்படுத்தி கடன் இடர் பகுப்பாய்வு. எகர் மற்றும் பலர். (2019)</a> [Egger2019]</p></li>
 </ul>
-<p>A general introduction to QAE can be found in the following paper:</p>
+<p>QAE பற்றிய பொதுவான அறிமுகத்தை பின்வரும் தாளில் காணலாம்:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://arxiv.org/abs/quant-ph/0005055">Quantum Amplitude Amplification and Estimation. Gilles Brassard et al.</a></p></li>
+<li><p><a class="reference external" href="http://arxiv.org/abs/quant-ph/0005055">குவாண்டம் அலைவீச்சு பெருக்கம் மற்றும் மதிப்பீடு. கில்லஸ் பிராஸார்ட் மற்றும் பலர்.</a></p></li>
 </ul>
-<p>The structure of the tutorial is as follows:</p>
+<p>டுடோரியலின் அமைப்பு பின்வருமாறு:</p>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="#Problem-Definition">Problem Definition</a></p></li>
-<li><p><a class="reference external" href="#Uncertainty-Model">Uncertainty Model</a></p></li>
-<li><p><a class="reference external" href="#Expected-Loss">Expected Loss</a></p></li>
-<li><p><a class="reference external" href="#Cumulative-Distribution-Function">Cumulative Distribution Function</a></p></li>
-<li><p><a class="reference external" href="#Value-at-Risk">Value at Risk</a></p></li>
-<li><p><a class="reference external" href="#Conditional-Value-at-Risk">Conditional Value at Risk</a></p></li>
+<li><p><a class="reference external" href="#சிக்கல்-வரையறை">சிக்கல் வரையறை</a></p></li>
+<li><p><a class="reference external" href="#நிச்சயமற்றமாதிரி">நிச்சயமற்ற மாதிரி</a></p></li>
+<li><p><a class="reference external" href="#எதிர்பார்க்கப்படும்-இழப்பு">எதிர்பார்க்கப்படும் இழப்பு</a></p></li>
+<li><p><a class="reference external" href="#ஒட்டுமொத்த-விநியோகம்-செயல்பாடு">ஒட்டுமொத்த விநியோக செயல்பாடு</a></p></li>
+<li><p><a class="reference external" href="#மதிப்பில்மதிப்பு">ஆபத்தில் மதிப்பு</a></p></li>
+<li><p><a class="reference external" href="#நிபந்தனை-மதிப்பு-ஆபத்தில்">ஆபத்தில் நிபந்தனை மதிப்பு</a></p></li>
 </ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -524,24 +524,23 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </div>
-<div class="section" id="Problem-Definition">
-<h2>Problem Definition<a class="headerlink" href="#Problem-Definition" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial we want to analyze the credit risk of a portfolio of <span class="math notranslate nohighlight">\(K\)</span> assets. The default probability of every asset <span class="math notranslate nohighlight">\(k\)</span> follows a <em>Gaussian Conditional Independence</em> model, i.e., given a value <span class="math notranslate nohighlight">\(z\)</span> sampled from a latent random variable <span class="math notranslate nohighlight">\(Z\)</span> following a standard normal distribution, the default probability of asset <span class="math notranslate nohighlight">\(k\)</span> is given by</p>
+<div class="section" id="சிக்கல்-வரையறை">
+<h2>சிக்கல் வரையறை<a class="headerlink" href="#சிக்கல்-வரையறை" title="Permalink to this headline">¶</a></h2>
+<p>இந்த டுடோரியலில்: கணிதத்தின் ஒரு போர்ட்ஃபோலியோவின் கடன் அபாயத்தை பகுப்பாய்வு செய்ய விரும்புகிறோம் <span class="math notranslate nohighlight">\(K\)</span> சொத்துக்கள். ஒவ்வொரு சொத்தின் இயல்புநிலை நிகழ்தகவு <span class="math notranslate nohighlight">\(k\)</span> ஒரு <em>காஸியன் நிபந்தனை சுதந்திரம்</em> மாதிரியைப் பின்பற்றுகிறது, அதாவது, ஒரு மதிப்பு கொடுக்கப்பட்டுள்ளது <span class="math notranslate nohighlight">\(z\)</span> ஒரு மறைந்த சீரற்ற மாறியில் இருந்து மாதிரி <span class="math notranslate nohighlight">\(Z\)</span> ஒரு நிலையான சாதாரண விநியோகத்தைத் தொடர்ந்து, சொத்தின் இயல்புநிலை நிகழ்தகவு <span class="math notranslate nohighlight">\(k\)</span> வழங்கப்படுகிறது</p>
 <div class="math notranslate nohighlight">
-\[p_k(z) = F\left( \frac{F^{-1}(p_k^0) - \sqrt{\rho_k}z}{\sqrt{1 - \rho_k}} \right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(F\)</span> denotes the cumulative distribution function of <span class="math notranslate nohighlight">\(Z\)</span>, <span class="math notranslate nohighlight">\(p_k^0\)</span> is the default probability of asset <span class="math notranslate nohighlight">\(k\)</span> for <span class="math notranslate nohighlight">\(z=0\)</span> and <span class="math notranslate nohighlight">\(\rho_k\)</span> is the sensitivity of the default probability of asset <span class="math notranslate nohighlight">\(k\)</span> with respect to <span class="math notranslate nohighlight">\(Z\)</span>. Thus, given a concrete realization of <span class="math notranslate nohighlight">\(Z\)</span> the individual default events are assumed to be independent from each other.</p>
-<p>We are interested in analyzing risk measures of the total loss</p>
+\[p_k (z) = F\left (\frac {F ^{-1}(p_k ^ 0)-\sqrt {\rho_k} z} {\sqrt {1- \rho_k}} \right)\]</div>
+<p>எங்கே <span class="math notranslate nohighlight">\(F\)</span> என்பது ஒட்டுமொத்த விநியோக செயல்பாட்டைக் குறிக்கிறது <span class="math notranslate nohighlight">\(Z\)</span> , <span class="math notranslate nohighlight">\(p_k^0\)</span> என்பது சொத்தின் இயல்புநிலை நிகழ்தகவு <span class="math notranslate nohighlight">\(k\)</span> க்கு <span class="math notranslate nohighlight">\(z=0\)</span> மற்றும் <span class="math notranslate nohighlight">\(\rho_k\)</span> என்பது சொத்தின் இயல்புநிலை நிகழ்தகவின் உணர்திறன் <span class="math notranslate nohighlight">\(k\)</span> தொடர்பாக <span class="math notranslate nohighlight">\(Z\)</span>. ஆகவே, கணிதத்தின் ஒரு தெளிவான உணர்தல் கொடுக்கப்பட்டால் <span class="math notranslate nohighlight">\(Z\)</span> தனிப்பட்ட இயல்புநிலை நிகழ்வுகள் ஒருவருக்கொருவர் சுயாதீனமாக கருதப்படுகின்றன.</p>
+<p>மொத்த இழப்பின் ஆபத்து நடவடிக்கைகளை பகுப்பாய்வு செய்வதில் நாங்கள் ஆர்வமாக உள்ளோம்</p>
 <div class="math notranslate nohighlight">
-\[L = \sum_{k=1}^K \lambda_k X_k(Z)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\lambda_k\)</span> denotes the <em>loss given default</em> of asset <span class="math notranslate nohighlight">\(k\)</span>, and given <span class="math notranslate nohighlight">\(Z\)</span>, <span class="math notranslate nohighlight">\(X_k(Z)\)</span> denotes a Bernoulli variable representing the default event of asset <span class="math notranslate nohighlight">\(k\)</span>. More precisely, we are interested in the expected value <span class="math notranslate nohighlight">\(\mathbb{E}[L]\)</span>, the Value at Risk (VaR) of <span class="math notranslate nohighlight">\(L\)</span> and the Conditional Value at Risk of <span class="math notranslate nohighlight">\(L\)</span> (also called Expected Shortfall). Where VaR and CVaR are defined as</p>
+\[L = \sum_ {k=1} ^ K \lambda_k X_ k (Z)\]</div>
+<p>எங்கே <span class="math notranslate nohighlight">\(\lambda_k\)</span> என்பது சொத்தின் <em>கொடுக்கப்பட்ட இயல்புநிலையை</em> குறிக்கிறது <span class="math notranslate nohighlight">\(k\)</span>, மற்றும் கொடுக்கப்பட்ட <span class="math notranslate nohighlight">\(Z\)</span>, <span class="math notranslate nohighlight">\(X_k(Z)\)</span> இயல்புநிலை நிகழ்வைக் குறிக்கும் பெர்ன lli லி மாறியைக் குறிக்கிறது சொத்து <span class="math notranslate nohighlight">\(k\)</span>. இன்னும் துல்லியமாக, எதிர்பார்க்கப்படும் மதிப்பில் நாங்கள் ஆர்வமாக உள்ளோம் <span class="math notranslate nohighlight">\(\mathbb{E}[L]\)</span>, இடர் மதிப்பு (VaR) <span class="math notranslate nohighlight">\(L\)</span> மற்றும் ஆபத்தில் நிபந்தனை மதிப்பு <span class="math notranslate nohighlight">\(L\)</span> (எதிர்பார்க்கப்படும் பற்றாக்குறை என்றும் அழைக்கப்படுகிறது). VaR மற்றும் CVaR என வரையறுக்கப்பட்டுள்ளது</p>
 <div class="math notranslate nohighlight">
-\[\text{VaR}_{\alpha}(L) = \inf \{ x \mid \mathbb{P}[L &lt;= x] \geq 1 - \alpha \}\]</div>
-<p>with confidence level <span class="math notranslate nohighlight">\(\alpha \in [0, 1]\)</span>, and</p>
+\[\text{VaR}_ {\alpha} (L) = \inf\{x \mid \mathbb{P}[L &lt; = x] \geq 1 - \alpha\}\]</div>
+<p>நம்பிக்கை மட்டத்துடன் <span class="math notranslate nohighlight">\(\alpha \in [0, 1]\)</span>, மற்றும்</p>
 <div class="math notranslate nohighlight">
-\[\text{CVaR}_{\alpha}(L) = \mathbb{E}[ L \mid L \geq \text{VaR}_{\alpha}(L) ].\]</div>
+\[\text{CVaR}_ {\alpha} (L) = \mathbb{E}[L \mid L \geq \text{VaR}_ {\alpha} (L)].\]</div>
 <p>For more details on the considered model, see, e.g., <a class="reference external" href="https://arxiv.org/abs/1412.1183">Regulatory Capital Modeling for Credit Risk. Marek Rutkowski, Silvio Tarca</a></p>
-<p>The problem is defined by the following parameters: - number of qubits used to represent <span class="math notranslate nohighlight">\(Z\)</span>, denoted by <span class="math notranslate nohighlight">\(n_z\)</span> - truncation value for <span class="math notranslate nohighlight">\(Z\)</span>, denoted by <span class="math notranslate nohighlight">\(z_{\text{max}}\)</span>, i.e., Z is assumed to take <span class="math notranslate nohighlight">\(2^{n_z}\)</span> equidistant values in <span class="math notranslate nohighlight">\(\{-z_{max}, ..., +z_{max}\}\)</span> - the base default probabilities for each asset <span class="math notranslate nohighlight">\(p_0^k \in (0, 1)\)</span>, <span class="math notranslate nohighlight">\(k=1, ..., K\)</span> - sensitivities of the default probabilities with respect to <span class="math notranslate nohighlight">\(Z\)</span>, denoted by <span class="math notranslate nohighlight">\(\rho_k \in [0, 1)\)</span> -
-loss given default for asset <span class="math notranslate nohighlight">\(k\)</span>, denoted by <span class="math notranslate nohighlight">\(\lambda_k\)</span> - confidence level for VaR / CVaR <span class="math notranslate nohighlight">\(\alpha \in [0, 1]\)</span>.</p>
+<p>சிக்கல் பின்வரும் அளவுருக்களால் வரையறுக்கப்படுகிறது: - பிரதிநிதித்துவப்படுத்த பயன்படுத்தப்படும் குவிட்களின் எண்ணிக்கை <span class="math notranslate nohighlight">\(Z\)</span>, இதன் மூலம் குறிக்கப்படுகிறது <span class="math notranslate nohighlight">\(n_z\)</span> - இதற்கான துண்டிப்பு மதிப்பு <span class="math notranslate nohighlight">\(Z\)</span>, குறிக்கப்படுகிறது <span class="math notranslate nohighlight">\(z_{\text{max}}\)</span>, அதாவது Z எடுக்கப்படும் என்று கருதப்படுகிறது <span class="math notranslate nohighlight">\(2^{n_z}\)</span> இதில் சமமான மதிப்புகள் <span class="math notranslate nohighlight">\(\{-z_{max}, ..., +z_{max}\}\)</span>- ஒவ்வொரு சொத்துக்கும் அடிப்படை இயல்புநிலை நிகழ்தகவுகள் <span class="math notranslate nohighlight">\(p_0^k \in (0, 1)\)</span>, <span class="math notranslate nohighlight">\(k=1, ..., K\)</span> - இது தொடர்பான இயல்புநிலை நிகழ்தகவுகளின் உணர்திறன் <span class="math notranslate nohighlight">\(Z\)</span>, குறிக்கப்படுகிறது <span class="math notranslate nohighlight">\(\rho_k \in [0, 1)\)</span>- சொத்துக்கான இயல்புநிலை கொடுக்கப்பட்ட இழப்பு <span class="math notranslate nohighlight">\(k\)</span>, குறிக்கப்படுகிறது <span class="math notranslate nohighlight">\(\lambda_k\)</span> - VaR / CVaR <span class="math notranslate nohighlight">\(\alpha \in [0, 1]\)</span>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -562,11 +561,11 @@ loss given default for asset <span class="math notranslate nohighlight">\(k\)</s
 </div>
 <div class="section" id="Uncertainty-Model">
 <h2>Uncertainty Model<a class="headerlink" href="#Uncertainty-Model" title="Permalink to this headline">¶</a></h2>
-<p>We now construct a circuit that loads the uncertainty model. This can be achieved by creating a quantum state in a register of <span class="math notranslate nohighlight">\(n_z\)</span> qubits that represents <span class="math notranslate nohighlight">\(Z\)</span> following a standard normal distribution. This state is then used to control single qubit Y-rotations on a second qubit register of <span class="math notranslate nohighlight">\(K\)</span> qubits, where a <span class="math notranslate nohighlight">\(|1\rangle\)</span> state of qubit <span class="math notranslate nohighlight">\(k\)</span> represents the default event of asset <span class="math notranslate nohighlight">\(k\)</span>. The resulting quantum state can be written as</p>
+<p>நிச்சயமற்ற மாதிரியை ஏற்றும் ஒரு சுற்று ஒன்றை இப்போது உருவாக்குகிறோம். ஒரு பதிவேட்டில் ஒரு குவாண்டம் நிலையை உருவாக்குவதன் மூலம் இதை அடைய முடியும் <span class="math notranslate nohighlight">\(n_z\)</span> குவிட்ஸ் குறிக்கும் <span class="math notranslate nohighlight">\(Z\)</span> ஒரு நிலையான சாதாரண விநியோகத்தைத் தொடர்ந்து. இந்த நிலை பின்னர் இரண்டாவது குவிட் பதிவேட்டில் ஒற்றை குவிட் ஒய்-சுழற்சிகளைக் கட்டுப்படுத்தப் பயன்படுகிறது <span class="math notranslate nohighlight">\(K\)</span> குவிட்ஸ், அங்கு ஒரு <span class="math notranslate nohighlight">\(|1\rangle\)</span> குவிட் நிலை <span class="math notranslate nohighlight">\(k\)</span> இயல்புநிலை நிகழ்வைக் குறிக்கிறது சொத்து <span class="math notranslate nohighlight">\(k\)</span>. இதன் விளைவாக குவாண்டம் நிலையை இவ்வாறு எழுதலாம்</p>
 <div class="math notranslate nohighlight">
 \[ |\Psi\rangle = \sum_{i=0}^{2^{n_z}-1} \sqrt{p_z^i} |z_i \rangle \bigotimes_{k=1}^K
 \left( \sqrt{1 - p_k(z_i)}|0\rangle + \sqrt{p_k(z_i)}|1\rangle\right),\]</div>
-<p>where we denote by <span class="math notranslate nohighlight">\(z_i\)</span> the <span class="math notranslate nohighlight">\(i\)</span>-th value of the discretized and truncated <span class="math notranslate nohighlight">\(Z\)</span> [Egger2019].</p>
+<p>இங்கு நாம் குறிக்கிறோம் <span class="math notranslate nohighlight">\(z_i\)</span> <span class="math notranslate nohighlight">\(i\)</span>-th மதிப்பிடப்பட்ட மற்றும் துண்டிக்கப்பட்ட மதிப்பு <span class="math notranslate nohighlight">\(Z\)</span> [Egger2019].</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -601,7 +600,7 @@ q_2: ─────────┤2        ├┤         ├
 q_3: ────────────────────┤2        ├
                          └─────────┘</pre></div>
 </div>
-<p>We now use the simulator to validate the circuit that constructs <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> and compute the corresponding exact values for - expected loss <span class="math notranslate nohighlight">\(\mathbb{E}[L]\)</span> - PDF and CDF of <span class="math notranslate nohighlight">\(L\)</span> - value at risk <span class="math notranslate nohighlight">\(VaR(L)\)</span> and corresponding probability - conditional value at risk <span class="math notranslate nohighlight">\(CVaR(L)\)</span></p>
+<p>கட்டமைக்கும் சுற்றுவட்டத்தை சரிபார்க்க இப்போது சிமுலேட்டரைப் பயன்படுத்துகிறோம் <span class="math notranslate nohighlight">\(|\Psi\rangle\)</span> மற்றும் எதிர்பார்க்கப்படும் இழப்புக்கான சரியான மதிப்புகளைக் கணக்கிடுங்கள் <span class="math notranslate nohighlight">\(\mathbb{E}[L]\)</span>- PDF மற்றும் CDF இன் <span class="math notranslate nohighlight">\(L\)</span> - ஆபத்தில் உள்ள மதிப்பு <span class="math notranslate nohighlight">\(VaR(L)\)</span> மற்றும் அதனுடன் தொடர்புடைய நிகழ்தகவு - ஆபத்தில் நிபந்தனை மதிப்பு <span class="math notranslate nohighlight">\(CVaR(L)\)</span></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -755,19 +754,19 @@ Conditional Value at Risk CVaR[L]: 3.0000
 <img alt="../_images/tutorials_09_credit_risk_analysis_14_0.svg" src="../_images/tutorials_09_credit_risk_analysis_14_0.svg" /></div>
 </div>
 </div>
-<div class="section" id="Expected-Loss">
-<h2>Expected Loss<a class="headerlink" href="#Expected-Loss" title="Permalink to this headline">¶</a></h2>
-<p>To estimate the expected loss, we first apply a weighted sum operator to sum up individual losses to total loss:</p>
+<div class="section" id="எதிர்பார்க்கப்படும்-இழப்பு">
+<h2>எதிர்பார்க்கப்படும் இழப்பு<a class="headerlink" href="#எதிர்பார்க்கப்படும்-இழப்பு" title="Permalink to this headline">¶</a></h2>
+<p>எதிர்பார்க்கப்படும் இழப்பை மதிப்பிடுவதற்கு, தனிப்பட்ட இழப்புகளை மொத்த இழப்புக்குச் சேர்க்க முதலில் எடையுள்ள தொகை ஆபரேட்டரைப் பயன்படுத்துகிறோம்:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{S}: |x_1, ..., x_K \rangle_K |0\rangle_{n_S} \mapsto |x_1, ..., x_K \rangle_K |\lambda_1x_1 + ... + \lambda_K x_K\rangle_{n_S}.\]</div>
-<p>The required number of qubits to represent the result is given by</p>
+<p>முடிவைக் குறிக்க தேவையான எண்ணிக்கையிலான குவிட்கள் வழங்கப்படுகின்றன</p>
 <div class="math notranslate nohighlight">
 \[n_s = \lfloor \log_2( \lambda_1 + ... + \lambda_K ) \rfloor + 1.\]</div>
-<p>Once we have the total loss distribution in a quantum register, we can use the techniques described in [Woerner2019] to map a total loss <span class="math notranslate nohighlight">\(L \in \{0, ..., 2^{n_s}-1\}\)</span> to the amplitude of an objective qubit by an operator</p>
+<p>ஒரு குவாண்டம் பதிவேட்டில் மொத்த இழப்பு விநியோகத்தை நாங்கள் பெற்றவுடன், மொத்த இழப்பை வரைபடமாக்க [Woerner2019] இல் விவரிக்கப்பட்டுள்ள நுட்பங்களைப் பயன்படுத்தலாம் <span class="math notranslate nohighlight">\(L \in \{0, ..., 2^{n_s}-1\}\)</span> ஒரு ஆபரேட்டரால் ஒரு புறநிலை குவிட்டின் வீச்சுக்கு</p>
 <div class="math notranslate nohighlight">
 \[ | L \rangle_{n_s}|0\rangle \mapsto
 | L \rangle_{n_s} \left( \sqrt{1 - L/(2^{n_s}-1)}|0\rangle + \sqrt{L/(2^{n_s}-1)}|1\rangle \right),\]</div>
-<p>which allows to run amplitude estimation to evaluate the expected loss.</p>
+<p>இது எதிர்பார்த்த இழப்பை மதிப்பிடுவதற்கு வீச்சு மதிப்பீட்டை இயக்க அனுமதிக்கிறது.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -807,7 +806,7 @@ Conditional Value at Risk CVaR[L]: 3.0000
 </pre></div>
 </div>
 </div>
-<p>Create the state preparation circuit:</p>
+<p>நிலை தயாரிப்பு சர்க்யூட்டை உருவாக்க:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -862,7 +861,7 @@ objective_0: ─────────┤        ├┤2   ├┤           �
     carry_0: ─────────┤6       ├──────┤6          ├
                       └────────┘      └───────────┘</pre></div>
 </div>
-<p>Before we use QAE to estimate the expected loss, we validate the quantum circuit representing the objective function by just simulating it directly and analyzing the probability of the objective qubit being in the <span class="math notranslate nohighlight">\(|1\rangle\)</span> state, i.e., the value QAE will eventually approximate.</p>
+<p>எதிர்பார்த்த இழப்பை மதிப்பிடுவதற்கு QAE ஐப் பயன்படுத்துவதற்கு முன்பு, புறநிலை செயல்பாட்டைக் குறிக்கும் குவாண்டம் சர்க்யூட்களை நேரடியாக உருவகப்படுத்துவதன் மூலமும், புறநிலை குவிட்டின் நிகழ்தகவை பகுப்பாய்வு செய்வதன் மூலமும் சரிபார்க்கிறோம்.:math:<cite>|1rangle</cite> state,அதாவது, QAE மதிப்பு இறுதியில் தோராயமாக இருக்கும்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -901,7 +900,7 @@ Exact Operator Value:  0.3906
 Mapped Operator value: 0.6640
 </pre></div></div>
 </div>
-<p>Next we run QAE to estimate the expected loss with a quadratic speed-up over classical Monte Carlo simulation.</p>
+<p>அடுத்து கிளாசிக்கல் மான்டே கார்லோ உருவகப்படுத்துதலுடன் இருபடி வேகத்துடன் எதிர்பார்க்கப்படும் இழப்பை மதிப்பிடுவதற்கு QAE ஐ இயக்குகிறோம்.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -938,22 +937,22 @@ Confidence interval:    [0.6587, 0.6878]
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Cumulative-Distribution-Function">
-<h2>Cumulative Distribution Function<a class="headerlink" href="#Cumulative-Distribution-Function" title="Permalink to this headline">¶</a></h2>
-<p>Instead of the expected loss (which could also be estimated efficiently using classical techniques) we now estimate the cumulative distribution function (CDF) of the loss. Classically, this either involves evaluating all the possible combinations of defaulting assets, or many classical samples in a Monte Carlo simulation. Algorithms based on QAE have the potential to significantly speed up this analysis in the future.</p>
-<p>To estimate the CDF, i.e., the probability <span class="math notranslate nohighlight">\(\mathbb{P}[L \leq x]\)</span>, we again apply <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> to compute the total loss, and then apply a comparator that for a given value <span class="math notranslate nohighlight">\(x\)</span> acts as</p>
+<div class="section" id="ஒட்டுமொத்த-விநியோக-செயல்பாடு">
+<h2>ஒட்டுமொத்த விநியோக செயல்பாடு<a class="headerlink" href="#ஒட்டுமொத்த-விநியோக-செயல்பாடு" title="Permalink to this headline">¶</a></h2>
+<p>எதிர்பார்த்த இழப்புக்கு பதிலாக (இது கிளாசிக்கல் நுட்பங்களைப் பயன்படுத்தி திறமையாக மதிப்பிடப்படலாம்) இழப்பின் ஒட்டுமொத்த விநியோக செயல்பாட்டை (CDF) இப்போது மதிப்பிடுகிறோம். பாரம்பரியமாக, இயல்புநிலை சொத்துக்களின் சாத்தியமான அனைத்து சேர்க்கைகளையும் மதிப்பீடு செய்வது அல்லது மான்டே கார்லோ உருவகப்படுத்துதலில் பல கிளாசிக்கல் மாதிரிகள் ஆகியவற்றை மதிப்பீடு செய்வது இதில் அடங்கும். QAE ஐ அடிப்படையாகக் கொண்ட வழிமுறைகள் எதிர்காலத்தில் இந்த பகுப்பாய்வை கணிசமாக விரைவுபடுத்தும் திறனைக் கொண்டுள்ளன.</p>
+<p>சி.டி.எஃப் ஐ மதிப்பிடுவதற்கு, அதாவது நிகழ்தகவு <span class="math notranslate nohighlight">\(\mathbb{P}[L \leq x]\)</span>, நாங்கள் மீண்டும் விண்ணப்பிக்கிறோம் <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> மொத்த இழப்பைக் கணக்கிட, பின்னர் ஒரு ஒப்பீட்டாளரைப் பயன்படுத்துங்கள் கொடுக்கப்பட்ட மதிப்புக்கு <span class="math notranslate nohighlight">\(x\)</span> ஆக செயல்படுகிறது</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \mathcal{C}: |L\rangle_n|0&gt; \mapsto
 \begin{cases}
 |L\rangle_n|1&gt; &amp; \text{if}\quad L \leq x \\
 |L\rangle_n|0&gt; &amp; \text{if}\quad L &gt; x.
 \end{cases}\end{split}\]</div>
-<p>The resulting quantum state can be written as</p>
+<p>இதன் விளைவாக குவாண்டம் நிலையை இவ்வாறு எழுதலாம்</p>
 <div class="math notranslate nohighlight">
 \[ \sum_{L = 0}^{x} \sqrt{p_{L}}|L\rangle_{n_s}|1\rangle +
 \sum_{L = x+1}^{2^{n_s}-1} \sqrt{p_{L}}|L\rangle_{n_s}|1\rangle,\]</div>
-<p>where we directly assume the summed up loss values and corresponding probabilities instead of presenting the details of the uncertainty model.</p>
-<p>The CDF(<span class="math notranslate nohighlight">\(x\)</span>) equals the probability of measuring <span class="math notranslate nohighlight">\(|1\rangle\)</span> in the objective qubit and QAE can be directly used to estimate it.</p>
+<p>நிச்சயமற்ற மாதிரியின் விவரங்களை முன்வைப்பதற்கு பதிலாக சுருக்கமான இழப்பு மதிப்புகள் மற்றும் அதனுடன் தொடர்புடைய நிகழ்தகவுகளை நாங்கள் நேரடியாக கருதுகிறோம்.</p>
+<p>சி.டி.எஃப் (<span class="math notranslate nohighlight">\(x\)</span>) அளவிடும் நிகழ்தகவுக்கு சமம் <span class="math notranslate nohighlight">\(|1\rangle\)</span> புறநிலை குவிட்டில் மற்றும் QAE ஐ நேரடியாக மதிப்பிட பயன்படுத்தலாம்.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1017,7 +1016,7 @@ compare_0: ──┼──┤ X ├┤ X ├──┼──
 </pre></div>
 </div>
 </div>
-<p>Again, we first use quantum simulation to validate the quantum circuit.</p>
+<p>மீண்டும், குவாண்டம் சர்க்யூட்கள் சரிபார்க்க முதலில் குவாண்டம் உருவகப்படுத்துதலைப் பயன்படுத்துகிறோம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -1085,7 +1084,7 @@ Operator CDF(2) = 0.9591
 Exact    CDF(2) = 0.9591
 </pre></div></div>
 </div>
-<p>Next we run QAE to estimate the CDF for a given <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>கொடுக்கப்பட்டவற்றிற்கான சி.டி.எஃப் மதிப்பிட அடுத்ததாக QAE ஐ இயக்குகிறோம்:math:<cite>x</cite>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
@@ -1121,9 +1120,9 @@ Confidence interval:    [0.9582, 0.9604]
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Value-at-Risk">
-<h2>Value at Risk<a class="headerlink" href="#Value-at-Risk" title="Permalink to this headline">¶</a></h2>
-<p>In the following we use a bisection search and QAE to efficiently evaluate the CDF to estimate the value at risk.</p>
+<div class="section" id="ஆபத்தில்-மதிப்பு">
+<h2>ஆபத்தில் மதிப்பு<a class="headerlink" href="#ஆபத்தில்-மதிப்பு" title="Permalink to this headline">¶</a></h2>
+<p>பின்வருவனவற்றில், ஆபத்தில் உள்ள மதிப்பை மதிப்பிடுவதற்கு சி. டி. எஃப் ஐ திறம்பட மதிப்பீடு செய்ய ஒரு பைசெக்ஷன் தேடல் மற்றும் QAE ஐப் பயன்படுத்துகிறோம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
@@ -1264,15 +1263,15 @@ Exact Probability:        0.959
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Conditional-Value-at-Risk">
-<h2>Conditional Value at Risk<a class="headerlink" href="#Conditional-Value-at-Risk" title="Permalink to this headline">¶</a></h2>
-<p>Last, we compute the CVaR, i.e. the expected value of the loss conditional to it being larger than or equal to the VaR. To do so, we evaluate a piecewise linear objective function <span class="math notranslate nohighlight">\(f(L)\)</span>, dependent on the total loss <span class="math notranslate nohighlight">\(L\)</span>, that is given by</p>
+<div class="section" id="ஆபத்தில்-நிபந்தனை-மதிப்பு">
+<h2>ஆபத்தில் நிபந்தனை மதிப்பு<a class="headerlink" href="#ஆபத்தில்-நிபந்தனை-மதிப்பு" title="Permalink to this headline">¶</a></h2>
+<p>கடைசியாக, நாங்கள் CVaR-ரைக் கணக்கிடுகிறோம், அதாவது இழப்புக்கான நிபந்தனைக்குட்பட்ட மதிப்பு VaR-ரை விட பெரியதாகவோ அல்லது சமமாகவோ இருக்கும். அவ்வாறு செய்ய, ஒரு பிஸ்கேவ் நேரியல் நோக்க செயல்பாட்டை மதிப்பீடு செய்கிறோம் <span class="math notranslate nohighlight">\(f(L)\)</span>, மொத்த இழப்பைப் பொறுத்தது <span class="math notranslate nohighlight">\(L\)</span>, இது வழங்கியது</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}f(L) = \begin{cases}
 0 &amp; \text{if}\quad L \leq VaR \\
 L &amp; \text{if}\quad L &gt; VaR.
 \end{cases}\end{split}\]</div>
-<p>To normalize, we have to divide the resulting expected value by the VaR-probability, i.e. <span class="math notranslate nohighlight">\(\mathbb{P}[L \leq VaR]\)</span>.</p>
+<p>இயல்பாக்குவதற்கு, இதன் விளைவாக எதிர்பார்க்கப்படும் மதிப்பை VaR- நிகழ்தகவு மூலம் வகுக்க வேண்டும், அதாவது <span class="math notranslate nohighlight">\(\mathbb{P}[L \leq VaR]\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
@@ -1355,7 +1354,7 @@ q155_0: ┤2        ├┤  cmp ├┤2        ├┤  cmp_dg ├
 &lt;qiskit.circuit.instructionset.InstructionSet at 0x14b747640&gt;
 </pre></div></div>
 </div>
-<p>Again, we first use quantum simulation to validate the quantum circuit.</p>
+<p>மீண்டும், குவாண்டம் சர்க்யூட்கள் சரிபார்க்க முதலில் குவாண்டம் உருவகப்படுத்துதலைப் பயன்படுத்துகிறோம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
@@ -1397,7 +1396,7 @@ Estimated CVaR: 3.3021
 Exact CVaR:     3.0000
 </pre></div></div>
 </div>
-<p>Next we run QAE to estimate the CVaR.</p>
+<p>அடுத்து CVaR ஐ மதிப்பிடுவதற்கு QAE ஐ இயக்குகிறோம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
@@ -1520,12 +1519,12 @@ Estimated CVaR: 3.3836
               <ul>
 <li><a class="reference internal" href="#">Credit Risk Analysis</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#Problem-Definition">Problem Definition</a></li>
+<li><a class="reference internal" href="#சிக்கல்-வரையறை">சிக்கல் வரையறை</a></li>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
-<li><a class="reference internal" href="#Expected-Loss">Expected Loss</a></li>
-<li><a class="reference internal" href="#Cumulative-Distribution-Function">Cumulative Distribution Function</a></li>
-<li><a class="reference internal" href="#Value-at-Risk">Value at Risk</a></li>
-<li><a class="reference internal" href="#Conditional-Value-at-Risk">Conditional Value at Risk</a></li>
+<li><a class="reference internal" href="#எதிர்பார்க்கப்படும்-இழப்பு">எதிர்பார்க்கப்படும் இழப்பு</a></li>
+<li><a class="reference internal" href="#ஒட்டுமொத்த-விநியோக-செயல்பாடு">ஒட்டுமொத்த விநியோக செயல்பாடு</a></li>
+<li><a class="reference internal" href="#ஆபத்தில்-மதிப்பு">ஆபத்தில் மதிப்பு</a></li>
+<li><a class="reference internal" href="#ஆபத்தில்-நிபந்தனை-மதிப்பு">ஆபத்தில் நிபந்தனை மதிப்பு</a></li>
 </ul>
 </li>
 </ul>

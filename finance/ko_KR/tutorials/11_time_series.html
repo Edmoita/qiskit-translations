@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Loading and Processing Stock-Market Time-Series Data &mdash; Qiskit Finance 0.2.0 문서</title>
+  <title>주식시장 시계열 데이터 로드 및 처리 &mdash; Qiskit Finance 0.2.0 문서</title>
   
 
   
@@ -40,7 +40,7 @@
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
     <link rel="next" title="Release Notes" href="../release_notes.html" />
-    <link rel="prev" title="Option Pricing with qGANs" href="10_qgan_option_pricing.html" /> 
+    <link rel="prev" title="qGANs 을 이용한 옵션 가격 책정 (Option Pricing)" href="10_qgan_option_pricing.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Loading and Processing Stock-Market Time-Series Data</li>
+      <li>주식시장 시계열 데이터 로드 및 처리</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/11_time_series.ipynb">docs/tutorials/11_time_series.ipynb</a> 에서 생성되었다.</p>
 </div>
-<div class="section" id="Loading-and-Processing-Stock-Market-Time-Series-Data">
-<h1>Loading and Processing Stock-Market Time-Series Data<a class="headerlink" href="#Loading-and-Processing-Stock-Market-Time-Series-Data" title="이 표제에 대한 퍼머링크">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="이 표제에 대한 퍼머링크">¶</a></h2>
-<p>Across many problems in finance, one starts with time series. Here, we showcase how to generate pseudo-random time-series, download actual stock-market time series from a number of common providers, and how to compute time-series similarity measures.</p>
+<div class="section" id="주식시장-시계열-데이터-로드-및-처리">
+<h1>주식시장 시계열 데이터 로드 및 처리<a class="headerlink" href="#주식시장-시계열-데이터-로드-및-처리" title="이 표제에 대한 퍼머링크">¶</a></h1>
+<div class="section" id="소개">
+<h2>소개<a class="headerlink" href="#소개" title="이 표제에 대한 퍼머링크">¶</a></h2>
+<p>금융의 많은 문제들에 있어서, 하나는 시계열로 시작한다. 여기서는 유사-랜덤 시계열을 생성하고, 다수의 공통 제공자로부터 실제 주식 시장 시간 시리즈를 다운로드하는 방법 및 시계열 유사성 측정을 계산하는 방법을 소개한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -519,7 +519,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>Once the data are loaded, you can run a variety of algorithms on those to aggregate the data. Notably, you can compute the covariance matrix or a variant, which would consider alternative time-series similarity measures based on <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_time_warping">dynamic time warping</a> (DTW). In DTW, changes that vary in speed, e.g., one stock’s price following another stock’s price with a small delay, can be accommodated.</p>
+<p>데이터가 로드되면 데이터를 집계하기 위해 다양한 알고리즘을 실행할 수 있다. 특히, <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_time_warping">Dynamic Time Warping</a> (DTW) 을 기반으로 하는 대체 시계열 유사성 측도를 고려할 수 있는 공분산 행렬 또는 가변값을 계산할 수 있다. DTW 에서, 속도가 달라지는 변화, 예를 들어, 짧은 지연이 있는 다른 주식의 가격에 이은 하나의 주식의 가격이 수용될 수 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -579,7 +579,7 @@ A covariance matrix:
 <img alt="../_images/tutorials_11_time_series_5_3.png" src="../_images/tutorials_11_time_series_5_3.png" />
 </div>
 </div>
-<p>If you wish, you can look into the underlying pseudo-random time-series using. Please note that the private class members (starting with underscore) may change in future releases of Qiskit.</p>
+<p>원하는 경우에 기본적인 의사 랜덤 (pseudo-random) 시계열을 검색할 수 있다. 개인용 클래스 멤버 (밑줄로 시작) 는 향후 Qiskit 릴리스에서 변경될 수 있다는 점에 유의하라.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -677,7 +677,7 @@ required for the computation of covariance and time-series matrices, but hundred
 </pre></div>
 </div>
 </div>
-<p>Once the data are loaded, you can again compute the covariance matrix or its DTW variants.</p>
+<p>데이터가 로드되면 공분산 행렬 또는 DTW 변형을 다시 계산할 수 있다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -704,7 +704,7 @@ required for the computation of covariance and time-series matrices, but hundred
 </pre></div>
 </div>
 </div>
-<p>If you wish, you can look into the underlying time-series using:</p>
+<p>원하는 경우 다음을 사용하여 기본 시간 시리즈를 조사할 수 있다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -728,12 +728,11 @@ required for the computation of covariance and time-series matrices, but hundred
 </div>
 </div>
 </div>
-<div class="section" id="[Optional]-Setup-token-to-access-recent,-fine-grained-time-series">
-<h2>[Optional] Setup token to access recent, fine-grained time-series<a class="headerlink" href="#[Optional]-Setup-token-to-access-recent,-fine-grained-time-series" title="이 표제에 대한 퍼머링크">¶</a></h2>
-<p>If you would like to download professional data, you will have to set-up a token with one of the major providers. Let us now illustrate the data with NASDAQ Data on Demand, which can supply bid and ask prices in arbitrary resolution, as well as aggregates such as daily adjusted closing prices, for NASDAQ and NYSE issues.</p>
-<p>If you don’t have NASDAQ Data on Demand license, you can contact NASDAQ (cf. <a class="reference external" href="https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html">https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html</a>) to obtain a trial or paid license.</p>
-<p>If and when you have access to NASDAQ Data on Demand using your own token, you should replace REPLACE-ME below with the token. To assure the security of the connection, you should also have your own means of validating NASDAQ’s certificates. The DataOnDemandProvider constructor has an optional argument <code class="docutils literal notranslate"><span class="pre">verify</span></code>, which can be <code class="docutils literal notranslate"><span class="pre">None</span></code> or a string or a boolean. If it is <code class="docutils literal notranslate"><span class="pre">None</span></code>, certify certificates will be used (default). If verify is a string, it should be pointing to a certificate for the
-HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA_BUNDLE file or a directory wherein to look.</p>
+<div class="section" id="[Optional]-설정-토큰을-설정하여-최신의-세분화된-시간-시리즈">
+<h2>[Optional] 설정 토큰을 설정하여 최신의 세분화된 시간-시리즈<a class="headerlink" href="#[Optional]-설정-토큰을-설정하여-최신의-세분화된-시간-시리즈" title="이 표제에 대한 퍼머링크">¶</a></h2>
+<p>전문 데이터를 다운로드하려면 주요 제공자 중 하나를 사용하여 토큰을 설정해야 한다. 이제 나스닥 및 NYSE 문제에 대한 데이터를 조정하고, 가격을 조정하고 매일 조정하는 가격, 나스닥 및 NYSE 문제에 대한 조정과 같은 집계를 제공할 수 있는 나스닥 데이터의 데이터를 설명한다.</p>
+<p>나스닥 데이터 온디맨드 라이센스가 없는 경우, 나스닥에 문의해 시험판 또는 유료 라이센스를 얻을 수 있다 (참조. <a class="reference external" href="https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html">https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html</a>).</p>
+<p>자신의 토큰을 사용하여 나스닥 데이터에 액세스할 수 있는 경우, 아래의 〈REPLACE-ME〉 를 토큰으로 대체해야 한다. 연결 보안을 보장하기 위해 나스닥 인증서의 유효성을 확인하는 고유한 방법도 가지고 있어야 한다. DataOnDemandProvider 생성자는 <code class="docutils literal notranslate"><span class="pre">None</span></code> 또는 문자열 또는 부울이 될 수 있는 선택적인 인수 검증 <code class="docutils literal notranslate"><span class="pre">verify</span></code> 를 갖고 있다. <code class="docutils literal notranslate"><span class="pre">None</span></code> 이면 인증서가 사용된다 (기본값). 검증이 문자열인 경우 CA_BUNDLE 파일 형식 또는 찾아볼 디렉토리 (dataondemand.nasdaq.com) 의 HTTPS 연결을 위한 인증서를 가리키고 있어야 한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -758,8 +757,8 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 </pre></div>
 </div>
 </div>
-<p>Another major vendor of stock market data is Exchange Data International (EDI), whose API can be used to query over 100 emerging and frontier markets that are Africa, Asia, Far East, Latin America and Middle East, as well as the more established ones. See: <a class="reference external" href="https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage">https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage</a> for an overview of the coverage.</p>
-<p>The access again requires a valid access token to replace REPLACE-ME below. The token can be obtained on a trial or paid-for basis at: <a class="reference external" href="https://www.quandl.com/">https://www.quandl.com/</a></p>
+<p>주식 시장 데이터의 또 다른 주요 공급업체인 EDI (Exchange Data International) 는 아프리카, 아시아, 극동, 라틴 아메리카, 중동, 그리고 더 설정된 것들 뿐만 아니라 아프리카, 아시아, 극동, 라틴 아메리카, 중동과 같은 100개 이상의 신흥 시장을 조회하는 데 사용될 수 있는 API를 사용할 수 있다. 예를 들어 <a class="reference external" href="https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage">https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage</a> 전체에 대한 개요를 볼 수 있다.</p>
+<p>액세스를 다시 요청하려면 아래에 있는 REPLACE-ME를 대체할 유효한 액세스 토큰이 필요하다. 이 토큰은 다음과 같이 시험 또는 지불 방식으로 얻을 수 있다: <a class="reference external" href="https://www.quandl.com/">https://www.quandl.com/</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -786,7 +785,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 </pre></div>
 </div>
 </div>
-<p>One can also access Yahoo Finance Data, no token needed, from Yahoo! Finance.</p>
+<p>또한 야후의 금융 데이터에 액세스할 수 있는 서비스를 제공하지 않아도 된다. 금융.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -800,7 +799,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
     <span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_tickers</span><span class="p">):</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">cnt</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="k">except</span> <span class="n">QiskitFinanceError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
@@ -816,7 +815,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 <img alt="../_images/tutorials_11_time_series_22_0.png" src="../_images/tutorials_11_time_series_22_0.png" />
 </div>
 </div>
-<p>For the actual use of the data, please see the portfolio_optimization or portfolio_diversification notebooks.</p>
+<p>데이터의 실제 사용을 위해 portfolio_optimization 또는 portfolio_diversification 노트북을 참조한다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -832,8 +831,8 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area rendered_html docutils container">
-<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>None</td></tr><tr><td>Terra</td><td>0.17.0.dev0+3c103ae</td></tr><tr><td>Aer</td><td>0.8.0</td></tr><tr><td>Ignis</td><td>0.6.0.dev0+6103f99</td></tr><tr><td>Aqua</td><td>None</td></tr><tr><td>IBM Q Provider</td><td>0.12.0.dev0+8f3168b</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.9 (default, Aug 31 2020, 07:22:35)
-[Clang 10.0.0 ]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>2</td></tr><tr><td>Memory (Gb)</td><td>12.0</td></tr><tr><td colspan='2'>Wed Mar 10 13:35:39 2021 EST</td></tr></table></div>
+<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td><code>qiskit-terra</code></td><td>0.18.0</td></tr><tr><td><code>qiskit-aer</code></td><td>0.9.0</td></tr><tr><td><code>qiskit-ignis</code></td><td>0.7.0.dev0+9201ed8</td></tr><tr><td><code>qiskit-ibmq-provider</code></td><td>0.14.0.dev0+436e42e</td></tr><tr><td><code>qiskit-nature</code></td><td>0.1.4</td></tr><tr><td><code>qiskit-finance</code></td><td>0.3.0</td></tr><tr><td><code>qiskit-optimization</code></td><td>0.2.0</td></tr><tr><td><code>qiskit-machine-learning</code></td><td>0.2.0</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.8.8 (default, Apr 13 2021, 12:59:45)
+[Clang 10.0.0 ]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>2</td></tr><tr><td>Memory (Gb)</td><td>12.0</td></tr><tr><td colspan='2'>Thu Jul 15 20:38:23 2021 EDT</td></tr></table></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -864,7 +863,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
         <a href="../release_notes.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="10_qgan_option_pricing.html" class="btn btn-neutral" title="Option Pricing with qGANs" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="10_qgan_option_pricing.html" class="btn btn-neutral" title="qGANs 을 이용한 옵션 가격 책정 (Option Pricing)" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -896,10 +895,10 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Loading and Processing Stock-Market Time-Series Data</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
+<li><a class="reference internal" href="#">주식시장 시계열 데이터 로드 및 처리</a><ul>
+<li><a class="reference internal" href="#소개">소개</a></li>
 <li><a class="reference internal" href="#Access-to-closing-price-time-series">Access to closing-price time-series</a></li>
-<li><a class="reference internal" href="#[Optional]-Setup-token-to-access-recent,-fine-grained-time-series">[Optional] Setup token to access recent, fine-grained time-series</a></li>
+<li><a class="reference internal" href="#[Optional]-설정-토큰을-설정하여-최신의-세분화된-시간-시리즈">[Optional] 설정 토큰을 설정하여 최신의 세분화된 시간-시리즈</a></li>
 </ul>
 </li>
 </ul>

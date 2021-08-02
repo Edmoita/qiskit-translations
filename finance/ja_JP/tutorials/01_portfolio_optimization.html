@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="index" title="目次" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
     <link rel="next" title="Portfolio Diversification" href="02_portfolio_diversification.html" />
     <link rel="prev" title="Finance Tutorials" href="index.html" /> 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>言語</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/01_portfolio_optimization.html">English</a></dd>
       
@@ -482,30 +482,30 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a>.</p>
 </div>
 <div class="section" id="Portfolio-Optimization">
 <h1>Portfolio Optimization<a class="headerlink" href="#Portfolio-Optimization" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>This tutorial shows how to solve the following mean-variance portfolio optimization problem for <span class="math notranslate nohighlight">\(n\)</span> assets:</p>
+<p>このチュートリアルでは、 <span class="math notranslate nohighlight">\(n\)</span> アセットの次の平均分散ポートフォリオ最適化問題を解決する方法を示します。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \min_{x \in \{0, 1\}^n}  q x^T \Sigma x - \mu^T x\\
 \text{subject to: } 1^T x = B
 \end{aligned}\end{split}\]</div>
-<p>where we use the following notation:</p>
+<p>ここで、次の表記を使用します。</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> denotes the vector of binary decision variables, which indicate which assets to pick (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) and which not to pick (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> defines the expected returns for the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> specifies the covariances between the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(q &gt; 0\)</span> controls the risk appetite of the decision maker,</p></li>
-<li><p>and <span class="math notranslate nohighlight">\(B\)</span> denotes the budget, i.e. the number of assets to be selected out of <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^nは、バイナリー決定変数のベクトルを示し、ピックする資産 (:math:「x[i] = 1」) と、ピックしない (:math:\)</span>)を示します。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> はアセットの期待されるリターンを定義します。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> は、アセット間の共分散を指定します</p></li>
+<li><p><span class="math notranslate nohighlight">\(q &gt; 0\)</span> は、意思決定者のリスク選好度を制御します。</p></li>
+<li><p><span class="math notranslate nohighlight">\(B\)</span> は予算、つまり <span class="math notranslate nohighlight">\(n\)</span> の中から選択するアセットの数を表します。</p></li>
 </ul>
-<p>We assume the following simplifications: - all assets have the same price (normalized to 1), - the full budget <span class="math notranslate nohighlight">\(B\)</span> has to be spent, i.e. one has to select exactly <span class="math notranslate nohighlight">\(B\)</span> assets.</p>
-<p>The equality constraint <span class="math notranslate nohighlight">\(1^T x = B\)</span> is mapped to a penalty term <span class="math notranslate nohighlight">\((1^T x - B)^2\)</span> which is scaled by a parameter and subtracted from the objective function. The resulting problem can be mapped to a Hamiltonian whose ground state corresponds to the optimal solution. This notebook shows how to use the Variational Quantum Eigensolver (VQE) or the Quantum Approximate Optimization Algorithm (QAOA) to find the optimal solution for a given set of parameters.</p>
+<p>すべての資産は同じ価格 ( 1に正規化 ) を持ち、最大予算 <span class="math notranslate nohighlight">\(B\)</span> を使用する必要があります。すなわち、 <span class="math notranslate nohighlight">\(B\)</span> 個の資産を正確に選択する必要があります。</p>
+<p><span class="math notranslate nohighlight">\(1^T x = B\)</span> の等価制約は、ペナルティー項 <span class="math notranslate nohighlight">\((1^T x - B)^2\)</span> にマップされます。これはパラメータによって縮小され、目的関数から減算されます。 結果として問題は、基底状態が最適解に対応するハミルトニアンにマッピングすることができます。 このノートブックでは、特定のパラメータセットによる最適解を見つけるために、Variational Quantum Eigensolver (VQE) または Quantum Approximate Optimization Algorithm (QAOA) を使用する方法について説明します。</p>
 <p>Experiments on real quantum hardware for this problem are reported for instance in the following paper: <a class="reference external" href="https://arxiv.org/abs/1907.04769">Improving Variational Quantum Optimization using CVaR. Barkoutsos et al. 2019.</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -528,15 +528,15 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="section" id="[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">
-<h3>[Optional] Setup token to run the experiment on a real device<a class="headerlink" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>If you would like to run the experiment on a real device, you need to setup your account first.</p>
-<p>Note: If you do not store your token yet, use <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> to store it first.</p>
+<div class="section" id="[Optional]-実際のデバイスで実験を実行するためのトークンをセットアップする">
+<h3>[Optional] 実際のデバイスで実験を実行するためのトークンをセットアップする<a class="headerlink" href="#[Optional]-実際のデバイスで実験を実行するためのトークンをセットアップする" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>実際のデバイスで実験を実行したい場合は、まずアカウントを設定する必要があります。</p>
+<p>注意: トークンをまだ保存していない場合は、最初に <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> を使用して保存してください。</p>
 </div>
 </div>
-<div class="section" id="Define-problem-instance">
-<h2>Define problem instance<a class="headerlink" href="#Define-problem-instance" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>Here an Operator instance is created for our Hamiltonian. In this case the paulis are from an Ising Hamiltonian translated from the portfolio problem. We use a random portfolio problem for this notebook. It is straight-forward to extend this to using real financial data as illustrated here: <a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a></p>
+<div class="section" id="問題のインスタンスを定義">
+<h2>問題のインスタンスを定義<a class="headerlink" href="#問題のインスタンスを定義" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ここで、Operatorインスタンスがこのハミルトニアン用に作成されます。 ここでのパウリ項は、ポートフォリオ問題から導かれたイジング・ハミルトニアンからのものです。このノートブックではランダムなポートフォリオ問題を使用します。<a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a> で示されるように、実際の財務データに容易に適用することができます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -620,7 +620,7 @@ Binaries
 End
 </pre></div></div>
 </div>
-<p>We define some utility methods to print the results in a nice format.</p>
+<p>整ったフォーマットで出力するためのユーティリティー・メソッドをいくつか定義します。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -653,10 +653,10 @@ End
 </div>
 </div>
 </div>
-<div class="section" id="NumPyMinimumEigensolver-(as-a-classical-reference)">
-<h2>NumPyMinimumEigensolver (as a classical reference)<a class="headerlink" href="#NumPyMinimumEigensolver-(as-a-classical-reference)" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>Lets solve the problem. First classically…</p>
-<p>We can now use the Operator we built above without regard to the specifics of how it was created. We set the algorithm for the NumPyMinimumEigensolver so we can have a classical reference. The problem is set for ‘ising’. Backend is not required since this is computed classically not using quantum computation. The result is returned as a dictionary.</p>
+<div class="section" id="NumPyMinimumEigensolver-(古典の参照として)">
+<h2>NumPyMinimumEigensolver (古典の参照として)<a class="headerlink" href="#NumPyMinimumEigensolver-(古典の参照として)" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>まず最初に古典的な手法で問題を解いてみます。</p>
+<p>上記で構築したOperatorを、どのように作成されたかの詳細に関係なく使用できるようになりました。 NumPyMinimumEigensolver のアルゴリズムを設定することで、古典的な参照を行うことができます。 問題は 『ising』 に設定されています。バックエンドは必要ありません。これは古典的な計算で、量子計算を使用していないためです。 結果は辞書として返されます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -700,10 +700,10 @@ selection       value           probability
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Solution-using-VQE">
-<h2>Solution using VQE<a class="headerlink" href="#Solution-using-VQE" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>We can now use the Variational Quantum Eigensolver (VQE) to solve the problem. We will specify the optimizer and variational form to be used.</p>
-<p>Note: You can switch to different backends by providing the name of backend.</p>
+<div class="section" id="VQE-を使用したソリューション">
+<h2>VQE を使用したソリューション<a class="headerlink" href="#VQE-を使用したソリューション" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>これで、 Variational Quantum Eigensolver (VQE) を使用して問題を解決できるようになりました。 使用する最適化プログラムおよび変分フォームを指定します。</p>
+<p>注: バックエンドの名前を指定することで、異なるバックエンドに切り替えることができます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -754,9 +754,9 @@ selection       value           probability
  [1 1 0 0]      0.0160          0.0000
 </pre></div></div>
 </div>
-<div class="section" id="Solution-using-QAOA">
-<h3>Solution using QAOA<a class="headerlink" href="#Solution-using-QAOA" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>We also show here a result using the Quantum Approximate Optimization Algorithm (QAOA). This is another variational algorithm and it uses an internal variational form that is created based on the problem.</p>
+<div class="section" id="QAOA-を使用したソリューション">
+<h3>QAOA を使用したソリューション<a class="headerlink" href="#QAOA-を使用したソリューション" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>また、Quantum Approximate Optimization Algorithm (QAOA) を使用した結果をも示します。 これは別の変分アルゴリズムであり、問題に応じて作成される内部の変分フォームを使用します。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -886,13 +886,13 @@ selection       value           probability
               <ul>
 <li><a class="reference internal" href="#">Portfolio Optimization</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">[Optional] Setup token to run the experiment on a real device</a></li>
+<li><a class="reference internal" href="#[Optional]-実際のデバイスで実験を実行するためのトークンをセットアップする">[Optional] 実際のデバイスで実験を実行するためのトークンをセットアップする</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Define-problem-instance">Define problem instance</a></li>
-<li><a class="reference internal" href="#NumPyMinimumEigensolver-(as-a-classical-reference)">NumPyMinimumEigensolver (as a classical reference)</a></li>
-<li><a class="reference internal" href="#Solution-using-VQE">Solution using VQE</a><ul>
-<li><a class="reference internal" href="#Solution-using-QAOA">Solution using QAOA</a></li>
+<li><a class="reference internal" href="#問題のインスタンスを定義">問題のインスタンスを定義</a></li>
+<li><a class="reference internal" href="#NumPyMinimumEigensolver-(古典の参照として)">NumPyMinimumEigensolver (古典の参照として)</a></li>
+<li><a class="reference internal" href="#VQE-を使用したソリューション">VQE を使用したソリューション</a><ul>
+<li><a class="reference internal" href="#QAOA-を使用したソリューション">QAOA を使用したソリューション</a></li>
 </ul>
 </li>
 </ul>

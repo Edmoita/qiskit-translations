@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting started &mdash; documentação Qiskit Finance 0.2.0</title>
+  <title>Primeiros passos &mdash; documentação Qiskit Finance 0.2.0</title>
   
 
   
@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
     <link rel="index" title="Índice" href="genindex.html" />
-    <link rel="search" title="Buscar" href="search.html" />
+    <link rel="search" title="Pesquisar" href="search.html" />
     <link rel="next" title="Qiskit Finance API Reference" href="apidocs/qiskit_finance.html" />
     <link rel="prev" title="Qiskit Finance documentation" href="index.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Idiomas</dt>
       
         <dd><a class="version" href="/documentation/finance/getting_started.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Primeiros Passos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apidocs/qiskit_finance.html">Referências de API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutoriais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Notas da Versão</a></li>
 </ul>
 
             
@@ -202,7 +202,7 @@
       </li>
 
         
-      <li>Getting started</li>
+      <li>Primeiros passos</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -233,18 +233,18 @@
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
   <br><br><br><div class="section" id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Link permanente para este título">¶</a></h1>
+<h1>Primeiros passos<a class="headerlink" href="#getting-started" title="Link permanente para este título">¶</a></h1>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link permanente para este título">¶</a></h2>
+<h2>Instalação<a class="headerlink" href="#installation" title="Link permanente para este título">¶</a></h2>
 <p>Qiskit Finance depends on the main Qiskit package which has its own
 <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Getting Started</a> detailing the
 installation options for Qiskit and its supported environments/platforms. You should refer to
 that first. Then the information here can be followed which focuses on the additional installation
 specific to Qiskit Finance.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="eca871bb-2615-415c-875d-a8843a4ad737" name="500cf633-e214-41f7-a72f-56eaf618d330" type="radio">
-</input><label class="tabbed-label" for="eca871bb-2615-415c-875d-a8843a4ad737">
-Start locally</label><div class="tabbed-content docutils">
+<input checked="checked" id="a71d57fa-9799-45f9-bd4d-07a0bba06f76" name="fbda7b7c-d3a1-4429-ac29-fe65aab98f5d" type="radio">
+</input><label class="tabbed-label" for="a71d57fa-9799-45f9-bd4d-07a0bba06f76">
+Iniciar localmente</label><div class="tabbed-content docutils">
 <p>The simplest way to get started is to follow the getting started ‘Start locally’ for Qiskit
 here <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Getting Started</a></p>
 <p>In your virtual environment where you installed Qiskit simply add <code class="docutils literal notranslate"><span class="pre">finance</span></code> to the
@@ -259,9 +259,9 @@ versions of macOS), you’ll need to put <code class="docutils literal notransla
 </pre></div>
 </div>
 </div>
-<input id="a18b116e-fb55-4c60-8c2f-95770d25cb2c" name="500cf633-e214-41f7-a72f-56eaf618d330" type="radio">
-</input><label class="tabbed-label" for="a18b116e-fb55-4c60-8c2f-95770d25cb2c">
-Install from source</label><div class="tabbed-content docutils">
+<input id="58aa093d-ab54-4f0b-b231-755d75c142ca" name="fbda7b7c-d3a1-4429-ac29-fe65aab98f5d" type="radio">
+</input><label class="tabbed-label" for="58aa093d-ab54-4f0b-b231-755d75c142ca">
+Instalando da Fonte</label><div class="tabbed-content docutils">
 <p>Installing Qiskit Finance from source allows you to access the most recently
 updated version under development instead of using the version in the Python Package
 Index (PyPI) repository. This will give you the ability to inspect and extend
@@ -282,7 +282,7 @@ Qiskit Finance.</p>
 </pre></div>
 </div>
 </li>
-<li><p>If you want to run tests or linting checks, install the developer requirements.</p>
+<li><p>Se você quiser executar testes ou análise de código, instale os requisitos de desenvolvedor.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
 </pre></div>
 </div>
@@ -293,8 +293,7 @@ Qiskit Finance.</p>
 </div>
 </li>
 </ol>
-<p>If you want to install it in editable mode, meaning that code changes to the
-project don’t require a reinstall to be applied, you can do this with:</p>
+<p>Se você quiser instalá-lo em modo editável, o que significa que as alterações de código no projeto não requerem que uma reinstalação seja aplicada, você pode fazer isso com:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -e .
 </pre></div>
 </div>
@@ -303,7 +302,7 @@ project don’t require a reinstall to be applied, you can do this with:</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="ready-to-get-going">
-<h2>Ready to get going?…<a class="headerlink" href="#ready-to-get-going" title="Link permanente para este título">¶</a></h2>
+<h2>Pronto para começar?…<a class="headerlink" href="#ready-to-get-going" title="Link permanente para este título">¶</a></h2>
 <div class="tutorials-callout-container">
    <div class="row"><p><div class="col-md-6">
     <div class="text-container">
@@ -359,9 +358,9 @@ project don’t require a reinstall to be applied, you can do this with:</p>
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Getting started</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#ready-to-get-going">Ready to get going?…</a></li>
+<li><a class="reference internal" href="#">Primeiros passos</a><ul>
+<li><a class="reference internal" href="#installation">Instalação</a></li>
+<li><a class="reference internal" href="#ready-to-get-going">Pronto para começar?…</a></li>
 </ul>
 </li>
 </ul>

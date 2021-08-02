@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Esta página fue generada a partir de <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/11_time_series.ipynb">docs/tutorials/11_time_series.ipynb</a>.</p>
 </div>
 <div class="section" id="Loading-and-Processing-Stock-Market-Time-Series-Data">
 <h1>Loading and Processing Stock-Market Time-Series Data<a class="headerlink" href="#Loading-and-Processing-Stock-Market-Time-Series-Data" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Across many problems in finance, one starts with time series. Here, we showcase how to generate pseudo-random time-series, download actual stock-market time series from a number of common providers, and how to compute time-series similarity measures.</p>
+<div class="section" id="Introducción">
+<h2>Introducción<a class="headerlink" href="#Introducción" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>En muchos problemas en finanzas, uno comienza con series de tiempo. Aquí, mostramos cómo generar series de tiempo pseudoaleatorias, descargar series de tiempo reales del mercado de valores de varios proveedores comunes y cómo calcular medidas de similitud de series de tiempo.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -579,7 +579,7 @@ A covariance matrix:
 <img alt="../_images/tutorials_11_time_series_5_3.png" src="../_images/tutorials_11_time_series_5_3.png" />
 </div>
 </div>
-<p>If you wish, you can look into the underlying pseudo-random time-series using. Please note that the private class members (starting with underscore) may change in future releases of Qiskit.</p>
+<p>Si lo deseas, puedes consultar las series de tiempo pseudoaleatorias subyacentes utilizando lo siguiente. Ten en cuenta que los miembros de la clase privada (que comienzan con un guión bajo) pueden cambiar en futuras versiones de Qiskit.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -624,7 +624,7 @@ TICKER2
 [96.8774156647853, 98.99525441983634, 97.88323365714406, 97.50562865001707, 99.5484002575094, 100.19510325371124, 100.85816662608751, 100.34416025440004, 98.69608508354439, 98.86354982776713, 98.97256391558868, 97.7452118613441, 97.06198519956354, 96.98994151983632, 96.04518989677554, 95.94691992892332, 96.04240295639278, 96.07798919344826, 95.57169753513395, 96.16544560691977, 97.0566125612021, 97.37746086576867, 96.55923063837835, 97.29088292216379, 96.78944290369674, 97.66860352198472, 96.59681610510728, 97.51128330823606, 97.49121985362058]
 </pre></div></div>
 </div>
-<p>Clearly, you can adapt the number and names of tickers and the range of dates:</p>
+<p>Claramente, puedes adaptar el número y nombre de los símbolos, así como el rango de fechas:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -651,10 +651,9 @@ TICKER2
 </div>
 </div>
 </div>
-<div class="section" id="Access-to-closing-price-time-series">
-<h2>Access to closing-price time-series<a class="headerlink" href="#Access-to-closing-price-time-series" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>While the access to real-time data usually requires a payment, it is possible to access historical (adjusted) closing prices via Wikipedia and Quandl free of charge, following registration at: <a class="reference external" href="https://www.quandl.com/?modal=register">https://www.quandl.com/?modal=register</a> In the code below, one needs to specify actual tickers of actual NASDAQ issues and the access token you obtain from Quandl; by running the code below, you agree to the Quandl terms and conditions, including a liability waiver. Notice that at least two tickers are
-required for the computation of covariance and time-series matrices, but hundreds of tickers may go beyond the fair usage limits of Quandl.</p>
+<div class="section" id="Acceso-a-series-de-tiempo-de-precios-de-cierre">
+<h2>Acceso a series de tiempo de precios de cierre<a class="headerlink" href="#Acceso-a-series-de-tiempo-de-precios-de-cierre" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Si bien el acceso a datos en tiempo real generalmente requiere un pago, es posible acceder a precios de cierre históricos (ajustados) a través de Wikipedia y Quandl de forma gratuita, luego del registro en: <a class="reference external" href="https://www.quandl.com/?modal=register">https://www.quandl.com/?modal=register</a> En el siguiente código, es necesario especificar los códigos bursátiles concretos de activos de la NASDAQ y el token de acceso que obtienes de Quandl; al ejecutar el código a continuación, acepta los términos y condiciones de Quandl, incluida una exención de responsabilidad. Ten en cuenta que se requieren al menos dos códigos bursátiles para el cálculo de covarianza y matrices de series de tiempo, pero cientos de códigos bursátiles pueden ir más allá de los límites del uso razonable de Quandl.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -677,7 +676,7 @@ required for the computation of covariance and time-series matrices, but hundred
 </pre></div>
 </div>
 </div>
-<p>Once the data are loaded, you can again compute the covariance matrix or its DTW variants.</p>
+<p>Una vez cargados los datos, puedes volver a calcular la matriz de covarianza o sus variantes de DTW.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -704,7 +703,7 @@ required for the computation of covariance and time-series matrices, but hundred
 </pre></div>
 </div>
 </div>
-<p>If you wish, you can look into the underlying time-series using:</p>
+<p>Si lo deseas, puedes ver la serie de tiempo subyacente utilizando:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -728,12 +727,11 @@ required for the computation of covariance and time-series matrices, but hundred
 </div>
 </div>
 </div>
-<div class="section" id="[Optional]-Setup-token-to-access-recent,-fine-grained-time-series">
-<h2>[Optional] Setup token to access recent, fine-grained time-series<a class="headerlink" href="#[Optional]-Setup-token-to-access-recent,-fine-grained-time-series" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>If you would like to download professional data, you will have to set-up a token with one of the major providers. Let us now illustrate the data with NASDAQ Data on Demand, which can supply bid and ask prices in arbitrary resolution, as well as aggregates such as daily adjusted closing prices, for NASDAQ and NYSE issues.</p>
-<p>If you don’t have NASDAQ Data on Demand license, you can contact NASDAQ (cf. <a class="reference external" href="https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html">https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html</a>) to obtain a trial or paid license.</p>
-<p>If and when you have access to NASDAQ Data on Demand using your own token, you should replace REPLACE-ME below with the token. To assure the security of the connection, you should also have your own means of validating NASDAQ’s certificates. The DataOnDemandProvider constructor has an optional argument <code class="docutils literal notranslate"><span class="pre">verify</span></code>, which can be <code class="docutils literal notranslate"><span class="pre">None</span></code> or a string or a boolean. If it is <code class="docutils literal notranslate"><span class="pre">None</span></code>, certify certificates will be used (default). If verify is a string, it should be pointing to a certificate for the
-HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA_BUNDLE file or a directory wherein to look.</p>
+<div class="section" id="[Optional]-Configurar-un-token-para-acceder-a-series-de-tiempo-recientes-y-detalladas">
+<h2>[Optional] Configurar un token para acceder a series de tiempo recientes y detalladas<a class="headerlink" href="#[Optional]-Configurar-un-token-para-acceder-a-series-de-tiempo-recientes-y-detalladas" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Si deseas descargar datos profesionales, deberás configurar un token con uno de los principales proveedores. Ilustremos ahora los datos con NASDAQ Data on Demand, que puede proporcionar precios de oferta y demanda a una resolución arbitraria, así como agregados, como precios de cierre ajustados diariamente, para activos de NASDAQ y de NYSE.</p>
+<p>Si no tienes una licencia de NASDAQ Data on Demand, puedes ponerte en contacto con NASDAQ (cf. <a class="reference external" href="https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html">https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html</a>) para obtener una licencia de prueba o de pago.</p>
+<p>Si tienes y cuando tengas acceso a NASDAQ Data on Demand utilizando tu propio token, debes reemplazar más abajo REPLACE-ME con el token. Para garantizar la seguridad de la conexión, también debes tener tus propios medios para validar los certificados de NASDAQ. El constructor DataOnDemandProvider tiene un argumento opcional <code class="docutils literal notranslate"><span class="pre">verify</span></code>, que puede ser <code class="docutils literal notranslate"><span class="pre">None</span></code> o una cadena o un valor booleano. Si es <code class="docutils literal notranslate"><span class="pre">None</span></code>, se utilizarán certificados de confirmación (predeterminado). Si la verificación es una cadena, deberías apuntar a un certificado para la conexión HTTPS a NASDAQ (dataondemand.nasdaq.com), ya sea en forma de archivo CA_BUNDLE o de un directorio donde buscar.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -758,8 +756,8 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 </pre></div>
 </div>
 </div>
-<p>Another major vendor of stock market data is Exchange Data International (EDI), whose API can be used to query over 100 emerging and frontier markets that are Africa, Asia, Far East, Latin America and Middle East, as well as the more established ones. See: <a class="reference external" href="https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage">https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage</a> for an overview of the coverage.</p>
-<p>The access again requires a valid access token to replace REPLACE-ME below. The token can be obtained on a trial or paid-for basis at: <a class="reference external" href="https://www.quandl.com/">https://www.quandl.com/</a></p>
+<p>Otro proveedor principal de datos de mercado de valores es Exchange Data International (EDI), cuya API puede ser usada para consultar más de 100 mercados emergentes y fronterizos que son África, Asia, Extremo Oriente, América Latina y Medio Oriente, así como los mercados más establecidos. Consulta: <a class="reference external" href="https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage">https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage</a> para un resumen de la cobertura.</p>
+<p>El acceso nuevamente requiere un token de acceso válido para reemplazar más abajo REPLACE-ME. El token se puede obtener como una versión de prueba o de pago en: <a class="reference external" href="https://www.quandl.com/">https://www.quandl.com/</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -786,7 +784,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 </pre></div>
 </div>
 </div>
-<p>One can also access Yahoo Finance Data, no token needed, from Yahoo! Finance.</p>
+<p>También se puede acceder a los datos de Yahoo Finance, sin necesidad de token, desde Yahoo! Finance.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -800,7 +798,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
     <span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_tickers</span><span class="p">):</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">cnt</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="k">except</span> <span class="n">QiskitFinanceError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
@@ -816,7 +814,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 <img alt="../_images/tutorials_11_time_series_22_0.png" src="../_images/tutorials_11_time_series_22_0.png" />
 </div>
 </div>
-<p>For the actual use of the data, please see the portfolio_optimization or portfolio_diversification notebooks.</p>
+<p>Para conocer el uso real de los datos, consulte los cuadernos portfolio_optimization o portfolio_diversification.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -832,8 +830,8 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area rendered_html docutils container">
-<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>None</td></tr><tr><td>Terra</td><td>0.17.0.dev0+3c103ae</td></tr><tr><td>Aer</td><td>0.8.0</td></tr><tr><td>Ignis</td><td>0.6.0.dev0+6103f99</td></tr><tr><td>Aqua</td><td>None</td></tr><tr><td>IBM Q Provider</td><td>0.12.0.dev0+8f3168b</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.9 (default, Aug 31 2020, 07:22:35)
-[Clang 10.0.0 ]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>2</td></tr><tr><td>Memory (Gb)</td><td>12.0</td></tr><tr><td colspan='2'>Wed Mar 10 13:35:39 2021 EST</td></tr></table></div>
+<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td><code>qiskit-terra</code></td><td>0.18.0</td></tr><tr><td><code>qiskit-aer</code></td><td>0.9.0</td></tr><tr><td><code>qiskit-ignis</code></td><td>0.7.0.dev0+9201ed8</td></tr><tr><td><code>qiskit-ibmq-provider</code></td><td>0.14.0.dev0+436e42e</td></tr><tr><td><code>qiskit-nature</code></td><td>0.1.4</td></tr><tr><td><code>qiskit-finance</code></td><td>0.3.0</td></tr><tr><td><code>qiskit-optimization</code></td><td>0.2.0</td></tr><tr><td><code>qiskit-machine-learning</code></td><td>0.2.0</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.8.8 (default, Apr 13 2021, 12:59:45)
+[Clang 10.0.0 ]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>2</td></tr><tr><td>Memory (Gb)</td><td>12.0</td></tr><tr><td colspan='2'>Thu Jul 15 20:38:23 2021 EDT</td></tr></table></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -897,9 +895,9 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Loading and Processing Stock-Market Time-Series Data</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#Access-to-closing-price-time-series">Access to closing-price time-series</a></li>
-<li><a class="reference internal" href="#[Optional]-Setup-token-to-access-recent,-fine-grained-time-series">[Optional] Setup token to access recent, fine-grained time-series</a></li>
+<li><a class="reference internal" href="#Introducción">Introducción</a></li>
+<li><a class="reference internal" href="#Acceso-a-series-de-tiempo-de-precios-de-cierre">Acceso a series de tiempo de precios de cierre</a></li>
+<li><a class="reference internal" href="#[Optional]-Configurar-un-token-para-acceder-a-series-de-tiempo-recientes-y-detalladas">[Optional] Configurar un token para acceder a series de tiempo recientes y detalladas</a></li>
 </ul>
 </li>
 </ul>

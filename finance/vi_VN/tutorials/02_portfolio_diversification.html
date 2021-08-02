@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="index" title="Mục lục" href="../genindex.html" />
+    <link rel="search" title="Tìm kiếm" href="../search.html" />
     <link rel="next" title="Pricing European Call Options" href="03_european_call_option_pricing.html" />
     <link rel="prev" title="Portfolio Optimization" href="01_portfolio_optimization.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Ngôn ngữ</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/02_portfolio_diversification.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Bắt đầu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">Tài liệu tham khảo về API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Hướng dẫn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Thông tin phiên bản</a></li>
 </ul>
 
             
@@ -482,9 +482,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Ghi chú</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/02_portfolio_diversification.ipynb">docs/tutorials/02_portfolio_diversification.ipynb</a>.</p>
 </div>
 <div class="section" id="Portfolio-Diversification">
 <h1>Portfolio Diversification<a class="headerlink" href="#Portfolio-Diversification" title="Permalink to this headline">¶</a></h1>
@@ -496,9 +496,9 @@ difficult, and the transaction costs of the frequent rebalancing to adjust the p
 assets should represent the <span class="math notranslate nohighlight">\(q\)</span> clusters amounts to solving a large-scale optimization problem. In the following we describe the mathematical model for the portfolio diversification problem as introduced in [Cornuejols &amp; Tutuncu, 2006] 2. it allows for similarity measures between time-series beyond the covariance matrix. Notice that traditionally, modern portfolio theory considers the covariance matrix as a measure of similarity between the assets. As such, however, the covariance matrix
 is imperfect. Consider, for instance, a company listed both in London and New York. Although both listings should be very similar, only parts of the time series of the prices of the two listings will overlap, because of the partial overlap of the times the markets open. Instead of covariance, one can consider, for example, dynamic time warping of [Berndt and Clifford, 1994] as a measure of similarity between two time series, which allows for the fact that for some time periods, the data are
 captured by only one of the time series, while for others, both time series exhibit the similarity due to the parallel evolution of the stock price.</p>
-<p>The overall workflow we demonstrate comprises:</p>
+<p>Luồng công việc tổng thể chúng ta chứng minh bao gồm:</p>
 <ol class="arabic simple">
-<li><p>pick the ground set of assets. In our case, this is a small number of US stocks.</p></li>
+<li><p>chọn một bộ tài sản. Trong trường hợp của chúng ta, đây là một số lượng nhỏ cổ phiếu Mỹ.</p></li>
 <li><p>load the time series capturing the evolution of the prices of assets. In our case, this is a simplistic load of adjusted daily closing price data from Wikipedia or Nasdaq or LSE or EuroNext, whereas in a real asset management, a much higher frequency may be considered.</p></li>
 <li><p>compute the pair-wise similarity among the time series. In our case, we run a linear-time approximation of the dynamic time warping, still on the classical computer.</p></li>
 <li><p>compute the actual portfolio of <span class="math notranslate nohighlight">\(q\)</span> representative assets, based on the similarity measure. This step is run twice, actually. First, we obtain a reference value by a run of an IBM solver (IBM ILOG CPLEX or the Exact Eigensolver) on the classical computer. Second, we run an alternative, hybrid algorithm partly on the quantum computer.</p></li>
@@ -506,24 +506,24 @@ captured by only one of the time series, while for others, both time series exhi
 </ol>
 <p>In the following, we first explain the model used in (4) above, before we proceed with the installation of the pre-requisites and the data loading.</p>
 </div>
-<div class="section" id="The-Model">
-<h2>The Model<a class="headerlink" href="#The-Model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Mô-hình">
+<h2>Mô hình<a class="headerlink" href="#Mô-hình" title="Permalink to this headline">¶</a></h2>
 <p>As discussed in [Cornuejols &amp; Tutuncu, 2006], we describe a mathematical model that clusters assets into groups of similar ones and selects one representative asset from each group to be included in the index fund portfolio. The model is based on the following data, which we will discuss in more detail later:</p>
 <div class="math notranslate nohighlight">
 \[\rho_{ij} = \textrm{similarity}\, \textrm{between}\, \textrm{stock}\, i \, \textrm{and}\, \textrm{stock}\, j.\]</div>
-<p>For example, <span class="math notranslate nohighlight">\(\rho_{ii} = 1\)</span>, <span class="math notranslate nohighlight">\(\rho_{ij} \leq 1\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> is larger for more similar stocks. An example of this is the correlation between the returns of stocks <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>. But one could choose other similarity indices <span class="math notranslate nohighlight">\(\rho_{ij}\)</span>.</p>
-<p>The problem that we are interested in solving is:</p>
+<p>Ví dụ, <span class="math notranslate nohighlight">\(\rho_{ii} = 1\)</span>, <span class="math notranslate nohighlight">\(\rho_{ij} \leq 1\)</span> cho <span class="math notranslate nohighlight">\(i \neq j\)</span> và <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> lớn hơn cho các cổ phiếu tương tự. Một ví dụ của điều này là sự liên quan giữa sự trả về các cổ phiếu <span class="math notranslate nohighlight">\(i\)</span> và <span class="math notranslate nohighlight">\(j\)</span>. Nhưng chúng ta cũng có thể chọn những kí hiệu khác như <span class="math notranslate nohighlight">\(\rho_{ij}\)</span>.</p>
+<p>Bài toán mà chúng tôi muốn đến giải là:</p>
 <div class="math notranslate nohighlight">
 \[(M) \quad  f = \max_{x_{ij}, y_{j}} \,\, \sum_{i=1}^n \sum_{j=1}^n \rho_{ij} x_{ij}\]</div>
-<p>subject to the clustering constraint:</p>
+<p>chịu những ràng buộc về tạo cụm:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{j=1}^n y_j = q,\]</div>
-<p>to consistency constraints:</p>
+<p>những ràng buộc về sự nhất quán:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{j=1}^n x_{ij} = 1, \,\textrm{ for }\,  i = 1,\ldots, n,
 \quad x_{ij} \leq y_j,\,\textrm{ for }\,  i = 1,\ldots, n; \, j = 1,\ldots, n,
 \quad x_{jj} = y_j,\,\textrm{ for }\,  j = 1,\ldots, n,\]</div>
-<p>and integral constraints:</p>
+<p>và những ràng buộc về tích phân:</p>
 <div class="math notranslate nohighlight">
 \[\quad  x_{ij}, y_j \in\{0,1\}, \,\textrm{ for }\,  i = 1,\ldots, n; \, j = 1,\ldots, n.\]</div>
 <p>The variables <span class="math notranslate nohighlight">\(y_j\)</span> describe which stocks <span class="math notranslate nohighlight">\(j\)</span> are in the index fund (<span class="math notranslate nohighlight">\(y_j = 1\)</span> if <span class="math notranslate nohighlight">\(j\)</span> is selected in the fund, <span class="math notranslate nohighlight">\(0\)</span> otherwise). For each stock <span class="math notranslate nohighlight">\(i = 1,\dots,n\)</span>, the variable <span class="math notranslate nohighlight">\(x_{ij}\)</span> indicates which stock <span class="math notranslate nohighlight">\(j\)</span> in the index fund is most similar to <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(x_{ij} = 1\)</span> if <span class="math notranslate nohighlight">\(j\)</span> is the most similar stock in the index fund, <span class="math notranslate nohighlight">\(0\)</span> otherwise).</p>
@@ -531,10 +531,10 @@ captured by only one of the time series, while for others, both time series exhi
 <p>Let us concatenate the decision variables in one vector</p>
 <div class="math notranslate nohighlight">
 \[{\bf z} = [x_{11},x_{12},\ldots,x_{1n}, x_{22},\ldots,x_{nn}, y_{1},\ldots,y_{n}],\]</div>
-<p>whose dimension is <span class="math notranslate nohighlight">\({\bf z} \in \{0,1\}^N\)</span>, with <span class="math notranslate nohighlight">\(N = n (n+1)\)</span> and denote the optimal solution with <span class="math notranslate nohighlight">\({\bf z}^*\)</span>, and the optimal cost <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
+<p>với chiều là <span class="math notranslate nohighlight">\({\bf z} \in \{0,1\}^N\)</span>, với <span class="math notranslate nohighlight">\(N = n (n+1)\)</span> và chỉ kết quả tối ưu với <span class="math notranslate nohighlight">\({\bf z}^*\)</span>, và sự mất mát tối ưu với <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
 </div>
-<div class="section" id="A-Hybrid-Approach">
-<h2>A Hybrid Approach<a class="headerlink" href="#A-Hybrid-Approach" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Một-cách-tiếp-cận-lai">
+<h2>Một cách tiếp cận lai<a class="headerlink" href="#Một-cách-tiếp-cận-lai" title="Permalink to this headline">¶</a></h2>
 <p>Here, we demonstrate an approach that combines classical and quantum computing steps, following the quantum approximate optimization approach of Farhi, Goldstone, and Gutmann (2014).</p>
 <div class="section" id="Construct-a-binary-polynomial-optimization">
 <h3>Construct a binary polynomial optimization<a class="headerlink" href="#Construct-a-binary-polynomial-optimization" title="Permalink to this headline">¶</a></h3>
@@ -549,8 +549,8 @@ captured by only one of the time series, while for others, both time series exhi
 <div class="math notranslate nohighlight">
 \[\quad x_{jj} = y_j,\,\textrm{ for }\,  j = 1,\ldots, n.\]</div>
 </div>
-<div class="section" id="Construct-the-Ising-Hamiltonian">
-<h3>Construct the Ising Hamiltonian<a class="headerlink" href="#Construct-the-Ising-Hamiltonian" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Xây-dựng-Ising-Hamiltonian">
+<h3>Xây dựng Ising Hamiltonian<a class="headerlink" href="#Xây-dựng-Ising-Hamiltonian" title="Permalink to this headline">¶</a></h3>
 <p>We can now construct the Ising Hamiltonian (QUBO) by penalty methods (introducing a penalty coefficient <span class="math notranslate nohighlight">\(A\)</span> for each equality constraint) as</p>
 <div class="math notranslate nohighlight">
 \[(IH) \quad H = \sum_{i=1}^n \sum_{j=1}^n \rho_{ij} x_{ij} + A\Big( \sum_{j=1}^n y_j - q\Big)^2 + \sum_{i=1}^n A\Big( \sum_{j=1}^n x_{ij} - 1\Big)^2 + \sum_{j=1}^n A (x_{jj}-y_j)^2 +\sum_{i=1}^n \sum_{j=1}^n A \left(x_{ij} (1- y_j)\right).\]</div>
@@ -558,22 +558,22 @@ captured by only one of the time series, while for others, both time series exhi
 <div class="section" id="From-Hamiltonian-to-Quadratic-Programming-(QP)-formulation">
 <h3>From Hamiltonian to Quadratic Programming (QP) formulation<a class="headerlink" href="#From-Hamiltonian-to-Quadratic-Programming-(QP)-formulation" title="Permalink to this headline">¶</a></h3>
 <p>In the vector <span class="math notranslate nohighlight">\({\bf z}\)</span>, the Ising Hamiltonian elements can be rewritten as follows,</p>
-<p>First term:</p>
+<p>Số hạng đầu tiên:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i=1}^n \sum_{j=1}^n \rho_{ij} x_{ij} = [\rho_{11},\rho_{12},\ldots,\rho_{1n}, \rho_{22},\ldots,\rho_{nn}|{\bf 0}_n ]{\bf z} =: {\bf c}_0^T {\bf z}\]</div>
-<p>Second term:</p>
+<p>Số hạng thứ hai:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}A\Big( \sum_{j=1}^n y_j - q\Big)^2 = A \Big(\sum_{j=1}^n y_j\Big)^2 - 2 Aq \sum_{j=1}^n y_j + A q^2 = A {\bf z}^T \left[\begin{array}{c}{\bf 0}_{n^2} \\ \hline  {\bf 1}_n  \end{array}\right]\left[\begin{array}{cc}{\bf 0}_{n^2} | {\bf 1}_n  \end{array}\right]{\bf z} - 2 A q [{\bf 0}_{n^2}|{\bf 1}_n]{\bf z} + A q^2 =: {\bf z}^T {\bf Q}_0 {\bf z} + {\bf c}_1^T {\bf z} + r_0\end{split}\]</div>
-<p>Third term:</p>
+<p>Số hạng thứ ba:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i=1}^n A\Big( \sum_{j=1}^n x_{ij} - 1\Big)^2 = A\sum_{i=1}^n \Big(\sum_{j=1}^n x_{ij}\Big)^2 - 2 A \sum_{i=1}^n\sum_{j=1}^n x_{ij} + n A = \qquad\qquad\qquad\qquad\qquad\qquad\qquad\]</div>
-<p>which is equivalent to:</p>
+<p>tương đương với:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\qquad\qquad\qquad\qquad\qquad\qquad\qquad = A {\bf z}^T \left(\sum_{i=1}^n \left[\begin{array}{c}{\bf 0}_{n(i-1)}  \\ {\bf 1}_n  \\ {\bf 0}_{n(n-i)} \\ \hline {\bf 0}_{n} \end{array}\right]\left[\begin{array}{cccc}{\bf 0}_{n(i-1)} &amp; {\bf 1}_n  &amp; {\bf 0}_{n(n-i)} &amp; | {\bf 0}_{n} \end{array}\right]\right){\bf z} - 2 A [{\bf 1}_{n^2}|{\bf 0}_n]{\bf z} + n A =: {\bf z}^T {\bf Q}_1 {\bf z} + {\bf c}_2^T {\bf z} + r_1\end{split}\]</div>
-<p>Fourth term:</p>
+<p>Số hạng thứ tư:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}A \sum_{j=1}^n  (x_{jj}-y_j)^2 = A {\bf z}^T  \left(\sum_{j=0}^{n-1} \left[\begin{array}{c}{\bf 0}_{nj + j}  \\ 1  \\ {\bf 0}_{n^2-(nj+j+1)} \\ \hline {\bf 0}_{j} \\ -1 \\ {\bf 0}_{n-j-1} \end{array}\right]\left[\begin{array}{cccccc}{\bf 0}_{nj + j} &amp; 1  &amp; {\bf 0}_{n^2-(nj+j+1)} &amp; | {\bf 0}_{j} &amp; -1 &amp; {\bf 0}_{n-j-1}  \end{array}\right]\right){\bf z} = A {\bf z}^T {\bf Q}_2 {\bf z}\end{split}\]</div>
-<p>Fifth term:</p>
+<p>Số hạng thứ năm:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\sum_{i=1}^n \sum_{j=1}^n A \left(x_{ij} (1- y_j)\right) = A [{\bf 1}_{n^2}|{\bf 0}_n]{\bf z} + A {\bf z}^T \left( \sum_{i=1}^n \sum_{j=1}^n \left[\begin{array}{ccc|c}  &amp;  &amp; &amp; \\ &amp; {\bf 0}_{n^2\times n^2} &amp; &amp; -1/2_{(ij,j)}  \\ &amp; &amp; &amp; \\ \hline &amp; -1/2_{(j, ij)} &amp;  &amp; {\bf 0}_{n} \end{array}\right] \right) {\bf z} =:  {\bf z}^T {\bf Q}_3 {\bf z} + {\bf c}_3^T {\bf z}\end{split}\]</div>
 <p>Therefore, the formulation becomes,</p>
@@ -582,17 +582,17 @@ captured by only one of the time series, while for others, both time series exhi
 <p>which can be passed to the variational quantum eigensolver.</p>
 </div>
 </div>
-<div class="section" id="References">
-<h2>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Tài-liệu-tham-khảo">
+<h2>Tài liệu tham khảo<a class="headerlink" href="#Tài-liệu-tham-khảo" title="Permalink to this headline">¶</a></h2>
 <p>[1] G. Cornuejols, M. L. Fisher, and G. L. Nemhauser, <em>Location of bank accounts to optimize float: an analytical study of exact and approximate algorithms</em>, Management Science, vol. 23(8), 1997</p>
 <p>[2] E. Farhi, J. Goldstone, S. Gutmann e-print <a class="reference external" href="https://arxiv.org/abs/1411.4028">arXiv 1411.4028, 2014</a></p>
 <p>[3] G. Cornuejols and R. Tutuncu, <a class="reference external" href="http://web.math.ku.dk/~rolf/CT_FinOpt.pdf">Optimization methods in finance</a>, 2006</p>
 <p>[4] DJ. Berndt and J. Clifford, <em>Using dynamic time warping to find patterns in time series</em>. In KDD workshop 1994 (Vol. 10, No. 16, pp. 359-370).</p>
 <p>[5] <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/main/docs/tutorials/06_examples_max_cut_and_tsp.ipynb">Max-Cut and Traveling Salesman Problem</a></p>
 </div>
-<div class="section" id="The-Implementation">
-<h2>The Implementation<a class="headerlink" href="#The-Implementation" title="Permalink to this headline">¶</a></h2>
-<p>First, we import the requisite modules.</p>
+<div class="section" id="Triển-khai">
+<h2>Triển khai<a class="headerlink" href="#Triển-khai" title="Permalink to this headline">¶</a></h2>
+<p>Đầu tiên, chúng ta nhập những mô đun cần thiết.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -644,7 +644,7 @@ captured by only one of the time series, while for others, both time series exhi
 </pre></div>
 </div>
 </div>
-<p>Now we decide on the number of clusters. This has to be smaller than the number of stocks we have loaded.</p>
+<p>Bây giờ chúng tôi quyết định số lượng các cụm. Cái này phải nhỏ hơn số lượng cổ phiếu chúng ta đã nạp.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -655,9 +655,9 @@ captured by only one of the time series, while for others, both time series exhi
 </div>
 </div>
 </div>
-<div class="section" id="Classical-solution-using-IBM-ILOG-CPLEX">
-<h2>Classical solution using IBM ILOG CPLEX<a class="headerlink" href="#Classical-solution-using-IBM-ILOG-CPLEX" title="Permalink to this headline">¶</a></h2>
-<p>For a classical solution, we use IBM CPLEX. CPLEX is able to find the exact solution of this problem. We first define a ClassicalOptimizer class that encodes the problem in a way that CPLEX can solve, and then instantiate the class and solve it.</p>
+<div class="section" id="Lời-giải-cổ-điển-sử-dụng-IBM-ILOG-CPLEX">
+<h2>Lời giải cổ điển sử dụng IBM ILOG CPLEX<a class="headerlink" href="#Lời-giải-cổ-điển-sử-dụng-IBM-ILOG-CPLEX" title="Permalink to this headline">¶</a></h2>
+<p>Với lời giải cổ điển, chúng ta sử dụng IBM ILOG CPLEX. CPLEX để có thể tìm ra giải pháp chính xác của vấn đề này. Trước hết chúng ta định nghĩa lớp ClassicalOptimizer mà đã mã hóa vấn đề theo cách mà CPLEX có thể giải quyết, sau đó khởi tạo lớp và giải nó.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -803,8 +803,8 @@ Total number of combinations= 64
 </div>
 <p>Solution shows the selected stocks via the stars and in green the links (via similarities) with other stocks that are represented in the fund by the linked stock.</p>
 </div>
-<div class="section" id="Quantum-Computing-with-IBM-Q">
-<h2>Quantum Computing with IBM Q<a class="headerlink" href="#Quantum-Computing-with-IBM-Q" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Tính-toán-lượng-tử-với-IBM-Q">
+<h2>Tính toán lượng tử với IBM Q<a class="headerlink" href="#Tính-toán-lượng-tử-với-IBM-Q" title="Permalink to this headline">¶</a></h2>
 <p>For the quantum solution, we use Qiskit. We first define a class QuantumOptimizer that encodes the quantum approach to solve the problem and then we instantiate it and solve it. We define the following methods inside the class:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">exact_solution</span></code> : to make sure that the Ising Hamiltonian is correctly encoded in the <span class="math notranslate nohighlight">\(Z\)</span> basis, we can compute its eigendecomposition classically, i.e., considering a symmetric matrix of dimension <span class="math notranslate nohighlight">\(2^N \times 2^N\)</span>. For the problem at hand <span class="math notranslate nohighlight">\(n=3\)</span>, that is <span class="math notranslate nohighlight">\(N = 12\)</span>, seems to be the limit for many laptops;</p></li>
@@ -866,8 +866,8 @@ Total number of combinations= 64
 </pre></div>
 </div>
 </div>
-<div class="section" id="Step-1">
-<h3>Step 1<a class="headerlink" href="#Step-1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Bước-1">
+<h3>Bước 1<a class="headerlink" href="#Bước-1" title="Permalink to this headline">¶</a></h3>
 <p>Instantiate the quantum optimizer class with parameters: - the similarity matrix <code class="docutils literal notranslate"><span class="pre">rho</span></code>; - the number of assets and clusters <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">q</span></code>;</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -880,8 +880,8 @@ Total number of combinations= 64
 </div>
 </div>
 </div>
-<div class="section" id="Step-2">
-<h3>Step 2<a class="headerlink" href="#Step-2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Bước-2">
+<h3>Bước 2<a class="headerlink" href="#Bước-2" title="Permalink to this headline">¶</a></h3>
 <p>Encode the problem as a binary formulation (IH-QP).</p>
 <p>Sanity check: make sure that the binary formulation in the quantum optimizer is correct (i.e., yields the same cost given the same solution).</p>
 <div class="nbinput docutils container">
@@ -916,8 +916,8 @@ Binary formulation is correct
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Step-3">
-<h3>Step 3<a class="headerlink" href="#Step-3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Bước-3">
+<h3>Bước 3<a class="headerlink" href="#Bước-3" title="Permalink to this headline">¶</a></h3>
 <p>Encode the problem as an Ising Hamiltonian in the Z basis.</p>
 <p>Sanity check: make sure that the formulation is correct (i.e., yields the same cost given the same solution)</p>
 <div class="nbinput docutils container">
@@ -947,8 +947,8 @@ Ising Hamiltonian in Z basis is correct
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Step-4">
-<h3>Step 4<a class="headerlink" href="#Step-4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Bước-4">
+<h3>Bước 4<a class="headerlink" href="#Bước-4" title="Permalink to this headline">¶</a></h3>
 <p>Solve the problem via VQE. Notice that depending on the number of qubits, this can take a while: for 6 qubits it takes 15 minutes on a 2015 Macbook Pro, for 12 qubits it takes more than 12 hours. For longer runs, logging may be useful to observe the workings; otherwise, you just have to wait until the solution is printed.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -979,9 +979,9 @@ VQE does not produce the same solution as the exact eigensolver, but that is to 
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Step-5">
-<h3>Step 5<a class="headerlink" href="#Step-5" title="Permalink to this headline">¶</a></h3>
-<p>Visualize the solution</p>
+<div class="section" id="Bước-5">
+<h3>Bước 5<a class="headerlink" href="#Bước-5" title="Permalink to this headline">¶</a></h3>
+<p>Mịnh họa giải pháp</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -1105,22 +1105,22 @@ finding optimal solutions of the ILP is harder than finding local optima of the 
               <ul>
 <li><a class="reference internal" href="#">Portfolio Diversification</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#The-Model">The Model</a></li>
-<li><a class="reference internal" href="#A-Hybrid-Approach">A Hybrid Approach</a><ul>
+<li><a class="reference internal" href="#Mô-hình">Mô hình</a></li>
+<li><a class="reference internal" href="#Một-cách-tiếp-cận-lai">Một cách tiếp cận lai</a><ul>
 <li><a class="reference internal" href="#Construct-a-binary-polynomial-optimization">Construct a binary polynomial optimization</a></li>
-<li><a class="reference internal" href="#Construct-the-Ising-Hamiltonian">Construct the Ising Hamiltonian</a></li>
+<li><a class="reference internal" href="#Xây-dựng-Ising-Hamiltonian">Xây dựng Ising Hamiltonian</a></li>
 <li><a class="reference internal" href="#From-Hamiltonian-to-Quadratic-Programming-(QP)-formulation">From Hamiltonian to Quadratic Programming (QP) formulation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#References">References</a></li>
-<li><a class="reference internal" href="#The-Implementation">The Implementation</a></li>
-<li><a class="reference internal" href="#Classical-solution-using-IBM-ILOG-CPLEX">Classical solution using IBM ILOG CPLEX</a></li>
-<li><a class="reference internal" href="#Quantum-Computing-with-IBM-Q">Quantum Computing with IBM Q</a><ul>
-<li><a class="reference internal" href="#Step-1">Step 1</a></li>
-<li><a class="reference internal" href="#Step-2">Step 2</a></li>
-<li><a class="reference internal" href="#Step-3">Step 3</a></li>
-<li><a class="reference internal" href="#Step-4">Step 4</a></li>
-<li><a class="reference internal" href="#Step-5">Step 5</a></li>
+<li><a class="reference internal" href="#Tài-liệu-tham-khảo">Tài liệu tham khảo</a></li>
+<li><a class="reference internal" href="#Triển-khai">Triển khai</a></li>
+<li><a class="reference internal" href="#Lời-giải-cổ-điển-sử-dụng-IBM-ILOG-CPLEX">Lời giải cổ điển sử dụng IBM ILOG CPLEX</a></li>
+<li><a class="reference internal" href="#Tính-toán-lượng-tử-với-IBM-Q">Tính toán lượng tử với IBM Q</a><ul>
+<li><a class="reference internal" href="#Bước-1">Bước 1</a></li>
+<li><a class="reference internal" href="#Bước-2">Bước 2</a></li>
+<li><a class="reference internal" href="#Bước-3">Bước 3</a></li>
+<li><a class="reference internal" href="#Bước-4">Bước 4</a></li>
+<li><a class="reference internal" href="#Bước-5">Bước 5</a></li>
 </ul>
 </li>
 </ul>

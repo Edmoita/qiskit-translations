@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Portfolio Optimization &mdash; Qiskit Finance 0.2.0 belgelendirmesi</title>
+  <title>Portföy Optimizasyonu &mdash; Qiskit Finance 0.2.0 belgelendirmesi</title>
   
 
   
@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
-    <link rel="next" title="Portfolio Diversification" href="02_portfolio_diversification.html" />
+    <link rel="next" title="Portföy çeşitlendirme" href="02_portfolio_diversification.html" />
     <link rel="prev" title="Finance Tutorials" href="index.html" /> 
 
   
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Portfolio Optimization</li>
+      <li>Portföy Optimizasyonu</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -482,30 +482,30 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
-<div class="section" id="Portfolio-Optimization">
-<h1>Portfolio Optimization<a class="headerlink" href="#Portfolio-Optimization" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
+<div class="section" id="Portföy-Optimizasyonu">
+<h1>Portföy Optimizasyonu<a class="headerlink" href="#Portföy-Optimizasyonu" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>This tutorial shows how to solve the following mean-variance portfolio optimization problem for <span class="math notranslate nohighlight">\(n\)</span> assets:</p>
+<p>Bu eğitici belge, <span class="math notranslate nohighlight">\(n\)</span> varlıkları için aşağıdaki ortalama varyans portföy optimizasyon probleminin nasıl çözüleceğini gösterir:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \min_{x \in \{0, 1\}^n}  q x^T \Sigma x - \mu^T x\\
 \text{subject to: } 1^T x = B
 \end{aligned}\end{split}\]</div>
-<p>where we use the following notation:</p>
+<p>burada aşağıdaki gösterimi kullanırız:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> denotes the vector of binary decision variables, which indicate which assets to pick (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) and which not to pick (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> defines the expected returns for the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> specifies the covariances between the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(q &gt; 0\)</span> controls the risk appetite of the decision maker,</p></li>
-<li><p>and <span class="math notranslate nohighlight">\(B\)</span> denotes the budget, i.e. the number of assets to be selected out of <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> ikili karar değişkenlerin vektörünü temsil eder, hangi varlıkların seçileceğini (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) ve hangilerinin seçilmeyeceğini (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>) gösterir,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^ n\)</span> varlıkları için beklenen geri dönüşü tanımlar,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> varlıklar arasındaki kovaryansı belirler,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q &gt; 0\)</span> karar vericinin risk isteğini kontrol eder,</p></li>
+<li><p>ve <span class="math notranslate nohighlight">\(B\)</span>, bütçeyi, yani <span class="math notranslate nohighlight">\(n\)</span> dışında seçilecek varlıkların sayısını belirtir.</p></li>
 </ul>
-<p>We assume the following simplifications: - all assets have the same price (normalized to 1), - the full budget <span class="math notranslate nohighlight">\(B\)</span> has to be spent, i.e. one has to select exactly <span class="math notranslate nohighlight">\(B\)</span> assets.</p>
-<p>The equality constraint <span class="math notranslate nohighlight">\(1^T x = B\)</span> is mapped to a penalty term <span class="math notranslate nohighlight">\((1^T x - B)^2\)</span> which is scaled by a parameter and subtracted from the objective function. The resulting problem can be mapped to a Hamiltonian whose ground state corresponds to the optimal solution. This notebook shows how to use the Variational Quantum Eigensolver (VQE) or the Quantum Approximate Optimization Algorithm (QAOA) to find the optimal solution for a given set of parameters.</p>
+<p>Şu sadeleştirmelerin geçerli olduğunu varsayarız: - tüm varlıklar aynı fiyata sahiptir (1’e normalize edilmiştir), - bütçenin tamamı <span class="math notranslate nohighlight">\(B\)</span> harcanmalıdır, yani tam olarak <span class="math notranslate nohighlight">\(B\)</span> varlık seçilmesi gerekir.</p>
+<p>Eşitlik kısıtı <span class="math notranslate nohighlight">\(1^T x = B\)</span>, bir parametre ile ölçeklenip amaç fonksiyonundan çıkartılan ceza terimi <span class="math notranslate nohighlight">\((1^T x-B)^2\)</span> ile eşlenir. Sonuçta ortaya çıkan problem, taban enerji seviyesi optimal çözüme denk gelen bir Hamiltonian ile eşlenebilir. Bu not defteri, verilen parametrelerle optimal çözümü bulmak için Variational Quantum Eigensolver (VQE)’ın ya da Kuantum Yaklaşık Optimizasyon Algoritması (QAOA)’ın nasıl kullanılacağını gösterir.</p>
 <p>Experiments on real quantum hardware for this problem are reported for instance in the following paper: <a class="reference external" href="https://arxiv.org/abs/1907.04769">Improving Variational Quantum Optimization using CVaR. Barkoutsos et al. 2019.</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -528,15 +528,15 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="section" id="[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">
-<h3>[Optional] Setup token to run the experiment on a real device<a class="headerlink" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>If you would like to run the experiment on a real device, you need to setup your account first.</p>
-<p>Note: If you do not store your token yet, use <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> to store it first.</p>
+<div class="section" id="[Optional]-Denemeyi-gerçek-bir-cihazda-çalıştırmak-için-kurulum-erişim-anahtarı">
+<h3>[Optional] Denemeyi gerçek bir cihazda çalıştırmak için kurulum erişim-anahtarı<a class="headerlink" href="#[Optional]-Denemeyi-gerçek-bir-cihazda-çalıştırmak-için-kurulum-erişim-anahtarı" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Denemeyi gerçek bir cihazda çalıştırmak istiyorsanız, önce hesabınızı ayarlamanız gerekir.</p>
+<p>Not: Erişim anahtarını henüz kaydetmediyseniz, önce kaydetmek için <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> kullanın.</p>
 </div>
 </div>
-<div class="section" id="Define-problem-instance">
-<h2>Define problem instance<a class="headerlink" href="#Define-problem-instance" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Here an Operator instance is created for our Hamiltonian. In this case the paulis are from an Ising Hamiltonian translated from the portfolio problem. We use a random portfolio problem for this notebook. It is straight-forward to extend this to using real financial data as illustrated here: <a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a></p>
+<div class="section" id="Sorun-örneğini-tanımlayın">
+<h2>Sorun örneğini tanımlayın<a class="headerlink" href="#Sorun-örneğini-tanımlayın" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Burada Hamiltonian’ımız için bir Operator örneği oluşturulmuştur. Bu durumda, pauliler portföy probleminden çevrilen Ising Hamiltonian’ından gelir. Bu not defteri için rastgele bir portföy problemi kullanıyoruz. <a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a>‘da gösterildiği gibi gerçek finansal veriyle genişletilebilir</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -620,7 +620,7 @@ Binaries
 End
 </pre></div></div>
 </div>
-<p>We define some utility methods to print the results in a nice format.</p>
+<p>Sonuçları güzel bir formatta yazdırmak için bazı yardımcı yöntemler tanımlarız.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -653,10 +653,10 @@ End
 </div>
 </div>
 </div>
-<div class="section" id="NumPyMinimumEigensolver-(as-a-classical-reference)">
-<h2>NumPyMinimumEigensolver (as a classical reference)<a class="headerlink" href="#NumPyMinimumEigensolver-(as-a-classical-reference)" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Lets solve the problem. First classically…</p>
-<p>We can now use the Operator we built above without regard to the specifics of how it was created. We set the algorithm for the NumPyMinimumEigensolver so we can have a classical reference. The problem is set for ‘ising’. Backend is not required since this is computed classically not using quantum computation. The result is returned as a dictionary.</p>
+<div class="section" id="NumPyMinimumEigensolver-(klasik-bir-referans-olarak)">
+<h2>NumPyMinimumEigensolver (klasik bir referans olarak)<a class="headerlink" href="#NumPyMinimumEigensolver-(klasik-bir-referans-olarak)" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Sorunu çözelim. Önce klasik olarak…</p>
+<p>Artık yukarıda oluşturduğumuz Operatörü nasıl oluşturulduğuna bakmadan kullanabiliriz. NumPyMinimumEigensolver algoritmasını klasik bir referansa sahip olabilmemiz için ayarladık. Sorun ‘ising için ayarlandı. Bu, klasik olarak kuantum hesaplama kullanılmadan hesaplandığından arka uç gerekli değildir. Sonuç bir sözlük olarak döndürülür.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -700,10 +700,10 @@ selection       value           probability
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Solution-using-VQE">
-<h2>Solution using VQE<a class="headerlink" href="#Solution-using-VQE" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>We can now use the Variational Quantum Eigensolver (VQE) to solve the problem. We will specify the optimizer and variational form to be used.</p>
-<p>Note: You can switch to different backends by providing the name of backend.</p>
+<div class="section" id="VQE-kullanarak-çözüm">
+<h2>VQE kullanarak çözüm<a class="headerlink" href="#VQE-kullanarak-çözüm" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Problemi çözmek için şimdi Variational Quantum Eigensolver (VQE)’ı kullanabiliriz. Kullanılacak optimize ediciyi ve değişimsel yapıyı belirleyeceğiz.</p>
+<p>Not: Arkayüz adını vererek farklı arkayüzlere geçiş yapabilirsiniz.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -754,9 +754,9 @@ selection       value           probability
  [1 1 0 0]      0.0160          0.0000
 </pre></div></div>
 </div>
-<div class="section" id="Solution-using-QAOA">
-<h3>Solution using QAOA<a class="headerlink" href="#Solution-using-QAOA" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>We also show here a result using the Quantum Approximate Optimization Algorithm (QAOA). This is another variational algorithm and it uses an internal variational form that is created based on the problem.</p>
+<div class="section" id="QAOA-kullanarak-çözüm">
+<h3>QAOA kullanarak çözüm<a class="headerlink" href="#QAOA-kullanarak-çözüm" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Burada ayrıca, Kuantum Yaklaşık Optimizasyon Algoritması (QAOA) kullanılarak elde edilmiş bir sonuç da gösterilmektedir. Bu, başka bir değişimsel algoritmadır ve probleme dayanarak geliştirilmiş dahili bir değişimsel yapı kullanır.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -849,7 +849,7 @@ selection       value           probability
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="02_portfolio_diversification.html" class="btn btn-neutral float-right" title="Portfolio Diversification" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="02_portfolio_diversification.html" class="btn btn-neutral float-right" title="Portföy çeşitlendirme" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Finance Tutorials" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -884,15 +884,15 @@ selection       value           probability
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Portfolio Optimization</a><ul>
+<li><a class="reference internal" href="#">Portföy Optimizasyonu</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">[Optional] Setup token to run the experiment on a real device</a></li>
+<li><a class="reference internal" href="#[Optional]-Denemeyi-gerçek-bir-cihazda-çalıştırmak-için-kurulum-erişim-anahtarı">[Optional] Denemeyi gerçek bir cihazda çalıştırmak için kurulum erişim-anahtarı</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Define-problem-instance">Define problem instance</a></li>
-<li><a class="reference internal" href="#NumPyMinimumEigensolver-(as-a-classical-reference)">NumPyMinimumEigensolver (as a classical reference)</a></li>
-<li><a class="reference internal" href="#Solution-using-VQE">Solution using VQE</a><ul>
-<li><a class="reference internal" href="#Solution-using-QAOA">Solution using QAOA</a></li>
+<li><a class="reference internal" href="#Sorun-örneğini-tanımlayın">Sorun örneğini tanımlayın</a></li>
+<li><a class="reference internal" href="#NumPyMinimumEigensolver-(klasik-bir-referans-olarak)">NumPyMinimumEigensolver (klasik bir referans olarak)</a></li>
+<li><a class="reference internal" href="#VQE-kullanarak-çözüm">VQE kullanarak çözüm</a><ul>
+<li><a class="reference internal" href="#QAOA-kullanarak-çözüm">QAOA kullanarak çözüm</a></li>
 </ul>
 </li>
 </ul>

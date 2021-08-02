@@ -40,7 +40,7 @@
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
     <link rel="next" title="Pricing European Put Options" href="04_european_put_option_pricing.html" />
-    <link rel="prev" title="Portfolio Diversification" href="02_portfolio_diversification.html" /> 
+    <link rel="prev" title="Portföy çeşitlendirme" href="02_portfolio_diversification.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/03_european_call_option_pricing.ipynb">docs/tutorials/03_european_call_option_pricing.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
 <div class="section" id="Pricing-European-Call-Options">
 <h1>Pricing European Call Options<a class="headerlink" href="#Pricing-European-Call-Options" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Suppose a European call option with strike price <span class="math notranslate nohighlight">\(K\)</span> and an underlying asset whose spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> follows a given random distribution. The corresponding payoff function is defined as:</p>
+<p>Kullanım fiyatı <span class="math notranslate nohighlight">\(K\)</span> olan bir Avrupa alım opsiyonu ve <span class="math notranslate nohighlight">\(S_T\)</span> vadesindeki spot fiyatı belirli bir rasgele dağılımı izleyen bir dayanak varlık varsayalım. Karşılık gelen getiri fonksiyonu şu şekilde tanımlanır:</p>
 <div class="math notranslate nohighlight">
 \[\max\{S_T - K, 0\}\]</div>
 <p>In the following, a quantum algorithm based on amplitude estimation is used to estimate the expected payoff, i.e., the fair price before discounting, for the option:</p>
@@ -588,7 +588,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Payoff-Function">
 <h2>Payoff Function<a class="headerlink" href="#Payoff-Function" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>The payoff function equals zero as long as the spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> is less than the strike price <span class="math notranslate nohighlight">\(K\)</span> and then increases linearly. The implementation uses a comparator, that flips an ancilla qubit from <span class="math notranslate nohighlight">\(\big|0\rangle\)</span> to <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> if <span class="math notranslate nohighlight">\(S_T \geq K\)</span>, and this ancilla is used to control the linear part of the payoff function.</p>
+<p><span class="math notranslate nohighlight">\(S_T\)</span> vadesindeki spot fiyat, kullanım fiyatı <span class="math notranslate nohighlight">\(K\)</span>’dan düşük olduğu sürece, getiri fonksiyonu sıfıra eşittir. Sonrasında da doğrusal olarak artış gösterir. Uygulama, <span class="math notranslate nohighlight">\(S_T \geq K\)</span> ise bir yardımcı kübiti <span class="math notranslate nohighlight">\(\big|0\rangle\)</span>’dan <span class="math notranslate nohighlight">\(\big|1\rangle\)</span>’e çeviren bir karşılaştırıcı kullanır ve bu yardımcı, getiri fonksiyonunun doğrusal kısmını kontrol etmek için kullanılır.</p>
 <p>The linear part itself is then approximated as follows. We exploit the fact that <span class="math notranslate nohighlight">\(\sin^2(y + \pi/4) \approx y + 1/2\)</span> for small <span class="math notranslate nohighlight">\(|y|\)</span>. Thus, for a given approximation rescaling factor <span class="math notranslate nohighlight">\(c_\text{approx} \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> we consider</p>
 <div class="math notranslate nohighlight">
 \[\sin^2( \pi/2 * c_\text{approx} * ( x - 1/2 ) + \pi/4) \approx \pi/2 * c_\text{approx} * ( x - 1/2 ) + 1/2\]</div>
@@ -788,7 +788,7 @@ Estimated value:        0.1681
 Confidence interval:    [0.1633, 0.1730]
 </pre></div></div>
 </div>
-<p>Instead of constructing these circuits manually, Qiskit’s finance module offers the <code class="docutils literal notranslate"><span class="pre">EuropeanCallPricing</span></code> circuit, which already implements this functionality as building block.</p>
+<p>Bu devreleri manuel olarak oluşturmak yerine, Qiskit’in finans modülü bu işlevi hali hazırda yapı taşı olarak uygulayan <code class="docutils literal notranslate"><span class="pre">EuropeanCallPricing</span></code> devresini sunmaktadır.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -839,7 +839,7 @@ Confidence interval:    [0.1623, 0.1722]
 </div>
 <div class="section" id="Evaluate-Delta">
 <h2>Evaluate Delta<a class="headerlink" href="#Evaluate-Delta" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>The Delta is a bit simpler to evaluate than the expected payoff. Similarly to the expected payoff, we use a comparator circuit and an ancilla qubit to identify the cases where <span class="math notranslate nohighlight">\(S_T &gt; K\)</span>. However, since we are only interested in the probability of this condition being true, we can directly use this ancilla qubit as the objective qubit in amplitude estimation without any further approximation.</p>
+<p>Delta’yı değerlendirmek, beklenen getiriden biraz daha basittir. Beklenen getiriye benzer şekilde, <span class="math notranslate nohighlight">\(S_T &gt; K\)</span>’nın bulunduğu durumları tanımlamak için bir karşılaştırıcı devre ve bir yardımcı kübit kullanıyoruz. Bununla birlikte, sadece bu koşulun doğru olma olasılığıyla ilgilendiğimiz için, bu yardımcı kübiti, daha fazla yaklaşıma gerek olmadan, genlik tahmininde hedef kübit olarak doğrudan kullanabiliriz.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1009,7 +1009,7 @@ Confidence interval:    [0.8005, 0.8120]
         <a href="04_european_put_option_pricing.html" class="btn btn-neutral float-right" title="Pricing European Put Options" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="02_portfolio_diversification.html" class="btn btn-neutral" title="Portfolio Diversification" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="02_portfolio_diversification.html" class="btn btn-neutral" title="Portföy çeşitlendirme" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   

@@ -482,9 +482,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/05_bull_spread_pricing.ipynb">docs/tutorials/05_bull_spread_pricing.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
 <div class="section" id="Pricing-Bull-Spreads">
 <h1>Pricing Bull Spreads<a class="headerlink" href="#Pricing-Bull-Spreads" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
@@ -587,11 +587,11 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Payoff-Function">
 <h2>Payoff Function<a class="headerlink" href="#Payoff-Function" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>The payoff function equals zero as long as the spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> is less than the strike price <span class="math notranslate nohighlight">\(K_1\)</span>, then increases linearly, and is bounded by <span class="math notranslate nohighlight">\(K_2\)</span>. The implementation uses two comparators, that flip an ancilla qubit each from <span class="math notranslate nohighlight">\(\big|0\rangle\)</span> to <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> if <span class="math notranslate nohighlight">\(S_T \geq K_1\)</span> and <span class="math notranslate nohighlight">\(S_T \leq K_2\)</span>, and these ancillas are used to control the linear part of the payoff function.</p>
+<p><span class="math notranslate nohighlight">\(S_T\)</span> vadesindeki spot fiyat, kullanım fiyatı <span class="math notranslate nohighlight">\(K_1\)</span> ile sınırlıdır. Uygulama, eğer <span class="math notranslate nohighlight">\(S_T \geq K_1\)</span> ve <span class="math notranslate nohighlight">\(S_T \leq K_2\)</span> ise, her biri için bir yardımcı kübiti <span class="math notranslate nohighlight">\(\big|0\rangle\)</span>big|1rangle`e çeviren iki karşılaştırıcı kullanır ve bu yardımcılar, getiri fonksiyonunun doğrusal kısmını kontrol etmek için kullanılır.</p>
 <p>The linear part itself is then approximated as follows. We exploit the fact that <span class="math notranslate nohighlight">\(\sin^2(y + \pi/4) \approx y + 1/2\)</span> for small <span class="math notranslate nohighlight">\(|y|\)</span>. Thus, for a given approximation rescaling factor <span class="math notranslate nohighlight">\(c_\text{approx} \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> we consider</p>
 <div class="math notranslate nohighlight">
 \[\sin^2( \pi/2 * c_\text{approx} * ( x - 1/2 ) + \pi/4) \approx \pi/2 * c_\text{approx} * ( x - 1/2 ) + 1/2\]</div>
-<p>for small <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>.</p>
+<p>küçük <span class="math notranslate nohighlight">\(c_\text{approx}\)</span> için.</p>
 <p>We can easily construct an operator that acts as</p>
 <div class="math notranslate nohighlight">
 \[\big|x\rangle \big|0\rangle \mapsto \big|x\rangle \left( \cos(a*x+b) \big|0\rangle + \sin(a*x+b) \big|1\rangle \right),\]</div>
@@ -734,7 +734,7 @@ Confidence interval:    [0.5493, 0.5967]
 </div>
 <div class="section" id="Evaluate-Delta">
 <h2>Evaluate Delta<a class="headerlink" href="#Evaluate-Delta" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>The Delta is a bit simpler to evaluate than the expected payoff. Similarly to the expected payoff, we use comparator circuits and ancilla qubits to identify the cases where <span class="math notranslate nohighlight">\(K_1 \leq S_T \leq K_2\)</span>. However, since we are only interested in the probability of this condition being true, we can directly use an ancilla qubit as the objective qubit in amplitude estimation without any further approximation.</p>
+<p>Delta’yı değerlendirmek, beklenen getiriden biraz daha basittir. Beklenen getiriye benzer şekilde, <span class="math notranslate nohighlight">\(K_1 \leq S_T \leq K_2\)</span>’nın bulunduğu durumları tanımlamak için karşılaştırıcı devreler ve yardımcı kübitler kullanıyoruz. Bununla birlikte, sadece bu koşulun doğru olma olasılığıyla ilgilendiğimiz için, bu yardımcı kübiti, daha fazla yaklaşıma gerek olmadan, genlik tahmininde hedef kübit olarak doğrudan kullanabiliriz.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>

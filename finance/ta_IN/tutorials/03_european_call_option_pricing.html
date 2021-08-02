@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Pricing European Put Options" href="04_european_put_option_pricing.html" />
     <link rel="prev" title="Portfolio Diversification" href="02_portfolio_diversification.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/03_european_call_option_pricing.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,20 +482,20 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/03_european_call_option_pricing.ipynb">docs/tutorials/03_european_call_option_pricing.ipynb</a>.</p>
 </div>
 <div class="section" id="Pricing-European-Call-Options">
 <h1>Pricing European Call Options<a class="headerlink" href="#Pricing-European-Call-Options" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>Suppose a European call option with strike price <span class="math notranslate nohighlight">\(K\)</span> and an underlying asset whose spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> follows a given random distribution. The corresponding payoff function is defined as:</p>
+<p>வேலைநிறுத்த விலையுடன் ஒரு ஐரோப்பிய அழைப்பு விருப்பத்தை வைத்துக்கொள்வோம் <span class="math notranslate nohighlight">\(K\)</span> மற்றும் முதிர்ச்சியடைந்த இடத்தின் விலை <span class="math notranslate nohighlight">\(S_T\)</span> கொடுக்கப்பட்ட சீரற்ற விநியோகத்தைப் பின்பற்றுகிறது. தொடர்புடைய செலுத்துதல் செயல்பாடு பின்வருமாறு வரையறுக்கப்படுகிறது:</p>
 <div class="math notranslate nohighlight">
-\[\max\{S_T - K, 0\}\]</div>
+\[\max\ {S_T-K, 0\}\]</div>
 <p>In the following, a quantum algorithm based on amplitude estimation is used to estimate the expected payoff, i.e., the fair price before discounting, for the option:</p>
 <div class="math notranslate nohighlight">
-\[\mathbb{E}\left[ \max\{S_T - K, 0\} \right]\]</div>
+\[\mathbb{E}\left[ \max\{S_T - K, 0\} \right\]</div>
 <p>as well as the corresponding <span class="math notranslate nohighlight">\(\Delta\)</span>, i.e., the derivative of the option price with respect to the spot price, defined as:</p>
 <div class="math notranslate nohighlight">
 \[\Delta = \mathbb{P}\left[S_T \geq K\right]\]</div>
@@ -588,7 +588,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Payoff-Function">
 <h2>Payoff Function<a class="headerlink" href="#Payoff-Function" title="Permalink to this headline">¶</a></h2>
-<p>The payoff function equals zero as long as the spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> is less than the strike price <span class="math notranslate nohighlight">\(K\)</span> and then increases linearly. The implementation uses a comparator, that flips an ancilla qubit from <span class="math notranslate nohighlight">\(\big|0\rangle\)</span> to <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> if <span class="math notranslate nohighlight">\(S_T \geq K\)</span>, and this ancilla is used to control the linear part of the payoff function.</p>
+<p>முதிர்ச்சியில் ஸ்பாட் விலை இருக்கும் வரை செலுத்துதல் செயல்பாடு பூஜ்ஜியத்திற்கு சமம் <span class="math notranslate nohighlight">\(S_T\)</span> வேலைநிறுத்த விலையை விட குறைவாக உள்ளது <span class="math notranslate nohighlight">\(K\)</span> பின்னர் நேர்கோட்டுடன் அதிகரிக்கிறது. செயல்படுத்தல் ஒரு ஒப்பீட்டாளரைப் பயன்படுத்துகிறது, இது ஒரு கணிதத்தை <span class="math notranslate nohighlight">\(\big|0\rangle\)</span> முதல் <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> என்றால் <span class="math notranslate nohighlight">\(S_T \geq K\)</span> மற்றும் இந்த துணை செலுத்துதல் செயல்பாட்டின் நேரியல் பகுதியைக் கட்டுப்படுத்தப் பயன்படுகிறது.</p>
 <p>The linear part itself is then approximated as follows. We exploit the fact that <span class="math notranslate nohighlight">\(\sin^2(y + \pi/4) \approx y + 1/2\)</span> for small <span class="math notranslate nohighlight">\(|y|\)</span>. Thus, for a given approximation rescaling factor <span class="math notranslate nohighlight">\(c_\text{approx} \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(x \in [0, 1]\)</span> we consider</p>
 <div class="math notranslate nohighlight">
 \[\sin^2( \pi/2 * c_\text{approx} * ( x - 1/2 ) + \pi/4) \approx \pi/2 * c_\text{approx} * ( x - 1/2 ) + 1/2\]</div>
@@ -788,7 +788,7 @@ Estimated value:        0.1681
 Confidence interval:    [0.1633, 0.1730]
 </pre></div></div>
 </div>
-<p>Instead of constructing these circuits manually, Qiskit’s finance module offers the <code class="docutils literal notranslate"><span class="pre">EuropeanCallPricing</span></code> circuit, which already implements this functionality as building block.</p>
+<p>இந்த சர்க்யூட்களை கைமுறையாக நிர்மாணிப்பதற்கு பதிலாக, Qiskitடின் நிதி தொகுதி `` ஐரோப்பிய கால் விலை நிர்ணயம்`` சர்க்யூட் வழங்குகிறது, இது ஏற்கனவே இந்த செயல்பாட்டை கட்டடத் தொகுதியாக செயல்படுத்துகிறது.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -839,7 +839,7 @@ Confidence interval:    [0.1623, 0.1722]
 </div>
 <div class="section" id="Evaluate-Delta">
 <h2>Evaluate Delta<a class="headerlink" href="#Evaluate-Delta" title="Permalink to this headline">¶</a></h2>
-<p>The Delta is a bit simpler to evaluate than the expected payoff. Similarly to the expected payoff, we use a comparator circuit and an ancilla qubit to identify the cases where <span class="math notranslate nohighlight">\(S_T &gt; K\)</span>. However, since we are only interested in the probability of this condition being true, we can directly use this ancilla qubit as the objective qubit in amplitude estimation without any further approximation.</p>
+<p>டெல்டா எதிர்பார்த்த ஊதியத்தை விட மதிப்பீடு செய்வது சற்று எளிது. எதிர்பார்த்த ஊதியத்தைப் போலவே, ஒரு ஒப்பீட்டு சுற்று மற்றும் ஒரு துணை குவிட் ஆகியவற்றைப் பயன்படுத்துகிறோம் <span class="math notranslate nohighlight">\(S_T &gt; K\)</span>. எவ்வாறாயினும், இந்த நிலை உண்மையாக இருப்பதற்கான நிகழ்தகவு குறித்து மட்டுமே நாங்கள் ஆர்வம் காட்டுவதால், மேலதிக தோராயமின்றி வீச்சு மதிப்பீட்டில் புறநிலை குவிட்டாக இந்த துணை குயிட்டை நேரடியாகப் பயன்படுத்தலாம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>

@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Portfolio Diversification" href="02_portfolio_diversification.html" />
     <link rel="prev" title="Finance Tutorials" href="index.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/01_portfolio_optimization.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,30 +482,30 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a>.</p>
 </div>
 <div class="section" id="Portfolio-Optimization">
 <h1>Portfolio Optimization<a class="headerlink" href="#Portfolio-Optimization" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial shows how to solve the following mean-variance portfolio optimization problem for <span class="math notranslate nohighlight">\(n\)</span> assets:</p>
+<p>இந்த டுடோரியல் பின்வரும் <span class="math notranslate nohighlight">\(n\)</span> சராசரி-மாறுபாடு போர்ட்ஃபோலியோ தேர்வுமுறை சிக்கலை எவ்வாறு தீர்ப்பது என்பதைக் காட்டுகிறது:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \min_{x \in \{0, 1\}^n}  q x^T \Sigma x - \mu^T x\\
 \text{subject to: } 1^T x = B
 \end{aligned}\end{split}\]</div>
-<p>where we use the following notation:</p>
+<p>பின்வரும் குறியீட்டை நாங்கள் பயன்படுத்துகிறோம்:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> denotes the vector of binary decision variables, which indicate which assets to pick (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) and which not to pick (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> defines the expected returns for the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> specifies the covariances between the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(q &gt; 0\)</span> controls the risk appetite of the decision maker,</p></li>
-<li><p>and <span class="math notranslate nohighlight">\(B\)</span> denotes the budget, i.e. the number of assets to be selected out of <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> இல் பைனரி முடிவு மாறிகளின் திசையனைக் குறிக்கிறது, இது எந்த சொத்துக்களை எடுக்க வேண்டும் என்பதைக் குறிக்கிறது (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) மற்றும் எதை எடுக்கக்கூடாது (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> என்பது எதிர்பார்க்கப்படும் தரவுகளை வரையறுக்கிறது,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> என்பது தரவுகளுக்கு இடையிலான ஒற்றுமையைக் குறிப்பிடுகிறது,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q &gt; 0\)</span> முடிவெடுப்பவரின் ஆபத்து பசியைக் கட்டுப்படுத்துகிறது,</p></li>
+<li><p>மற்றும் <span class="math notranslate nohighlight">\(B\)</span> பட்ஜெட்டைக் குறிக்கிறது. அதாவது,  இதில் இருந்து தேர்ந்தெடுக்கப்பட வேண்டிய சொத்துகளின் எண்ணிக்கை <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 </ul>
-<p>We assume the following simplifications: - all assets have the same price (normalized to 1), - the full budget <span class="math notranslate nohighlight">\(B\)</span> has to be spent, i.e. one has to select exactly <span class="math notranslate nohighlight">\(B\)</span> assets.</p>
-<p>The equality constraint <span class="math notranslate nohighlight">\(1^T x = B\)</span> is mapped to a penalty term <span class="math notranslate nohighlight">\((1^T x - B)^2\)</span> which is scaled by a parameter and subtracted from the objective function. The resulting problem can be mapped to a Hamiltonian whose ground state corresponds to the optimal solution. This notebook shows how to use the Variational Quantum Eigensolver (VQE) or the Quantum Approximate Optimization Algorithm (QAOA) to find the optimal solution for a given set of parameters.</p>
+<p>பின்வரும் எளிமைப்படுத்தல்களை நாங்கள் கருதுகிறோம்: - அனைத்து சொத்துகளுக்கும் ஒரே விலை (1 ஆக இயல்பாக்கப்பட்டுள்ளது), - முழு பட்ஜெட் <span class="math notranslate nohighlight">\(B\)</span> செலவிடப்பட வேண்டும், அதாவது  ஒருவர் சரியாக தேர்ந்தெடுக்க வேண்டிய தரவுகள் <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>சமத்துவக் கட்டுப்பாடு <span class="math notranslate nohighlight">\(1^T x = B\)</span> என்பது ஒரு அபராத காலத்திற்கு மாற்றப்பட்டுள்ளது <span class="math notranslate nohighlight">\((1^T x - B)^2\)</span> இது ஒரு அளவுருவால் அளவிடப்படுகிறது மற்றும் புறநிலை செயல்பாட்டிலிருந்து கழிக்கப்படுகிறது. இதன் விளைவாக ஏற்படும் பிரச்சினை ஒரு ஹாமில்டோனியனுடன் பொருத்தப்படலாம், அதன் நில நிலை உகந்த தீர்வுக்கு ஒத்திருக்கிறது. கொடுக்கப்பட்ட அளவுருக்களின் உகந்த தீர்வைக் கண்டறிய, மாறுபட்ட குவாண்டம் ஐஜென்சால்வர் (VQE) அல்லது குவாண்டம் தோராயமான உகப்பாக்கம் அல்காரிதம் (QAOA) ஐ எவ்வாறு பயன்படுத்துவது என்பதை இந்த நோட்புக் காட்டுகிறது.</p>
 <p>Experiments on real quantum hardware for this problem are reported for instance in the following paper: <a class="reference external" href="https://arxiv.org/abs/1907.04769">Improving Variational Quantum Optimization using CVaR. Barkoutsos et al. 2019.</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -528,15 +528,15 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="section" id="[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">
-<h3>[Optional] Setup token to run the experiment on a real device<a class="headerlink" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device" title="Permalink to this headline">¶</a></h3>
-<p>If you would like to run the experiment on a real device, you need to setup your account first.</p>
-<p>Note: If you do not store your token yet, use <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> to store it first.</p>
+<div class="section" id="[Optional]-உண்மையான-சாதனத்தில்-சோதனையை-இயக்க-டோக்கனை-அமைக்கவும்">
+<h3>[Optional] உண்மையான சாதனத்தில் சோதனையை இயக்க டோக்கனை அமைக்கவும்<a class="headerlink" href="#[Optional]-உண்மையான-சாதனத்தில்-சோதனையை-இயக்க-டோக்கனை-அமைக்கவும்" title="Permalink to this headline">¶</a></h3>
+<p>நீங்கள் ஒரு உண்மையான சாதனத்தில் சோதனையை இயக்க விரும்பினால், முதலில் உங்கள் கணக்கை அமைக்க வேண்டும்.</p>
+<p>குறிப்பு: உங்கள் டோக்கனை நீங்கள் இன்னும் சேமிக்கவில்லை என்றால், அதை முதலில் சேமிக்க <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> ஐப் பயன்படுத்தவும்.</p>
 </div>
 </div>
-<div class="section" id="Define-problem-instance">
-<h2>Define problem instance<a class="headerlink" href="#Define-problem-instance" title="Permalink to this headline">¶</a></h2>
-<p>Here an Operator instance is created for our Hamiltonian. In this case the paulis are from an Ising Hamiltonian translated from the portfolio problem. We use a random portfolio problem for this notebook. It is straight-forward to extend this to using real financial data as illustrated here: <a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a></p>
+<div class="section" id="சிக்கல்-உதாரணத்தை-வரையறுக்கவும்">
+<h2>சிக்கல் உதாரணத்தை வரையறுக்கவும்<a class="headerlink" href="#சிக்கல்-உதாரணத்தை-வரையறுக்கவும்" title="Permalink to this headline">¶</a></h2>
+<p>இங்கே எங்கள் ஹாமில்டோனியனுக்காக ஒரு ஆபரேட்டர் உதாரணம் உருவாக்கப்பட்டது. இந்த வழக்கில் பவுலிஸ் போர்ட்ஃபோலியோ சிக்கலில் இருந்து மொழிபெயர்க்கப்பட்ட ஐசிங் ஹாமில்டோனியனிலிருந்து வந்தவர்கள். இந்த நோட்புக்கு ஒரு சீரற்ற போர்ட்ஃபோலியோ சிக்கலைப் பயன்படுத்துகிறோம். இங்கே விளக்கப்பட்டுள்ளபடி உண்மையான நிதித் தரவைப் பயன்படுத்த இதை நீட்டிப்பது நேராக முன்னோக்கி உள்ளது:<a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -620,7 +620,7 @@ Binaries
 End
 </pre></div></div>
 </div>
-<p>We define some utility methods to print the results in a nice format.</p>
+<p>முடிவுகளை நல்ல வடிவத்தில் அச்சிட சில பயன்பாட்டு முறைகளை நாங்கள் வரையறுக்கிறோம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -653,10 +653,10 @@ End
 </div>
 </div>
 </div>
-<div class="section" id="NumPyMinimumEigensolver-(as-a-classical-reference)">
-<h2>NumPyMinimumEigensolver (as a classical reference)<a class="headerlink" href="#NumPyMinimumEigensolver-(as-a-classical-reference)" title="Permalink to this headline">¶</a></h2>
-<p>Lets solve the problem. First classically…</p>
-<p>We can now use the Operator we built above without regard to the specifics of how it was created. We set the algorithm for the NumPyMinimumEigensolver so we can have a classical reference. The problem is set for ‘ising’. Backend is not required since this is computed classically not using quantum computation. The result is returned as a dictionary.</p>
+<div class="section" id="NumPyMinimumEigensolver-(ஒரு-கிளாசிக்கல்-குறிப்பாக)">
+<h2>NumPyMinimumEigensolver (ஒரு கிளாசிக்கல் குறிப்பாக)<a class="headerlink" href="#NumPyMinimumEigensolver-(ஒரு-கிளாசிக்கல்-குறிப்பாக)" title="Permalink to this headline">¶</a></h2>
+<p>சிக்கலை தீர்க்கலாம். முதலில் கிளாசிக்கல்…</p>
+<p>அது எவ்வாறு உருவாக்கப்பட்டது என்பதற்கான பிரத்தியேகங்களைப் பொருட்படுத்தாமல் நாம் மேலே கட்டிய ஆபரேட்டரை இப்போது பயன்படுத்தலாம். NumPyMinimumEigensolver க்கான வழிமுறையை நாங்கள் அமைத்துள்ளோம், எனவே ஒரு கிளாசிக்கல் குறிப்பைக் கொண்டிருக்கலாம். சிக்கல் ‘ஐசிங்’ என்பதற்காக அமைக்கப்பட்டுள்ளது. குவாண்டம் கணக்கீட்டைப் பயன்படுத்தாமல் கிளாசிக்கல் முறையில் கணக்கிடப்படுவதால் பின்தளத்தில் தேவையில்லை. இதன் விளைவாக அகராதியாக வழங்கப்படுகிறது.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -700,10 +700,10 @@ selection       value           probability
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Solution-using-VQE">
-<h2>Solution using VQE<a class="headerlink" href="#Solution-using-VQE" title="Permalink to this headline">¶</a></h2>
-<p>We can now use the Variational Quantum Eigensolver (VQE) to solve the problem. We will specify the optimizer and variational form to be used.</p>
-<p>Note: You can switch to different backends by providing the name of backend.</p>
+<div class="section" id="VQE-ஐப்-பயன்படுத்தி-தீர்வு">
+<h2>VQE ஐப் பயன்படுத்தி தீர்வு<a class="headerlink" href="#VQE-ஐப்-பயன்படுத்தி-தீர்வு" title="Permalink to this headline">¶</a></h2>
+<p>சிக்கலைத் தீர்க்க நாம் இப்போது மாறுபட்ட குவாண்டம் ஐஜென்சால்வரை (VQE) பயன்படுத்தலாம். பயன்படுத்த வேண்டிய உகப்பாக்கி மற்றும் மாறுபட்ட படிவத்தை நாங்கள் குறிப்பிடுவோம்.</p>
+<p>குறிப்பு: பின்தளத்தில் பெயரை வழங்குவதன் மூலம் நீங்கள் வெவ்வேறு பின்தளத்தில் மாறலாம்.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -754,9 +754,9 @@ selection       value           probability
  [1 1 0 0]      0.0160          0.0000
 </pre></div></div>
 </div>
-<div class="section" id="Solution-using-QAOA">
-<h3>Solution using QAOA<a class="headerlink" href="#Solution-using-QAOA" title="Permalink to this headline">¶</a></h3>
-<p>We also show here a result using the Quantum Approximate Optimization Algorithm (QAOA). This is another variational algorithm and it uses an internal variational form that is created based on the problem.</p>
+<div class="section" id="QAOA-ஐப்-பயன்படுத்தி-தீர்வு">
+<h3>QAOA ஐப் பயன்படுத்தி தீர்வு<a class="headerlink" href="#QAOA-ஐப்-பயன்படுத்தி-தீர்வு" title="Permalink to this headline">¶</a></h3>
+<p>குவாண்டம் தோராய உகப்பாக்கம் அல்காரிதம் (QAOA) ஐப் பயன்படுத்தி ஒரு முடிவையும் இங்கே காண்பிக்கிறோம். இது மற்றொரு மாறுபட்ட வழிமுறை மற்றும் இது சிக்கலின் அடிப்படையில் உருவாக்கப்பட்ட உள் மாறுபட்ட வடிவத்தைப் பயன்படுத்துகிறது.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -886,13 +886,13 @@ selection       value           probability
               <ul>
 <li><a class="reference internal" href="#">Portfolio Optimization</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">[Optional] Setup token to run the experiment on a real device</a></li>
+<li><a class="reference internal" href="#[Optional]-உண்மையான-சாதனத்தில்-சோதனையை-இயக்க-டோக்கனை-அமைக்கவும்">[Optional] உண்மையான சாதனத்தில் சோதனையை இயக்க டோக்கனை அமைக்கவும்</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Define-problem-instance">Define problem instance</a></li>
-<li><a class="reference internal" href="#NumPyMinimumEigensolver-(as-a-classical-reference)">NumPyMinimumEigensolver (as a classical reference)</a></li>
-<li><a class="reference internal" href="#Solution-using-VQE">Solution using VQE</a><ul>
-<li><a class="reference internal" href="#Solution-using-QAOA">Solution using QAOA</a></li>
+<li><a class="reference internal" href="#சிக்கல்-உதாரணத்தை-வரையறுக்கவும்">சிக்கல் உதாரணத்தை வரையறுக்கவும்</a></li>
+<li><a class="reference internal" href="#NumPyMinimumEigensolver-(ஒரு-கிளாசிக்கல்-குறிப்பாக)">NumPyMinimumEigensolver (ஒரு கிளாசிக்கல் குறிப்பாக)</a></li>
+<li><a class="reference internal" href="#VQE-ஐப்-பயன்படுத்தி-தீர்வு">VQE ஐப் பயன்படுத்தி தீர்வு</a><ul>
+<li><a class="reference internal" href="#QAOA-ஐப்-பயன்படுத்தி-தீர்வு">QAOA ஐப் பயன்படுத்தி தீர்வு</a></li>
 </ul>
 </li>
 </ul>

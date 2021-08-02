@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="index" title="Mục lục" href="../genindex.html" />
+    <link rel="search" title="Tìm kiếm" href="../search.html" />
     <link rel="next" title="Portfolio Diversification" href="02_portfolio_diversification.html" />
     <link rel="prev" title="Finance Tutorials" href="index.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Ngôn ngữ</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/01_portfolio_optimization.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Bắt đầu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">Tài liệu tham khảo về API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Hướng dẫn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Thông tin phiên bản</a></li>
 </ul>
 
             
@@ -482,27 +482,27 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Ghi chú</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a>.</p>
 </div>
 <div class="section" id="Portfolio-Optimization">
 <h1>Portfolio Optimization<a class="headerlink" href="#Portfolio-Optimization" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial shows how to solve the following mean-variance portfolio optimization problem for <span class="math notranslate nohighlight">\(n\)</span> assets:</p>
+<p>Hướng dẫn này cho phép giải quyết vấn đề tối ưu hóa phương sai trung bình danh mục vốn đầu tư cho <span class="math notranslate nohighlight">\(n\)</span> tài sản:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \min_{x \in \{0, 1\}^n}  q x^T \Sigma x - \mu^T x\\
 \text{subject to: } 1^T x = B
 \end{aligned}\end{split}\]</div>
-<p>where we use the following notation:</p>
+<p>trong đó chúng ta sử dụng ký hiệu sau:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> denotes the vector of binary decision variables, which indicate which assets to pick (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) and which not to pick (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>),</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> defines the expected returns for the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> specifies the covariances between the assets,</p></li>
-<li><p><span class="math notranslate nohighlight">\(q &gt; 0\)</span> controls the risk appetite of the decision maker,</p></li>
-<li><p>and <span class="math notranslate nohighlight">\(B\)</span> denotes the budget, i.e. the number of assets to be selected out of <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> thể hiện véc-tơ của các biến quyết định nhị phân, thứ mà chỉ ra tài sản nào nên chọn (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) và không nên chọn (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> được định nghĩa là kết quả trông đợi cho các tài sản,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> chỉ hiệp phương sai phương sai giữa hai tài sản,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q&gt;0\)</span> điều khiển độ cần rủi ro của bộ ra quyết định,</p></li>
+<li><p>và <span class="math notranslate nohighlight">\(B\)</span> thể hiện khoản tiền, tức số tài sản được chọn từ <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 </ul>
 <p>We assume the following simplifications: - all assets have the same price (normalized to 1), - the full budget <span class="math notranslate nohighlight">\(B\)</span> has to be spent, i.e. one has to select exactly <span class="math notranslate nohighlight">\(B\)</span> assets.</p>
 <p>The equality constraint <span class="math notranslate nohighlight">\(1^T x = B\)</span> is mapped to a penalty term <span class="math notranslate nohighlight">\((1^T x - B)^2\)</span> which is scaled by a parameter and subtracted from the objective function. The resulting problem can be mapped to a Hamiltonian whose ground state corresponds to the optimal solution. This notebook shows how to use the Variational Quantum Eigensolver (VQE) or the Quantum Approximate Optimization Algorithm (QAOA) to find the optimal solution for a given set of parameters.</p>
@@ -528,14 +528,14 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="section" id="[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">
-<h3>[Optional] Setup token to run the experiment on a real device<a class="headerlink" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device" title="Permalink to this headline">¶</a></h3>
-<p>If you would like to run the experiment on a real device, you need to setup your account first.</p>
-<p>Note: If you do not store your token yet, use <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> to store it first.</p>
+<div class="section" id="[Optional]-Thiết-lập-để-chạy-thử-nghiệm-trên-một-thiết-bị-thật">
+<h3>[Optional] Thiết lập để chạy thử nghiệm trên một thiết bị thật<a class="headerlink" href="#[Optional]-Thiết-lập-để-chạy-thử-nghiệm-trên-một-thiết-bị-thật" title="Permalink to this headline">¶</a></h3>
+<p>Nếu bạn muốn thực hiện thí nghiệm trên một thiết bị thực, bạn cần thiết lập tài khoản trước.</p>
+<p>Lưu ý: Nếu bạn chưa lưu trữ token của bạn, thì sử dụng <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> để lưu nó trước.</p>
 </div>
 </div>
-<div class="section" id="Define-problem-instance">
-<h2>Define problem instance<a class="headerlink" href="#Define-problem-instance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Định-nghĩa-thực-thể-của-vấn-đề">
+<h2>Định nghĩa thực thể của vấn đề<a class="headerlink" href="#Định-nghĩa-thực-thể-của-vấn-đề" title="Permalink to this headline">¶</a></h2>
 <p>Here an Operator instance is created for our Hamiltonian. In this case the paulis are from an Ising Hamiltonian translated from the portfolio problem. We use a random portfolio problem for this notebook. It is straight-forward to extend this to using real financial data as illustrated here: <a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -620,7 +620,7 @@ Binaries
 End
 </pre></div></div>
 </div>
-<p>We define some utility methods to print the results in a nice format.</p>
+<p>Chúng tôi xác định một số phương pháp tiện ích để in các kết quả theo định dạng tốt.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -653,9 +653,9 @@ End
 </div>
 </div>
 </div>
-<div class="section" id="NumPyMinimumEigensolver-(as-a-classical-reference)">
-<h2>NumPyMinimumEigensolver (as a classical reference)<a class="headerlink" href="#NumPyMinimumEigensolver-(as-a-classical-reference)" title="Permalink to this headline">¶</a></h2>
-<p>Lets solve the problem. First classically…</p>
+<div class="section" id="NumPyimimumEigensolver-(như-một-tham-khảo-cổ-điển)">
+<h2>NumPyimimumEigensolver (như một tham khảo cổ điển)<a class="headerlink" href="#NumPyimimumEigensolver-(như-một-tham-khảo-cổ-điển)" title="Permalink to this headline">¶</a></h2>
+<p>Hãy cùng giải bài toán này. Đầu tiên một cách cổ điển…</p>
 <p>We can now use the Operator we built above without regard to the specifics of how it was created. We set the algorithm for the NumPyMinimumEigensolver so we can have a classical reference. The problem is set for ‘ising’. Backend is not required since this is computed classically not using quantum computation. The result is returned as a dictionary.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -700,10 +700,10 @@ selection       value           probability
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Solution-using-VQE">
-<h2>Solution using VQE<a class="headerlink" href="#Solution-using-VQE" title="Permalink to this headline">¶</a></h2>
-<p>We can now use the Variational Quantum Eigensolver (VQE) to solve the problem. We will specify the optimizer and variational form to be used.</p>
-<p>Note: You can switch to different backends by providing the name of backend.</p>
+<div class="section" id="Giải-pháp-sử-dụng-VQE">
+<h2>Giải pháp sử dụng VQE<a class="headerlink" href="#Giải-pháp-sử-dụng-VQE" title="Permalink to this headline">¶</a></h2>
+<p>Bây giờ chúng ta có thể sử dụng Phương án Quantum Eigensolver (VQE) để giải bài toán. Chúng tôi sẽ xác định bộ tối ưu và dạng biến sẽ được sử dụng.</p>
+<p>Lưu ý: Bạn có thể chuyển sang phần sau khác nhau bằng cách cung cấp tên của phần sau.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -754,9 +754,9 @@ selection       value           probability
  [1 1 0 0]      0.0160          0.0000
 </pre></div></div>
 </div>
-<div class="section" id="Solution-using-QAOA">
-<h3>Solution using QAOA<a class="headerlink" href="#Solution-using-QAOA" title="Permalink to this headline">¶</a></h3>
-<p>We also show here a result using the Quantum Approximate Optimization Algorithm (QAOA). This is another variational algorithm and it uses an internal variational form that is created based on the problem.</p>
+<div class="section" id="Giải-pháp-sử-dụng-QAOA">
+<h3>Giải pháp sử dụng QAOA<a class="headerlink" href="#Giải-pháp-sử-dụng-QAOA" title="Permalink to this headline">¶</a></h3>
+<p>Chúng tôi cũng cho thấy kết quả là sử dụng thuật toán tối ưu hóa lượng tử (QAOA). Đây là một thuật toán biến khác và nó sử dụng một dạng biến nội bộ được tạo ra dựa trên vấn đề.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -886,13 +886,13 @@ selection       value           probability
               <ul>
 <li><a class="reference internal" href="#">Portfolio Optimization</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">[Optional] Setup token to run the experiment on a real device</a></li>
+<li><a class="reference internal" href="#[Optional]-Thiết-lập-để-chạy-thử-nghiệm-trên-một-thiết-bị-thật">[Optional] Thiết lập để chạy thử nghiệm trên một thiết bị thật</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Define-problem-instance">Define problem instance</a></li>
-<li><a class="reference internal" href="#NumPyMinimumEigensolver-(as-a-classical-reference)">NumPyMinimumEigensolver (as a classical reference)</a></li>
-<li><a class="reference internal" href="#Solution-using-VQE">Solution using VQE</a><ul>
-<li><a class="reference internal" href="#Solution-using-QAOA">Solution using QAOA</a></li>
+<li><a class="reference internal" href="#Định-nghĩa-thực-thể-của-vấn-đề">Định nghĩa thực thể của vấn đề</a></li>
+<li><a class="reference internal" href="#NumPyimimumEigensolver-(như-một-tham-khảo-cổ-điển)">NumPyimimumEigensolver (như một tham khảo cổ điển)</a></li>
+<li><a class="reference internal" href="#Giải-pháp-sử-dụng-VQE">Giải pháp sử dụng VQE</a><ul>
+<li><a class="reference internal" href="#Giải-pháp-sử-dụng-QAOA">Giải pháp sử dụng QAOA</a></li>
 </ul>
 </li>
 </ul>

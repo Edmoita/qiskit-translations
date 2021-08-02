@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Pricing European Call Options &mdash; Qiskit Finance 0.2.0 문서</title>
+  <title>가격 책정 유럽 통화 옵션 &mdash; Qiskit Finance 0.2.0 문서</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
-    <link rel="next" title="Pricing European Put Options" href="04_european_put_option_pricing.html" />
-    <link rel="prev" title="Portfolio Diversification" href="02_portfolio_diversification.html" /> 
+    <link rel="next" title="가격 책정 유럽 통화 풋 옵션" href="04_european_put_option_pricing.html" />
+    <link rel="prev" title="포트폴리오 다양화" href="02_portfolio_diversification.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Pricing European Call Options</li>
+      <li>가격 책정 유럽 통화 옵션</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -482,12 +482,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/03_european_call_option_pricing.ipynb">docs/tutorials/03_european_call_option_pricing.ipynb</a> 에서 생성되었다.</p>
 </div>
-<div class="section" id="Pricing-European-Call-Options">
-<h1>Pricing European Call Options<a class="headerlink" href="#Pricing-European-Call-Options" title="이 표제에 대한 퍼머링크">¶</a></h1>
+<div class="section" id="가격-책정-유럽-통화-옵션">
+<h1>가격 책정 유럽 통화 옵션<a class="headerlink" href="#가격-책정-유럽-통화-옵션" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>Suppose a European call option with strike price <span class="math notranslate nohighlight">\(K\)</span> and an underlying asset whose spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> follows a given random distribution. The corresponding payoff function is defined as:</p>
@@ -502,7 +502,7 @@ div.rendered_html tbody tr:hover {
 <p>The approximation of the objective function and a general introduction to option pricing and risk analysis on quantum computers are given in the following papers:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.nature.com/articles/s41534-019-0130-6">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p></li>
-<li><p><a class="reference external" href="https://quantum-journal.org/papers/q-2020-07-06-291/">Option Pricing using Quantum Computers. Stamatopoulos et al. 2019.</a></p></li>
+<li><p><a class="reference external" href="https://quantum-journal.org/papers/q-2020-07-06-291/">Option Pricing using Quantum Computers. Stamatopoulos et al. 2019.</a></p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -598,7 +598,7 @@ div.rendered_html tbody tr:hover {
 \[\big|x\rangle \big|0\rangle \mapsto \big|x\rangle \left( \cos(a*x+b) \big|0\rangle + \sin(a*x+b) \big|1\rangle \right),\]</div>
 <p>using controlled Y-rotations.</p>
 <p>Eventually, we are interested in the probability of measuring <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> in the last qubit, which corresponds to <span class="math notranslate nohighlight">\(\sin^2(a*x+b)\)</span>. Together with the approximation above, this allows to approximate the values of interest. The smaller we choose <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>, the better the approximation. However, since we are then estimating a property scaled by <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>, the number of evaluation qubits <span class="math notranslate nohighlight">\(m\)</span> needs to be adjusted accordingly.</p>
-<p>For more details on the approximation, we refer to: <a class="reference external" href="https://www.nature.com/articles/s41534-019-0130-6">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p>
+<p>근사화에 대한 더 자세한 내용은 <a class="reference external" href="https://www.nature.com/articles/s41534-019-0130-6">Quantum Risk Analysis. Woerner, Egger. 2018.</a> 에서 참조할 수 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -788,7 +788,7 @@ Estimated value:        0.1681
 Confidence interval:    [0.1633, 0.1730]
 </pre></div></div>
 </div>
-<p>Instead of constructing these circuits manually, Qiskit’s finance module offers the <code class="docutils literal notranslate"><span class="pre">EuropeanCallPricing</span></code> circuit, which already implements this functionality as building block.</p>
+<p>Qiskit의 금융 모듈은 이러한 회로를 수동으로 구성하는 대신에 이미 이 기능을 빌딩 블록으로 구현하는 <code class="docutils literal notranslate"><span class="pre">EuropeanCallPricing</span></code> 회로를 제공한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -1006,10 +1006,10 @@ Confidence interval:    [0.8005, 0.8120]
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="04_european_put_option_pricing.html" class="btn btn-neutral float-right" title="Pricing European Put Options" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="04_european_put_option_pricing.html" class="btn btn-neutral float-right" title="가격 책정 유럽 통화 풋 옵션" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="02_portfolio_diversification.html" class="btn btn-neutral" title="Portfolio Diversification" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="02_portfolio_diversification.html" class="btn btn-neutral" title="포트폴리오 다양화" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1041,7 +1041,7 @@ Confidence interval:    [0.8005, 0.8120]
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Pricing European Call Options</a><ul>
+<li><a class="reference internal" href="#">가격 책정 유럽 통화 옵션</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
 <li><a class="reference internal" href="#Payoff-Function">Payoff Function</a></li>

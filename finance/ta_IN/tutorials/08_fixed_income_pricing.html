@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Credit Risk Analysis" href="09_credit_risk_analysis.html" />
     <link rel="prev" title="Pricing Asian Barrier Spreads" href="07_asian_barrier_spread_pricing.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/08_fixed_income_pricing.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,9 +482,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/08_fixed_income_pricing.ipynb">docs/tutorials/08_fixed_income_pricing.ipynb</a>.</p>
 </div>
 <div class="section" id="Pricing-Fixed-Income-Assets">
 <h1>Pricing Fixed-Income Assets<a class="headerlink" href="#Pricing-Fixed-Income-Assets" title="Permalink to this headline">¶</a></h1>
@@ -527,7 +527,7 @@ objective function follows the following paper: <a class="reference external" hr
 <p>where <span class="math notranslate nohighlight">\(p_{i_1, ..., i_d}\)</span> denote the probabilities corresponding to the truncated and discretized distribution and where <span class="math notranslate nohighlight">\(i_j\)</span> is mapped to the right interval <span class="math notranslate nohighlight">\([low_j, high_j]\)</span> using the affine map:</p>
 <div class="math notranslate nohighlight">
 \[\{0, \ldots, 2^{n_{j}}-1\} \ni i_j \mapsto \frac{high_j - low_j}{2^{n_j} - 1} * i_j + low_j \in [low_j, high_j].\]</div>
-<p>In addition to the uncertainty model, we can also apply an affine map, e.g. resulting from a principal component analysis. The interest rates used are then given by:</p>
+<p>நிச்சயமற்ற மாதிரியுடன் கூடுதலாக, நாங்கள் ஒரு அஃபைன் வரைபடத்தையும் பயன்படுத்தலாம், எ.கா. ஒரு முக்கிய கூறு பகுப்பாய்வின் விளைவாக. பயன்படுத்தப்படும் வட்டி விகிதங்கள் பின்வருமாறு கொடுக்கப்பட்டது:</p>
 <div class="math notranslate nohighlight">
 \[\vec{r} = A * \vec{x} + b,\]</div>
 <p>where <span class="math notranslate nohighlight">\(\vec{x} \in \otimes_{i=1}^d [low_i, high_i]\)</span> follows the given random distribution.</p>
@@ -582,10 +582,10 @@ objective function follows the following paper: <a class="reference external" hr
 <img alt="../_images/tutorials_08_fixed_income_pricing_6_0.svg" src="../_images/tutorials_08_fixed_income_pricing_6_0.svg" /></div>
 </div>
 </div>
-<div class="section" id="Cash-flow,-payoff-function,-and-exact-expected-value">
-<h3>Cash flow, payoff function, and exact expected value<a class="headerlink" href="#Cash-flow,-payoff-function,-and-exact-expected-value" title="Permalink to this headline">¶</a></h3>
-<p>In the following we define the cash flow per period, the resulting payoff function and evaluate the exact expected value.</p>
-<p>For the payoff function we first use a first order approximation and then apply the same approximation technique as for the linear part of the payoff function of the <a class="reference internal" href="03_european_call_option_pricing.html"><span class="doc">European Call Option</span></a>.</p>
+<div class="section" id="பணப்புழக்கம்,-செலுத்துதல்-செயல்பாடு-மற்றும்-சரியான-எதிர்பார்க்கப்பட்ட-மதிப்பு">
+<h3>பணப்புழக்கம், செலுத்துதல் செயல்பாடு மற்றும் சரியான எதிர்பார்க்கப்பட்ட மதிப்பு<a class="headerlink" href="#பணப்புழக்கம்,-செலுத்துதல்-செயல்பாடு-மற்றும்-சரியான-எதிர்பார்க்கப்பட்ட-மதிப்பு" title="Permalink to this headline">¶</a></h3>
+<p>பின்வருவனவற்றில், ஒரு காலகட்டத்திற்கான பணப்புழக்கத்தை நாங்கள் வரையறுக்கிறோம், இதன் விளைவாக செலுத்தும் செயல்பாடு மற்றும் சரியான எதிர்பார்க்கப்படும் மதிப்பை மதிப்பீடு செய்கிறது.</p>
+<p>செலுத்துதல் செயல்பாட்டிற்கு, நாங்கள் முதலில் ஒரு முதல் வரிசை தோராயத்தைப் பயன்படுத்துகிறோம், பின்னர் <a class="reference internal" href="03_european_call_option_pricing.html"><span class="doc">ஐரோப்பிய அழைப்பு விருப்பத்தின்</span></a> இன் செலுத்துதல் செயல்பாட்டின் நேரியல் பகுதியைப் போலவே அதே தோராய நுட்பத்தையும் பயன்படுத்துகிறோம்.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -848,7 +848,7 @@ Confidence interval:    [2.3015, 2.3823]
 <li><a class="reference internal" href="#">Pricing Fixed-Income Assets</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
-<li><a class="reference internal" href="#Cash-flow,-payoff-function,-and-exact-expected-value">Cash flow, payoff function, and exact expected value</a></li>
+<li><a class="reference internal" href="#பணப்புழக்கம்,-செலுத்துதல்-செயல்பாடு-மற்றும்-சரியான-எதிர்பார்க்கப்பட்ட-மதிப்பு">பணப்புழக்கம், செலுத்துதல் செயல்பாடு மற்றும் சரியான எதிர்பார்க்கப்பட்ட மதிப்பு</a></li>
 </ul>
 </li>
 </ul>

@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="ইনডেক্স" href="../genindex.html" />
+    <link rel="index" title="সূচিপত্র" href="../genindex.html" />
     <link rel="search" title="অনুসন্ধান" href="../search.html" />
     <link rel="next" title="Portfolio Diversification" href="02_portfolio_diversification.html" />
     <link rel="prev" title="Finance Tutorials" href="index.html" /> 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>ভাষাসমূহ</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/01_portfolio_optimization.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">শুরুর নির্দেশনা</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">পাঠসমূহ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">অব্যাহতি পত্র</a></li>
 </ul>
 
             
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a>.</p>
 </div>
 <div class="section" id="Portfolio-Optimization">
 <h1>Portfolio Optimization<a class="headerlink" href="#Portfolio-Optimization" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>This tutorial shows how to solve the following mean-variance portfolio optimization problem for <span class="math notranslate nohighlight">\(n\)</span> assets:</p>
+<p>এই টিউটোরিয়াল দেখায় কীভাবে  <span class="math notranslate nohighlight">\(n\)</span> সম্পদের জন্য নীচের মীন-ভ্যারিয়্যান্স পোর্টফোলিও অপ্টিমাইজেশান সমস্যাটি সমাধান করা যায়:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \min_{x \in \{0, 1\}^n}  q x^T \Sigma x - \mu^T x\\
@@ -534,8 +534,8 @@ div.rendered_html tbody tr:hover {
 <p>Note: If you do not store your token yet, use <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> to store it first.</p>
 </div>
 </div>
-<div class="section" id="Define-problem-instance">
-<h2>Define problem instance<a class="headerlink" href="#Define-problem-instance" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<div class="section" id="সমস্যা-দৃষ্টান্ত-(ইনস্ট্যান্স)-সংজ্ঞায়িত-করুন">
+<h2>সমস্যা দৃষ্টান্ত (ইনস্ট্যান্স) সংজ্ঞায়িত করুন<a class="headerlink" href="#সমস্যা-দৃষ্টান্ত-(ইনস্ট্যান্স)-সংজ্ঞায়িত-করুন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <p>Here an Operator instance is created for our Hamiltonian. In this case the paulis are from an Ising Hamiltonian translated from the portfolio problem. We use a random portfolio problem for this notebook. It is straight-forward to extend this to using real financial data as illustrated here: <a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -700,8 +700,8 @@ selection       value           probability
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Solution-using-VQE">
-<h2>Solution using VQE<a class="headerlink" href="#Solution-using-VQE" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<div class="section" id="ভি-কিউ-ই-ব্যবহার-করে-সমাধান">
+<h2>ভি কিউ ই ব্যবহার করে সমাধান<a class="headerlink" href="#ভি-কিউ-ই-ব্যবহার-করে-সমাধান" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <p>We can now use the Variational Quantum Eigensolver (VQE) to solve the problem. We will specify the optimizer and variational form to be used.</p>
 <p>Note: You can switch to different backends by providing the name of backend.</p>
 <div class="nbinput docutils container">
@@ -754,8 +754,8 @@ selection       value           probability
  [1 1 0 0]      0.0160          0.0000
 </pre></div></div>
 </div>
-<div class="section" id="Solution-using-QAOA">
-<h3>Solution using QAOA<a class="headerlink" href="#Solution-using-QAOA" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<div class="section" id="কিউএওএ-(QAOA)-ব্যবহার-করে-সমাধান">
+<h3>কিউএওএ (QAOA) ব্যবহার করে সমাধান<a class="headerlink" href="#কিউএওএ-(QAOA)-ব্যবহার-করে-সমাধান" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>We also show here a result using the Quantum Approximate Optimization Algorithm (QAOA). This is another variational algorithm and it uses an internal variational form that is created based on the problem.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -889,10 +889,10 @@ selection       value           probability
 <li><a class="reference internal" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">[Optional] Setup token to run the experiment on a real device</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Define-problem-instance">Define problem instance</a></li>
+<li><a class="reference internal" href="#সমস্যা-দৃষ্টান্ত-(ইনস্ট্যান্স)-সংজ্ঞায়িত-করুন">সমস্যা দৃষ্টান্ত (ইনস্ট্যান্স) সংজ্ঞায়িত করুন</a></li>
 <li><a class="reference internal" href="#NumPyMinimumEigensolver-(as-a-classical-reference)">NumPyMinimumEigensolver (as a classical reference)</a></li>
-<li><a class="reference internal" href="#Solution-using-VQE">Solution using VQE</a><ul>
-<li><a class="reference internal" href="#Solution-using-QAOA">Solution using QAOA</a></li>
+<li><a class="reference internal" href="#ভি-কিউ-ই-ব্যবহার-করে-সমাধান">ভি কিউ ই ব্যবহার করে সমাধান</a><ul>
+<li><a class="reference internal" href="#কিউএওএ-(QAOA)-ব্যবহার-করে-সমাধান">কিউএওএ (QAOA) ব্যবহার করে সমাধান</a></li>
 </ul>
 </li>
 </ul>

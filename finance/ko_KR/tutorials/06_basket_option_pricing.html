@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Pricing Basket Options &mdash; Qiskit Finance 0.2.0 문서</title>
+  <title>가격 책정 바스켓 옵션 &mdash; Qiskit Finance 0.2.0 문서</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
-    <link rel="next" title="Pricing Asian Barrier Spreads" href="07_asian_barrier_spread_pricing.html" />
-    <link rel="prev" title="Pricing Bull Spreads" href="05_bull_spread_pricing.html" /> 
+    <link rel="next" title="아시아 통화 가격 하락" href="07_asian_barrier_spread_pricing.html" />
+    <link rel="prev" title="가격 하락 확산" href="05_bull_spread_pricing.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Pricing Basket Options</li>
+      <li>가격 책정 바스켓 옵션</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -482,12 +482,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/06_basket_option_pricing.ipynb">docs/tutorials/06_basket_option_pricing.ipynb</a> 에서 생성되었다.</p>
 </div>
-<div class="section" id="Pricing-Basket-Options">
-<h1>Pricing Basket Options<a class="headerlink" href="#Pricing-Basket-Options" title="이 표제에 대한 퍼머링크">¶</a></h1>
+<div class="section" id="가격-책정-바스켓-옵션">
+<h1>가격 책정 바스켓 옵션<a class="headerlink" href="#가격-책정-바스켓-옵션" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="이 표제에 대한 퍼머링크">¶</a></h2>
 <p>Suppose a basket option with strike price <span class="math notranslate nohighlight">\(K\)</span> and two underlying assets whose spot price at maturity <span class="math notranslate nohighlight">\(S_T^1\)</span>, <span class="math notranslate nohighlight">\(S_T^2\)</span> follow given random distributions. The corresponding payoff function is defined as:</p>
@@ -499,7 +499,7 @@ div.rendered_html tbody tr:hover {
 <p>The approximation of the objective function and a general introduction to option pricing and risk analysis on quantum computers are given in the following papers:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1905.02666">Option Pricing using Quantum Computers. Stamatopoulos et al. 2019.</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1905.02666">Option Pricing using Quantum Computers. Stamatopoulos et al. 2019.</a></p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -614,7 +614,7 @@ function.</p>
 \[\big|x\rangle \big|0\rangle \mapsto \big|x\rangle \left( \cos(a*x+b) \big|0\rangle + \sin(a*x+b) \big|1\rangle \right),\]</div>
 <p>using controlled Y-rotations.</p>
 <p>Eventually, we are interested in the probability of measuring <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> in the last qubit, which corresponds to <span class="math notranslate nohighlight">\(\sin^2(a*x+b)\)</span>. Together with the approximation above, this allows to approximate the values of interest. The smaller we choose <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>, the better the approximation. However, since we are then estimating a property scaled by <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>, the number of evaluation qubits <span class="math notranslate nohighlight">\(m\)</span> needs to be adjusted accordingly.</p>
-<p>For more details on the approximation, we refer to: <a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p>
+<p>근사화에 대한 더 자세한 내용은 <a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a> 에서 참조할 수 있다.</p>
 <p>Since the weighted sum operator (in its current implementation) can only sum up integers, we need to map from the original ranges to the representable range to estimate the result, and reverse this mapping before interpreting the result. The mapping essentially corresponds to the affine mapping described in the context of the uncertainty model above.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -929,10 +929,10 @@ Confidence interval:    [0.4493, 0.5357]
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="07_asian_barrier_spread_pricing.html" class="btn btn-neutral float-right" title="Pricing Asian Barrier Spreads" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="07_asian_barrier_spread_pricing.html" class="btn btn-neutral float-right" title="아시아 통화 가격 하락" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="05_bull_spread_pricing.html" class="btn btn-neutral" title="Pricing Bull Spreads" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="05_bull_spread_pricing.html" class="btn btn-neutral" title="가격 하락 확산" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -964,7 +964,7 @@ Confidence interval:    [0.4493, 0.5357]
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Pricing Basket Options</a><ul>
+<li><a class="reference internal" href="#">가격 책정 바스켓 옵션</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
 <li><a class="reference internal" href="#Payoff-Function">Payoff Function</a></li>

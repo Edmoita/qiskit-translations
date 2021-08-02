@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
-    <link rel="next" title="Credit Risk Analysis" href="09_credit_risk_analysis.html" />
+    <link rel="next" title="Kredi Risk Analizi" href="09_credit_risk_analysis.html" />
     <link rel="prev" title="Pricing Asian Barrier Spreads" href="07_asian_barrier_spread_pricing.html" /> 
 
   
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/08_fixed_income_pricing.ipynb">docs/tutorials/08_fixed_income_pricing.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
 <div class="section" id="Pricing-Fixed-Income-Assets">
 <h1>Pricing Fixed-Income Assets<a class="headerlink" href="#Pricing-Fixed-Income-Assets" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>We seek to price a fixed-income asset knowing the distributions describing the relevant interest rates. The cash flows <span class="math notranslate nohighlight">\(c_t\)</span> of the asset and the dates at which they occur are known. The total value <span class="math notranslate nohighlight">\(V\)</span> of the asset is thus the expectation value of:</p>
+<p>İlgili faiz oranlarını tanımlayan dağılımları bilerek sabit getirili bir varlığı fiyatlandırmaya çalışıyoruz. Varlığın nakit akışları <span class="math notranslate nohighlight">\(c_t\)</span> ve bunların oluştuğu tarihler bilinmektedir. Varlığın toplam değeri <span class="math notranslate nohighlight">\(V\)</span> bu nedenle aşağıdakilerin beklenen değeridir:</p>
 <div class="math notranslate nohighlight">
 \[V = \sum_{t=1}^T \frac{c_t}{(1+r_t)^t}\]</div>
 <p>Each cash flow is treated as a zero coupon bond with a corresponding interest rate <span class="math notranslate nohighlight">\(r_t\)</span> that depends on its maturity. The user must specify the distribution modeling the uncertainty in each <span class="math notranslate nohighlight">\(r_t\)</span> (possibly correlated) as well as the number of qubits he wishes to use to sample each distribution. In this example we expand the value of the asset to first order in the interest rates <span class="math notranslate nohighlight">\(r_t\)</span>. This corresponds to studying the asset in terms of its duration. The approximation of the
@@ -521,16 +521,16 @@ objective function follows the following paper: <a class="reference external" hr
 </div>
 <div class="section" id="Uncertainty-Model">
 <h3>Uncertainty Model<a class="headerlink" href="#Uncertainty-Model" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>We construct a circuit factory to load a multivariate normal random distribution in <span class="math notranslate nohighlight">\(d\)</span> dimensions into a quantum state. The distribution is truncated to a given box <span class="math notranslate nohighlight">\(\otimes_{i=1}^d [low_i, high_i]\)</span> and discretized using <span class="math notranslate nohighlight">\(2^{n_i}\)</span> grid points, where <span class="math notranslate nohighlight">\(n_i\)</span> denotes the number of qubits used for dimension <span class="math notranslate nohighlight">\(i = 1,\ldots, d\)</span>. The unitary operator corresponding to the circuit factory implements the following:</p>
+<p>Bir kuantum durumuna <span class="math notranslate nohighlight">\(d\)</span> boyutlarında çok değişkenli log-normal rastgele dağılımı yüklemek için bir devre fabrikası oluşturuyoruz. Dağılım, verilen bir <span class="math notranslate nohighlight">\(\otimes_{i=1}^d [low_i, high_i]\)</span> kutuya indirgenir ve <span class="math notranslate nohighlight">\(2^{n_i}\)</span> ızgara noktası kullanılarak ayrıştırılır. Burada <span class="math notranslate nohighlight">\(n_i\)</span>, <span class="math notranslate nohighlight">\(i = 1,\ldots, d\)</span> boyutunu temsil etmek için kulanılan kübit sayısını belirtir. Devre fabrikasına karşılık gelen üniter operatör aşağıdakini uygular:</p>
 <div class="math notranslate nohighlight">
 \[\big|0\rangle_{n_1}\ldots\big|0\rangle_{n_d} \mapsto \big|\psi\rangle = \sum_{i_1=0}^{2^n_-1}\ldots\sum_{i_d=0}^{2^n_-1} \sqrt{p_{i_1,...,i_d}}\big|i_1\rangle_{n_1}\ldots\big|i_d\rangle_{n_d},\]</div>
-<p>where <span class="math notranslate nohighlight">\(p_{i_1, ..., i_d}\)</span> denote the probabilities corresponding to the truncated and discretized distribution and where <span class="math notranslate nohighlight">\(i_j\)</span> is mapped to the right interval <span class="math notranslate nohighlight">\([low_j, high_j]\)</span> using the affine map:</p>
+<p>burada <span class="math notranslate nohighlight">\(p_{i_1, ..., i_d}\)</span> indirgenmiş ve ayrıştırılmış dağılıma karşılık gelen olasılıkları belirtmektedir ve <span class="math notranslate nohighlight">\(i_j\)</span> afin harita kullanılarak <span class="math notranslate nohighlight">\([low_j, high_j]\)</span> doğru aralığına eşlenmektedir:</p>
 <div class="math notranslate nohighlight">
 \[\{0, \ldots, 2^{n_{j}}-1\} \ni i_j \mapsto \frac{high_j - low_j}{2^{n_j} - 1} * i_j + low_j \in [low_j, high_j].\]</div>
-<p>In addition to the uncertainty model, we can also apply an affine map, e.g. resulting from a principal component analysis. The interest rates used are then given by:</p>
+<p>Belirsizlik modeline ek olarak, bir afin harita da uygulayabiliriz (örneğin, temel bileşen analizinden elde edilir). Kullanılan faiz oranları daha sonra şu şekilde verilir:</p>
 <div class="math notranslate nohighlight">
 \[\vec{r} = A * \vec{x} + b,\]</div>
-<p>where <span class="math notranslate nohighlight">\(\vec{x} \in \otimes_{i=1}^d [low_i, high_i]\)</span> follows the given random distribution.</p>
+<p><span class="math notranslate nohighlight">\(\vec{x} \in \otimes_{i=1}^d [low_i, high_i]\)</span> verilen rasgele dağılımı izler.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -582,10 +582,10 @@ objective function follows the following paper: <a class="reference external" hr
 <img alt="../_images/tutorials_08_fixed_income_pricing_6_0.svg" src="../_images/tutorials_08_fixed_income_pricing_6_0.svg" /></div>
 </div>
 </div>
-<div class="section" id="Cash-flow,-payoff-function,-and-exact-expected-value">
-<h3>Cash flow, payoff function, and exact expected value<a class="headerlink" href="#Cash-flow,-payoff-function,-and-exact-expected-value" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>In the following we define the cash flow per period, the resulting payoff function and evaluate the exact expected value.</p>
-<p>For the payoff function we first use a first order approximation and then apply the same approximation technique as for the linear part of the payoff function of the <a class="reference internal" href="03_european_call_option_pricing.html"><span class="doc">European Call Option</span></a>.</p>
+<div class="section" id="Nakit-akışı,-getiri-fonksiyonu-ve-tam-beklenen-değer">
+<h3>Nakit akışı, getiri fonksiyonu ve tam beklenen değer<a class="headerlink" href="#Nakit-akışı,-getiri-fonksiyonu-ve-tam-beklenen-değer" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Aşağıda dönem başına nakit akışını, sonuçta ortaya çıkan getiri fonksiyonunu tanımlıyor ve tam beklenen değeri değerlendiriyoruz.</p>
+<p>Getiri fonksiyonu için, ilk olarak birinci dereceden bir yaklaşım kullanırız ve daha sonra, <a class="reference internal" href="03_european_call_option_pricing.html"><span class="doc">European Call Option</span></a> ‘in getiri fonksiyonunun doğrusal kısmı için olduğu gibi aynı yaklaşım tekniğini uygularız.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -810,7 +810,7 @@ Confidence interval:    [2.3015, 2.3823]
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="09_credit_risk_analysis.html" class="btn btn-neutral float-right" title="Credit Risk Analysis" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="09_credit_risk_analysis.html" class="btn btn-neutral float-right" title="Kredi Risk Analizi" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="07_asian_barrier_spread_pricing.html" class="btn btn-neutral" title="Pricing Asian Barrier Spreads" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -848,7 +848,7 @@ Confidence interval:    [2.3015, 2.3823]
 <li><a class="reference internal" href="#">Pricing Fixed-Income Assets</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
-<li><a class="reference internal" href="#Cash-flow,-payoff-function,-and-exact-expected-value">Cash flow, payoff function, and exact expected value</a></li>
+<li><a class="reference internal" href="#Nakit-akışı,-getiri-fonksiyonu-ve-tam-beklenen-değer">Nakit akışı, getiri fonksiyonu ve tam beklenen değer</a></li>
 </ul>
 </li>
 </ul>

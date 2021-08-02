@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Pricing Bull Spreads &mdash; Qiskit Finance 0.2.0 문서</title>
+  <title>가격 하락 확산 &mdash; Qiskit Finance 0.2.0 문서</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
-    <link rel="next" title="Pricing Basket Options" href="06_basket_option_pricing.html" />
-    <link rel="prev" title="Pricing European Put Options" href="04_european_put_option_pricing.html" /> 
+    <link rel="next" title="가격 책정 바스켓 옵션" href="06_basket_option_pricing.html" />
+    <link rel="prev" title="가격 책정 유럽 통화 풋 옵션" href="04_european_put_option_pricing.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Pricing Bull Spreads</li>
+      <li>가격 하락 확산</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/05_bull_spread_pricing.ipynb">docs/tutorials/05_bull_spread_pricing.ipynb</a> 에서 생성되었다.</p>
 </div>
-<div class="section" id="Pricing-Bull-Spreads">
-<h1>Pricing Bull Spreads<a class="headerlink" href="#Pricing-Bull-Spreads" title="이 표제에 대한 퍼머링크">¶</a></h1>
+<div class="section" id="가격-하락-확산">
+<h1>가격 하락 확산<a class="headerlink" href="#가격-하락-확산" title="이 표제에 대한 퍼머링크">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="이 표제에 대한 퍼머링크">¶</a></h2>
-<p>Suppose a <a class="reference external" href="http://www.theoptionsguide.com/bull-call-spread.aspx">bull spread</a> with strike prices <span class="math notranslate nohighlight">\(K_1 &lt; K_2\)</span> and an underlying asset whose spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> follows a given random distribution. The corresponding payoff function is defined as:</p>
+<p><a class="reference external" href="http://www.theoptionsguide.com/bull-call-spread.aspx">불 스프레드</a> 의 행사 가격이 <span class="math notranslate nohighlight">\(K_1 &lt; K_2\)</span> 이며 만기시 현물가격이 <span class="math notranslate nohighlight">\(S_T\)</span> 인 기준자산이 주어진 랜덤분포를 따른다고 가정해보자. 그러면 이에 상응하는 보수(payoff) 함수는 다음과 같이 정의할 수 있다:</p>
 <div class="math notranslate nohighlight">
 \[\min\{\max\{S_T - K_1, 0\}, K_2 - K_1\}\]</div>
 <p>In the following, a quantum algorithm based on amplitude estimation is used to estimate the expected payoff, i.e., the fair price before discounting, for the option:</p>
@@ -502,7 +502,7 @@ div.rendered_html tbody tr:hover {
 <p>The approximation of the objective function and a general introduction to option pricing and risk analysis on quantum computers are given in the following papers:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p></li>
-<li><p><a class="reference external" href="https://arxiv.org/abs/1905.02666">Option Pricing using Quantum Computers. Stamatopoulos et al. 2019.</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1905.02666">Option Pricing using Quantum Computers. Stamatopoulos et al. 2019.</a></p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -597,7 +597,7 @@ div.rendered_html tbody tr:hover {
 \[\big|x\rangle \big|0\rangle \mapsto \big|x\rangle \left( \cos(a*x+b) \big|0\rangle + \sin(a*x+b) \big|1\rangle \right),\]</div>
 <p>using controlled Y-rotations.</p>
 <p>Eventually, we are interested in the probability of measuring <span class="math notranslate nohighlight">\(\big|1\rangle\)</span> in the last qubit, which corresponds to <span class="math notranslate nohighlight">\(\sin^2(a*x+b)\)</span>. Together with the approximation above, this allows to approximate the values of interest. The smaller we choose <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>, the better the approximation. However, since we are then estimating a property scaled by <span class="math notranslate nohighlight">\(c_\text{approx}\)</span>, the number of evaluation qubits <span class="math notranslate nohighlight">\(m\)</span> needs to be adjusted accordingly.</p>
-<p>For more details on the approximation, we refer to: <a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a></p>
+<p>근사화에 대한 더 자세한 내용은 <a class="reference external" href="https://arxiv.org/abs/1806.06893">Quantum Risk Analysis. Woerner, Egger. 2018.</a> 에서 참조할 수 있다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -853,10 +853,10 @@ Confidence interval:    [0.9277, 0.9305]
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="06_basket_option_pricing.html" class="btn btn-neutral float-right" title="Pricing Basket Options" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="06_basket_option_pricing.html" class="btn btn-neutral float-right" title="가격 책정 바스켓 옵션" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="04_european_put_option_pricing.html" class="btn btn-neutral" title="Pricing European Put Options" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="04_european_put_option_pricing.html" class="btn btn-neutral" title="가격 책정 유럽 통화 풋 옵션" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -888,7 +888,7 @@ Confidence interval:    [0.9277, 0.9305]
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Pricing Bull Spreads</a><ul>
+<li><a class="reference internal" href="#">가격 하락 확산</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
 <li><a class="reference internal" href="#Payoff-Function">Payoff Function</a></li>

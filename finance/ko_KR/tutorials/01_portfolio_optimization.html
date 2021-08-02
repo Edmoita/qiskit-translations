@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Portfolio Optimization &mdash; Qiskit Finance 0.2.0 문서</title>
+  <title>포트폴리오 최적화 &mdash; Qiskit Finance 0.2.0 문서</title>
   
 
   
@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
-    <link rel="next" title="Portfolio Diversification" href="02_portfolio_diversification.html" />
+    <link rel="next" title="포트폴리오 다양화" href="02_portfolio_diversification.html" />
     <link rel="prev" title="Finance Tutorials" href="index.html" /> 
 
   
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Portfolio Optimization</li>
+      <li>포트폴리오 최적화</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a> 에서 생성되었다.</p>
 </div>
-<div class="section" id="Portfolio-Optimization">
-<h1>Portfolio Optimization<a class="headerlink" href="#Portfolio-Optimization" title="이 표제에 대한 퍼머링크">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="이 표제에 대한 퍼머링크">¶</a></h2>
-<p>This tutorial shows how to solve the following mean-variance portfolio optimization problem for <span class="math notranslate nohighlight">\(n\)</span> assets:</p>
+<div class="section" id="포트폴리오-최적화">
+<h1>포트폴리오 최적화<a class="headerlink" href="#포트폴리오-최적화" title="이 표제에 대한 퍼머링크">¶</a></h1>
+<div class="section" id="소개">
+<h2>소개<a class="headerlink" href="#소개" title="이 표제에 대한 퍼머링크">¶</a></h2>
+<p>이 학습서는 <span class="math notranslate nohighlight">\(n\)</span> 자산에 대한 평균 분산 포트폴리오 최적화 문제점을 해결하는 방법을 보인다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \min_{x \in \{0, 1\}^n}  q x^T \Sigma x - \mu^T x\\
@@ -506,7 +506,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>We assume the following simplifications: - all assets have the same price (normalized to 1), - the full budget <span class="math notranslate nohighlight">\(B\)</span> has to be spent, i.e. one has to select exactly <span class="math notranslate nohighlight">\(B\)</span> assets.</p>
 <p>The equality constraint <span class="math notranslate nohighlight">\(1^T x = B\)</span> is mapped to a penalty term <span class="math notranslate nohighlight">\((1^T x - B)^2\)</span> which is scaled by a parameter and subtracted from the objective function. The resulting problem can be mapped to a Hamiltonian whose ground state corresponds to the optimal solution. This notebook shows how to use the Variational Quantum Eigensolver (VQE) or the Quantum Approximate Optimization Algorithm (QAOA) to find the optimal solution for a given set of parameters.</p>
-<p>Experiments on real quantum hardware for this problem are reported for instance in the following paper: <a class="reference external" href="https://arxiv.org/abs/1907.04769">Improving Variational Quantum Optimization using CVaR. Barkoutsos et al. 2019.</a></p>
+<p>이 문제에 대해 실제 양자 하드웨어에서 행한 실험들은 다음의 논문에서 발표되었다: <a class="reference external" href="https://arxiv.org/abs/1907.04769">Improving Variational Quantum Optimization using CVaR. Barkoutsos et al. 2019.</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -849,7 +849,7 @@ selection       value           probability
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="02_portfolio_diversification.html" class="btn btn-neutral float-right" title="Portfolio Diversification" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="02_portfolio_diversification.html" class="btn btn-neutral float-right" title="포트폴리오 다양화" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Finance Tutorials" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -884,8 +884,8 @@ selection       value           probability
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Portfolio Optimization</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#">포트폴리오 최적화</a><ul>
+<li><a class="reference internal" href="#소개">소개</a><ul>
 <li><a class="reference internal" href="#[Optional]-Setup-token-to-run-the-experiment-on-a-real-device">[Optional] Setup token to run the experiment on a real device</a></li>
 </ul>
 </li>

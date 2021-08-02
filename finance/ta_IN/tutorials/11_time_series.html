@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="உள்ளடக்கம்" href="../genindex.html" />
+    <link rel="search" title="தேடு" href="../search.html" />
     <link rel="next" title="Release Notes" href="../release_notes.html" />
     <link rel="prev" title="Option Pricing with qGANs" href="10_qgan_option_pricing.html" /> 
 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>மொழிகள்</dt>
       
         <dd><a class="version" href="/documentation/finance/tutorials/11_time_series.html">English</a></dd>
       
@@ -158,10 +158,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">தொடங்குதல்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_finance.html">API குறிப்பு</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">பயிற்சிகள்</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">வெளியீட்டு குறிப்புகள்</a></li>
 </ul>
 
             
@@ -482,15 +482,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/11_time_series.ipynb">docs/tutorials/11_time_series.ipynb</a>.</p>
 </div>
 <div class="section" id="Loading-and-Processing-Stock-Market-Time-Series-Data">
 <h1>Loading and Processing Stock-Market Time-Series Data<a class="headerlink" href="#Loading-and-Processing-Stock-Market-Time-Series-Data" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>Across many problems in finance, one starts with time series. Here, we showcase how to generate pseudo-random time-series, download actual stock-market time series from a number of common providers, and how to compute time-series similarity measures.</p>
+<p>நிதிகளில் பல சிக்கல்களில், ஒன்று நேரத் தொடரில் தொடங்குகிறது. போலி-சீரற்ற நேரத் தொடரை எவ்வாறு உருவாக்குவது, பல பொதுவான வழங்குநர்களிடமிருந்து உண்மையான பங்கு-சந்தை நேரத் தொடரைப் பதிவிறக்குவது மற்றும் நேர-தொடர் ஒற்றுமை நடவடிக்கைகளை எவ்வாறு கணக்கிடுவது என்பதை இங்கே காண்பிக்கிறோம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -579,7 +579,7 @@ A covariance matrix:
 <img alt="../_images/tutorials_11_time_series_5_3.png" src="../_images/tutorials_11_time_series_5_3.png" />
 </div>
 </div>
-<p>If you wish, you can look into the underlying pseudo-random time-series using. Please note that the private class members (starting with underscore) may change in future releases of Qiskit.</p>
+<p>நீங்கள் விரும்பினால், நீங்கள் பயன்படுத்தும் போலி-சீரற்ற நேரத் தொடரைப் பார்க்கலாம். Qiskitடின் எதிர்கால வெளியீடுகளில் தனியார் வகுப்பு உறுப்பினர்கள் (அடிக்கோடிட்டு தொடங்கி) மாறக்கூடும் என்பதை நினைவில் கொள்க.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -624,7 +624,7 @@ TICKER2
 [96.8774156647853, 98.99525441983634, 97.88323365714406, 97.50562865001707, 99.5484002575094, 100.19510325371124, 100.85816662608751, 100.34416025440004, 98.69608508354439, 98.86354982776713, 98.97256391558868, 97.7452118613441, 97.06198519956354, 96.98994151983632, 96.04518989677554, 95.94691992892332, 96.04240295639278, 96.07798919344826, 95.57169753513395, 96.16544560691977, 97.0566125612021, 97.37746086576867, 96.55923063837835, 97.29088292216379, 96.78944290369674, 97.66860352198472, 96.59681610510728, 97.51128330823606, 97.49121985362058]
 </pre></div></div>
 </div>
-<p>Clearly, you can adapt the number and names of tickers and the range of dates:</p>
+<p>தெளிவாக, நீங்கள் டிக்கர்களின் எண்ணிக்கை மற்றும் பெயர்கள் மற்றும் தேதிகளின் வரம்பை மாற்றியமைக்கலாம்:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -651,10 +651,9 @@ TICKER2
 </div>
 </div>
 </div>
-<div class="section" id="Access-to-closing-price-time-series">
-<h2>Access to closing-price time-series<a class="headerlink" href="#Access-to-closing-price-time-series" title="Permalink to this headline">¶</a></h2>
-<p>While the access to real-time data usually requires a payment, it is possible to access historical (adjusted) closing prices via Wikipedia and Quandl free of charge, following registration at: <a class="reference external" href="https://www.quandl.com/?modal=register">https://www.quandl.com/?modal=register</a> In the code below, one needs to specify actual tickers of actual NASDAQ issues and the access token you obtain from Quandl; by running the code below, you agree to the Quandl terms and conditions, including a liability waiver. Notice that at least two tickers are
-required for the computation of covariance and time-series matrices, but hundreds of tickers may go beyond the fair usage limits of Quandl.</p>
+<div class="section" id="இறுதி-விலை-நேரத்-தொடருக்கான-அணுகல்">
+<h2>இறுதி விலை நேரத் தொடருக்கான அணுகல்<a class="headerlink" href="#இறுதி-விலை-நேரத்-தொடருக்கான-அணுகல்" title="Permalink to this headline">¶</a></h2>
+<p>நிகழ்நேர தரவை அணுகுவதற்கு வழக்கமாக கட்டணம் தேவைப்பட்டாலும், விக்கிபீடியா மற்றும் குவாண்டல் வழியாக வரலாற்று (சரிசெய்யப்பட்ட) இறுதி விலைகளை இலவசமாக அணுக முடியும், பதிவுசெய்ததைத் தொடர்ந்து: <a class="reference external" href="https://www.quandl.com/?modal=register">https://www.quandl.com/?modal=register</a> கீழேயுள்ள குறியீட்டில், உண்மையான NASDAQ சிக்கல்களின் உண்மையான டிக்கர்களையும் குவாண்டலில் இருந்து நீங்கள் பெறும் அணுகல் டோக்கனையும் ஒருவர் குறிப்பிட வேண்டும்; கீழே உள்ள குறியீட்டை இயக்குவதன் மூலம், பொறுப்பு தள்ளுபடி உள்ளிட்ட குவாண்டல் விதிமுறைகளையும் நிபந்தனைகளையும் ஒப்புக்கொள்கிறீர்கள். கோவாரன்ஸ் மற்றும் நேர-தொடர் மெட்ரிக்ஸைக் கணக்கிடுவதற்கு குறைந்தது இரண்டு டிக்கர்கள் தேவை என்பதைக் கவனியுங்கள், ஆனால் நூற்றுக்கணக்கான டிக்கர்கள் குவாண்டலின் நியாயமான பயன்பாட்டு வரம்புகளுக்கு அப்பால் செல்லக்கூடும்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -677,7 +676,7 @@ required for the computation of covariance and time-series matrices, but hundred
 </pre></div>
 </div>
 </div>
-<p>Once the data are loaded, you can again compute the covariance matrix or its DTW variants.</p>
+<p>தரவு ஏற்றப்பட்டதும், நீங்கள் மீண்டும் கோணம் மேட்ரிக்ஸ் அல்லது அதன் DTW வகைகளை கணக்கிடலாம்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -704,7 +703,7 @@ required for the computation of covariance and time-series matrices, but hundred
 </pre></div>
 </div>
 </div>
-<p>If you wish, you can look into the underlying time-series using:</p>
+<p>நீங்கள் விரும்பினால், இதைப் பயன்படுத்தி அடிப்படை நேரத் தொடரைப் பார்க்கலாம்:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -728,12 +727,11 @@ required for the computation of covariance and time-series matrices, but hundred
 </div>
 </div>
 </div>
-<div class="section" id="[Optional]-Setup-token-to-access-recent,-fine-grained-time-series">
-<h2>[Optional] Setup token to access recent, fine-grained time-series<a class="headerlink" href="#[Optional]-Setup-token-to-access-recent,-fine-grained-time-series" title="Permalink to this headline">¶</a></h2>
-<p>If you would like to download professional data, you will have to set-up a token with one of the major providers. Let us now illustrate the data with NASDAQ Data on Demand, which can supply bid and ask prices in arbitrary resolution, as well as aggregates such as daily adjusted closing prices, for NASDAQ and NYSE issues.</p>
-<p>If you don’t have NASDAQ Data on Demand license, you can contact NASDAQ (cf. <a class="reference external" href="https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html">https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html</a>) to obtain a trial or paid license.</p>
-<p>If and when you have access to NASDAQ Data on Demand using your own token, you should replace REPLACE-ME below with the token. To assure the security of the connection, you should also have your own means of validating NASDAQ’s certificates. The DataOnDemandProvider constructor has an optional argument <code class="docutils literal notranslate"><span class="pre">verify</span></code>, which can be <code class="docutils literal notranslate"><span class="pre">None</span></code> or a string or a boolean. If it is <code class="docutils literal notranslate"><span class="pre">None</span></code>, certify certificates will be used (default). If verify is a string, it should be pointing to a certificate for the
-HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA_BUNDLE file or a directory wherein to look.</p>
+<div class="section" id="[Optional]-சமீபத்திய,-நேர்த்தியான-நேரத்-தொடரை-அணுக-டோக்கனை-அமைக்கவும்">
+<h2>[Optional] சமீபத்திய, நேர்த்தியான நேரத் தொடரை அணுக டோக்கனை அமைக்கவும்<a class="headerlink" href="#[Optional]-சமீபத்திய,-நேர்த்தியான-நேரத்-தொடரை-அணுக-டோக்கனை-அமைக்கவும்" title="Permalink to this headline">¶</a></h2>
+<p>நீங்கள் தொழில்முறை தரவைப் பதிவிறக்க விரும்பினால், முக்கிய வழங்குநர்களில் ஒருவரிடம் டோக்கனை அமைக்க வேண்டும். NASDAQ டேட்டா தேவை தரவை இப்போது விளக்குவோம், இது ஏலத்தை வழங்கலாம் மற்றும் தன்னிச்சையான தீர்மானத்தில் விலைகளைக் கேட்கலாம், அத்துடன் NASDAQ மற்றும் NYSE சிக்கல்களுக்கு தினசரி சரிசெய்யப்பட்ட நிறைவு விலைகள் போன்ற திரட்டுகளையும் வழங்கலாம்.</p>
+<p>உங்களிடம் கோரிக்கை உரிமத்தில் NASDAQ தரவு இல்லையென்றால், சோதனை அல்லது கட்டண உரிமத்தைப் பெற NASDAQ (cf. <a class="reference external" href="https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html">https://business.nasdaq.com/intel/GIS/Nasdaq-Data-on-Demand.html</a>) ஐ தொடர்பு கொள்ளலாம்.</p>
+<p>உங்கள் சொந்த டோக்கனைப் பயன்படுத்தி NASDAQ டேட்டா ஆன் டிமாண்டிற்கு அணுகல் இருந்தால், கீழேயுள்ள REPLACE-ME ஐ டோக்கனுடன் மாற்ற வேண்டும். இணைப்பின் பாதுகாப்பை உறுதிப்படுத்த, NASDAQ சான்றிதழ்களை சரிபார்க்க உங்கள் சொந்த வழிகளும் இருக்க வேண்டும். DataOnDemandProvider கட்டமைப்பாளருக்கு ஒரு விருப்ப வாதம் உள்ளது <code class="docutils literal notranslate"><span class="pre">சரிபார்க்கவும்</span></code>, இது <code class="docutils literal notranslate"><span class="pre">எதுவுமில்லை</span></code> அல்லது சரம் அல்லது பூலியன். இது <code class="docutils literal notranslate"><span class="pre">எதுவுமில்லை</span></code> என்றால், சான்றிதழ் சான்றிதழ்கள் பயன்படுத்தப்படும் (இயல்புநிலை). சரிபார்ப்பு ஒரு சரம் என்றால், அது CA_BUNDLE கோப்பு வடிவில் அல்லது பார்க்க வேண்டிய கோப்பகத்தின் வடிவத்தில், NASDAQ (dataondemand.nasdaq.com) உடன் HTTPS இணைப்பிற்கான சான்றிதழை சுட்டிக்காட்ட வேண்டும்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -758,8 +756,8 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 </pre></div>
 </div>
 </div>
-<p>Another major vendor of stock market data is Exchange Data International (EDI), whose API can be used to query over 100 emerging and frontier markets that are Africa, Asia, Far East, Latin America and Middle East, as well as the more established ones. See: <a class="reference external" href="https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage">https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage</a> for an overview of the coverage.</p>
-<p>The access again requires a valid access token to replace REPLACE-ME below. The token can be obtained on a trial or paid-for basis at: <a class="reference external" href="https://www.quandl.com/">https://www.quandl.com/</a></p>
+<p>பங்குச் சந்தை தரவின் மற்றொரு முக்கிய விற்பனையாளர் எக்ஸ்சேஞ்ச் டேட்டா இன்டர்நேஷனல் (EDI) ஆகும், இதன் API ஆப்பிரிக்கா, ஆசியா, தூர கிழக்கு, லத்தீன் அமெரிக்கா மற்றும் மத்திய கிழக்கு ஆகிய 100 க்கும் மேற்பட்ட வளர்ந்து வரும் மற்றும் எல்லைப்புற சந்தைகளை வினவ பயன்படுகிறது, மேலும் நிறுவப்பட்டவை. காண்க: <a class="reference external" href="https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage">https://www.exchange-data.com/pricing-data/adjusted-prices.php#exchange-coverage</a> இன் கண்ணோட்டத்திற்கு.</p>
+<p>அணுகலுக்கு மீண்டும் கீழே உள்ள REPLACE-ME ஐ மாற்ற சரியான அணுகல் டோக்கன் தேவைப்படுகிறது. டோக்கனை சோதனை அல்லது கட்டண அடிப்படையில் பெறலாம்: <a class="reference external" href="https://www.quandl.com/">https://www.quandl.com/</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -786,7 +784,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 </pre></div>
 </div>
 </div>
-<p>One can also access Yahoo Finance Data, no token needed, from Yahoo! Finance.</p>
+<p>Yahooவிலிருந்து Yahoo நிதி தரவையும் அணுகலாம், டோக்கன் தேவையில்லை.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -800,7 +798,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
     <span class="n">data</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_tickers</span><span class="p">):</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">cnt</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="k">except</span> <span class="n">QiskitFinanceError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
@@ -816,7 +814,7 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 <img alt="../_images/tutorials_11_time_series_22_0.png" src="../_images/tutorials_11_time_series_22_0.png" />
 </div>
 </div>
-<p>For the actual use of the data, please see the portfolio_optimization or portfolio_diversification notebooks.</p>
+<p>தரவின் உண்மையான பயன்பாட்டிற்கு, தயவுசெய்து போர்ட்ஃபோலியோ_ஓப்டிமைசேஷன் அல்லது போர்ட்ஃபோலியோ_ பல்வகைப்படுத்தல் குறிப்பேடுகளைப் பார்க்கவும்.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -832,8 +830,8 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area rendered_html docutils container">
-<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>None</td></tr><tr><td>Terra</td><td>0.17.0.dev0+3c103ae</td></tr><tr><td>Aer</td><td>0.8.0</td></tr><tr><td>Ignis</td><td>0.6.0.dev0+6103f99</td></tr><tr><td>Aqua</td><td>None</td></tr><tr><td>IBM Q Provider</td><td>0.12.0.dev0+8f3168b</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.9 (default, Aug 31 2020, 07:22:35)
-[Clang 10.0.0 ]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>2</td></tr><tr><td>Memory (Gb)</td><td>12.0</td></tr><tr><td colspan='2'>Wed Mar 10 13:35:39 2021 EST</td></tr></table></div>
+<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td><code>qiskit-terra</code></td><td>0.18.0</td></tr><tr><td><code>qiskit-aer</code></td><td>0.9.0</td></tr><tr><td><code>qiskit-ignis</code></td><td>0.7.0.dev0+9201ed8</td></tr><tr><td><code>qiskit-ibmq-provider</code></td><td>0.14.0.dev0+436e42e</td></tr><tr><td><code>qiskit-nature</code></td><td>0.1.4</td></tr><tr><td><code>qiskit-finance</code></td><td>0.3.0</td></tr><tr><td><code>qiskit-optimization</code></td><td>0.2.0</td></tr><tr><td><code>qiskit-machine-learning</code></td><td>0.2.0</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.8.8 (default, Apr 13 2021, 12:59:45)
+[Clang 10.0.0 ]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>2</td></tr><tr><td>Memory (Gb)</td><td>12.0</td></tr><tr><td colspan='2'>Thu Jul 15 20:38:23 2021 EDT</td></tr></table></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -898,8 +896,8 @@ HTTPS connection to NASDAQ (dataondemand.nasdaq.com), either in the form of a CA
               <ul>
 <li><a class="reference internal" href="#">Loading and Processing Stock-Market Time-Series Data</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#Access-to-closing-price-time-series">Access to closing-price time-series</a></li>
-<li><a class="reference internal" href="#[Optional]-Setup-token-to-access-recent,-fine-grained-time-series">[Optional] Setup token to access recent, fine-grained time-series</a></li>
+<li><a class="reference internal" href="#இறுதி-விலை-நேரத்-தொடருக்கான-அணுகல்">இறுதி விலை நேரத் தொடருக்கான அணுகல்</a></li>
+<li><a class="reference internal" href="#[Optional]-சமீபத்திய,-நேர்த்தியான-நேரத்-தொடரை-அணுக-டோக்கனை-அமைக்கவும்">[Optional] சமீபத்திய, நேர்த்தியான நேரத் தொடரை அணுக டோக்கனை அமைக்கவும்</a></li>
 </ul>
 </li>
 </ul>

@@ -40,7 +40,7 @@
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
     <link rel="next" title="Loading and Processing Stock-Market Time-Series Data" href="11_time_series.html" />
-    <link rel="prev" title="Credit Risk Analysis" href="09_credit_risk_analysis.html" /> 
+    <link rel="prev" title="Kredi Risk Analizi" href="09_credit_risk_analysis.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -482,9 +482,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/10_qgan_option_pricing.ipynb">docs/tutorials/10_qgan_option_pricing.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
 <div class="section" id="Option-Pricing-with-qGANs">
 <h1>Option Pricing with qGANs<a class="headerlink" href="#Option-Pricing-with-qGANs" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
@@ -514,10 +514,10 @@ Pricing</span></a>. For further details on learning and loading random distribut
 </div>
 <div class="section" id="Uncertainty-Model">
 <h3>Uncertainty Model<a class="headerlink" href="#Uncertainty-Model" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>The Black-Scholes model assumes that the spot price at maturity <span class="math notranslate nohighlight">\(S_T\)</span> for a European call option is log-normally distributed. Thus, we can train a qGAN on samples from a log-normal distribution and use the result as an uncertainty model underlying the option. In the following, we construct a quantum circuit that loads the uncertainty model. The circuit output reads</p>
+<p>Black-Scholes modeli, bir Avrupa alım opsiyonu için vade sonundaki spot fiyatın <span class="math notranslate nohighlight">\(S_T\)</span> log-normal olarak dağıldığını varsayar. Böylece, bir log-normal dağılımdan alınan örnekler üzerinde bir qGAN eğitebilir ve sonucu, seçeneğin altında yatan bir belirsizlik modeli olarak kullanabiliriz. Aşağıda, belirsizlik modelini yükleyen bir kuantum devresi oluşturuyoruz. Devre çıkışı okur</p>
 <div class="math notranslate nohighlight">
 \[\big| g_{\theta}\rangle = \sum_{j=0}^{2^n-1}\sqrt{p_{\theta}^{j}} \big| j \rangle ,\]</div>
-<p>where the probabilities <span class="math notranslate nohighlight">\(p_{\theta}^{j}\)</span>, for <span class="math notranslate nohighlight">\(j\in \left\{0, \ldots, {2^n-1} \right\}\)</span>, represent a model of the target distribution.</p>
+<p>burada  <span class="math notranslate nohighlight">\(p_{\theta}^{j}\)</span>, for <span class="math notranslate nohighlight">\(j\in \left\{0, \ldots, {2^n-1} \right\}\)</span> olasılıkları, hedef dağılımın bir modelini temsil eder.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -549,7 +549,7 @@ Pricing</span></a>. For further details on learning and loading random distribut
 </div>
 <div class="section" id="Evaluate-Expected-Payoff">
 <h3>Evaluate Expected Payoff<a class="headerlink" href="#Evaluate-Expected-Payoff" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>Now, the trained uncertainty model can be used to evaluate the expectation value of the option’s payoff function with Quantum Amplitude Estimation.</p>
+<p>Şimdi, eğitimli belirsizlik modeli, opsiyonun getiri fonksiyonunun beklenti değerini Kuantum Genlik Tahmini ile ölçmek için kullanılabilir.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -564,9 +564,9 @@ Pricing</span></a>. For further details on learning and loading random distribut
 </div>
 </div>
 </div>
-<div class="section" id="Plot-the-probability-distribution">
-<h3>Plot the probability distribution<a class="headerlink" href="#Plot-the-probability-distribution" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>Next, we plot the trained probability distribution and, for reasons of comparison, also the target probability distribution.</p>
+<div class="section" id="Olasılık-dağılımını-çizin">
+<h3>Olasılık dağılımını çizin<a class="headerlink" href="#Olasılık-dağılımını-çizin" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Sonra, eğitilmiş olasılık dağılımını ve karşılaştırma amacıyla hedef olasılık dağılımını çiziyoruz.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -610,9 +610,9 @@ Pricing</span></a>. For further details on learning and loading random distribut
 <img alt="../_images/tutorials_10_qgan_option_pricing_7_0.svg" src="../_images/tutorials_10_qgan_option_pricing_7_0.svg" /></div>
 </div>
 </div>
-<div class="section" id="id1">
-<h3>Evaluate Expected Payoff<a class="headerlink" href="#id1" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>Now, the trained uncertainty model can be used to evaluate the expectation value of the option’s payoff function analytically and with Quantum Amplitude Estimation.</p>
+<div class="section" id="id2">
+<h3>Evaluate Expected Payoff<a class="headerlink" href="#id2" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Şimdi, eğitimli belirsizlik modeli, opsiyonun getiri fonksiyonunun beklenti değerini analitik olarak ve Kuantum Genlik Tahmini ile birlikte ölçmek için kullanılabilir.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -751,7 +751,7 @@ Confidence interval:    [0.9965, 1.0455]
         <a href="11_time_series.html" class="btn btn-neutral float-right" title="Loading and Processing Stock-Market Time-Series Data" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="09_credit_risk_analysis.html" class="btn btn-neutral" title="Credit Risk Analysis" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="09_credit_risk_analysis.html" class="btn btn-neutral" title="Kredi Risk Analizi" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -787,8 +787,8 @@ Confidence interval:    [0.9965, 1.0455]
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#Uncertainty-Model">Uncertainty Model</a></li>
 <li><a class="reference internal" href="#Evaluate-Expected-Payoff">Evaluate Expected Payoff</a></li>
-<li><a class="reference internal" href="#Plot-the-probability-distribution">Plot the probability distribution</a></li>
-<li><a class="reference internal" href="#id1">Evaluate Expected Payoff</a></li>
+<li><a class="reference internal" href="#Olasılık-dağılımını-çizin">Olasılık dağılımını çizin</a></li>
+<li><a class="reference internal" href="#id2">Evaluate Expected Payoff</a></li>
 </ul>
 </li>
 </ul>
