@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.algorithms.optimizers.qnspsa &mdash; Qiskit 0.28.0 documentation</title>
+  <title>qiskit.algorithms.optimizers.qnspsa &mdash; Qiskit 0.29.0 documentation</title>
   
 
   
@@ -511,17 +511,10 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">settings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;The optimizer settings in a dictionary format.</span>
-
-<span class="sd">        .. note::</span>
-
-<span class="sd">            The ``fidelity`` property cannot be serialized and will not be contained</span>
-<span class="sd">            in the dictionary. To construct a ``QNSPSA`` object from a dictionary you</span>
-<span class="sd">            have to add it manually with the key ``&quot;fidelity&quot;``.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;The optimizer settings in a dictionary format.&quot;&quot;&quot;</span>
         <span class="c1"># re-use serialization from SPSA</span>
         <span class="n">settings</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">settings</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;fidelity&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fidelity</span><span class="p">})</span>
 
         <span class="c1"># remove SPSA-specific arguments not in QNSPSA</span>
         <span class="n">settings</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;trust_region&quot;</span><span class="p">)</span>
@@ -604,7 +597,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/08/02 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/08/03 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>

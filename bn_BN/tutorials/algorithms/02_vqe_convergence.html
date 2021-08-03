@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Monitoring VQE convergence &mdash; Qiskit 0.28.0 documentation</title>
+  <title>ভি কিউ ই এর এক-কেন্দ্রাভিমুখতা (কনভারজেন্স) নিরীক্ষণকরণ &mdash; Qiskit 0.29.0 documentation</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Monitoring VQE convergence</li>
+      <li>ভি কিউ ই এর এক-কেন্দ্রাভিমুখতা (কনভারজেন্স) নিরীক্ষণকরণ</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -570,13 +570,13 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/algorithms/02_vqe_convergence.ipynb">tutorials/algorithms/02_vqe_convergence.ipynb</a>.</p>
+<p>এই পৃষ্ঠাটি <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/algorithms/02_vqe_convergence.ipynb">tutorials/algorithms/02_vqe_convergence.ipynb</a> -থেকে বানানো হয়েছে।</p>
 </div>
-<section id="Monitoring-VQE-convergence">
-<h1>Monitoring VQE convergence<a class="headerlink" href="#Monitoring-VQE-convergence" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<section id="ভি-কিউ-ই-এর-এক-কেন্দ্রাভিমুখতা-(কনভারজেন্স)-নিরীক্ষণকরণ">
+<h1>ভি কিউ ই এর এক-কেন্দ্রাভিমুখতা (কনভারজেন্স) নিরীক্ষণকরণ<a class="headerlink" href="#ভি-কিউ-ই-এর-এক-কেন্দ্রাভিমুখতা-(কনভারজেন্স)-নিরীক্ষণকরণ" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
 <p>Variational algorithms in Qiskit, like <a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.algorithms.VQE.html">VQE</a> and <a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.algorithms.QAOA.html">QAOA</a>, provide the option for a user to give a callback method that can be used to monitor optimization progress as the algorithm runs and converges to the minimum. The callback is invoked for each functional evaluation by the optimizer and provides the current optimizer value, evaluation count, current
 optimizer parameters etc. Note that, depending on the specific optimizer this may not be each iteration (step) of the optimizer, so for example if the optimizer is calling the cost function to compute a finite difference based gradient this will be visible via the callback.</p>
-<p>This notebook demonstrates using Qiskit’s VQE algorithm to plot graphs of the convergence path to ground state energy with a selected set of optimizers.</p>
+<p>অনুকূলায়কের একটি নির্বাচিত সেটের সাহায্যে Qiskit এর ভি কিউ ই অ্যালগোরিথমের নিম্নতম শক্তির অবস্থার দিকে এককেন্দ্রাভিমুখতার লেখচিত্র এই নোটবুকটি প্রদর্শন করে।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -713,8 +713,8 @@ Reference value: -1.85728
 <img alt="../../_images/tutorials_algorithms_02_vqe_convergence_10_0.png" src="../../_images/tutorials_algorithms_02_vqe_convergence_10_0.png" />
 </div>
 </div>
-<section id="Using-Gradient-framework">
-<h2>Using Gradient framework<a class="headerlink" href="#Using-Gradient-framework" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<section id="নতিমাত্রার-কাঠামো-ব্যবহার-করে">
+<h2>নতিমাত্রার কাঠামো ব্যবহার করে<a class="headerlink" href="#নতিমাত্রার-কাঠামো-ব্যবহার-করে" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <p>Qiskit now has a Gradient framework as part of the Opflow capability. With the gradient computed for the optimizer we now see just the optimization steps themselves.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -772,8 +772,8 @@ Value using Gradient: -1.85728
 </div>
 </div>
 </section>
-<section id="Monitoring-via-the-logging">
-<h2>Monitoring via the logging<a class="headerlink" href="#Monitoring-via-the-logging" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<section id="লগিংয়ের-সাহায্যে-নিরীক্ষণ-করা">
+<h2>লগিংয়ের সাহায্যে নিরীক্ষণ করা<a class="headerlink" href="#লগিংয়ের-সাহায্যে-নিরীক্ষণ-করা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <p>Much of the code is instrumented with <a class="reference external" href="https://docs.python.org/3/library/logging.html">Python logging</a> statements. The logging is configurable to adjust level of logging etc. Here we set the logging level to <code class="docutils literal notranslate"><span class="pre">INFO</span></code></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -840,7 +840,7 @@ Value using Gradient: -1.85728
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/08/02 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/08/03 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>
@@ -859,9 +859,9 @@ Value using Gradient: -1.85728
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Monitoring VQE convergence</a><ul>
-<li><a class="reference internal" href="#Using-Gradient-framework">Using Gradient framework</a></li>
-<li><a class="reference internal" href="#Monitoring-via-the-logging">Monitoring via the logging</a></li>
+<li><a class="reference internal" href="#">ভি কিউ ই এর এক-কেন্দ্রাভিমুখতা (কনভারজেন্স) নিরীক্ষণকরণ</a><ul>
+<li><a class="reference internal" href="#নতিমাত্রার-কাঠামো-ব্যবহার-করে">নতিমাত্রার কাঠামো ব্যবহার করে</a></li>
+<li><a class="reference internal" href="#লগিংয়ের-সাহায্যে-নিরীক্ষণ-করা">লগিংয়ের সাহায্যে নিরীক্ষণ করা</a></li>
 </ul>
 </li>
 </ul>

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.ibmq.ibmqbackend &mdash; Qiskit 0.28.0 ドキュメント</title>
+  <title>qiskit.providers.ibmq.ibmqbackend &mdash; Qiskit 0.29.0 ドキュメント</title>
   
 
   
@@ -346,7 +346,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.circuit.duration</span> <span class="kn">import</span> <span class="n">duration_in_dt</span>
 <span class="kn">from</span> <span class="nn">qiskit.pulse</span> <span class="kn">import</span> <span class="n">Schedule</span><span class="p">,</span> <span class="n">LoConfig</span>
 <span class="kn">from</span> <span class="nn">qiskit.pulse.channels</span> <span class="kn">import</span> <span class="n">PulseChannel</span>
-<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="kn">import</span> <span class="n">QasmQobj</span><span class="p">,</span> <span class="n">PulseQobj</span><span class="p">,</span> <span class="n">validate_qobj_against_schema</span>
+<span class="kn">from</span> <span class="nn">qiskit.qobj</span> <span class="kn">import</span> <span class="n">QasmQobj</span><span class="p">,</span> <span class="n">PulseQobj</span>
 <span class="kn">from</span> <span class="nn">qiskit.qobj.utils</span> <span class="kn">import</span> <span class="n">MeasLevel</span><span class="p">,</span> <span class="n">MeasReturnType</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.backend</span> <span class="kn">import</span> <span class="n">BackendV1</span> <span class="k">as</span> <span class="n">Backend</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.options</span> <span class="kn">import</span> <span class="n">Options</span>
@@ -475,7 +475,6 @@
             <span class="n">job_share_level</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">job_tags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">experiment_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">validate_qobj</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">header</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">shots</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">memory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -524,8 +523,6 @@
 <span class="sd">                as a filter in the :meth:`jobs()` function call.</span>
 <span class="sd">            experiment_id: Used to add a job to an &quot;experiment&quot;, which is a collection</span>
 <span class="sd">                of jobs and additional metadata.</span>
-<span class="sd">            validate_qobj: DEPRECATED. If ``True``, run JSON schema validation against the</span>
-<span class="sd">                submitted payload. Only applicable if a Qobj is passed in.</span>
 
 <span class="sd">            The following arguments are NOT applicable if a Qobj is passed in.</span>
 
@@ -648,14 +645,6 @@
                 <span class="n">run_config_dict</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sim_method</span>
             <span class="n">qobj</span> <span class="o">=</span> <span class="n">assemble</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">run_config_dict</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">validate_qobj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The `validate_qobj` keyword is deprecated and will &quot;</span>
-                          <span class="s2">&quot;be removed in a future release. &quot;</span>
-                          <span class="s2">&quot;You can pull the schemas from the Qiskit/ibmq-schemas &quot;</span>
-                          <span class="s2">&quot;repo and directly validate your payloads with that.&quot;</span><span class="p">,</span>
-                          <span class="ne">DeprecationWarning</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">validate_qobj</span><span class="p">:</span>
-                <span class="n">validate_qobj_against_schema</span><span class="p">(</span><span class="n">qobj</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_submit_job</span><span class="p">(</span><span class="n">qobj</span><span class="p">,</span> <span class="n">job_name</span><span class="p">,</span> <span class="n">job_tags</span><span class="p">,</span> <span class="n">experiment_id</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_get_run_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
@@ -1187,7 +1176,6 @@
             <span class="n">job_share_level</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">job_tags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">experiment_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">validate_qobj</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">backend_options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">noise_model</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span>
@@ -1210,8 +1198,6 @@
 <span class="sd">                as a filter in the :meth:`IBMQBackend.jobs()&lt;IBMQBackend.jobs&gt;` method.</span>
 <span class="sd">            experiment_id: Used to add a job to an &quot;experiment&quot;, which is a collection</span>
 <span class="sd">                of jobs and additional metadata.</span>
-<span class="sd">            validate_qobj: DEPRECATED. If ``True``, run JSON schema validation against the</span>
-<span class="sd">                submitted payload.</span>
 <span class="sd">            backend_options: DEPRECATED dictionary of backend options for the execution.</span>
 <span class="sd">            noise_model: Noise model.</span>
 <span class="sd">            kwargs: Additional runtime configuration options. They take</span>
@@ -1241,7 +1227,6 @@
         <span class="n">run_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="n">job_name</span><span class="p">,</span>
                            <span class="n">job_tags</span><span class="o">=</span><span class="n">job_tags</span><span class="p">,</span> <span class="n">experiment_id</span><span class="o">=</span><span class="n">experiment_id</span><span class="p">,</span>
-                           <span class="n">validate_qobj</span><span class="o">=</span><span class="n">validate_qobj</span><span class="p">,</span>
                            <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="o">**</span><span class="n">run_config</span><span class="p">)</span>
 
 
@@ -1361,7 +1346,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最終更新: 2021/08/02
+      最終更新: 2021/08/03
 
     </p>
   </div>

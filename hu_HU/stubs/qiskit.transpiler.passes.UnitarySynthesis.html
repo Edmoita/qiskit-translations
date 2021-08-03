@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.transpiler.passes.UnitarySynthesis &mdash; Qiskit 0.28.0 dokumentáció</title>
+  <title>qiskit.transpiler.passes.UnitarySynthesis &mdash; Qiskit 0.29.0 dokumentáció</title>
   
 
   
@@ -340,17 +340,23 @@ exactly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paraméterek</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>basis_gates</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – List of gate names to target.</p></li>
-<li><p><strong>approximation_degree</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Closeness of approximation
+<li><p><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of gate names to target.</p></li>
+<li><p><strong>approximation_degree</strong> (<em>float</em>) – Closeness of approximation
 (0: lowest, 1: highest).</p></li>
-<li><p><strong>backend_props</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">BackendProperties</span></code>]) – Properties of a backend to synthesize for
-(e.g. gate fidelities).</p></li>
-<li><p><strong>pulse_optimize</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]) – Whether to optimize pulses during
+<li><p><strong>coupling_map</strong> (<a class="reference internal" href="qiskit.transpiler.CouplingMap.html#qiskit.transpiler.CouplingMap" title="qiskit.transpiler.CouplingMap"><em>CouplingMap</em></a>) – the coupling map of the backend
+in case synthesis is done on a physical circuit. The
+directionality of the coupling_map will be taken into
+account if pulse_optimize is True/None and natural_direction
+is True/None.</p></li>
+<li><p><strong>backend_props</strong> (<a class="reference internal" href="qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties" title="qiskit.providers.models.BackendProperties"><em>BackendProperties</em></a>) – Properties of a backend to
+synthesize for (e.g. gate fidelities).</p></li>
+<li><p><strong>pulse_optimize</strong> (<em>bool</em>) – Whether to optimize pulses during
 synthesis. A value of None will attempt it but fall
-back if it doesn’t succeed.</p></li>
-<li><p><strong>natural_direction</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]) – Whether to apply synthesis considering
+back if it doesn’t succeed. A value of True will raise
+an error if pulse-optimized synthesis does not succeed.</p></li>
+<li><p><strong>natural_direction</strong> (<em>bool</em>) – Whether to apply synthesis considering
 directionality of 2-qubit gates. Only applies when
-<cite>pulse_optimize</cite> == True. The natural direction is
+<cite>pulse_optimize</cite> is True or None. The natural direction is
 determined by first checking to see whether the
 coupling map is unidirectional.  If there is no
 coupling map or the coupling map is bidirectional,
@@ -360,7 +366,7 @@ set to True, and a natural direction can not be
 determined, raises TranspileError. If set to None, no
 exception will be raised if a natural direction can
 not be determined.</p></li>
-<li><p><strong>synth_gates</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – List of gates to synthesize. If None and
+<li><p><strong>synth_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of gates to synthesize. If None and
 <cite>pulse_optimize</cite> is False or None, default to
 [«unitary»]. If None and <cite>pulse_optimzie</cite> == True,
 default to [«unitary», «swap»]</p></li>
@@ -378,17 +384,23 @@ exactly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paraméterek</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>basis_gates</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – List of gate names to target.</p></li>
-<li><p><strong>approximation_degree</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Closeness of approximation
+<li><p><strong>basis_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of gate names to target.</p></li>
+<li><p><strong>approximation_degree</strong> (<em>float</em>) – Closeness of approximation
 (0: lowest, 1: highest).</p></li>
-<li><p><strong>backend_props</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">BackendProperties</span></code>]) – Properties of a backend to synthesize for
-(e.g. gate fidelities).</p></li>
-<li><p><strong>pulse_optimize</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]) – Whether to optimize pulses during
+<li><p><strong>coupling_map</strong> (<a class="reference internal" href="qiskit.transpiler.CouplingMap.html#qiskit.transpiler.CouplingMap" title="qiskit.transpiler.CouplingMap"><em>CouplingMap</em></a>) – the coupling map of the backend
+in case synthesis is done on a physical circuit. The
+directionality of the coupling_map will be taken into
+account if pulse_optimize is True/None and natural_direction
+is True/None.</p></li>
+<li><p><strong>backend_props</strong> (<a class="reference internal" href="qiskit.providers.models.BackendProperties.html#qiskit.providers.models.BackendProperties" title="qiskit.providers.models.BackendProperties"><em>BackendProperties</em></a>) – Properties of a backend to
+synthesize for (e.g. gate fidelities).</p></li>
+<li><p><strong>pulse_optimize</strong> (<em>bool</em>) – Whether to optimize pulses during
 synthesis. A value of None will attempt it but fall
-back if it doesn’t succeed.</p></li>
-<li><p><strong>natural_direction</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>]) – Whether to apply synthesis considering
+back if it doesn’t succeed. A value of True will raise
+an error if pulse-optimized synthesis does not succeed.</p></li>
+<li><p><strong>natural_direction</strong> (<em>bool</em>) – Whether to apply synthesis considering
 directionality of 2-qubit gates. Only applies when
-<cite>pulse_optimize</cite> == True. The natural direction is
+<cite>pulse_optimize</cite> is True or None. The natural direction is
 determined by first checking to see whether the
 coupling map is unidirectional.  If there is no
 coupling map or the coupling map is bidirectional,
@@ -398,7 +410,7 @@ set to True, and a natural direction can not be
 determined, raises TranspileError. If set to None, no
 exception will be raised if a natural direction can
 not be determined.</p></li>
-<li><p><strong>synth_gates</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – List of gates to synthesize. If None and
+<li><p><strong>synth_gates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of gates to synthesize. If None and
 <cite>pulse_optimize</cite> is False or None, default to
 [«unitary»]. If None and <cite>pulse_optimzie</cite> == True,
 default to [«unitary», «swap»]</p></li>
@@ -519,7 +531,7 @@ but cannot modify the property set (but it can be read).</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Utolsó frissítés 2021/08/02.
+      Utolsó frissítés 2021/08/03.
 
     </p>
   </div>

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.transpiler.passes.synthesis.unitary_synthesis &mdash; Tài liệu Qiskit 0.28.0</title>
+  <title>qiskit.transpiler.passes.synthesis.unitary_synthesis &mdash; Tài liệu Qiskit 0.29.0</title>
   
 
   
@@ -337,6 +337,7 @@
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
 <span class="kn">from</span> <span class="nn">qiskit.converters</span> <span class="kn">import</span> <span class="n">circuit_to_dag</span>
+<span class="kn">from</span> <span class="nn">qiskit.transpiler</span> <span class="kn">import</span> <span class="n">CouplingMap</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.basepasses</span> <span class="kn">import</span> <span class="n">TransformationPass</span>
 <span class="kn">from</span> <span class="nn">qiskit.transpiler.exceptions</span> <span class="kn">import</span> <span class="n">TranspilerError</span>
 <span class="kn">from</span> <span class="nn">qiskit.dagcircuit.dagcircuit</span> <span class="kn">import</span> <span class="n">DAGCircuit</span>
@@ -385,7 +386,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">basis_gates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">approximation_degree</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="n">coupling_map</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">coupling_map</span><span class="p">:</span> <span class="n">CouplingMap</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">backend_props</span><span class="p">:</span> <span class="n">BackendProperties</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">pulse_optimize</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">natural_direction</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -399,17 +400,23 @@
 <span class="sd">        exactly.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            basis_gates: List of gate names to target.</span>
-<span class="sd">            approximation_degree: Closeness of approximation</span>
+<span class="sd">            basis_gates (list[str]): List of gate names to target.</span>
+<span class="sd">            approximation_degree (float): Closeness of approximation</span>
 <span class="sd">                (0: lowest, 1: highest).</span>
-<span class="sd">            backend_props: Properties of a backend to synthesize for</span>
-<span class="sd">                (e.g. gate fidelities).</span>
-<span class="sd">            pulse_optimize: Whether to optimize pulses during</span>
+<span class="sd">            coupling_map (CouplingMap): the coupling map of the backend</span>
+<span class="sd">                in case synthesis is done on a physical circuit. The</span>
+<span class="sd">                directionality of the coupling_map will be taken into</span>
+<span class="sd">                account if pulse_optimize is True/None and natural_direction</span>
+<span class="sd">                is True/None.</span>
+<span class="sd">            backend_props (BackendProperties): Properties of a backend to</span>
+<span class="sd">                synthesize for (e.g. gate fidelities).</span>
+<span class="sd">            pulse_optimize (bool): Whether to optimize pulses during</span>
 <span class="sd">                synthesis. A value of None will attempt it but fall</span>
-<span class="sd">                back if it doesn&#39;t succeed.</span>
-<span class="sd">            natural_direction: Whether to apply synthesis considering</span>
+<span class="sd">                back if it doesn&#39;t succeed. A value of True will raise</span>
+<span class="sd">                an error if pulse-optimized synthesis does not succeed.</span>
+<span class="sd">            natural_direction (bool): Whether to apply synthesis considering</span>
 <span class="sd">                directionality of 2-qubit gates. Only applies when</span>
-<span class="sd">                `pulse_optimize` == True. The natural direction is</span>
+<span class="sd">                `pulse_optimize` is True or None. The natural direction is</span>
 <span class="sd">                determined by first checking to see whether the</span>
 <span class="sd">                coupling map is unidirectional.  If there is no</span>
 <span class="sd">                coupling map or the coupling map is bidirectional,</span>
@@ -419,7 +426,7 @@
 <span class="sd">                determined, raises TranspileError. If set to None, no</span>
 <span class="sd">                exception will be raised if a natural direction can</span>
 <span class="sd">                not be determined.</span>
-<span class="sd">            synth_gates: List of gates to synthesize. If None and</span>
+<span class="sd">            synth_gates (list[str]): List of gates to synthesize. If None and</span>
 <span class="sd">                `pulse_optimize` is False or None, default to</span>
 <span class="sd">                [&#39;unitary&#39;]. If None and `pulse_optimzie` == True,</span>
 <span class="sd">                default to [&#39;unitary&#39;, &#39;swap&#39;]</span>
@@ -582,7 +589,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Cập nhật mới nhất vào 2021/08/02.
+      Cập nhật mới nhất vào 2021/08/03.
 
     </p>
   </div>

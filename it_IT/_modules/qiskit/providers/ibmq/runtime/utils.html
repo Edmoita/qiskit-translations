@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.ibmq.runtime.utils &mdash; Qiskit 0.28.0 documentazione</title>
+  <title>qiskit.providers.ibmq.runtime.utils &mdash; Qiskit 0.29.0 documentazione</title>
   
 
   
@@ -343,6 +343,7 @@
 <span class="kn">import</span> <span class="nn">zlib</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="k">try</span><span class="p">:</span>
@@ -467,6 +468,9 @@
                     <span class="s1">&#39;__module__&#39;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
                     <span class="s1">&#39;__class__&#39;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
                     <span class="s1">&#39;__value__&#39;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">settings</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Callable </span><span class="si">{</span><span class="n">obj</span><span class="si">}</span><span class="s2"> is not JSON serializable and will be set to None.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">HAS_SCIPY</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">spmatrix</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">_serialize_and_encode</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">save_npz</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;__type__&#39;</span><span class="p">:</span> <span class="s1">&#39;spmatrix&#39;</span><span class="p">,</span> <span class="s1">&#39;__value__&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>
@@ -529,7 +533,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Ultimo aggiornamento 2021/08/02.
+      Ultimo aggiornamento 2021/08/03.
 
     </p>
   </div>

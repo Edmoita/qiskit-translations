@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.ibmq.accountprovider &mdash; Qiskit 0.28.0 說明文件</title>
+  <title>qiskit.providers.ibmq.accountprovider &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -356,7 +356,7 @@
 <span class="kn">from</span> <span class="nn">.ibmqbackendservice</span> <span class="kn">import</span> <span class="n">IBMQBackendService</span><span class="p">,</span> <span class="n">IBMQDeprecatedBackendService</span>
 <span class="kn">from</span> <span class="nn">.utils.json_decoder</span> <span class="kn">import</span> <span class="n">decode_backend_configuration</span>
 <span class="kn">from</span> <span class="nn">.random.ibmqrandomservice</span> <span class="kn">import</span> <span class="n">IBMQRandomService</span>
-<span class="kn">from</span> <span class="nn">.experiment.experimentservice</span> <span class="kn">import</span> <span class="n">ExperimentService</span>
+<span class="kn">from</span> <span class="nn">.experiment</span> <span class="kn">import</span> <span class="n">IBMExperimentService</span>
 <span class="kn">from</span> <span class="nn">.runtime.ibm_runtime_service</span> <span class="kn">import</span> <span class="n">IBMRuntimeService</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">IBMQNotAuthorizedError</span><span class="p">,</span> <span class="n">IBMQInputValueError</span>
 <span class="kn">from</span> <span class="nn">.runner_result</span> <span class="kn">import</span> <span class="n">RunnerResult</span>
@@ -441,7 +441,7 @@
 
         <span class="c1"># Initialize other services.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_random</span> <span class="o">=</span> <span class="n">IBMQRandomService</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">extractor_url</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_experiment</span> <span class="o">=</span> <span class="n">ExperimentService</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">experiment_url</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_experiment</span> <span class="o">=</span> <span class="n">IBMExperimentService</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">experiment_url</span> <span class="k">else</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_runtime</span> <span class="o">=</span> <span class="n">IBMRuntimeService</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> \
             <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">runtime_url</span> <span class="k">else</span> <span class="kc">None</span>
 
@@ -702,7 +702,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">experiment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExperimentService</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">experiment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IBMExperimentService</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Return the experiment service.</span>
 
 <span class="sd">        Returns:</span>
@@ -779,7 +779,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/02。
+      最後更新於 2021/08/03。
 
     </p>
   </div>

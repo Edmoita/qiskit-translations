@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building Pulse Schedules &mdash; Qiskit 0.28.0 documentation</title>
+  <title>পালস সময়সূচী তৈরির পদ্ধতি &mdash; Qiskit 0.29.0 documentation</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Building Pulse Schedules</li>
+      <li>পালস সময়সূচী তৈরির পদ্ধতি</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -570,13 +570,13 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits_advanced/06_building_pulse_schedules.ipynb">tutorials/circuits_advanced/06_building_pulse_schedules.ipynb</a>.</p>
+<p>এই পৃষ্ঠাটি <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits_advanced/06_building_pulse_schedules.ipynb">tutorials/circuits_advanced/1_advanced_circuits.ipynb</a> থেকে উৎপন্ন হয়েছে।</p>
 </div>
-<section id="Building-Pulse-Schedules">
-<h1>Building Pulse Schedules<a class="headerlink" href="#Building-Pulse-Schedules" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
-<p>Pulse gates define a low-level, exact representation for a circuit gate. A single operation can be implemented with a pulse program, which is comprised of multiple low-level instructions. To learn more about pulse gates, refer back to the documentation <a class="reference internal" href="05_pulse_gates.html"><span class="doc">here</span></a>. This page details how to create pulse programs.</p>
-<p>Note: For IBM devices, pulse programs are used as subroutines to describe gates. Previously, some devices accepted full programs in this format, but this is being sunset in December 2021. Other providers may still accept full programs in this format. Regardless of how the program is used, the syntax for building the program is the same. Read on to learn how!</p>
-<p>Pulse programs, which are called <code class="docutils literal notranslate"><span class="pre">Schedule</span></code>s, describe instruction sequences for the control electronics. We build <code class="docutils literal notranslate"><span class="pre">Schedule</span></code>s using the Pulse Builder. It’s easy to initialize a schedule:</p>
+<section id="পালস-সময়সূচী-তৈরির-পদ্ধতি">
+<h1>পালস সময়সূচী তৈরির পদ্ধতি<a class="headerlink" href="#পালস-সময়সূচী-তৈরির-পদ্ধতি" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<p>তড়িৎস্পন্দন বা পালস একটি বর্তনী (সার্কিট) যুক্তিবর্তনী (গেইট) জন্য একটি মৌলিক স্তরের, সঠিক উপস্থাপনা সংজ্ঞায়িত করে | একটি একক ক্রিয়াকলাপ (অপারেশন) একটি তড়িৎস্পন্দন বা তড়িৎস্পন্দন বা পালস নির্দেশমালার সাথে বাস্তবায়ন করা যেতে পারে, যা একাধিক মৌলিক স্তরের নির্দেশাবলী নিয়ে গঠিত। তড়িৎস্পন্দন বা তড়িৎস্পন্দন বা পালস গেট সম্পর্কে আরও জানতে, প্রদর্শক (ডকুমেন্টেশন) ফিরে যান <cite>এখানে &lt;05_pulse_gates.ipynb&gt;</cite> __। এই পৃষ্ঠাটি কীভাবে তড়িৎস্পন্দন বা পালস নির্দেশমালা তৈরি করতে হয় তা বিশদ করে।</p>
+<p>টীকা: আই.বি.এম এর যন্ত্রের জন্য, তড়িৎস্পন্দন বা পালস নির্দেশমালা গেট বর্ণনা করার জন্য সাবরুটিন হিসাবে ব্যবহৃত হয়। পূর্বে, কিছু যন্ত্রের এই বিন্যাসে সম্পূর্ণ নির্দেশমালা গ্রহণ করাছিল, কিন্তু এটি 2021 সালের ডিসেম্বরে সূর্যাস্ত (বন্ধ) হচ্ছে। অন্যান্য প্রোভাইডার এখনও এই বিন্যাসে সম্পূর্ণ নির্দেশমালা গ্রহণ করতে পারে। নির্দেশমালাটি যেভাবেই ব্যবহার করা হোক না কেন, নির্দেশমালা তৈরির গঠন (সিনট্যাক্স) একই। কিভাবে জানতে পড়ুন!</p>
+<p>তড়িৎস্পন্দন বা পালস নির্দেশমালা , যাকে <code class="docutils literal notranslate"><span class="pre">Schedule</span></code>s বলা হয়, নিয়ন্ত্রণ ইলেকট্রনিক্সের জন্য নির্দেশ ক্রম বর্ণনা করে। আমরা তড়িৎস্পন্দন বা পালস নির্মাতা ব্যবহার করে <code class="docutils literal notranslate"><span class="pre">Schedule</span></code>s তৈরি করি। একটি <code class="docutils literal notranslate"><span class="pre">Schedule</span></code> শুরু করা সহজ:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -601,10 +601,10 @@ div.rendered_html tbody tr:hover {
 Schedule(, name=&#34;my_example&#34;)
 </pre></div></div>
 </div>
-<p>You can see that there are no instructions yet. The next section of this page will explain each of the instructions you might add to a schedule, and the last section will describe various <em>alignment contexts</em>, which determine how instructions are placed in time relative to one another.</p>
+<p>আপনি দেখতে পারেন যে এখনও কোন নির্দেশনা নেই। এই পৃষ্ঠার পরবর্তী অংশটি আপনি যে সময়সূচীতে যোগ করতে পারেন তার প্রতিটি নির্দেশাবলী ব্যাখ্যা করবে এবং শেষ অংশটি বিভিন্ন <a href="#id1"><span class="problematic" id="id2">*</span></a>প্রান্তিককরণ প্রেক্ষাপট (alignment contexts) * বর্ণনা করবে, যা নির্দেশ করে কিভাবে একে অপরের আপেক্ষিক সময়ে নির্দেশাবলী স্থাপন করা হয়।</p>
 </section>
-<section id="Schedule-Instructions">
-<h1><code class="docutils literal notranslate"><span class="pre">Schedule</span></code> Instructions<a class="headerlink" href="#Schedule-Instructions" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<section id="Schedule-নির্দেশনা">
+<h1><code class="docutils literal notranslate"><span class="pre">Schedule</span></code> নির্দেশনা<a class="headerlink" href="#Schedule-নির্দেশনা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="#delay">delay(duration, channel)</a></p></li>
 <li><p><a class="reference external" href="#play">play(pulse, channel)</a></p></li>
@@ -612,16 +612,16 @@ Schedule(, name=&#34;my_example&#34;)
 <li><p><a class="reference external" href="#shift_phase">shift_phase(phase, channel)</a></p></li>
 <li><p><a class="reference external" href="#acquire">acquire(duration, channel, mem_slot, reg_slot)</a></p></li>
 </ul>
-<p>Each instruction type has its own set of operands. As you can see above, they each include at least one <code class="docutils literal notranslate"><span class="pre">Channel</span></code> to specify where the instruction will be applied.</p>
-<p><strong>Channels</strong> are labels for signal lines from the control hardware to the quantum chip.</p>
+<p>প্রতিটি নির্দেশনা ধরনের নিজস্ব অপারেন্ড গুচ্ছ আছে। আপনি উপরে দেখতে পাচ্ছেন, নির্দেশাবলী কোথায় প্রয়োগ করা হবে তা নির্দিষ্ট করার জন্য তাদের প্রতিটিতে কমপক্ষে একটি &quot;চ্যানেল&quot; অন্তর্ভুক্ত রয়েছে।</p>
+<p><strong>চ্যানেল</strong> হল নিয়ন্ত্রণ যন্ত্র থেকে কোয়ান্টাম চিপ পর্যন্ত সিগন্যাল লাইনের নাম (লেবেল)।</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code>s are typically used for <em>driving</em> single qubit rotations,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>s are typically used for multi-qubit gates or additional drive lines for tunable qubits,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MeasureChannel</span></code>s are specific to transmitting pulses which stimulate readout, and</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code>s are used to trigger digitizers which collect readout signals.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code>গুলি সাধারণত একক কিউবিট ঘূর্ণনের * ড্রাইভিং * এর জন্য ব্যবহৃত হয়,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>গুলি সাধারণত মাল্টি-কিউবিট গেট বা টিউনেবল (tunable)কিউবিটগুলির অতিরিক্ত ড্রাইভ লাইনের জন্য ব্যবহৃত হয়,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MeasureChannel</span></code>গুলি পালস প্রেরণের জন্য নির্দিষ্ট যা রিড-আউটকে উদ্দীপিত করে, এবং</p></li>
+<li><p>ডিজিটাইজারগুলিকে ট্রিগার করতে <code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code>গুলি ব্যবহার করা হয় যা রিড-আউট সিগন্যাল সংগ্রহ করে।</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code>s, <code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>s, and <code class="docutils literal notranslate"><span class="pre">MeasureChannel</span></code>s are all <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code>s; this means that they support <em>transmitting</em> pulses, whereas the <code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code> is a receive channel only and cannot play waveforms.</p>
-<p>For the following examples, we will create one <code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code> instance for each <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> that accepts a <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code>. Channels take one integer <code class="docutils literal notranslate"><span class="pre">index</span></code> argument. Except for <code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>s, the index maps trivially to the qubit label.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code>, <code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>, এবং <code class="docutils literal notranslate"><span class="pre">MeasureChannel</span></code>গুলি সব <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code>; এর মানে হল যে তারা * পালস প্রেরণ * সমর্থন করে, যেখানে <code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code> শুধুমাত্র একটি রিসিভ চ্যানেল এবং তরঙ্গরূপ চালাতে পারে না।</p>
+<p>নিম্নলিখিত উদাহরণগুলির জন্য, আমরা প্রতিটি <code class="docutils literal notranslate"><span class="pre">Instruction</span></code> এর জন্য একটি <code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code> উদাহরণ তৈরি করব যা একটি <code class="docutils literal notranslate"><span class="pre">PulseChannel</span></code> গ্রহণ করে। চ্যানেলগুলি একটি পূর্ণসংখ্যা <code class="docutils literal notranslate"><span class="pre">index</span></code> আর্গুমেন্ট নেয়। <code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>গুলি ছাড়া, সূচকটি ট্রিভিয়ালি কিউবিট লেবেলে ম্যাপ করে।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -684,8 +684,8 @@ Schedule(, name=&#34;my_example&#34;)
 </pre></div>
 </div>
 <p>Let’s clarify what the <code class="docutils literal notranslate"><span class="pre">pulse</span></code> argument is and explore a few different ways to build one.</p>
-<section id="Pulses">
-<h3>Pulses<a class="headerlink" href="#Pulses" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="তড়িৎস্পন্দন-বা-পালস">
+<h3>তড়িৎস্পন্দন বা পালস<a class="headerlink" href="#তড়িৎস্পন্দন-বা-পালস" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>A <code class="docutils literal notranslate"><span class="pre">Pulse</span></code> specifies an arbitrary pulse <em>envelope</em>. The modulation frequency and phase of the output waveform are controlled by the <code class="docutils literal notranslate"><span class="pre">set_frequency</span></code> and <code class="docutils literal notranslate"><span class="pre">shift_phase</span></code> instructions, which we will cover next.</p>
 <p>The image below may provide some intuition for why they are specified separately. Think of the pulses which describe their envelopes as input to an arbitrary waveform generator (AWG), a common lab instrument – this is depicted in the left image. Notice the limited sample rate discritizes the signal. The signal produced by the AWG may be mixed with a continuous sine wave generator. The frequency of its output is controlled by instructions to the sine wave generator; see the middle image. Finally,
 the signal sent to the qubit is demonstrated by the right side of the image below.</p>
@@ -706,8 +706,8 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 </pre></div>
 </div>
 </div>
-<section id="Parametric-pulses">
-<h4>Parametric pulses<a class="headerlink" href="#Parametric-pulses" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="পরামিতিক-তড়িৎস্পন্দন-বা-পালস">
+<h4>পরামিতিক তড়িৎস্পন্দন বা পালস<a class="headerlink" href="#পরামিতিক-তড়িৎস্পন্দন-বা-পালস" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <p>Let’s build our Gaussian pulse using the <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code> parametric pulse. A parametric pulse sends the name of the function and its parameters to the backend, rather than every individual sample. Using parametric pulses makes the jobs you send to the backend much smaller. IBM Quantum backends limit the maximum job size that they accept, so parametric pulses may allow you to run larger programs.</p>
 <p>Other parametric pulses in the <code class="docutils literal notranslate"><span class="pre">library</span></code> include <code class="docutils literal notranslate"><span class="pre">GaussianSquare</span></code>, <code class="docutils literal notranslate"><span class="pre">Drag</span></code>, and <code class="docutils literal notranslate"><span class="pre">Constant</span></code>.</p>
 <p><strong>Note</strong>: The backend is responsible for deciding exactly how to sample the parametric pulses. It is possible to draw parametric pulses, but the samples displayed are not guaranteed to be the same as those executed on the backend.</p>
@@ -758,8 +758,8 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
 </div>
 </div>
 </section>
-<section id="Pulse-library-functions">
-<h4>Pulse library functions<a class="headerlink" href="#Pulse-library-functions" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="তড়িৎস্পন্দন-বা-পালস-লাইব্রেরি-ফাংশন">
+<h4>তড়িৎস্পন্দন বা পালস লাইব্রেরি ফাংশন<a class="headerlink" href="#তড়িৎস্পন্দন-বা-পালস-লাইব্রেরি-ফাংশন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <p>Our own pulse library has sampling methods to build a <code class="docutils literal notranslate"><span class="pre">Waveform</span></code> from common functions.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -1065,7 +1065,7 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/08/02 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/08/03 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>
@@ -1084,14 +1084,14 @@ the signal sent to the qubit is demonstrated by the right side of the image belo
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Building Pulse Schedules</a></li>
-<li><a class="reference internal" href="#Schedule-Instructions"><code class="docutils literal notranslate"><span class="pre">Schedule</span></code> Instructions</a><ul>
+<li><a class="reference internal" href="#">পালস সময়সূচী তৈরির পদ্ধতি</a></li>
+<li><a class="reference internal" href="#Schedule-নির্দেশনা"><code class="docutils literal notranslate"><span class="pre">Schedule</span></code> নির্দেশনা</a><ul>
 <li><a class="reference internal" href="#delay"><code class="docutils literal notranslate"><span class="pre">delay</span></code></a></li>
 <li><a class="reference internal" href="#play"><code class="docutils literal notranslate"><span class="pre">play</span></code></a><ul>
-<li><a class="reference internal" href="#Pulses">Pulses</a><ul>
-<li><a class="reference internal" href="#Parametric-pulses">Parametric pulses</a></li>
+<li><a class="reference internal" href="#তড়িৎস্পন্দন-বা-পালস">তড়িৎস্পন্দন বা পালস</a><ul>
+<li><a class="reference internal" href="#পরামিতিক-তড়িৎস্পন্দন-বা-পালস">পরামিতিক তড়িৎস্পন্দন বা পালস</a></li>
 <li><a class="reference internal" href="#Pulse-waveforms-described-by-samples">Pulse waveforms described by samples</a></li>
-<li><a class="reference internal" href="#Pulse-library-functions">Pulse library functions</a></li>
+<li><a class="reference internal" href="#তড়িৎস্পন্দন-বা-পালস-লাইব্রেরি-ফাংশন">তড়িৎস্পন্দন বা পালস লাইব্রেরি ফাংশন</a></li>
 </ul>
 </li>
 </ul>

@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started with Qiskit &mdash; Qiskit 0.28.0 documentation</title>
+  <title>Qiskit দিয়ে শুরু করা যাক। &mdash; Qiskit 0.29.0 documentation</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Getting Started with Qiskit</li>
+      <li>Qiskit দিয়ে শুরু করা যাক।</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -570,12 +570,11 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits/1_getting_started_with_qiskit.ipynb">tutorials/circuits/1_getting_started_with_qiskit.ipynb</a>.</p>
+<p>এই পৃষ্ঠাটি <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits/1_getting_started_with_qiskit.ipynb">tutorials/circuits/1_getting_started_with_qiskit.ipynb</a> থেকে উৎপন্ন হয়েছে।</p>
 </div>
-<section id="Getting-Started-with-Qiskit">
-<h1>Getting Started with Qiskit<a class="headerlink" href="#Getting-Started-with-Qiskit" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
-<p>Here, we provide an overview of working with Qiskit. The fundamental package of Qiskit is Terra that provides the basic building blocks necessary to program quantum computers. The fundamental unit of Qiskit is the <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">quantum circuit</a>. A basic workflow using Qiskit consists of two stages: <strong>Build</strong> and <strong>Execute</strong>. <strong>Build</strong> allows you to make different quantum circuits that represent the problem you are solving, and <strong>Execute</strong> that allows you to
-run them on different backends. After the jobs have been run, the data is collected and postprocessed depending on the desired output.</p>
+<section id="Qiskit-দিয়ে-শুরু-করা-যাক।">
+<h1>Qiskit দিয়ে শুরু করা যাক।<a class="headerlink" href="#Qiskit-দিয়ে-শুরু-করা-যাক।" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<p>এখানে, আমরা Qiskit এর সাথে কাজ করার একটি সাধারণ ধারণা পাবো। Qiskit এর মূল প্যাকেজটি হল টেরা (Terra) যা কোয়ান্টাম কম্পিউটার নির্দেশমালা (প্রোগ্রাম) করার জন্য প্রয়োজনীয় নির্মাণ নকশা (বিল্ডিং ব্লক) সরবরাহ করে। Qiskit এর মূল এককটি হ’ল <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">quantum circuit</a>। Qiskit ব্যবহার করে একটি প্রাথমিক কর্মপ্রবাহ দুটি ধাপ নিয়ে গঠিত: <strong>নির্মাণ (বিল্ড)</strong> এবং <strong>কার্যকর(এক্সিকিউট)</strong>। <strong>নির্মাণ (বিল্ড)</strong> আপনাকে বিভিন্ন কোয়ান্টাম বর্তনী (সার্কিট) তৈরি করতে দেয় যা আপনি যে সমস্যার সমাধান করছেন তাতে প্রতিনিধিত্ব করে এবং <strong>কার্যকর (এক্সিকিউট)</strong> যা আপনাকে এগুলি বিভিন্ন ব্যাক-এন্ডে চালানোর অনুমতি দেয়। কাজগুলি কার্যকর করার পরে, তথ্য (ডেটা) সংগ্রহ করা হয় এবং পছন্দসই ফলাফলের উপর নির্ভর করে পরবর্তী প্রক্রিয়া (পোস্টপ্রসেস) করা হয়।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -587,11 +586,11 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<section id="Circuit-Basics">
-<h2>Circuit Basics<a class="headerlink" href="#Circuit-Basics" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<section id="Building-the-circuit">
-<h3>Building the circuit<a class="headerlink" href="#Building-the-circuit" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The basic element needed for your first program is the QuantumCircuit. We begin by creating a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> comprised of three qubits.</p>
+<section id="বর্তনীর-(সার্কিট)-প্রাথমিক-ধারণা">
+<h2>বর্তনীর (সার্কিট) প্রাথমিক ধারণা<a class="headerlink" href="#বর্তনীর-(সার্কিট)-প্রাথমিক-ধারণা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<section id="বর্তনী-(সার্কিট)-নির্মাণ">
+<h3>বর্তনী (সার্কিট) নির্মাণ<a class="headerlink" href="#বর্তনী-(সার্কিট)-নির্মাণ" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>প্রথম নির্দেশমালাটির (প্রোগ্রাম) জন্য প্রয়োজনীয় মৌলিক উপাদানটি হল QuantumCircuit। আমরা তিনটি কিউবিট সমন্বিত একটি <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> তৈরির মাধ্যমে শুরু করি।.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -602,12 +601,12 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<p>After you create the circuit with its registers, you can add gates (“operations”) to manipulate the registers. As you proceed through the tutorials you will find more gates and circuits; below is an example of a quantum circuit that makes a three-qubit GHZ state</p>
+<p>বর্তনী (সার্কিট) টি রেজিস্টারগুলি দিয়ে তৈরি করার পরে, আপনি রেজিস্টার গুলি পরিচালনা করতে যুক্তিবর্তনী (গেইট) (&quot;ক্রিয়াকলাপ (অপারেশন)&quot;) যুক্ত করতে পারেন। টিউটোরিয়ালগুলির মাধ্যমে আপনি আরও দ্বার এবং বর্তনী (সার্কিট) পাবেন। নীচে কোয়ান্টাম বর্তনীর (সার্কিটের) একটি উদাহরণ দেওয়া হলো যা তিন কিউবিট GHZ মান তৈরি করে।</p>
 <div class="math notranslate nohighlight">
-\[|\psi\rangle = \left(|000\rangle+|111\rangle\right)/\sqrt{2}.\]</div>
-<p>To create such a state, we start with a three-qubit quantum register. By default, each qubit in the register is initialized to <span class="math notranslate nohighlight">\(|0\rangle\)</span>. To make the GHZ state, we apply the following gates: - A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0, which puts it into the superposition state <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span>. - A controlled-Not operation (<span class="math notranslate nohighlight">\(C_{X}\)</span>) between qubit 0 and qubit 1. - A controlled-Not operation between qubit 0 and qubit 2.</p>
-<p>On an ideal quantum computer, the state produced by running this circuit would be the GHZ state above.</p>
-<p>In Qiskit, operations can be added to the circuit one by one, as shown below.</p>
+\[|\psi\rangle = \left(|00\rangle+|11\rangle\right)/\sqrt{2}.\]</div>
+<p>এমন একটি স্থিতি (স্টেট্ ) তৈরি করতে, আমরা তিন-কিউবিট কোয়ান্টাম রেজিস্টার দিয়ে শুরু করি। পূর্বনির্ধারিতভাবে (ডিফল্ট) রেজিস্টারের প্রতিটি কিউবিট <span class="math notranslate nohighlight">\(|0\rangle\)</span> থেকে শুরু করা হয়। GHZ স্থিতিটি তৈরি করতে, আমরা নিম্নলিখিত যুক্তিদ্বার (গেট) গুলি প্রয়োগ করি:- কিউবিট 0-এ একটি হ্যাডামার্ড যুক্তিদ্বার (গেট) H এটিকে সুপারপজিশন স্থিতি <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span> এ ফেলেছে। কিউবিট 0 এবং কিউবিট ১ এর মধ্যে একটি কনট্রোলড নট অপারেশন (<span class="math notranslate nohighlight">\(C_{X}\)</span>) । কিউবিট 0 এবং কিউবিট ২ এর মধ্যে একটি কনট্রোলড নট অপারেশন।</p>
+<p>একটি আদর্শ কোয়ান্টাম কম্পিউটারে, এই বর্তনী (সার্কিট) টি চালিয়ে প্রাপ্ত মান বা অবস্থা (স্টেট্) টি উপরের GHZ মান বা অবস্থা হবে।</p>
+<p>Qiskit এ ক্রিয়াকলাপগুলি একের পর এক বর্তনীর (সার্কিট) সাথে নিম্নলিখিতভাবে যুক্ত করা যেতে পারে।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -635,9 +634,9 @@ run them on different backends. After the jobs have been run, the data is collec
 </div>
 </section>
 </section>
-<section id="Visualize-Circuit">
-<h2>Visualize Circuit<a class="headerlink" href="#Visualize-Circuit" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>You can visualize your circuit using Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>, which plots the circuit in the form found in many textbooks.</p>
+<section id="বর্তনী-(সার্কিট)-দৃশ্যায়িত-করা">
+<h2>বর্তনী (সার্কিট) দৃশ্যায়িত করা<a class="headerlink" href="#বর্তনী-(সার্কিট)-দৃশ্যায়িত-করা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p>আপনি Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> ব্যবহার করে বর্তনী (সার্কিট) দৃশ্যায়িত করতে পারেন, যেটা বহুসংখ্যক পাঠ্যপুস্তকের মধ্যে ওইরূপে থাকা বর্তনী (সার্কিট) আঁকে।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
@@ -655,20 +654,21 @@ run them on different backends. After the jobs have been run, the data is collec
 <img alt="../../_images/tutorials_circuits_1_getting_started_with_qiskit_7_0.png" src="../../_images/tutorials_circuits_1_getting_started_with_qiskit_7_0.png" />
 </div>
 </div>
-<p>In this circuit, the qubits are put in order, with qubit zero at the top and qubit two at the bottom. The circuit is read left to right (meaning that gates that are applied earlier in the circuit show up further to the left).</p>
-<div class="alert alert-block alert-info"><p>When representing the state of a multi-qubit system, the tensor order used in Qiskit is different than that used in most physics textbooks. Suppose there are <span class="math notranslate nohighlight">\(n\)</span> qubits, and qubit <span class="math notranslate nohighlight">\(j\)</span> is labeled as <span class="math notranslate nohighlight">\(Q_{j}\)</span>. Qiskit uses an ordering in which the <span class="math notranslate nohighlight">\(n^{\mathrm{th}}\)</span> qubit is on the left side of the tensor product, so that the basis vectors are labeled as <span class="math notranslate nohighlight">\(Q_{n-1}\otimes \cdots \otimes Q_1\otimes Q_0\)</span>.</p>
-<p>For example, if qubit zero is in state 0, qubit 1 is in state 0, and qubit 2 is in state 1, Qiskit would represent this state as <span class="math notranslate nohighlight">\(|100\rangle\)</span>, whereas many physics textbooks would represent it as <span class="math notranslate nohighlight">\(|001\rangle\)</span>.</p>
-<p>This difference in labeling affects the way multi-qubit operations are represented as matrices. For example, Qiskit represents a controlled-X (<span class="math notranslate nohighlight">\(C_{X}\)</span>) operation with qubit 0 being the control and qubit 1 being the target as</p>
+<p>এই সার্কিটটি (বর্তনীটি) তে, কিউবিট-গুলি একটি ক্রমে রাখা হয়েছে যেখানে শূন্য কিউবিট একদম শীর্ষে এবং দ্বিতীয় কিউবিট একদম নিচে রয়েছে। সার্কিটটি (বর্তনীটি) বামদিক থেকে ডানদিকে পড়া হয় (যার অর্থ হল যেই গেটস গুলো সার্কিটে (বর্তনীটে) আগে প্রয়োগ করা হয়েছে সেই গুলো আরও বামদিকে প্রদর্শিত হবে)।</p>
+<div class="alert alert-block alert-info"><p>মাল্টি-কিউবিট (বহু কিউবিট) গঠনতন্ত্রের স্থিতি উপস্থাপন করার সময়, টেনসর যেই ক্রমে Qiskit এ ব্যবহৃত হয় সেটা বেশিরভাগ পদার্থবিজ্ঞান পাঠ্যপুস্তকের থেকে ভিন্ন। ধরে নেয়া যাক এখানে <span class="math notranslate nohighlight">\(n\)</span> qubits (কিউবিট) আছে এবং qubit (কিউবিট) <span class="math notranslate nohighlight">\(j\)</span> কে <span class="math notranslate nohighlight">\(Q_{j}\)</span> হিসাবে আখ্যা দেত্তয়া হয়েছে। Qiskit একটি ক্রম ব্যবহার করে যেটাতে <span class="math notranslate nohighlight">\(n^{\mathrm{th}}\)</span> qubit (কিউবিট) টেনসর গুণফলের বামদিকে অবস্থান করে, যাতে বেসিস ভেক্টর (ভিত্তি দিকরাশি) গুলি কে <span class="math notranslate nohighlight">\(Q_{n-1}\otimes \cdots \otimes Q_1\otimes Q_0\)</span> ভাবে আখ্যা দেয়া হয়।</p>
+<p>উদাহরণ স্বরূপ, যদি শূন্য কিউবিটটি 0 স্থিতি তে থাকে, প্রথম কিউবিটটি 0 স্থিতি তে থাকে, এবং দ্বিতীয় কিউবিটটি ১ স্থিতি তে থাকে, তাহলে Qiskit ওই স্থিতি টা কে <span class="math notranslate nohighlight">\(|100\rangle\)</span> ভাবে উপস্থাপন করবে, যদিও বেশিরভাগ পদার্থবিজ্ঞান পাঠ্যপুস্তকে ওটাকে <span class="math notranslate nohighlight">\(|001\rangle\)</span> ভাবে উপস্থাপন করে।</p>
+<p>আখ্যা দেত্তয়ার এই পার্থক্যটি প্রভাবিত করে যেভাবে মাল্টি-কিউবিট (বহু কিউবিট ) অপারেশনগুলি কে ম্যাট্রিক্স হিসাবে উপস্থাপন করে | উদাহরণস্বরূপ, Qiskit একটি কন্ট্রোল্ড-এক্স (<span class="math notranslate nohighlight">\(C_{X}\)</span>) অপারেশনে, কিউবিট 0 টি কন্ট্রল এবং কিউবিট ১ টা টার্গেট হিসাবে উপস্থাপন করে</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}C_X = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\\end{pmatrix}.\end{split}\]</div>
 </div></section>
-<section id="Simulating-circuits-using-Qiskit-Aer">
-<h2>Simulating circuits using Qiskit Aer<a class="headerlink" href="#Simulating-circuits-using-Qiskit-Aer" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>Qiskit Aer is our package for simulating quantum circuits. It provides many different backends for doing a simulation. There is also a basic, Python only, implementation called <code class="docutils literal notranslate"><span class="pre">BasicAer</span></code> in Terra that can be used as a drop-in replacement for <code class="docutils literal notranslate"><span class="pre">Aer</span></code> in the examples below.</p>
-<section id="Statevector-backend">
-<h3>Statevector backend<a class="headerlink" href="#Statevector-backend" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The most common backend in Qiskit Aer is the <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>. This simulator returns the quantum state, which is a complex vector of dimensions <span class="math notranslate nohighlight">\(2^n\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of qubits (so be careful using this as it will quickly get too large to run on your machine).</p>
-<p>To run the above circuit using the statevector simulator, first you need to import Aer and then set the backend to <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>.</p>
+<section id="Qiskit-এয়ার-দিয়ে-সার্কিট-গুলি-(বর্তনীগুলি)-সিমুলেট-করা-হচ্ছে">
+<h2>Qiskit এয়ার দিয়ে সার্কিট-গুলি (বর্তনীগুলি) সিমুলেট করা হচ্ছে<a class="headerlink" href="#Qiskit-এয়ার-দিয়ে-সার্কিট-গুলি-(বর্তনীগুলি)-সিমুলেট-করা-হচ্ছে" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p>Qiskit এয়ার আমাদের প্যাকেজ যা দিয়ে কোয়ান্টাম সার্কিট-গুলি (বর্তনীগুলি) সিমুলেট করা হচ্ছে। এটা সিমুলেশন করার জন্য অনেক ভিন্ন ব্যাকএন্ড সরবরাহ করে। এখানে আরো একটি মৌলিক রূপায়ণ আছে, যেটা কেবল Python দিয়ে করা হয়, যাকে টেরা তে <code class="docutils literal notranslate"><span class="pre">BasicAer</span></code> বলে, যেটা নিচের উদাহরণে যে কোনো সময়ে <code class="docutils literal notranslate"><span class="pre">Aer</span></code> এর প্রতিস্থাপনে ব্যবহার করা যেতে পারে।</p>
+<section id="স্টেটভেক্টর-(অবস্থা-দিকরাশি)-ব্যাকএন্ড">
+<h3>স্টেটভেক্টর (অবস্থা দিকরাশি) ব্যাকএন্ড<a class="headerlink" href="#স্টেটভেক্টর-(অবস্থা-দিকরাশি)-ব্যাকএন্ড" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>Qiskit এয়ার-এ সবচেয়ে প্রচলিত ব্যাকএন্ড হল <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>। এই সিমুলেটরটি কোয়ান্টামের স্থিতি কে
+প্রত্যাবর্তন করে, যা <span class="math notranslate nohighlight">\(2^n\)</span> এর একটি জটিল দিকরাশির মাত্রা, যেখানে <span class="math notranslate nohighlight">\(n\)</span> হল কিউবিট-এর সংখ্যা (তাই এটি ব্যবহারের সময় সতর্কতা অবলম্বন করুন কারণ এটি আপনার মেশিনে চালানোর সময় দ্রুত খুব বড় হয়ে যাবে)।</p>
+<p>উপরের সার্কিটটি (বর্তনীটি) স্টেটভেক্টর সিমুলেটর দিয়ে চালানোর জন্য, আপনাকে প্রথমে এয়ার ইম্পোর্ট (আমদানি) করতে হবে এবং তারপরে ব্যাকএন্ডটি <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code> এ স্থির করতে হবে।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -682,8 +682,8 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<p>Now that we have chosen the backend, it’s time to compile and run the quantum circuit. In Qiskit we provide the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function for this. <code class="docutils literal notranslate"><span class="pre">execute</span></code> returns a <code class="docutils literal notranslate"><span class="pre">job</span></code> object that encapsulates information about the job submitted to the backend.</p>
-<div class="alert alert-block alert-info"><p>Tip: You can obtain the above parameters in Jupyter. Simply place the text cursor on a function and press Shift+Tab.</p>
+<p>এখন আমরা যে ব্যাকএন্ডটি নির্বাচিত করে নিয়েছি, এখন সেই কোয়ান্টাম সার্কিটটি (বর্তনীটি) কম্পাইল (সংকলন) এবং চালানোর সময়। Qiskit এ আমরা এর জন্য <code class="docutils literal notranslate"><span class="pre">execute</span></code> ফাংশন সরবাহ করি। <code class="docutils literal notranslate"><span class="pre">execute</span></code> একটি <code class="docutils literal notranslate"><span class="pre">job</span></code> অবজেক্ট কে প্রত্যাবর্তন করে যা ব্যাকএন্ড-এ জমা দেওয়া job-এর সম্পর্কে তথ্য এনক্যাপস্যুলেট করে।</p>
+<div class="alert alert-block alert-info"><p>টিপ: আপনি জুপিটারে উপরের প্যারামিটার-গুলি (স্থিতিমাপগুলি) পেতে পারেন। কেবল ওই টেক্সট কার্সারটি একটি ফাংশনের উপরে রেখে শিফট + ট্যাব টিপুন।</p>
 </div><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -694,8 +694,8 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<p>When you run a program, a job object is made that has the following two useful methods: <code class="docutils literal notranslate"><span class="pre">job.status()</span></code> and <code class="docutils literal notranslate"><span class="pre">job.result()</span></code>, which return the status of the job and a result object, respectively.</p>
-<div class="alert alert-block alert-info"><p>Note: Jobs run asynchronously, but when the result method is called, it switches to synchronous and waits for it to finish before moving on to another task.</p>
+<p>যখন আপনি একটি নির্দেশমালা (প্রোগ্রাম) চালাবেন, একটি কাজ (জব) অবজেক্ট তৈরি করা হয় যেটাতে নিম্নলিখিত দুটি দরকারি ফাংশন আছে: <code class="docutils literal notranslate"><span class="pre">job.status()</span></code> এবং <code class="docutils literal notranslate"><span class="pre">job.result()</span></code>, যেটা যথাক্রমে কাজ (জব) এর স্থিতি এবং ফলাফলের অবজেক্ট-টি প্রত্যাবর্তন করে।</p>
+<div class="alert alert-block alert-info"><p>দ্রষ্টব্য: কাজ (জব) গুলি অসমনিয়ত ভাবে চালিত হয়, কিন্তু যখন ফলাফল পদ্ধতি কে ডাকা হয়, তখন এটি সমকালীনে পরিবর্তন হয় এবং অন্য কোনো কার্যে যাওয়ার আগে এটি শেষ হওয়ার জন্য অপেক্ষা করে।</p>
 </div><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -705,7 +705,7 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<p>The results object contains the data and Qiskit provides the method <code class="docutils literal notranslate"><span class="pre">result.get_statevector(circ)</span></code> to return the state vector for the quantum circuit.</p>
+<p>ফলাফলের অবজেক্ট-টিতে তথ্য থাকে এবং Qiskit কোয়ান্টাম সার্কিট-এর (বর্তনীর) স্টেট ভেক্টরটি (অবস্থা দিকরাশিটি) প্রত্যাবর্তন করার জন্য <code class="docutils literal notranslate"><span class="pre">result.get_statevector(circ)</span></code> পদ্ধতিটি সরবরাহ করে।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -725,8 +725,8 @@ run them on different backends. After the jobs have been run, the data is collec
  0.707+0.j]
 </pre></div></div>
 </div>
-<p>Qiskit also provides a visualization toolbox to allow you to view these results.</p>
-<p>Below, we use the visualization function to plot the real and imaginary components of the state density matrix <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p>Qiskit আপনাকে এই ফলাফলগুলি পরিদর্শনের অনুমতি দেওয়ার জন্য একটি দৃশ্যায়ন সরঞ্জাম -বক্স ও সরবরাহ করে।</p>
+<p>নিচে আমরা দৃশ্যায়ন ফাংশনটি ব্যবহার করে অবস্থা (স্টেট) ঘনত্ব (ডেন্সিটি) ম্যাট্রিক্স <span class="math notranslate nohighlight">\(\rho\)</span> এর আসল এবং কাল্পনিক উপাদানগুলি কে অঙ্কন করবো।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -746,9 +746,9 @@ run them on different backends. After the jobs have been run, the data is collec
 </div>
 </div>
 </section>
-<section id="Unitary-backend">
-<h3>Unitary backend<a class="headerlink" href="#Unitary-backend" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>Qiskit Aer also includes a <code class="docutils literal notranslate"><span class="pre">unitary_simulator</span></code> that works <em>provided all the elements in the circuit are unitary operations</em>. This backend calculates the <span class="math notranslate nohighlight">\(2^n \times 2^n\)</span> matrix representing the gates in the quantum circuit.</p>
+<section id="ঐকিক-(ইউনিটারি)-ব্যাকএন্ড">
+<h3>ঐকিক (ইউনিটারি) ব্যাকএন্ড<a class="headerlink" href="#ঐকিক-(ইউনিটারি)-ব্যাকএন্ড" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>Qiskit Aer এর মধ্যে ʻউনিটারি_সিমুলেটর``অন্তর্ভুক্ত ও ব্যবহারযোগ্য <em>শর্তানুসারে বর্তনীর(সার্কিট ) এর সকল উপাদান কে একক ক্রিয়াকলাপ সম্পন্ন হতে হবে</em> .এই ব্যাকএন্ডটি <span class="math notranslate nohighlight">\(2^n \times 2^n\)</span> ম্যাট্রিক্স গণনা করতে পারে যা কোয়ান্টাম বর্তনী (সার্কিট) এর গেটস রূপে উপস্থাপন করা সম্ভব।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -788,8 +788,8 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div></div>
 </div>
 </section>
-<section id="OpenQASM-backend">
-<h3>OpenQASM backend<a class="headerlink" href="#OpenQASM-backend" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="OpenQASM-ব্যাকএন্ড">
+<h3>OpenQASM ব্যাকএন্ড<a class="headerlink" href="#OpenQASM-ব্যাকএন্ড" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>The simulators above are useful because they provide information about the state output by the ideal circuit and the matrix representation of the circuit. However, a real experiment terminates by <em>measuring</em> each qubit (usually in the computational <span class="math notranslate nohighlight">\(|0\rangle, |1\rangle\)</span> basis). Without measurement, we cannot gain information about the state. Measurements cause the quantum system to collapse into classical bits.</p>
 <p>For example, suppose we make independent measurements on each qubit of the three-qubit GHZ state</p>
 <div class="math notranslate nohighlight">
@@ -942,7 +942,7 @@ q_2: |0>──────────┤ X ├─░──╫──╫─┤M�
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/08/02 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/08/03 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>
@@ -961,16 +961,16 @@ q_2: |0>──────────┤ X ├─░──╫──╫─┤M�
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Getting Started with Qiskit</a><ul>
-<li><a class="reference internal" href="#Circuit-Basics">Circuit Basics</a><ul>
-<li><a class="reference internal" href="#Building-the-circuit">Building the circuit</a></li>
+<li><a class="reference internal" href="#">Qiskit দিয়ে শুরু করা যাক।</a><ul>
+<li><a class="reference internal" href="#বর্তনীর-(সার্কিট)-প্রাথমিক-ধারণা">বর্তনীর (সার্কিট) প্রাথমিক ধারণা</a><ul>
+<li><a class="reference internal" href="#বর্তনী-(সার্কিট)-নির্মাণ">বর্তনী (সার্কিট) নির্মাণ</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Visualize-Circuit">Visualize Circuit</a></li>
-<li><a class="reference internal" href="#Simulating-circuits-using-Qiskit-Aer">Simulating circuits using Qiskit Aer</a><ul>
-<li><a class="reference internal" href="#Statevector-backend">Statevector backend</a></li>
-<li><a class="reference internal" href="#Unitary-backend">Unitary backend</a></li>
-<li><a class="reference internal" href="#OpenQASM-backend">OpenQASM backend</a></li>
+<li><a class="reference internal" href="#বর্তনী-(সার্কিট)-দৃশ্যায়িত-করা">বর্তনী (সার্কিট) দৃশ্যায়িত করা</a></li>
+<li><a class="reference internal" href="#Qiskit-এয়ার-দিয়ে-সার্কিট-গুলি-(বর্তনীগুলি)-সিমুলেট-করা-হচ্ছে">Qiskit এয়ার দিয়ে সার্কিট-গুলি (বর্তনীগুলি) সিমুলেট করা হচ্ছে</a><ul>
+<li><a class="reference internal" href="#স্টেটভেক্টর-(অবস্থা-দিকরাশি)-ব্যাকএন্ড">স্টেটভেক্টর (অবস্থা দিকরাশি) ব্যাকএন্ড</a></li>
+<li><a class="reference internal" href="#ঐকিক-(ইউনিটারি)-ব্যাকএন্ড">ঐকিক (ইউনিটারি) ব্যাকএন্ড</a></li>
+<li><a class="reference internal" href="#OpenQASM-ব্যাকএন্ড">OpenQASM ব্যাকএন্ড</a></li>
 </ul>
 </li>
 </ul>

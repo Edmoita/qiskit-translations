@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.utils.quantum_instance &mdash; Qiskit 0.28.0 दिग्दर्शिका</title>
+  <title>qiskit.utils.quantum_instance &mdash; Qiskit 0.29.0 दिग्दर्शिका</title>
   
 
   
@@ -333,6 +333,7 @@
 <span class="sd">&quot;&quot;&quot; Quantum Instance module &quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -352,6 +353,59 @@
 <span class="p">)</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_MeasFitterType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Meas Fitter Type.&quot;&quot;&quot;</span>
+
+    <span class="n">COMPLETE_MEAS_FITTER</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">TENSORED_MEAS_FITTER</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">type_from_class</span><span class="p">(</span><span class="n">meas_class</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns fitter type from class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="kn">import</span> <span class="p">(</span>
+                <span class="n">CompleteMeasFitter</span><span class="p">,</span>
+                <span class="n">TensoredMeasFitter</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
+                <span class="n">libname</span><span class="o">=</span><span class="s2">&quot;qiskit-ignis&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;QuantumInstance&quot;</span><span class="p">,</span>
+                <span class="n">pip_install</span><span class="o">=</span><span class="s2">&quot;pip install qiskit-ignis&quot;</span><span class="p">,</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">ex</span>
+        <span class="k">if</span> <span class="n">meas_class</span> <span class="o">==</span> <span class="n">CompleteMeasFitter</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">COMPLETE_MEAS_FITTER</span>
+        <span class="k">elif</span> <span class="n">meas_class</span> <span class="o">==</span> <span class="n">TensoredMeasFitter</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">TENSORED_MEAS_FITTER</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown fitter </span><span class="si">{</span><span class="n">meas_class</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">type_from_instance</span><span class="p">(</span><span class="n">meas_instance</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns fitter type from instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="kn">import</span> <span class="p">(</span>
+                <span class="n">CompleteMeasFitter</span><span class="p">,</span>
+                <span class="n">TensoredMeasFitter</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
+                <span class="n">libname</span><span class="o">=</span><span class="s2">&quot;qiskit-ignis&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;QuantumInstance&quot;</span><span class="p">,</span>
+                <span class="n">pip_install</span><span class="o">=</span><span class="s2">&quot;pip install qiskit-ignis&quot;</span><span class="p">,</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">ex</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meas_instance</span><span class="p">,</span> <span class="n">CompleteMeasFitter</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">COMPLETE_MEAS_FITTER</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meas_instance</span><span class="p">,</span> <span class="n">TensoredMeasFitter</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">TENSORED_MEAS_FITTER</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown fitter </span><span class="si">{</span><span class="n">meas_instance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="QuantumInstance"><a class="viewcode-back" href="../../../stubs/qiskit.utils.QuantumInstance.html#qiskit.utils.QuantumInstance">[docs]</a><span class="k">class</span> <span class="nc">QuantumInstance</span><span class="p">:</span>
@@ -854,28 +908,15 @@
                         <span class="n">cals_result</span> <span class="o">=</span> <span class="n">result</span>
 
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Building calibration matrix for measurement error mitigation.&quot;</span><span class="p">)</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="kn">from</span> <span class="nn">qiskit.ignis.mitigation.measurement</span> <span class="kn">import</span> <span class="p">(</span>
-                        <span class="n">CompleteMeasFitter</span><span class="p">,</span>
-                        <span class="n">TensoredMeasFitter</span><span class="p">,</span>
-                    <span class="p">)</span>
-                <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
-                        <span class="n">libname</span><span class="o">=</span><span class="s2">&quot;qiskit-ignis&quot;</span><span class="p">,</span>
-                        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;execute&quot;</span><span class="p">,</span>
-                        <span class="n">pip_install</span><span class="o">=</span><span class="s2">&quot;pip install qiskit-ignis&quot;</span><span class="p">,</span>
-                    <span class="p">)</span> <span class="kn">from</span> <span class="nn">ex</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meas_error_mitigation_cls</span> <span class="o">==</span> <span class="n">CompleteMeasFitter</span><span class="p">:</span>
+                <span class="n">meas_type</span> <span class="o">=</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">type_from_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_meas_error_mitigation_cls</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">meas_type</span> <span class="o">==</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">COMPLETE_MEAS_FITTER</span><span class="p">:</span>
                     <span class="n">meas_error_mitigation_fitter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meas_error_mitigation_cls</span><span class="p">(</span>
                         <span class="n">cals_result</span><span class="p">,</span> <span class="n">state_labels</span><span class="p">,</span> <span class="n">qubit_list</span><span class="o">=</span><span class="n">qubit_index</span><span class="p">,</span> <span class="n">circlabel</span><span class="o">=</span><span class="n">circuit_labels</span>
                     <span class="p">)</span>
-                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meas_error_mitigation_cls</span> <span class="o">==</span> <span class="n">TensoredMeasFitter</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="n">meas_type</span> <span class="o">==</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">TENSORED_MEAS_FITTER</span><span class="p">:</span>
                     <span class="n">meas_error_mitigation_fitter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meas_error_mitigation_cls</span><span class="p">(</span>
                         <span class="n">cals_result</span><span class="p">,</span> <span class="n">mit_pattern</span><span class="o">=</span><span class="n">state_labels</span><span class="p">,</span> <span class="n">circlabel</span><span class="o">=</span><span class="n">circuit_labels</span>
                     <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown fitter </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_meas_error_mitigation_cls</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
                 <span class="bp">self</span><span class="o">.</span><span class="n">_meas_error_mitigation_fitters</span><span class="p">[</span><span class="n">qubit_index_str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="n">meas_error_mitigation_fitter</span><span class="p">,</span>
                     <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
@@ -927,7 +968,9 @@
                     <span class="n">tmp_result</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">c_idx</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">curr_qubit_index</span> <span class="o">==</span> <span class="n">qubit_index</span><span class="p">:</span>
                         <span class="n">tmp_fitter</span> <span class="o">=</span> <span class="n">meas_error_mitigation_fitter</span>
-                    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">meas_error_mitigation_fitter</span><span class="p">,</span> <span class="n">CompleteMeasFitter</span><span class="p">):</span>
+                    <span class="k">elif</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">COMPLETE_MEAS_FITTER</span> <span class="o">==</span> <span class="n">_MeasFitterType</span><span class="o">.</span><span class="n">type_from_instance</span><span class="p">(</span>
+                        <span class="n">meas_error_mitigation_fitter</span>
+                    <span class="p">):</span>
                         <span class="n">tmp_fitter</span> <span class="o">=</span> <span class="n">meas_error_mitigation_fitter</span><span class="o">.</span><span class="n">subset_fitter</span><span class="p">(</span><span class="n">curr_qubit_index</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="n">QiskitError</span><span class="p">(</span>
@@ -1186,7 +1229,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      अंतिम बार सम्पादित 2021/08/02.
+      अंतिम बार सम्पादित 2021/08/03.
 
     </p>
   </div>

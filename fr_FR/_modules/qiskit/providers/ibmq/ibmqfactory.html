@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit.providers.ibmq.ibmqfactory &mdash; Documentation Qiskit 0.28.0</title>
+  <title>qiskit.providers.ibmq.ibmqfactory &mdash; Documentation Qiskit 0.29.0</title>
   
 
   
@@ -478,11 +478,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Check for valid credentials.</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">stored_credentials</span><span class="p">,</span> <span class="n">stored_provider_hgp</span> <span class="o">=</span> <span class="n">discover_credentials</span><span class="p">()</span>
+            <span class="n">stored_credentials</span><span class="p">,</span> <span class="n">preferences</span> <span class="o">=</span> <span class="n">discover_credentials</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">HubGroupProjectInvalidStateError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">IBMQAccountCredentialsInvalidFormat</span><span class="p">(</span>
-                <span class="s1">&#39;The default provider (hub/group/project) stored on disk could not &#39;</span>
-                <span class="s1">&#39;be parsed: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)))</span> <span class="kn">from</span> <span class="nn">ex</span>
+                <span class="s1">&#39;Invalid provider (hub/group/project) data found </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)))</span> <span class="kn">from</span> <span class="nn">ex</span>
 
         <span class="n">credentials_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">stored_credentials</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
@@ -511,7 +510,7 @@
                            <span class="s1">&#39;account in the session will be replaced.&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">disable_account</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_providers</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_providers</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span> <span class="n">preferences</span><span class="p">)</span>
 
         <span class="c1"># Prevent edge case where no hubs are available.</span>
         <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">()</span>
@@ -523,8 +522,8 @@
         <span class="n">default_provider</span> <span class="o">=</span> <span class="n">providers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="c1"># If specified, attempt to get the provider stored for the account.</span>
-        <span class="k">if</span> <span class="n">stored_provider_hgp</span><span class="p">:</span>
-            <span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span> <span class="o">=</span> <span class="n">stored_provider_hgp</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">credentials</span><span class="o">.</span><span class="n">default_provider</span><span class="p">:</span>
+            <span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span> <span class="o">=</span> <span class="n">credentials</span><span class="o">.</span><span class="n">default_provider</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">default_provider</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_provider</span><span class="p">(</span><span class="n">hub</span><span class="o">=</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">IBMQProviderError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
@@ -581,8 +580,6 @@
                 <span class="s1">&#39;Invalid IBM Quantum Experience token &#39;</span>
                 <span class="s1">&#39;found: &quot;</span><span class="si">{}</span><span class="s1">&quot; of type </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">token</span><span class="p">)))</span>
 
-        <span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
         <span class="c1"># If any `hub`, `group`, or `project` is specified, make sure all parameters are set.</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">]):</span>
             <span class="k">raise</span> <span class="n">IBMQAccountValueError</span><span class="p">(</span><span class="s1">&#39;The hub, group, and project parameters must all be &#39;</span>
@@ -594,8 +591,10 @@
         <span class="n">default_provider_hgp</span> <span class="o">=</span> <span class="n">HubGroupProject</span><span class="p">(</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">)</span> \
             <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">hub</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">project</span><span class="p">])</span> <span class="k">else</span> <span class="kc">None</span>
 
+        <span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                                  <span class="n">default_provider</span><span class="o">=</span><span class="n">default_provider_hgp</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
         <span class="n">store_credentials</span><span class="p">(</span><span class="n">credentials</span><span class="p">,</span>
-                          <span class="n">default_provider</span><span class="o">=</span><span class="n">default_provider_hgp</span><span class="p">,</span>
                           <span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IBMQFactory.delete_account"><a class="viewcode-back" href="../../../../stubs/qiskit.providers.ibmq.IBMQFactory.html#qiskit.providers.ibmq.IBMQFactory.delete_account">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -766,17 +765,22 @@
                                        <span class="o">**</span><span class="n">credentials</span><span class="o">.</span><span class="n">connection_parameters</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">version_finder</span><span class="o">.</span><span class="n">version</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_initialize_providers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">:</span> <span class="n">Credentials</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Authenticate against IBM Quantum Experience and populate the providers.</span>
+    <span class="k">def</span> <span class="nf">_initialize_providers</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="n">credentials</span><span class="p">:</span> <span class="n">Credentials</span><span class="p">,</span>
+            <span class="n">preferences</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Authenticate against IBM Quantum and populate the providers.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            credentials: Credentials for IBM Quantum Experience.</span>
+<span class="sd">            credentials: Credentials for IBM Quantum.</span>
+<span class="sd">            preferences: Account preferences.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">auth_client</span> <span class="o">=</span> <span class="n">AuthClient</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">token</span><span class="p">,</span>
                                  <span class="n">credentials</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
                                  <span class="o">**</span><span class="n">credentials</span><span class="o">.</span><span class="n">connection_parameters</span><span class="p">())</span>
         <span class="n">service_urls</span> <span class="o">=</span> <span class="n">auth_client</span><span class="o">.</span><span class="n">current_service_urls</span><span class="p">()</span>
         <span class="n">user_hubs</span> <span class="o">=</span> <span class="n">auth_client</span><span class="o">.</span><span class="n">user_hubs</span><span class="p">()</span>
+        <span class="n">preferences</span> <span class="o">=</span> <span class="n">preferences</span> <span class="ow">or</span> <span class="p">{}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_credentials</span> <span class="o">=</span> <span class="n">credentials</span>
         <span class="k">for</span> <span class="n">hub_info</span> <span class="ow">in</span> <span class="n">user_hubs</span><span class="p">:</span>
@@ -789,7 +793,10 @@
                 <span class="n">proxies</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">proxies</span><span class="p">,</span>
                 <span class="n">verify</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">verify</span><span class="p">,</span>
                 <span class="n">services</span><span class="o">=</span><span class="n">service_urls</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;services&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+                <span class="n">default_provider</span><span class="o">=</span><span class="n">credentials</span><span class="o">.</span><span class="n">default_provider</span><span class="p">,</span>
                 <span class="o">**</span><span class="n">hub_info</span><span class="p">,</span> <span class="p">)</span>
+            <span class="n">provider_credentials</span><span class="o">.</span><span class="n">preferences</span> <span class="o">=</span> \
+                <span class="n">preferences</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">provider_credentials</span><span class="o">.</span><span class="n">unique_id</span><span class="p">(),</span> <span class="p">{})</span>
 
             <span class="c1"># Build the provider.</span>
             <span class="k">try</span><span class="p">:</span>
@@ -816,7 +823,7 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Mis à jour le 2021/08/02.
+      Mis à jour le 2021/08/03.
 
     </p>
   </div>

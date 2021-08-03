@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Randomized Benchmarking &mdash; Qiskit 0.28.0 說明文件</title>
+  <title>Randomized Benchmarking &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -570,12 +570,12 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">備註</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/noise/4_randomized_benchmarking.ipynb">tutorials/noise/4_randomized_benchmarking.ipynb</a>.</p>
+<p>此頁面是從 <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/noise/4_randomized_benchmarking.ipynb">tutorials/noise/4_randomized_benchmarking.ipynb</a> 產生的。</p>
 </div>
 <section id="Randomized-Benchmarking">
 <h1>Randomized Benchmarking<a class="headerlink" href="#Randomized-Benchmarking" title="本標題的永久連結">¶</a></h1>
-<section id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="本標題的永久連結">¶</a></h2>
+<section id="簡介">
+<h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
 <p><strong>Randomization benchmarking (RB)</strong> is a well-known technique to measure average gate performance by running sequences of random Clifford gates that should return the qubits to the initial state. Qiskit Ignis has tools to generate one- and two-qubit Clifford gate sequences simultaneously.</p>
 <p>This notebook gives an example for how to use the <code class="docutils literal notranslate"><span class="pre">ignis.verification.randomized_benchmarking</span></code> module. This particular example shows how to run 2-qubit randomized benchmarking (RB) simultaneous with 1-qubit RB. There are also examples on how to use some of the companion functions for predicting RB fidelity.</p>
 <div class="nbinput nblast docutils container">
@@ -599,8 +599,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="1)-Select-the-Parameters-of-the-RB-Run">
-<h2>1) Select the Parameters of the RB Run<a class="headerlink" href="#1)-Select-the-Parameters-of-the-RB-Run" title="本標題的永久連結">¶</a></h2>
+<section id="1）選取-RB-執行的參數">
+<h2>1）選取 RB 執行的參數<a class="headerlink" href="#1）選取-RB-執行的參數" title="本標題的永久連結">¶</a></h2>
 <p>First, we need to choose the following parameters:</p>
 <ul class="simple">
 <li><p><strong>nseeds:</strong> The number of seeds. For each seed you will get a separate list of output circuits in rb_circs.</p></li>
@@ -631,11 +631,11 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="2)-Generate-the-RB-sequences">
-<h2>2) Generate the RB sequences<a class="headerlink" href="#2)-Generate-the-RB-sequences" title="本標題的永久連結">¶</a></h2>
+<section id="2）產生其-RB-序列">
+<h2>2）產生其 RB 序列<a class="headerlink" href="#2）產生其-RB-序列" title="本標題的永久連結">¶</a></h2>
 <p>We generate RB sequences. We start with a small example (so it doesn’t take too long to run).</p>
 <p>In order to generate the RB sequences <strong>rb_circs</strong>, which is a list of lists of quantum circuits, we run the function <code class="docutils literal notranslate"><span class="pre">rb.randomized_benchmarking_seq</span></code>.</p>
-<p>This function returns:</p>
+<p>此函數傳回：</p>
 <ul class="simple">
 <li><p><strong>rb_circs:</strong> A list of lists of circuits for the rb sequences (separate list for each seed).</p></li>
 <li><p><strong>xdata:</strong> The Clifford lengths (with multiplier if applicable).</p></li>
@@ -698,8 +698,8 @@ qr_2: |0&gt;┤ H ├┤ S ├┤ X ├┤ H ├┤ S ├───────�
 </pre></div></div>
 </div>
 </section>
-<section id="Look-at-the-Unitary-for-1-Circuit">
-<h2>Look at the Unitary for 1 Circuit<a class="headerlink" href="#Look-at-the-Unitary-for-1-Circuit" title="本標題的永久連結">¶</a></h2>
+<section id="請看此相對於一個電路的么正矩陣">
+<h2>請看此相對於一個電路的么正矩陣<a class="headerlink" href="#請看此相對於一個電路的么正矩陣" title="本標題的永久連結">¶</a></h2>
 <p>The Unitary representing each RB circuit should be the identity (with a global phase), since we multiply random Clifford elements, including a computed reversal gate. We simulate this using an Aer unitary simulator.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -742,8 +742,8 @@ qr_2: |0&gt;┤ H ├┤ S ├┤ X ├┤ H ├┤ S ├───────�
 </pre></div></div>
 </div>
 </section>
-<section id="Define-the-noise-model">
-<h2>Define the noise model<a class="headerlink" href="#Define-the-noise-model" title="本標題的永久連結">¶</a></h2>
+<section id="定義雜訊模型">
+<h2>定義雜訊模型<a class="headerlink" href="#定義雜訊模型" title="本標題的永久連結">¶</a></h2>
 <p>We define a noise model for the simulator. To simulate decay, we add depolarizing error probabilities to the CNOT and U gates.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -760,8 +760,8 @@ qr_2: |0&gt;┤ H ├┤ S ├┤ X ├┤ H ├┤ S ├───────�
 </div>
 </div>
 </section>
-<section id="3)-Execute-the-RB-sequences-on-Aer-simulator">
-<h2>3) Execute the RB sequences on Aer simulator<a class="headerlink" href="#3)-Execute-the-RB-sequences-on-Aer-simulator" title="本標題的永久連結">¶</a></h2>
+<section id="3）在-Aer-模擬器上執行-RB-序列">
+<h2>3）在 Aer 模擬器上執行 RB 序列<a class="headerlink" href="#3）在-Aer-模擬器上執行-RB-序列" title="本標題的永久連結">¶</a></h2>
 <p>We can execute the RB sequences either using a Qiskit Aer Simulator (with some noise model) or using an IBMQ provider, and obtain a list of results, <code class="docutils literal notranslate"><span class="pre">result_list</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -899,8 +899,8 @@ Finished Simulating
 </div>
 </div>
 </section>
-<section id="Add-more-shots-to-the-data">
-<h3>Add more shots to the data<a class="headerlink" href="#Add-more-shots-to-the-data" title="本標題的永久連結">¶</a></h3>
+<section id="增加量測次數並將結果添加至原有的數據">
+<h3>增加量測次數並將結果添加至原有的數據<a class="headerlink" href="#增加量測次數並將結果添加至原有的數據" title="本標題的永久連結">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -971,8 +971,8 @@ Finished Simulating
 </div>
 </div>
 </section>
-<section id="Predicted-Gate-Fidelity">
-<h3>Predicted Gate Fidelity<a class="headerlink" href="#Predicted-Gate-Fidelity" title="本標題的永久連結">¶</a></h3>
+<section id="預測的閘保真度">
+<h3>預測的閘保真度<a class="headerlink" href="#預測的閘保真度" title="本標題的永久連結">¶</a></h3>
 <p>From the known depolarizing errors on the simulation we can predict the <strong>fidelity</strong>. First we need to count the number of <strong>gates per Clifford</strong>.</p>
 <p>The function <strong>gates_per_clifford</strong> takes a list of transpiled RB circuits and outputs the number of basis gates in each circuit.</p>
 <div class="nbinput docutils container">
@@ -1233,7 +1233,7 @@ Predicted 2Q Error per Clifford: 1.313111e-02
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/02。
+      最後更新於 2021/08/03。
 
     </p>
   </div>
@@ -1253,18 +1253,18 @@ Predicted 2Q Error per Clifford: 1.313111e-02
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Randomized Benchmarking</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#1)-Select-the-Parameters-of-the-RB-Run">1) Select the Parameters of the RB Run</a></li>
-<li><a class="reference internal" href="#2)-Generate-the-RB-sequences">2) Generate the RB sequences</a></li>
-<li><a class="reference internal" href="#Look-at-the-Unitary-for-1-Circuit">Look at the Unitary for 1 Circuit</a></li>
-<li><a class="reference internal" href="#Define-the-noise-model">Define the noise model</a></li>
-<li><a class="reference internal" href="#3)-Execute-the-RB-sequences-on-Aer-simulator">3) Execute the RB sequences on Aer simulator</a></li>
+<li><a class="reference internal" href="#簡介">簡介</a></li>
+<li><a class="reference internal" href="#1）選取-RB-執行的參數">1）選取 RB 執行的參數</a></li>
+<li><a class="reference internal" href="#2）產生其-RB-序列">2）產生其 RB 序列</a></li>
+<li><a class="reference internal" href="#請看此相對於一個電路的么正矩陣">請看此相對於一個電路的么正矩陣</a></li>
+<li><a class="reference internal" href="#定義雜訊模型">定義雜訊模型</a></li>
+<li><a class="reference internal" href="#3）在-Aer-模擬器上執行-RB-序列">3）在 Aer 模擬器上執行 RB 序列</a></li>
 <li><a class="reference internal" href="#4)-Fit-the-RB-results-and-calculate-the-gate-fidelity">4) Fit the RB results and calculate the gate fidelity</a><ul>
 <li><a class="reference internal" href="#Get-statistics-about-the-survival-probabilities">Get statistics about the survival probabilities</a></li>
 <li><a class="reference internal" href="#Plot-After-1-Seed">Plot After 1 Seed</a></li>
 <li><a class="reference internal" href="#Plot-with-the-Rest-of-the-Seeds">Plot with the Rest of the Seeds</a></li>
-<li><a class="reference internal" href="#Add-more-shots-to-the-data">Add more shots to the data</a></li>
-<li><a class="reference internal" href="#Predicted-Gate-Fidelity">Predicted Gate Fidelity</a></li>
+<li><a class="reference internal" href="#增加量測次數並將結果添加至原有的數據">增加量測次數並將結果添加至原有的數據</a></li>
+<li><a class="reference internal" href="#預測的閘保真度">預測的閘保真度</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Run-an-RB-Sequence-with-T1,T2-Errors">Run an RB Sequence with T1,T2 Errors</a></li>

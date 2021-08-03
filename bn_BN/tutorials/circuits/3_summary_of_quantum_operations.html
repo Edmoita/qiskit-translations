@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>কোয়ান্টাম প্রক্রিয়ার সারমর্ম &mdash; Qiskit 0.28.0 documentation</title>
+  <title>কোয়ান্টাম প্রক্রিয়ার সারমর্ম &mdash; Qiskit 0.29.0 documentation</title>
   
 
   
@@ -574,20 +574,20 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="কোয়ান্টাম-প্রক্রিয়ার-সারমর্ম">
 <h1>কোয়ান্টাম প্রক্রিয়ার সারমর্ম<a class="headerlink" href="#কোয়ান্টাম-প্রক্রিয়ার-সারমর্ম" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
-<p>In this section we will go into the different operations that are available in Qiskit Terra. These are:</p>
+<p>এই অংশে Qiskit টেরা তে ব্যবহৃত কয়েকটি কার্যকারকের বর্ণনা দেয়া হবে।:</p>
 <ul class="simple">
-<li><p>Single-qubit quantum gates</p></li>
-<li><p>Multi-qubit quantum gates</p></li>
-<li><p>Measurements</p></li>
+<li><p>একক কিউবিট যুক্তি বর্তনী</p></li>
+<li><p>বহু কিউবিট প্রায়োগিক যুক্তি বর্তনী</p></li>
+<li><p>পরিমাপ</p></li>
 <li><p>Reset</p></li>
-<li><p>Conditionals</p></li>
-<li><p>State initialization</p></li>
+<li><p>শর্তসাপেক্ষ</p></li>
+<li><p>অবস্থা সূচিতকরণ</p></li>
 </ul>
-<p>We will also show you how to use the three different simulators:</p>
+<p>কিভাবে তিনটি ভিন্ন ভিন্ন সিমুলেটর ব্যবহার করতে হয় তার প্রয়োগ দেখানো হবে:</p>
 <ul class="simple">
-<li><p>unitary_simulator</p></li>
-<li><p>qasm_simulator</p></li>
-<li><p>statevector_simulator</p></li>
+<li><p>ইউনিটারি_সিমুলেটর</p></li>
+<li><p>কোয়াজম_সিমুলেটর</p></li>
+<li><p>স্টেটভেক্টর সিমুলেটর</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -615,44 +615,44 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<section id="Single-Qubit-Quantum-states">
-<h2>Single Qubit Quantum states<a class="headerlink" href="#Single-Qubit-Quantum-states" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>A single qubit quantum state can be written as</p>
+<section id="একক-কিউবিট-কণার-দশা">
+<h2>একক কিউবিট কণার দশা<a class="headerlink" href="#একক-কিউবিট-কণার-দশা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p>একটি একক কিউবিট কণার লিখিত দশা বর্ণন</p>
 <div class="math notranslate nohighlight">
 \[\left|\psi\right\rangle = \alpha\left|0\right\rangle + \beta \left|1\right\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are complex numbers. In a measurement the probability of the bit being in <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> is <span class="math notranslate nohighlight">\(|\alpha|^2\)</span> and <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span> is <span class="math notranslate nohighlight">\(|\beta|^2\)</span>. As a vector this is</p>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span> এবং <span class="math notranslate nohighlight">\(\beta\)</span> জটিল সংখ্যা। একটি কণার <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> দশা পরিমাপণের সম্ভাব্যতা হচ্ছে <span class="math notranslate nohighlight">\(|\alpha|^2\)</span> এবং <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span> দশা পরিমাপণের সম্ভাব্যতা হচ্ছে <span class="math notranslate nohighlight">\(|\beta|^2\)</span>. দিকরাশি হিসেবে যা</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left|\psi\right\rangle =
 \begin{pmatrix}
 \alpha \\
 \beta
 \end{pmatrix}.\end{split}\]</div>
-<p>Note, due to the conservation of probability <span class="math notranslate nohighlight">\(|\alpha|^2+ |\beta|^2 = 1\)</span> and since global phase is undetectable <span class="math notranslate nohighlight">\(\left|\psi\right\rangle := e^{i\delta} \left|\psi\right\rangle\)</span> we only require two real numbers to describe a single qubit quantum state.</p>
-<p>A convenient representation is</p>
+<p>টীকা, সম্ভাবনার সংরক্ষনশীলতা অনুযায়ী <span class="math notranslate nohighlight">\(|\alpha|^2+|\beta|^2 = 1\)</span> এবং গ্লোবাল ফেজ অনির্ণেয় হেতু একটি একক কিউবিট কণার দশা <span class="math notranslate nohighlight">\(\left|\psi\right\rangle := e^{i\delta} \left|\psi\right\rangle\)</span> প্রকাশে আমাদের শুধুমাত্র দুইটি বাস্তব সংখ্যা প্রয়োজন।</p>
+<p>একটি সার্বজনীন সাংকেতিক প্রকাশ হচ্ছে</p>
 <div class="math notranslate nohighlight">
 \[\left|\psi\right\rangle = \cos(\theta/2)\left|0\right\rangle + \sin(\theta/2)e^{i\phi}\left|1\right\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(0\leq \phi &lt; 2\pi\)</span>, and <span class="math notranslate nohighlight">\(0\leq \theta \leq \pi\)</span>. From this, it is clear that there is a one-to-one correspondence between qubit states (<span class="math notranslate nohighlight">\(\mathbb{C}^2\)</span>) and the points on the surface of a unit sphere (<span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>). This is called the Bloch sphere representation of a qubit state.</p>
-<p>Quantum gates/operations are usually represented as matrices. A gate which acts on a qubit is represented by a <span class="math notranslate nohighlight">\(2\times 2\)</span> unitary matrix <span class="math notranslate nohighlight">\(U\)</span>. The action of the quantum gate is found by multiplying the matrix representing the gate with the vector which represents the quantum state.</p>
+<p>যেখানে <span class="math notranslate nohighlight">\(0\leq \phi &lt; 2\pi\)</span> এবং <span class="math notranslate nohighlight">\(0\leq \theta \leq \pi\)</span>। এ থেকে, এটি স্পষ্ট যে কিউবিট মানগুলির (<span class="math notranslate nohighlight">\(\mathbb{C}^2\)</span>) এবং একক গোলকের পৃষ্ঠের পয়েন্টগুলির (<span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>) মধ্যে একক সম্পর্কযুক্ত রয়েছে। একে বলা হয় ব্লুচ গোলকের (Bloch sphere) গোলককে একটি কিউবিট মানগুলির প্রতিনিধিত্ব।</p>
+<p>কোয়ান্টাম গেটগুলি / অপারেশনগুলি সাধারণত ম্যাট্রিক্স হিসাবে উপস্থাপিত হয়। একটি গেট যা একটি কিউবিটে কাজ করে <span class="math notranslate nohighlight">\(2\times 2\)</span> ইউনিটারি ম্যাট্রিক্স <span class="math notranslate nohighlight">\(U\)</span> দ্বারা প্রতিনিধিত্ব করে। কোয়ান্টাম গেটের কার্যকারিতা কোয়ান্টাম মানের প্রতিনিধিত্বকারী ভেক্টরগুলির সাথে গেটের ম্যাট্রিক্সকে গুণ করে পাওয়া যায়।</p>
 <div class="math notranslate nohighlight">
 \[\left|\psi'\right\rangle = U\left|\psi\right\rangle\]</div>
-<p>A general unitary must be able to take the <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> to the above state. That is</p>
+<p>একটি সাধারণ একক ক্রিয়াকলাপ অবশ্যই <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> থেকে উল্লিখিত পরিস্থিতি পেতে সক্ষম হবে। যার অর্থ হচ্ছে</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}U = \begin{pmatrix}
 \cos(\theta/2) &amp; a \\
 e^{i\phi}\sin(\theta/2) &amp; b
 \end{pmatrix}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are complex numbers constrained such that <span class="math notranslate nohighlight">\(U^\dagger U = I\)</span> for all <span class="math notranslate nohighlight">\(0\leq\theta\leq\pi\)</span> and <span class="math notranslate nohighlight">\(0\leq \phi&lt;2\pi\)</span>. This gives 3 constraints and as such <span class="math notranslate nohighlight">\(a\rightarrow -e^{i\lambda}\sin(\theta/2)\)</span> and <span class="math notranslate nohighlight">\(b\rightarrow e^{i\lambda+i\phi}\cos(\theta/2)\)</span> where <span class="math notranslate nohighlight">\(0\leq \lambda&lt;2\pi\)</span> giving</p>
+<p>যেখানে <span class="math notranslate nohighlight">\(a\)</span> এবং <span class="math notranslate nohighlight">\(b\)</span> জটিল সংখ্যা যেমন <span class="math notranslate nohighlight">\(U^\dagger U = I\)</span> সমস্ত <span class="math notranslate nohighlight">\(0\leq\theta\leq\pi\)</span> এবং <span class="math notranslate nohighlight">\(0\leq \phi&lt;2\pi\)</span> এর জন্য সীমাবদ্ধ। এটি 3 টি কন্সট্রেইন্ট দেয় এবং যেমন <span class="math notranslate nohighlight">\(a\rightarrow -e^{i\lambda}\sin(\theta/2)\)</span> এবং <span class="math notranslate nohighlight">\(b\rightarrow e^{i\lambda+i\phi}\cos(\theta/2)\)</span> যেখানে <span class="math notranslate nohighlight">\(0\leq \lambda&lt;2\pi\)</span> দেয়।</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}U = \begin{pmatrix}
 \cos(\theta/2) &amp; -e^{i\lambda}\sin(\theta/2) \\
 e^{i\phi}\sin(\theta/2) &amp; e^{i\lambda+i\phi}\cos(\theta/2)
 \end{pmatrix}.\end{split}\]</div>
-<p>This is the most general form of a single qubit unitary.</p>
+<p>এটি একটি একক কিউবিট ইউনিটরিটির সর্বাধিক সাধারণ ফর্ম।</p>
 </section>
-<section id="Single-Qubit-Gates">
-<h2>Single-Qubit Gates<a class="headerlink" href="#Single-Qubit-Gates" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>The single-qubit gates available are: - u gates - Identity gate - Pauli gates - Clifford gates - <span class="math notranslate nohighlight">\(C3\)</span> gates - Standard rotation gates</p>
-<p>We have provided a backend: <code class="docutils literal notranslate"><span class="pre">unitary_simulator</span></code> to allow you to calculate the unitary matrices.</p>
+<section id="একক-কিউবিট-যুক্তিবর্তনী">
+<h2>একক-কিউবিট যুক্তিবর্তনী<a class="headerlink" href="#একক-কিউবিট-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p>একক কিউবিট যুক্তিবর্তনীগুলো (গেইট) হলো: - ইউ যুক্তিবর্তনী, আইডেন্টিটি যুক্তিবর্তনী - পলি যুক্তিবর্তনী - ক্লিফোর্ড যুক্তিবর্তনী - <span class="math notranslate nohighlight">\(C3\)</span> যুক্তিবর্তনী - আদর্শ ঘূর্ণন যুক্তিবর্তনী</p>
+<p>একক ম্যাট্রিক্স গণনার জন্য আমরা <code class="docutils literal notranslate"><span class="pre">unitary_simulator</span></code> নামক একটি ব্যাকএন্ড সরবরাহ করেছি।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -662,9 +662,9 @@ e^{i\phi}\sin(\theta/2) &amp; e^{i\lambda+i\phi}\cos(\theta/2)
 </pre></div>
 </div>
 </div>
-<section id="u-gates">
-<h3>u gates<a class="headerlink" href="#u-gates" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>In Qiskit we give you access to the general unitary using the <span class="math notranslate nohighlight">\(u3\)</span> gate</p>
+<section id="ইউ-(u)-যুক্তিবর্তনী">
+<h3>ইউ (u) যুক্তিবর্তনী<a class="headerlink" href="#ইউ-(u)-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>Qiskit-এ আমরা <span class="math notranslate nohighlight">\(u3\)</span> যুক্তিবর্তনী ব্যবহার করে আপনাকে সাধারণ এককের (জেনারেল ইউনিটারি) প্রবেশাধিকার দেই।</p>
 <div class="math notranslate nohighlight">
 \[u3(\theta, \phi, \lambda) = U(\theta, \phi, \lambda)\]</div>
 <div class="nbinput docutils container">
@@ -707,14 +707,14 @@ array([[ 0.707+0.j   , -0.   -0.707j],
        [ 0.   +0.707j, -0.707+0.j   ]])
 </pre></div></div>
 </div>
-<p>The <span class="math notranslate nohighlight">\(u2(\phi, \lambda) =u3(\pi/2, \phi, \lambda)\)</span> gate has the matrix form</p>
+<p>গেট <span class="math notranslate nohighlight">\(u2(\phi, \lambda) =u3(\pi/2, \phi, \lambda)\)</span> এর ম্যাট্রিক্স ফর্মটি</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}u2(\phi, \lambda) =
 \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; -e^{i\lambda} \\
 e^{i\phi} &amp; e^{i(\phi + \lambda)}
 \end{pmatrix}.\end{split}\]</div>
-<p>This is a useful gate as it allows us to create superpositions.</p>
+<p>এটি একটি দরকারী যুক্তিবর্তনী কারণ এটি আমাদের কোয়ান্টাম উপরিপাতন তৈরি করতে দেয়।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -755,14 +755,14 @@ array([[ 0.707+0.j   , -0.   -0.707j],
        [ 0.   +0.707j, -0.707+0.j   ]])
 </pre></div></div>
 </div>
-<p>The <span class="math notranslate nohighlight">\(u1(\lambda)= u3(0, 0, \lambda)\)</span> gate has the matrix form</p>
+<p><span class="math notranslate nohighlight">\(u1(\lambda)= u3(0, 0, \lambda)\)</span> হল যুক্তিবর্তনীর ম্যাট্রিক্স ফর্ম</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}u1(\lambda) =
 \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; e^{i \lambda}
 \end{pmatrix},\end{split}\]</div>
-<p>which is useful as it allows us to apply a quantum phase.</p>
+<p>এটি কার্যকর কারণ এটি আমাদের কোয়ান্টাম ফেজ প্রয়োগ করতে দেয়।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -804,9 +804,9 @@ array([[1.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Identity-gate">
-<h3>Identity gate<a class="headerlink" href="#Identity-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The identity gate is <span class="math notranslate nohighlight">\(Id = u0(1)\)</span>.</p>
+<section id="আইডেন্টিটি-যুক্তিবর্তনী">
+<h3>আইডেন্টিটি যুক্তিবর্তনী<a class="headerlink" href="#আইডেন্টিটি-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>আইডেন্টিটি যুক্তিবর্তনী হল <span class="math notranslate nohighlight">\(Id = u0(1)\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -848,11 +848,11 @@ array([[1.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Pauli-gates">
-<h3>Pauli gates<a class="headerlink" href="#Pauli-gates" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<section id="X:-bit-flip-gate">
-<h4><span class="math notranslate nohighlight">\(X\)</span>: bit-flip gate<a class="headerlink" href="#X:-bit-flip-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
-<p>The bit-flip gate <span class="math notranslate nohighlight">\(X\)</span> is defined as:</p>
+<section id="পাউলি-যুক্তিবর্তনী-(গেইট)">
+<h3>পাউলি যুক্তিবর্তনী (গেইট)<a class="headerlink" href="#পাউলি-যুক্তিবর্তনী-(গেইট)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="X:-বিট-উল্টানো-যুক্তিবর্তনী">
+<h4><span class="math notranslate nohighlight">\(X\)</span>: বিট-উল্টানো যুক্তিবর্তনী<a class="headerlink" href="#X:-বিট-উল্টানো-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<p><span class="math notranslate nohighlight">\(X\)</span> বিট-উল্টানো যুক্তিবর্তনীটিকে নির্ধারণ করা হয়ে:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}X   =
 \begin{pmatrix}
@@ -902,7 +902,7 @@ array([[0.+0.j, 1.-0.j],
 </section>
 <section id="Y:-bit--and-phase-flip-gate">
 <h4><span class="math notranslate nohighlight">\(Y\)</span>: bit- and phase-flip gate<a class="headerlink" href="#Y:-bit--and-phase-flip-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
-<p>The <span class="math notranslate nohighlight">\(Y\)</span> gate is defined as:</p>
+<p><span class="math notranslate nohighlight">\(Y\)</span> যুক্তিবর্তনীর সংজ্ঞায়ন হচ্ছে:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}Y  =
 \begin{pmatrix}
@@ -950,9 +950,9 @@ array([[ 0.+0.j, -0.-1.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Z:-phase-flip-gate">
-<h4><span class="math notranslate nohighlight">\(Z\)</span>: phase-flip gate<a class="headerlink" href="#Z:-phase-flip-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
-<p>The phase-flip gate <span class="math notranslate nohighlight">\(Z\)</span> is defined as:</p>
+<section id="Z:-দশা-পরিবর্তনকারী-যুক্তিবর্তনী-(গেইট)">
+<h4><span class="math notranslate nohighlight">\(Z\)</span>: দশা পরিবর্তনকারী যুক্তিবর্তনী (গেইট)<a class="headerlink" href="#Z:-দশা-পরিবর্তনকারী-যুক্তিবর্তনী-(গেইট)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<p>দশা পরিবর্তনকারী যুক্তিবর্তনী (গেইট) <span class="math notranslate nohighlight">\(Z\)</span> এর সংজ্ঞায়ন হচ্ছেঃ:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}Z =
 \begin{pmatrix}
@@ -1001,10 +1001,10 @@ array([[ 1.+0.j,  0.+0.j],
 </div>
 </section>
 </section>
-<section id="Clifford-gates">
-<h3>Clifford gates<a class="headerlink" href="#Clifford-gates" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<section id="Hadamard-gate">
-<h4>Hadamard gate<a class="headerlink" href="#Hadamard-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="ক্লিফোর্ড-যুক্তিবর্তনী">
+<h3>ক্লিফোর্ড যুক্তিবর্তনী<a class="headerlink" href="#ক্লিফোর্ড-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="হাদামার্দ-যুক্তিবর্তনী">
+<h4>হাদামার্দ যুক্তিবর্তনী<a class="headerlink" href="#হাদামার্দ-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}H =
 \frac{1}{\sqrt{2}}
@@ -1053,8 +1053,8 @@ array([[ 0.707+0.j,  0.707-0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="S-(or,-\sqrt{Z}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(S\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate<a class="headerlink" href="#S-(or,-\sqrt{Z}-phase)-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="S-(-অথবা,-:math:`sqrt{Z}-দশা)-যুক্তিবর্তনী-(গেইট)">
+<h4><span class="math notranslate nohighlight">\(S\)</span> ( অথবা, :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>sqrt{Z} দশা) যুক্তিবর্তনী (গেইট)<a class="headerlink" href="#S-(-অথবা,-:math:`sqrt{Z}-দশা)-যুক্তিবর্তনী-(গেইট)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}S =
 \begin{pmatrix}
@@ -1102,8 +1102,8 @@ array([[1.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="S^{\dagger}-(or,-conjugate-of-\sqrt{Z}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate<a class="headerlink" href="#S^{\dagger}-(or,-conjugate-of-\sqrt{Z}-phase)-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="S^{\dagger}-(অথবা,-:math:sqrt{Z}`-এর-অনুবন্ধী-দশা)-যুক্তিবর্তনী-(গেইট)">
+<h4><span class="math notranslate nohighlight">\(S^{\dagger} (অথবা, :math:\)</span>sqrt{Z}` এর অনুবন্ধী দশা) যুক্তিবর্তনী (গেইট)<a class="headerlink" href="#S^{\dagger}-(অথবা,-:math:sqrt{Z}`-এর-অনুবন্ধী-দশা)-যুক্তিবর্তনী-(গেইট)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}S^{\dagger} =
 \begin{pmatrix}
@@ -1152,10 +1152,10 @@ array([[1.+0.j, 0.+0.j],
 </div>
 </section>
 </section>
-<section id="C3-gates">
-<h3><span class="math notranslate nohighlight">\(C3\)</span> gates<a class="headerlink" href="#C3-gates" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<section id="T-(or,-\sqrt{S}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(T\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate<a class="headerlink" href="#T-(or,-\sqrt{S}-phase)-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id=":math:`C3-যুক্তিবর্তনী-(গেইট)">
+<h3>:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>C3 যুক্তিবর্তনী (গেইট)<a class="headerlink" href="#:math:`C3-যুক্তিবর্তনী-(গেইট)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="T-(অথবা,-:math:sqrt{S}`-দশা)-যুক্তিবর্তনী">
+<h4><span class="math notranslate nohighlight">\(T (অথবা, :math:\)</span>sqrt{S}` দশা) যুক্তিবর্তনী<a class="headerlink" href="#T-(অথবা,-:math:sqrt{S}`-দশা)-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}T =
 \begin{pmatrix}
@@ -1203,8 +1203,8 @@ array([[1.   +0.j   , 0.   +0.j   ],
 </pre></div></div>
 </div>
 </section>
-<section id="T^{\dagger}-(or,-conjugate-of-\sqrt{S}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate<a class="headerlink" href="#T^{\dagger}-(or,-conjugate-of-\sqrt{S}-phase)-gate" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="T^{\dagger}-(অথবা,-:math:sqrt{S}`-এর-অনুবন্ধী-দশা)-যুক্তিবর্তনী-(গেইট)">
+<h4><span class="math notranslate nohighlight">\(T^{\dagger} (অথবা, :math:\)</span>sqrt{S}` এর অনুবন্ধী দশা) যুক্তিবর্তনী (গেইট)<a class="headerlink" href="#T^{\dagger}-(অথবা,-:math:sqrt{S}`-এর-অনুবন্ধী-দশা)-যুক্তিবর্তনী-(গেইট)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}T^{\dagger} =
 \begin{pmatrix}
@@ -1253,13 +1253,13 @@ array([[1.   +0.j   , 0.   +0.j   ],
 </div>
 </section>
 </section>
-<section id="Standard-Rotations">
-<h3>Standard Rotations<a class="headerlink" href="#Standard-Rotations" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The standard rotation gates are those that define rotations around the Paulis <span class="math notranslate nohighlight">\(P=\{X,Y,Z\}\)</span>. They are defined as</p>
+<section id="প্রামাণিক-(স্টান্ডার্ড)-ঘূর্ণন">
+<h3>প্রামাণিক (স্টান্ডার্ড) ঘূর্ণন<a class="headerlink" href="#প্রামাণিক-(স্টান্ডার্ড)-ঘূর্ণন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>প্রামাণিক ঘুর্ণনশীল যুক্তিবর্তনীর ঘুর্ণন পাউলী <span class="math notranslate nohighlight">\(P=\{X,Y,Z\}\)</span> এর ঘুর্ণন দ্বারা সংজ্ঞায়ন করা হয়।</p>
 <div class="math notranslate nohighlight">
 \[R_P(\theta) = \exp(-i \theta P/2) = \cos(\theta/2)I -i \sin(\theta/2)P\]</div>
-<section id="Rotation-around-X-axis">
-<h4>Rotation around X-axis<a class="headerlink" href="#Rotation-around-X-axis" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="X-অক্ষ-ঘিরে-আবর্তন">
+<h4>X-অক্ষ ঘিরে আবর্তন<a class="headerlink" href="#X-অক্ষ-ঘিরে-আবর্তন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}R_x(\theta) =
 \begin{pmatrix}
@@ -2035,8 +2035,8 @@ array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 <p>which, as bitstrings, represent the integers <span class="math notranslate nohighlight">\(0,1,2,\cdots, 7\)</span>. Again, Qiskit uses a representation in which the first qubit is on the right-most side of the tensor product and the third qubit is on the left-most side:</p>
 <div class="math notranslate nohighlight">
 \[\left|abc\right\rangle : \underset{\text{qubit 2}}{\left|a\right\rangle}\otimes \underset{\text{qubit 1}}{\left|b\right\rangle}\otimes \underset{\text{qubit 0}}{\left|c\right\rangle}.\]</div>
-<section id="Toffoli-gate-(ccx-gate)">
-<h3>Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)<a class="headerlink" href="#Toffoli-gate-(ccx-gate)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="টফোলি-যুক্তিবর্তনী-(গেইট)-(ccx-যুক্তিবর্তনী-(গেইট))">
+<h3>টফোলি যুক্তিবর্তনী (গেইট) (<span class="math notranslate nohighlight">\(ccx\)</span> যুক্তিবর্তনী (গেইট))<a class="headerlink" href="#টফোলি-যুক্তিবর্তনী-(গেইট)-(ccx-যুক্তিবর্তনী-(গেইট))" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_logic_gate#Toffoli_(CCNOT)_gate">Toffoli gate</a> flips the third qubit if the first two qubits (LSB) are both <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\left|abc\right\rangle \rightarrow \left|bc\oplus a\right\rangle \otimes \left|b\right\rangle \otimes \left|c\right\rangle.\]</div>
@@ -2196,8 +2196,8 @@ array([[1.-0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 </pre></div>
 </div>
 </div>
-<section id="Measurements">
-<h3>Measurements<a class="headerlink" href="#Measurements" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="পরিমাপ">
+<h3>পরিমাপ<a class="headerlink" href="#পরিমাপ" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>We don’t have access to all the information when we make a measurement in a quantum computer. The quantum state is projected onto the standard basis. Below are two examples showing a circuit that is prepared in a basis state and the quantum computer prepared in a superposition state.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
@@ -2642,7 +2642,7 @@ primitive gates of cx, rz and ry.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/08/02 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/08/03 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>
@@ -2662,29 +2662,29 @@ primitive gates of cx, rz and ry.</p>
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">কোয়ান্টাম প্রক্রিয়ার সারমর্ম</a><ul>
-<li><a class="reference internal" href="#Single-Qubit-Quantum-states">Single Qubit Quantum states</a></li>
-<li><a class="reference internal" href="#Single-Qubit-Gates">Single-Qubit Gates</a><ul>
-<li><a class="reference internal" href="#u-gates">u gates</a></li>
-<li><a class="reference internal" href="#Identity-gate">Identity gate</a></li>
-<li><a class="reference internal" href="#Pauli-gates">Pauli gates</a><ul>
-<li><a class="reference internal" href="#X:-bit-flip-gate"><span class="math notranslate nohighlight">\(X\)</span>: bit-flip gate</a></li>
+<li><a class="reference internal" href="#একক-কিউবিট-কণার-দশা">একক কিউবিট কণার দশা</a></li>
+<li><a class="reference internal" href="#একক-কিউবিট-যুক্তিবর্তনী">একক-কিউবিট যুক্তিবর্তনী</a><ul>
+<li><a class="reference internal" href="#ইউ-(u)-যুক্তিবর্তনী">ইউ (u) যুক্তিবর্তনী</a></li>
+<li><a class="reference internal" href="#আইডেন্টিটি-যুক্তিবর্তনী">আইডেন্টিটি যুক্তিবর্তনী</a></li>
+<li><a class="reference internal" href="#পাউলি-যুক্তিবর্তনী-(গেইট)">পাউলি যুক্তিবর্তনী (গেইট)</a><ul>
+<li><a class="reference internal" href="#X:-বিট-উল্টানো-যুক্তিবর্তনী"><span class="math notranslate nohighlight">\(X\)</span>: বিট-উল্টানো যুক্তিবর্তনী</a></li>
 <li><a class="reference internal" href="#Y:-bit--and-phase-flip-gate"><span class="math notranslate nohighlight">\(Y\)</span>: bit- and phase-flip gate</a></li>
-<li><a class="reference internal" href="#Z:-phase-flip-gate"><span class="math notranslate nohighlight">\(Z\)</span>: phase-flip gate</a></li>
+<li><a class="reference internal" href="#Z:-দশা-পরিবর্তনকারী-যুক্তিবর্তনী-(গেইট)"><span class="math notranslate nohighlight">\(Z\)</span>: দশা পরিবর্তনকারী যুক্তিবর্তনী (গেইট)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Clifford-gates">Clifford gates</a><ul>
-<li><a class="reference internal" href="#Hadamard-gate">Hadamard gate</a></li>
-<li><a class="reference internal" href="#S-(or,-\sqrt{Z}-phase)-gate"><span class="math notranslate nohighlight">\(S\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
-<li><a class="reference internal" href="#S^{\dagger}-(or,-conjugate-of-\sqrt{Z}-phase)-gate"><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
+<li><a class="reference internal" href="#ক্লিফোর্ড-যুক্তিবর্তনী">ক্লিফোর্ড যুক্তিবর্তনী</a><ul>
+<li><a class="reference internal" href="#হাদামার্দ-যুক্তিবর্তনী">হাদামার্দ যুক্তিবর্তনী</a></li>
+<li><a class="reference internal" href="#S-(-অথবা,-:math:`sqrt{Z}-দশা)-যুক্তিবর্তনী-(গেইট)"><span class="math notranslate nohighlight">\(S\)</span> ( অথবা, :math:`sqrt{Z} দশা) যুক্তিবর্তনী (গেইট)</a></li>
+<li><a class="reference internal" href="#S^{\dagger}-(অথবা,-:math:sqrt{Z}`-এর-অনুবন্ধী-দশা)-যুক্তিবর্তনী-(গেইট)"><span class="math notranslate nohighlight">\(S^{\dagger} (অথবা, :math:\)</span>sqrt{Z}` এর অনুবন্ধী দশা) যুক্তিবর্তনী (গেইট)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#C3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a><ul>
-<li><a class="reference internal" href="#T-(or,-\sqrt{S}-phase)-gate"><span class="math notranslate nohighlight">\(T\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
-<li><a class="reference internal" href="#T^{\dagger}-(or,-conjugate-of-\sqrt{S}-phase)-gate"><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
+<li><a class="reference internal" href="#:math:`C3-যুক্তিবর্তনী-(গেইট)">:math:`C3 যুক্তিবর্তনী (গেইট)</a><ul>
+<li><a class="reference internal" href="#T-(অথবা,-:math:sqrt{S}`-দশা)-যুক্তিবর্তনী"><span class="math notranslate nohighlight">\(T (অথবা, :math:\)</span>sqrt{S}` দশা) যুক্তিবর্তনী</a></li>
+<li><a class="reference internal" href="#T^{\dagger}-(অথবা,-:math:sqrt{S}`-এর-অনুবন্ধী-দশা)-যুক্তিবর্তনী-(গেইট)"><span class="math notranslate nohighlight">\(T^{\dagger} (অথবা, :math:\)</span>sqrt{S}` এর অনুবন্ধী দশা) যুক্তিবর্তনী (গেইট)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Standard-Rotations">Standard Rotations</a><ul>
-<li><a class="reference internal" href="#Rotation-around-X-axis">Rotation around X-axis</a></li>
+<li><a class="reference internal" href="#প্রামাণিক-(স্টান্ডার্ড)-ঘূর্ণন">প্রামাণিক (স্টান্ডার্ড) ঘূর্ণন</a><ul>
+<li><a class="reference internal" href="#X-অক্ষ-ঘিরে-আবর্তন">X-অক্ষ ঘিরে আবর্তন</a></li>
 <li><a class="reference internal" href="#Rotation-around-Y-axis">Rotation around Y-axis</a></li>
 <li><a class="reference internal" href="#Rotation-around-Z-axis">Rotation around Z-axis</a></li>
 </ul>
@@ -2715,12 +2715,12 @@ primitive gates of cx, rz and ry.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#Three-qubit-gates">Three-qubit gates</a><ul>
-<li><a class="reference internal" href="#Toffoli-gate-(ccx-gate)">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
+<li><a class="reference internal" href="#টফোলি-যুক্তিবর্তনী-(গেইট)-(ccx-যুক্তিবর্তনী-(গেইট))">টফোলি যুক্তিবর্তনী (গেইট) (<span class="math notranslate nohighlight">\(ccx\)</span> যুক্তিবর্তনী (গেইট))</a></li>
 <li><a class="reference internal" href="#Controlled-swap-gate-(Fredkin-Gate)">Controlled swap gate (Fredkin Gate)</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Non-unitary-operations">Non-unitary operations</a><ul>
-<li><a class="reference internal" href="#Measurements">Measurements</a></li>
+<li><a class="reference internal" href="#পরিমাপ">পরিমাপ</a></li>
 <li><a class="reference internal" href="#Reset">Reset</a></li>
 <li><a class="reference internal" href="#Conditional-operations">Conditional operations</a></li>
 </ul>

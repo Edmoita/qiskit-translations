@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Experiment (qiskit.providers.ibmq.experiment) &mdash; Qiskit 0.28.0 說明文件</title>
+  <title>Experiment (qiskit.providers.ibmq.experiment) &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="../_static/panels-variables.ade9f9d55df9d2893fc676ecd59723a1.css" type="text/css" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜尋" href="../search.html" />
-    <link rel="next" title="qiskit.providers.ibmq.experiment.ExperimentService" href="../stubs/qiskit.providers.ibmq.experiment.ExperimentService.html" />
+    <link rel="next" title="qiskit.providers.ibmq.experiment.IBMExperimentService" href="../stubs/qiskit.providers.ibmq.experiment.IBMExperimentService.html" />
     <link rel="prev" title="qiskit.providers.ibmq.random.CQCExtractorJob" href="../stubs/qiskit.providers.ibmq.random.CQCExtractorJob.html" /> 
 
   
@@ -326,26 +326,23 @@
               
   <span class="target" id="module-qiskit.providers.ibmq.experiment"><span id="qiskit-providers-ibmq-experiment"></span></span><section id="experiment-qiskit-providers-ibmq-experiment">
 <h1>Experiment (<a class="reference internal" href="#module-qiskit.providers.ibmq.experiment" title="qiskit.providers.ibmq.experiment"><code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.experiment</span></code></a>)<a class="headerlink" href="#experiment-qiskit-providers-ibmq-experiment" title="本標題的永久連結">¶</a></h1>
-<p>Modules representing IBM Quantum Experience experiments.</p>
-<div class="admonition caution">
-<p class="admonition-title">警示</p>
-<p>This package is currently provided in beta form and heavy modifications to
-both functionality and API are likely to occur.</p>
-</div>
+<p>Modules related to IBM Quantum experiment service.</p>
 <div class="admonition note">
 <p class="admonition-title">備註</p>
 <p>This service is not available to all accounts.</p>
 </div>
 <p>You can use the experiment service to query, upload, and retrieve
-experiments, experiment plots, and analysis results. For example:</p>
+experiments, experiment figures, and analysis results. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">IBMQ</span>
 <span class="n">provider</span> <span class="o">=</span> <span class="n">IBMQ</span><span class="o">.</span><span class="n">load_account</span><span class="p">()</span>
 <span class="n">experiments</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">experiments</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>All the available functions can be invoked using the <cite>provider.experiment</cite>
-attribute, which is an instance of the
-<a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.ExperimentService.html#qiskit.providers.ibmq.experiment.ExperimentService" title="qiskit.providers.ibmq.experiment.ExperimentService"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExperimentService</span></code></a> class.</p>
+attribute, which is an instance of the <a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.IBMExperimentService.html#qiskit.providers.ibmq.experiment.IBMExperimentService" title="qiskit.providers.ibmq.experiment.IBMExperimentService"><code class="xref py py-class docutils literal notranslate"><span class="pre">IBMExperimentService</span></code></a> class.</p>
+<p>This service is intended to be used in conjunction with the <code class="docutils literal notranslate"><span class="pre">qiskit-experiments</span></code>
+package, which allows you to create different types of experiments (for example,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">qiskit_experiments.library.characterization.T1</span></code>).</p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="本標題的永久連結">¶</a></h2>
 <table class="longtable docutils align-default">
@@ -354,14 +351,34 @@ attribute, which is an instance of the
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.ExperimentService.html#qiskit.providers.ibmq.experiment.ExperimentService" title="qiskit.providers.ibmq.experiment.ExperimentService"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExperimentService</span></code></a>(provider)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.IBMExperimentService.html#qiskit.providers.ibmq.experiment.IBMExperimentService" title="qiskit.providers.ibmq.experiment.IBMExperimentService"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IBMExperimentService</span></code></a>(provider)</p></td>
 <td><p>Provides experiment related services.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.Experiment.html#qiskit.providers.ibmq.experiment.Experiment" title="qiskit.providers.ibmq.experiment.Experiment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Experiment</span></code></a>(provider, backend_name, …[, …])</p></td>
-<td><p>Class representing an experiment.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.ResultQuality.html#qiskit.providers.ibmq.experiment.ResultQuality" title="qiskit.providers.ibmq.experiment.ResultQuality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResultQuality</span></code></a>(value)</p></td>
+<td><p>Possible values for analysis result quality.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.AnalysisResult.html#qiskit.providers.ibmq.experiment.AnalysisResult" title="qiskit.providers.ibmq.experiment.AnalysisResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnalysisResult</span></code></a>(experiment_uuid, …[, fit, …])</p></td>
-<td><p>Class representing an analysis result for an experiment.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.DeviceComponent.html#qiskit.providers.ibmq.experiment.DeviceComponent" title="qiskit.providers.ibmq.experiment.DeviceComponent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DeviceComponent</span></code></a>()</p></td>
+<td><p>Class representing a device component.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="本標題的永久連結">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.IBMExperimentError.html#qiskit.providers.ibmq.experiment.IBMExperimentError" title="qiskit.providers.ibmq.experiment.IBMExperimentError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IBMExperimentError</span></code></a>(*message)</p></td>
+<td><p>Base class for errors raised by the experiment service modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.IBMExperimentEntryExists.html#qiskit.providers.ibmq.experiment.IBMExperimentEntryExists" title="qiskit.providers.ibmq.experiment.IBMExperimentEntryExists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IBMExperimentEntryExists</span></code></a>(*message)</p></td>
+<td><p>Errors raised when an experiment entry already exists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../stubs/qiskit.providers.ibmq.experiment.IBMExperimentEntryNotFound.html#qiskit.providers.ibmq.experiment.IBMExperimentEntryNotFound" title="qiskit.providers.ibmq.experiment.IBMExperimentEntryNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IBMExperimentEntryNotFound</span></code></a>(*message)</p></td>
+<td><p>Errors raised when an experiment entry cannot be found.</p></td>
 </tr>
 </tbody>
 </table>
@@ -376,7 +393,7 @@ attribute, which is an instance of the
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../stubs/qiskit.providers.ibmq.experiment.ExperimentService.html" class="btn btn-neutral float-right" title="qiskit.providers.ibmq.experiment.ExperimentService" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="../stubs/qiskit.providers.ibmq.experiment.IBMExperimentService.html" class="btn btn-neutral float-right" title="qiskit.providers.ibmq.experiment.IBMExperimentService" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="../stubs/qiskit.providers.ibmq.random.CQCExtractorJob.html" class="btn btn-neutral" title="qiskit.providers.ibmq.random.CQCExtractorJob" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -393,7 +410,7 @@ attribute, which is an instance of the
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/02。
+      最後更新於 2021/08/03。
 
     </p>
   </div>
@@ -414,6 +431,7 @@ attribute, which is an instance of the
               <ul>
 <li><a class="reference internal" href="#">Experiment (<code class="xref py py-mod docutils literal notranslate"><span class="pre">qiskit.providers.ibmq.experiment</span></code>)</a><ul>
 <li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
 </ul>
 </li>
 </ul>
