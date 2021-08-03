@@ -251,89 +251,6 @@
               
   <br><br><br><div class="section" id="release-notes">
 <h1>Release Notes<a class="headerlink" href="#release-notes" title="Link permanen untuk headline ini">¶</a></h1>
-<div class="section" id="release-notes-0-2-0">
-<span id="id1"></span><h2>0.2.0<a class="headerlink" href="#release-notes-0-2-0" title="Link permanen untuk headline ini">¶</a></h2>
-<div class="section" id="new-features">
-<span id="release-notes-0-2-0-new-features"></span><h3>New Features<a class="headerlink" href="#new-features" title="Link permanen untuk headline ini">¶</a></h3>
-<ul class="simple">
-<li><p>A base class <code class="docutils literal notranslate"><span class="pre">TrainableModel</span></code> is introduced for machine learning models. This class follows
-Scikit-Learn principles and makes the quantum machine learning compatible with classical
-models. Both <code class="docutils literal notranslate"><span class="pre">NeuralNetworkClassifier</span></code> and <code class="docutils literal notranslate"><span class="pre">NeuralNetworkRegressor</span></code> extend this class.
-A base class <code class="docutils literal notranslate"><span class="pre">ObjectiveFunction</span></code> is introduced for objective functions optimized by machine
-learning models. There are three objective functions introduced that are used by ML models:
-<code class="docutils literal notranslate"><span class="pre">BinaryObjectiveFunction</span></code>, <code class="docutils literal notranslate"><span class="pre">MultiClassObjectiveFunction</span></code>, and <code class="docutils literal notranslate"><span class="pre">OneHotObjectiveFunction</span></code>.
-These functions are used internally by the models.</p></li>
-</ul>
-<ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">optimizer</span></code> argument for the classes <code class="docutils literal notranslate"><span class="pre">NeuralNetworkClassifier</span></code> and 
-<code class="docutils literal notranslate"><span class="pre">NeuralNetworkRegressor</span></code>, both of which extends the <code class="docutils literal notranslate"><span class="pre">TrainableModel</span></code> 
-class, is made optional with the default value being <code class="docutils literal notranslate"><span class="pre">SLSQP()</span></code>. The same
-is true for the classes <code class="docutils literal notranslate"><span class="pre">VQC</span></code> and <code class="docutils literal notranslate"><span class="pre">VQR</span></code> as they inherit from 
-<code class="docutils literal notranslate"><span class="pre">NeuralNetworkClassifier</span></code> and <code class="docutils literal notranslate"><span class="pre">NeuralNetworkRegressor</span></code> respectively.</p></li>
-</ul>
-<ul class="simple">
-<li><p>The constructor of <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code>, and all classes that inherit from it, has a new parameter
-<code class="docutils literal notranslate"><span class="pre">input_gradients</span></code> which defaults to False. Previously this parameter could only be set using
-the setter method. Note that <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> previously set <code class="docutils literal notranslate"><span class="pre">input_gradients</span></code> of the
-<code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> it was instantiated with to <code class="docutils literal notranslate"><span class="pre">True</span></code>. This is not longer the case. So if you
-use <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> and want to compute the gradients w.r.t. the input, make sure you set
-<code class="docutils literal notranslate"><span class="pre">input_gradients=True</span></code> on the <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> before passing it to <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code>.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Added a parameter <code class="docutils literal notranslate"><span class="pre">initial_point</span></code> to the neural network classifiers and regressors.
-This an array that is passed to an optimizer as an initial point to start from.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Computation of gradients with respect to input data in the backward method of <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code>
-is now optional. By default gradients are not computed. They may inspected and turned on,
-if required, by getting or setting a new property <code class="docutils literal notranslate"><span class="pre">input_gradients</span></code> in
-the <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> class.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Now <code class="docutils literal notranslate"><span class="pre">NeuralNetworkClassifier</span></code> extends <code class="docutils literal notranslate"><span class="pre">ClassifierMixin</span></code> and <code class="docutils literal notranslate"><span class="pre">NeuralNetworkRegressor</span></code>
-extends <code class="docutils literal notranslate"><span class="pre">RegressorMixin</span></code> from Scikit-Learn and rely on their methods for score calculation.
-This also adds an ability to pass sample weights as an optional parameter
-to the score methods.</p></li>
-</ul>
-</div>
-<div class="section" id="deprecation-notes">
-<span id="release-notes-0-2-0-deprecation-notes"></span><h3>Deprecation Notes<a class="headerlink" href="#deprecation-notes" title="Link permanen untuk headline ini">¶</a></h3>
-<ul class="simple">
-<li><p>The valid values passed to the loss argument of the <code class="docutils literal notranslate"><span class="pre">TrainableModel</span></code> constructor were partially
-deprecated (i.e. <code class="docutils literal notranslate"><span class="pre">loss='l1'</span></code> is replaced with <code class="docutils literal notranslate"><span class="pre">loss='absolute_error'</span></code> and <code class="docutils literal notranslate"><span class="pre">loss='l2'</span></code> is 
-replaced with <code class="docutils literal notranslate"><span class="pre">loss='squared_error'</span></code>). This affects instantiation of classes like the
-<code class="docutils literal notranslate"><span class="pre">NeuralNetworkClassifier</span></code>. This change was made to reduce confusion that stems from using
-lowercase 'l' character which can be mistaken for a numeric '1' or capital 'I'. You should
-update your model instantiations by replacing 'l1' with 'absolute_error' and 'l2' with 
-'squared_error'.</p></li>
-</ul>
-<ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">weights</span></code> property in <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> is deprecated in favor of
-the <code class="docutils literal notranslate"><span class="pre">weight</span></code> property which is PyTorch compatible. By default, PyTorch
-layers expose <code class="docutils literal notranslate"><span class="pre">weight</span></code> properties to get access to the computed weights.</p></li>
-</ul>
-</div>
-<div class="section" id="bug-fixes">
-<span id="release-notes-0-2-0-bug-fixes"></span><h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link permanen untuk headline ini">¶</a></h3>
-<ul class="simple">
-<li><p>This fixes the exception that occurs when no <code class="docutils literal notranslate"><span class="pre">optimizer</span></code> argument is
-passed to <code class="docutils literal notranslate"><span class="pre">NeuralNetworkClassifier</span></code> and <code class="docutils literal notranslate"><span class="pre">NeuralNetworkRegressor</span></code>.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Fixes the computation of gradients in TorchConnector when a batch of input samples is provided.</p></li>
-</ul>
-<ul class="simple">
-<li><p><cite>TorchConnector</cite> now returns the correct input gradient dimensions during the backward pass in hybrid nn training.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Added a dedicated handling of <code class="docutils literal notranslate"><span class="pre">ComposedOp</span></code> as a operator in <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code>. In this case
-output shape is determined from the first operator in the <code class="docutils literal notranslate"><span class="pre">ComposedOp</span></code> instance.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Fix the dimensions of the gradient in the quantum generator for the qGAN training.</p></li>
-</ul>
-</div>
-</div>
 </div>
 
 
@@ -377,15 +294,7 @@ output shape is determined from the first operator in the <code class="docutils 
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Release Notes</a><ul>
-<li><a class="reference internal" href="#release-notes-0-2-0">0.2.0</a><ul>
-<li><a class="reference internal" href="#new-features">New Features</a></li>
-<li><a class="reference internal" href="#deprecation-notes">Deprecation Notes</a></li>
-<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Release Notes</a></li>
 </ul>
 
             </div>
