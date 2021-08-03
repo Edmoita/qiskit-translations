@@ -257,8 +257,8 @@
 <p>Qiskit 機械学習は、 Qiskit のインストール・オプションとそのサポート環境/プラットフォームを詳述した「<a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit はじめに</a> 」にて説明された主要 Qiskit パッケージに依存しています。 まずそれを参照してください。次に、ここで説明する情報に従って、Qiskit 機械学習に固有の追加インストールをしましょう。</p>
 <p>Qiskit 機械学習には、デフォルトで依存コードまたはサポート・プログラム ( あるいはその両方 ) がインストールされていない (または、それらを使用できない ) ような、オプション機能がいくつかあります。PyTorch および Sparse が該当します。詳細については、 <a class="reference internal" href="#optional-installs"><span class="std std-ref">オプションのインストール</span></a> を参照してください。</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="5024edc1-66e8-476f-ba80-06c0746758df" name="fac9589e-2cf9-429e-bad9-8db54b8e7ab8" type="radio">
-</input><label class="tabbed-label" for="5024edc1-66e8-476f-ba80-06c0746758df">
+<input checked="checked" id="159ceb8f-1bd3-4ae6-8203-87afee3ff29f" name="01754748-367f-4e79-80c0-5240459657e1" type="radio">
+</input><label class="tabbed-label" for="159ceb8f-1bd3-4ae6-8203-87afee3ff29f">
 ローカルで始める</label><div class="tabbed-content docutils">
 <p>最も簡単な方法は「 <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit はじめに</a> 」の「ローカルで始める」を参照して開始することです。</p>
 <p>Qiskit をインストールした仮想環境で、 Qiskit に追加の <code class="docutils literal notranslate"><span class="pre">visualization</span></code> サポートをインストールした方法と同様の方法で以下のようにして追加リストに <code class="docutils literal notranslate"><span class="pre">machine-learning</span></code> を追加してください:</p>
@@ -270,8 +270,8 @@
 </pre></div>
 </div>
 </div>
-<input id="1f1eca7e-da88-41e0-9b4f-62bd5359aa83" name="fac9589e-2cf9-429e-bad9-8db54b8e7ab8" type="radio">
-</input><label class="tabbed-label" for="1f1eca7e-da88-41e0-9b4f-62bd5359aa83">
+<input id="cecb397f-e7cd-43d5-80af-16ac3079b85f" name="01754748-367f-4e79-80c0-5240459657e1" type="radio">
+</input><label class="tabbed-label" for="cecb397f-e7cd-43d5-80af-16ac3079b85f">
 ソースからインストールする</label><div class="tabbed-content docutils">
 <p>ソースから Qiskit 機械学習をインストールすることにより、Python Package Index (PyPI) リポジトリのバージョンを使う代わりに、最新の Qiskit バージョンにアクセスすることが出来ます。これにより、Qiskit 機械学習コードの最新版を調査したり、拡張することがより効果的にできるようになります。</p>
 <p>Qiskit 機械学習は Qiskit に依存しており、最新の変更が Qiskit の新規機能または変更された機能を必要とする場合があるので、まず「 <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit はじめに</a> 」の <cite>「ソースからのインストール」</cite> の指示に従ってください。</p>
@@ -308,7 +308,9 @@
 <div class="section" id="optional-installs">
 <span id="id1"></span><h2>オプションのインストール<a class="headerlink" href="#optional-installs" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <ul class="simple">
-<li><p><strong>PyTorch</strong> は、コマンド <cite>pip install 『qiskit-machine-learning[torch]』</cite> を使用してパッケージをインストールするか、 PyTorch <a class="reference external" href="https://pytorch.org/get-started/locally/">getting started</a> を参照してインストールすることができます。 PyTorch がインストールされると、<cite>TorchConnector</cite> は量子計算ネットワークの使用を容易にします。</p></li>
+<li><p><strong>PyTorch</strong>, may be installed either using command <cite>pip install 『qiskit-machine-learning[torch]』</cite> to install the
+package or refer to PyTorch <a class="reference external" href="https://pytorch.org/get-started/locally/">getting started</a>. When PyTorch
+is installed, the <cite>TorchConnector</cite> facilitates its use of quantum computed networks.</p></li>
 <li><p><strong>Sparse</strong> は、コマンド <cite>pip install 『qiskit-machine-learning[sparse]』</cite> を使用してパッケージをインストールすることによってインストールできます。 インストールされた Sparse 使用すると、疎な配列/テンソルの使用が可能になります。</p></li>
 </ul>
 </div>

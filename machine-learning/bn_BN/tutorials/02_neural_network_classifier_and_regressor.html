@@ -37,10 +37,10 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="ইনডেক্স" href="../genindex.html" />
+    <link rel="index" title="সূচিপত্র" href="../genindex.html" />
     <link rel="search" title="অনুসন্ধান" href="../search.html" />
-    <link rel="next" title="Quantum Kernel Machine Learning" href="03_quantum_kernel.html" />
-    <link rel="prev" title="Quantum Neural Networks" href="01_neural_networks.html" /> 
+    <link rel="next" title="কোয়ান্টাম কার্নেল মেশিন লার্নিং" href="03_quantum_kernel.html" />
+    <link rel="prev" title="কোয়ান্টাম নিউরাল নেটওয়ার্ক" href="01_neural_networks.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>ভাষাসমূহ</dt>
       
         <dd><a class="version" href="/documentation/machine-learning/tutorials/02_neural_network_classifier_and_regressor.html">English</a></dd>
       
@@ -176,10 +176,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_machine_learning.html">API References</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">শুরুর নির্দেশনা</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_machine_learning.html">API তথ্যসূত্র</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">পাঠসমূহ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">অব্যাহতি পত্র</a></li>
 </ul>
 
             
@@ -502,7 +502,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-machine-learning/blob/stable/0.2/docs/tutorials/02_neural_network_classifier_and_regressor.ipynb">docs/tutorials/02_neural_network_classifier_and_regressor.ipynb</a>.</p>
+<p>এই পেজটি <a class="reference external" href="https://github.com/Qiskit/qiskit-machine-learning/blob/stable/0.2/docs/tutorials/02_neural_network_classifier_and_regressor.ipynb">docs/tutorials/02_neural_network_classifier_and_regressor.ipynb</a> থেকে তৈরি হয়েছে।</p>
 </div>
 <div class="section" id="Neural-Network-Classifier-&amp;-Regressor">
 <h1>Neural Network Classifier &amp; Regressor<a class="headerlink" href="#Neural-Network-Classifier-&-Regressor" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
@@ -878,8 +878,8 @@ array([[0.40039062]])
 </div>
 </div>
 </div>
-<div class="section" id="Regression">
-<h2>Regression<a class="headerlink" href="#Regression" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<div class="section" id="রিগ্রেশন">
+<h2>রিগ্রেশন<a class="headerlink" href="#রিগ্রেশন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <p>এই ধারাক্রম গুলিকে (অ্যালগোরিদমস​​) কে বোঝানোর জন্য আমরা একটি সহজ রিগ্রেশন​ তথ্যশালা (ডাটাসেট​) বানাই।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -910,7 +910,7 @@ array([[0.40039062]])
 </div>
 <div class="section" id="Regression-with-an-OpflowQNN">
 <h3>Regression with an <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code><a class="headerlink" href="#Regression-with-an-OpflowQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>Here we restrict to regression with an <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> that returns values in <span class="math notranslate nohighlight">\([-1, +1]\)</span>. More complex and also multi-dimensional models could be constructed, also based on <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> but that exceeds the scope of this tutorial.</p>
+<p>এই সহায়িকাতে আমরা <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> রিগ্রেশন ব্যবহার করব যা আমাদের <span class="math notranslate nohighlight">\([-1, +1]\)</span> ভ্যালু দিবে। আরো জটিল এবং বহুমাত্রিক মডেল এই রিগ্রেশন দ্বারা তৈরি করা যাবে, এই ক্ষেত্রে আমাদের <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> ব্যবহার করতে হবে, যা এই সহায়িকার বা টিউটোরিয়ালের সীমার বাইরে।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -991,9 +991,9 @@ array([[0.40039062]])
 </div>
 </div>
 </div>
-<div class="section" id="Regression-with-the-Variational-Quantum-Regressor-(VQR)">
-<h3>Regression with the Variational Quantum Regressor (<code class="docutils literal notranslate"><span class="pre">VQR</span></code>)<a class="headerlink" href="#Regression-with-the-Variational-Quantum-Regressor-(VQR)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>Similar to the <code class="docutils literal notranslate"><span class="pre">VQC</span></code> for classification, the <code class="docutils literal notranslate"><span class="pre">VQR</span></code> is a special variant of the <code class="docutils literal notranslate"><span class="pre">NeuralNetworkRegressor</span></code> with a <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code>. By default it considers the <code class="docutils literal notranslate"><span class="pre">L2Loss</span></code> function to minimize the mean squared error between predictions and targets.</p>
+<div class="section" id="পরিবর্তনশীল-(ভ্যারিয়েশনাল)-কোয়ান্টাম-রিগ্রেশর-(VQR)-দ্বারা-রিগ্রেশন।">
+<h3>পরিবর্তনশীল (ভ্যারিয়েশনাল) কোয়ান্টাম রিগ্রেশর (<code class="docutils literal notranslate"><span class="pre">VQR</span></code>) দ্বারা রিগ্রেশন।<a class="headerlink" href="#পরিবর্তনশীল-(ভ্যারিয়েশনাল)-কোয়ান্টাম-রিগ্রেশর-(VQR)-দ্বারা-রিগ্রেশন।" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">VQC</span></code> শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন) এর মতই <code class="docutils literal notranslate"><span class="pre">VQR</span></code> একটি বিশেষ প্রকরণ যা <code class="docutils literal notranslate"><span class="pre">NeuralNetworkRegressor</span></code> এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> এর অন্তর্ভুক্ত। স্বতঃসিদ্ধ নিয়মানুসারে এটি একটি <code class="docutils literal notranslate"><span class="pre">L2Loss</span></code> ফাংশন যা অনুমান (প্রেডিকশন) এবং প্রত্যাশিত ফলাফল (টারগেট) এর গড় বর্গ মান অবনমন (মিনিমাইজ) করে।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
@@ -1098,10 +1098,10 @@ array([[0.40039062]])
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="03_quantum_kernel.html" class="btn btn-neutral float-right" title="Quantum Kernel Machine Learning" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="03_quantum_kernel.html" class="btn btn-neutral float-right" title="কোয়ান্টাম কার্নেল মেশিন লার্নিং" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="01_neural_networks.html" class="btn btn-neutral" title="Quantum Neural Networks" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="01_neural_networks.html" class="btn btn-neutral" title="কোয়ান্টাম নিউরাল নেটওয়ার্ক" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1140,9 +1140,9 @@ array([[0.40039062]])
 <li><a class="reference internal" href="#Variational-Quantum-Classifier-(VQC)">Variational Quantum Classifier (<code class="docutils literal notranslate"><span class="pre">VQC</span></code>)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Regression">Regression</a><ul>
+<li><a class="reference internal" href="#রিগ্রেশন">রিগ্রেশন</a><ul>
 <li><a class="reference internal" href="#Regression-with-an-OpflowQNN">Regression with an <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code></a></li>
-<li><a class="reference internal" href="#Regression-with-the-Variational-Quantum-Regressor-(VQR)">Regression with the Variational Quantum Regressor (<code class="docutils literal notranslate"><span class="pre">VQR</span></code>)</a></li>
+<li><a class="reference internal" href="#পরিবর্তনশীল-(ভ্যারিয়েশনাল)-কোয়ান্টাম-রিগ্রেশর-(VQR)-দ্বারা-রিগ্রেশন।">পরিবর্তনশীল (ভ্যারিয়েশনাল) কোয়ান্টাম রিগ্রেশর (<code class="docutils literal notranslate"><span class="pre">VQR</span></code>) দ্বারা রিগ্রেশন।</a></li>
 </ul>
 </li>
 </ul>

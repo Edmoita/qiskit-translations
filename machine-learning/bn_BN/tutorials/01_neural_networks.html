@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quantum Neural Networks &mdash; Qiskit Machine Learning 0.2.0 documentation</title>
+  <title>কোয়ান্টাম নিউরাল নেটওয়ার্ক &mdash; Qiskit Machine Learning 0.2.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="ইনডেক্স" href="../genindex.html" />
+    <link rel="index" title="সূচিপত্র" href="../genindex.html" />
     <link rel="search" title="অনুসন্ধান" href="../search.html" />
     <link rel="next" title="Neural Network Classifier &amp; Regressor" href="02_neural_network_classifier_and_regressor.html" />
     <link rel="prev" title="মেশিন লার্নিংন পাঠসমূহ (টিউটোরিয়ালস)" href="index.html" /> 
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>ভাষাসমূহ</dt>
       
         <dd><a class="version" href="/documentation/machine-learning/tutorials/01_neural_networks.html">English</a></dd>
       
@@ -176,10 +176,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_machine_learning.html">API References</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">শুরুর নির্দেশনা</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_machine_learning.html">API তথ্যসূত্র</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">পাঠসমূহ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">অব্যাহতি পত্র</a></li>
 </ul>
 
             
@@ -222,7 +222,7 @@
         
           <li><a href="index.html">মেশিন লার্নিংন পাঠসমূহ (টিউটোরিয়ালস)</a> &gt;</li>
         
-      <li>Quantum Neural Networks</li>
+      <li>কোয়ান্টাম নিউরাল নেটওয়ার্ক</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -502,16 +502,16 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-machine-learning/blob/stable/0.2/docs/tutorials/01_neural_networks.ipynb">docs/tutorials/01_neural_networks.ipynb</a>.</p>
+<p>এই পেজটি <a class="reference external" href="https://github.com/Qiskit/qiskit-machine-learning/blob/stable/0.2/docs/tutorials/01_neural_networks.ipynb">docs/tutorials/01_neural_networks.ipynb</a> থেকে তৈরি হয়েছে।</p>
 </div>
-<div class="section" id="Quantum-Neural-Networks">
-<h1>Quantum Neural Networks<a class="headerlink" href="#Quantum-Neural-Networks" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
-<p>This notebook demonstrates the different generic quantum neural network (QNN) implementations provided in Qiskit Machine Learning. The networks are meant as application-agnostic computational units that can be used for many different use cases. Depending on the application, a particular type of network might more or less suitable and might require to be set up in a particular way. The following different available neural networks will now be discussed in more detail:</p>
+<div class="section" id="কোয়ান্টাম-নিউরাল-নেটওয়ার্ক">
+<h1>কোয়ান্টাম নিউরাল নেটওয়ার্ক<a class="headerlink" href="#কোয়ান্টাম-নিউরাল-নেটওয়ার্ক" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<p>এই নোটবুকটি Qiskit মেশিন লার্নিং এ উপলব্ধ কোয়ান্টাম নিউরাল নেটওয়ার্ক (কিউ এন এন) এর বিভিন্ন রূপায়ণ (ইমপ্লিমেন্টেশন) প্রদর্শন করে। নেটওয়ার্ক গুলো অ্যাপ্লিকেশন-এগ্নস্টিক কম্পিউটেশনাল ইউনিট হিসেবে বোঝানো হয় যা অনেক গুলি বিভিন্ন ক্ষেত্রে ব্যবহার করা যেতে পারে।এপ্লিকেশনের উপর নির্ভর করে, একটি নির্দিষ্ট ধরনের নেটওয়ার্ক কম-বেশি উপযুক্ত হতে পারে এবং একটি নির্দিষ্ট উপায়ে সেটাপ করার প্রয়োজনীয়তা দেখা দিতে পারে। নিম্নে বিভিন্ন উপলব্ধ নিউরাল নেটওয়ার্ক গুলো আরো বিশদ ভাবে আলোচনা করা হবে:</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code>: The interface for neural networks.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code>: A network based on the evaluation of quantum mechanical observables.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>: A special <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> implementation for convenience.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code>: A network based on the samples resulting from measuring a quantum circuit.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code>: নিউরাল নেটওয়ার্কের ইন্টারফেস</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code>: কোয়ান্টাম বলবিদ্যার পর্যবেক্ষণের মূল্যায়নের উপর ভিত্তি করে একটি নেটওয়ার্ক।</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>: কাজের সুবিধার জন্য একটি বিশেষ `` OpflowQNN`` বাস্তবায়ন।</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code>: একটি নেটওয়ার্ক যা কোয়ান্টাম সার্কিট পরিমাপের ফলে নমুনাগুলির উপর ভিত্তি করে রচিত।</p></li>
 </ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -547,14 +547,14 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="section" id="1.-NeuralNetwork">
-<h2>1. <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code><a class="headerlink" href="#1.-NeuralNetwork" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> represents the interface for all neural networks available in Qiskit Machine Learning. It exposes a forward and a backward pass taking the data samples and trainable weights as input. A <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> does not contain any training capabilities, these are pushed to the actual algorithms / applications. Thus, a <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> also does not store the values for trainable weights. In the following, different implementations of this interfaces are introduced.</p>
-<p>Suppose a <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> called <code class="docutils literal notranslate"><span class="pre">nn</span></code>. Then, the <code class="docutils literal notranslate"><span class="pre">nn.forward(input,</span> <span class="pre">weights)</span></code> pass takes either flat inputs for the data and weights of size <code class="docutils literal notranslate"><span class="pre">nn.num_inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">nn.num_weights</span></code>, respectively. <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> supports batching of inputs and returns batches of output of the corresponding shape.</p>
+<div class="section" id="১.-NeuralNetwork">
+<h2>১. <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code><a class="headerlink" href="#১.-NeuralNetwork" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> Qiskit মেশিন লার্নিংয়ে উপলভ্য সমস্ত নিউরাল নেটওয়ার্কগুলির ইন্টারফেসের প্রতিনিধিত্ব করে। এটি ইনপুট হিসাবে ডেটা নমুনা এবং প্রশিক্ষণযোগ্য ওয়েট গ্রহণ করে একটি ফরোয়ার্ড এবং একটি ব্যাকওয়ার্ড পাস উন্মুক্ত করে।একটি <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> কোনও প্রশিক্ষণ ক্ষমতা রাখে না, এগুলি প্রকৃত অ্যালগরিদম / অ্যাপ্লিকেশনগুলিতে পুস করা যায়।সুতরাং একটি, <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> প্রশিক্ষণযোগ্য ওয়েটের মানগুলিও সঞ্চয় করে না।নিচে, এই ইন্টারফেসগুলির বিভিন্ন প্রয়োগ দেখানো হয়েছে।</p>
+<p>ধরুন, একটি <code class="docutils literal notranslate"><span class="pre">neuralnetwork</span></code> যার সংক্ষিপ্ত নাম <code class="docutils literal notranslate"><span class="pre">nn</span></code>। এরপরে, <code class="docutils literal notranslate"><span class="pre">nn.forward(input,</span> <span class="pre">weights)</span></code> পাসের জন্য যথাক্রমে <code class="docutils literal notranslate"><span class="pre">nn.num_inputs</span></code> এবং <code class="docutils literal notranslate"><span class="pre">nn.num_weights``এর</span> <span class="pre">সমান</span> <span class="pre">ইনপুট</span> <span class="pre">ও</span> <span class="pre">তথ্য</span> <span class="pre">লাগে।</span> <span class="pre">``NeuralNetwork</span></code> ইনপুটের ব্যাচিং সমর্থন করে এবং সংশ্লিষ্ট আকৃতির আউটপুট ব্যাচ প্রদান করে।</p>
 </div>
-<div class="section" id="2.-OpflowQNN">
-<h2>2. <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code><a class="headerlink" href="#2.-OpflowQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> takes a (parametrized) operator from Qiskit and leverages Qiskit’s gradient framework to provide the backward pass. Such an operator can for instance be an expected value of a quantum mechanical observable with respect to a parametrized quantum state. The Parameters can be used to load classical data as well as represent trainable weights. The <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> also allows lists of operators and more complex structures to construct more complex QNNs.</p>
+<div class="section" id="২.-OpflowQNN">
+<h2>২. <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code><a class="headerlink" href="#২.-OpflowQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p>`` OpflowQNN`` Qiskit থেকে একটি (প্যারাম্যাট্রাইজড) অপারেটর নেয় এবং পিছনের পাসটি সরবরাহের জন্য Qiskit এর গ্রেডিয়েন্ট কাঠামোটি ব্যবহার করে। যেমন একটি অপারেটর উদাহরণস্বরূপ একটি প্যারামাইট্রাইজড কোয়ান্টাম রাষ্ট্রের সাথে পর্যবেক্ষণযোগ্য কোয়ান্টাম মেকানিকালটির প্রত্যাশিত মান হতে পারে। প্যারামিটারগুলি ক্লাসিকাল ডেটা লোড করার পাশাপাশি প্রশিক্ষণযোগ্য ওজন উপস্থাপন করতে ব্যবহার করা যেতে পারে। <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> অপারেটরগুলির তালিকা এবং আরও জটিল কাঠামোকে আরও জটিল কিউএনএন তৈরি করার অনুমতি দেয়।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -706,7 +706,7 @@ array([[0.81422018],
         [[0.0008565]]]))
 </pre></div></div>
 </div>
-<p>Combining multiple observables in a <code class="docutils literal notranslate"><span class="pre">ListOp</span></code> also allows to create more complex QNNs</p>
+<p>বিভিন্ন দৃষ্টিগ্রাহ্যদের (অবসারভেবলস​) <code class="docutils literal notranslate"><span class="pre">ListOp</span></code> এ এক করে আরও জটিল QNN বানানো সম্ভব​</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -759,9 +759,9 @@ array([[0.81422018, 0.81422018]])
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="3.-TwoLayerQNN">
-<h2>3. <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code><a class="headerlink" href="#3.-TwoLayerQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> is a special <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> on <span class="math notranslate nohighlight">\(n\)</span> qubits that consists of first a feature map to insert data and second an ansatz that is trained. The default observable is <span class="math notranslate nohighlight">\(Z^{\otimes n}\)</span>, i.e., parity.</p>
+<div class="section" id="৩.-TwoLayerQNN">
+<h2>৩. <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code><a class="headerlink" href="#৩.-TwoLayerQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p>`` TwoLayerQNN`` হল একটি বিশেষ <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> on <span class="math notranslate nohighlight">\(n\)</span> কিউবিটসমূহ যারা ডেটা সন্নিবেশ করানোর জন্য প্রথম বৈশিষ্ট্যের মানচিত্র এবং দ্বিতীয়টি একটি আনস্যাটজ যা প্রশিক্ষিত। প্রাথমিক পর্যবেক্ষণযোগ্য হ’ল :math: <cite>Z ^ {otimes n}</cite>, উদাহরণস্বরূপ, প্যারিটি(parity) ।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -903,13 +903,11 @@ array([[0.28520667]])
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="4.-CircuitQNN">
-<h2>4. <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code><a class="headerlink" href="#4.-CircuitQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> is based on a (parametrized) <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>. This can take input as well as weight parameters and produces samples from the measurement. The samples can either be interpreted as probabilities of measuring the integer index corresponding to a bitstring or directly as a batch of binary output. In the case of probabilities, gradients can be estimated efficiently and the <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> provides a backward pass as well. In case of samples, differentiation is not possible and
-the backward pass returns <code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">None)</span></code>.</p>
-<p>Further, the <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> allows to specify an <code class="docutils literal notranslate"><span class="pre">interpret</span></code> function to post-process the samples. This is expected to take a measured integer (from a bitstring) and map it to a new index, i.e. non-negative integer. In this case, the output shape needs to be provided and the probabilities are aggregated accordingly.</p>
-<p>A <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> can be configured to return sparse as well as dense probability vectors. If no <code class="docutils literal notranslate"><span class="pre">interpret</span></code> function is used, the dimension of the probability vector scales exponentially with the number of qubits and a sparse recommendation is usually recommended. In case of an <code class="docutils literal notranslate"><span class="pre">interpret</span></code> function it depends on the expected outcome. If, for instance, an index is mapped to the parity of the corresponding bitstring, i.e., to 0 or 1, a dense output makes sense and the result will be a
-probability vector of length 2.</p>
+<div class="section" id="৪.-CircuitQNN">
+<h2>৪. <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code><a class="headerlink" href="#৪.-CircuitQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> একটি (প্যারাম্যাট্রাইজড) <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> এর উপর ভিত্তি করে গঠিত। এটি ইনপুট নেয়ার পাশাপাশি প্যারামিটার মাপতে পারে এবং পরিমাপ থেকে নমুনা তৈরি করে। নমুনাগুলি হয় হয় একটি বিটস্ট্রিংয়ের সাথে সম্পর্কিত ইন্টিজার সূচকটি পরিমাপের সম্ভাব্যতা হিসাবে বা সরাসরি বাইনারি আউটপুটটির ব্যাচ হিসাবে ব্যাখ্যা করা যেতে পারে। সম্ভাবনার ক্ষেত্রে গ্রেডিয়েন্টগুলি দক্ষতার সাথে অনুমান করা যায় এবং <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> পাশাপাশি একটি পশ্চাৎ পাস সরবরাহ করে। নমুনার ক্ষেত্রে, পার্থক্য সম্ভব নয় এবং পিছনের পাসটি <code class="docutils literal notranslate"><span class="pre">(None,</span> <span class="pre">None)</span></code> রিটার্ন করে।</p>
+<p>উপরন্তু, <code class="docutils literal notranslate"><span class="pre">CircuitQNN`</span> <span class="pre">,</span> <span class="pre">নমুনাগুলি</span> <span class="pre">পোস্ট-প্রসেস</span> <span class="pre">করার</span> <span class="pre">জন্য,</span> <span class="pre">একটি</span> <span class="pre">``interpret</span></code> ফাংশন নির্দিষ্ট করার অনুমতি দেয়। এটি একটি পরিমাপ করা পূর্ণসংখ্যা (একটি বিটস্ট্রিং থেকে) গ্রহণ করবে এবং এটি একটি নতুন সূচকে, যেমন অ-নেতিবাচক পূর্ণসংখ্যা ম্যাপ করবে বলে আশা করা হচ্ছে। এই ক্ষেত্রে, আউটপুট আকৃতি সরবরাহ করা প্রয়োজন এবং সম্ভাব্যতাগুলি সেই অনুযায়ী সংযুক্ত করা হয়।</p>
+<p>একটি <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> ডেন্স সম্ভাব্যতা (probability) ভেক্টরগুলির পাশাপাশি স্পার্স ফিরে আসতে কনফিগার করা যেতে পারে। যদি কোনও <code class="docutils literal notranslate"><span class="pre">interpret</span></code> ফাংশন ব্যবহার না করা হয় তবে সম্ভাব্যতা ভেক্টরের মাত্রা স্পষ্টতই কিউবিটের সংখ্যার সাথে স্কেল করে এবং একটি স্পার্স সুপারিশ সাধারণত দেওয়া হয়। <code class="docutils literal notranslate"><span class="pre">interpret</span></code> ফাংশনের ক্ষেত্রে এটি প্রত্যাশিত ফলাফলের উপর নির্ভর করে। উদাহরণস্বরূপ, যদি একটি সূচী সংশ্লিষ্ট বিটস্ট্রিং এর সমানতায় ম্যাপ করা হয়, যেমন, 0 বা 1, একটি ডেন্স আউটপুট বোধগম্য হয় এবং ফলাফলটি দৈর্ঘ্য 2 এর সম্ভাব্যতা (probability) ভেক্টর হবে।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
@@ -937,8 +935,8 @@ probability vector of length 2.</p>
 <img alt="../_images/tutorials_01_neural_networks_29_0.png" src="../_images/tutorials_01_neural_networks_29_0.png" />
 </div>
 </div>
-<div class="section" id="4.1-Output:-sparse-integer-probabilities">
-<h3>4.1 Output: sparse integer probabilities<a class="headerlink" href="#4.1-Output:-sparse-integer-probabilities" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<div class="section" id="4.1-আউটপুট:-স্পার্স-পূর্ণসংখ্যার-সম্ভাবনা">
+<h3>4.1 আউটপুট: স্পার্স পূর্ণসংখ্যার সম্ভাবনা<a class="headerlink" href="#4.1-আউটপুট:-স্পার্স-পূর্ণসংখ্যার-সম্ভাবনা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
@@ -1000,8 +998,8 @@ array([[0.5, 0. , 0. , 0. , 0.3, 0. , 0. , 0.2]])
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="4.2-Output:-dense-parity-probabilities">
-<h3>4.2 Output: dense parity probabilities<a class="headerlink" href="#4.2-Output:-dense-parity-probabilities" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<div class="section" id="4.2-আউটপুট:-ঘন-(ডেন্স)-সমতা-(প্যারিটি)-সম্ভাবনা">
+<h3>4.2 আউটপুট: ঘন (ডেন্স) সমতা (প্যারিটি) সম্ভাবনা<a class="headerlink" href="#4.2-আউটপুট:-ঘন-(ডেন্স)-সমতা-(প্যারিটি)-সম্ভাবনা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
@@ -1292,13 +1290,13 @@ array([[[1.],
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Quantum Neural Networks</a><ul>
-<li><a class="reference internal" href="#1.-NeuralNetwork">1. <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code></a></li>
-<li><a class="reference internal" href="#2.-OpflowQNN">2. <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code></a></li>
-<li><a class="reference internal" href="#3.-TwoLayerQNN">3. <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code></a></li>
-<li><a class="reference internal" href="#4.-CircuitQNN">4. <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code></a><ul>
-<li><a class="reference internal" href="#4.1-Output:-sparse-integer-probabilities">4.1 Output: sparse integer probabilities</a></li>
-<li><a class="reference internal" href="#4.2-Output:-dense-parity-probabilities">4.2 Output: dense parity probabilities</a></li>
+<li><a class="reference internal" href="#">কোয়ান্টাম নিউরাল নেটওয়ার্ক</a><ul>
+<li><a class="reference internal" href="#১.-NeuralNetwork">১. <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code></a></li>
+<li><a class="reference internal" href="#২.-OpflowQNN">২. <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code></a></li>
+<li><a class="reference internal" href="#৩.-TwoLayerQNN">৩. <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code></a></li>
+<li><a class="reference internal" href="#৪.-CircuitQNN">৪. <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code></a><ul>
+<li><a class="reference internal" href="#4.1-আউটপুট:-স্পার্স-পূর্ণসংখ্যার-সম্ভাবনা">4.1 আউটপুট: স্পার্স পূর্ণসংখ্যার সম্ভাবনা</a></li>
+<li><a class="reference internal" href="#4.2-আউটপুট:-ঘন-(ডেন্স)-সমতা-(প্যারিটি)-সম্ভাবনা">4.2 আউটপুট: ঘন (ডেন্স) সমতা (প্যারিটি) সম্ভাবনা</a></li>
 <li><a class="reference internal" href="#৪.৩-আউটপুট-:-নমুনা-(স্যাম্পল)">৪.৩ আউটপুট : নমুনা (স্যাম্পল)</a></li>
 <li><a class="reference internal" href="#৪.৪-আউটপুট:-প্যরিটি-নমুনা-(স্যাম্পল)">৪.৪ আউটপুট: প্যরিটি নমুনা (স্যাম্পল)</a></li>
 </ul>

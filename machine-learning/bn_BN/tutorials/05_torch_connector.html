@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Torch Connector and Hybrid QNNs &mdash; Qiskit Machine Learning 0.2.0 documentation</title>
+  <title>টর্চ (PyTorch) সংযোগকারী এবং দোআঁশলা কোয়ান্টাম নিউরাল নেটওয়ার্ক &mdash; Qiskit Machine Learning 0.2.0 documentation</title>
   
 
   
@@ -37,10 +37,10 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="ইনডেক্স" href="../genindex.html" />
+    <link rel="index" title="সূচিপত্র" href="../genindex.html" />
     <link rel="search" title="অনুসন্ধান" href="../search.html" />
     <link rel="next" title="Release Notes" href="../release_notes.html" />
-    <link rel="prev" title="qGANs for Loading Random Distributions" href="04_qgans_for_loading_random_distributions.html" /> 
+    <link rel="prev" title="দৈব বণ্টন (র‍্যান্ডম ডিস্ট্রিবিউশন) লোড করার জন্য qGANS" href="04_qgans_for_loading_random_distributions.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -97,7 +97,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>ভাষাসমূহ</dt>
       
         <dd><a class="version" href="/documentation/machine-learning/tutorials/05_torch_connector.html">English</a></dd>
       
@@ -176,10 +176,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_machine_learning.html">API References</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">শুরুর নির্দেশনা</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_machine_learning.html">API তথ্যসূত্র</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">পাঠসমূহ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">অব্যাহতি পত্র</a></li>
 </ul>
 
             
@@ -222,7 +222,7 @@
         
           <li><a href="index.html">মেশিন লার্নিংন পাঠসমূহ (টিউটোরিয়ালস)</a> &gt;</li>
         
-      <li>Torch Connector and Hybrid QNNs</li>
+      <li>টর্চ (PyTorch) সংযোগকারী এবং দোআঁশলা কোয়ান্টাম নিউরাল নেটওয়ার্ক</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -502,31 +502,30 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-machine-learning/blob/stable/0.2/docs/tutorials/05_torch_connector.ipynb">docs/tutorials/05_torch_connector.ipynb</a>.</p>
+<p>এই পৃষ্ঠাটি <a class="reference external" href="https://github.com/Qiskit/qiskit-machine-learning/blob/stable/0.2/docs/tutorials/05_torch_connector.ipynb">docs/tutorials/05_torch_connector.ipynb</a> -থেকে বানানো হয়েছে।</p>
 </div>
-<div class="section" id="Torch-Connector-and-Hybrid-QNNs">
-<h1>Torch Connector and Hybrid QNNs<a class="headerlink" href="#Torch-Connector-and-Hybrid-QNNs" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
-<p>This tutorial introduces Qiskit’s <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> class, and demonstrates how the <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> allows for a natural integration of any <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> from Qiskit Machine Learning into a PyTorch workflow. <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> takes a Qiskit <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> and makes it available as a PyTorch <code class="docutils literal notranslate"><span class="pre">Module</span></code>. The resulting module can be seamlessly incorporated into PyTorch classical architectures and trained jointly without additional considerations, enabling the development and testing of
-novel <strong>hybrid quantum-classical</strong> machine learning architectures.</p>
-<div class="section" id="Content:">
-<h2>Content:<a class="headerlink" href="#Content:" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p><a class="reference external" href="#Part-1:-Simple-Classification-&amp;-Regression">Part 1: Simple Classification &amp; Regression</a></p>
-<p>The first part of this tutorial shows how quantum neural networks can be trained using PyTorch’s automatic differentiation engine (<code class="docutils literal notranslate"><span class="pre">torch.autograd</span></code>, <a class="reference external" href="https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html">link</a>) for simple classification and regression tasks.</p>
+<div class="section" id="টর্চ-(PyTorch)-সংযোগকারী-এবং-দোআঁশলা-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক">
+<h1>টর্চ (PyTorch) সংযোগকারী এবং দোআঁশলা কোয়ান্টাম নিউরাল নেটওয়ার্ক<a class="headerlink" href="#টর্চ-(PyTorch)-সংযোগকারী-এবং-দোআঁশলা-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<p>এই পাঠসমূহতে (টিউটোরিয়াল) Qiskit - এর <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> ক্লাস ব্যবহার করে কিভাবে Qiskit Machine Learning - এর <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> যেকোনো PyTorch কর্মধারায় সংযোজন করা যেতে পারে সেটা দেখানো হয়েছে। Qiskit এর <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> - টি <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> একটি PyTorch <code class="docutils literal notranslate"><span class="pre">Module</span></code> হিসাবে উপলব্ধ করে। সেই মডিউল (<code class="docutils literal notranslate"><span class="pre">Module</span></code>) যেকোনো PyTorch এর প্রথাগত স্থাপত্যতে নির্বিঘ্নে অন্তর্ভুক্ত করা যেতে পারে এবং অতিরিক্ত বিবেচনা ছাড়াই যৌথভাবে প্রশিক্ষিত করা যেতে পারে। এই ভাবে এটি নতুন <strong>দোআঁশলা কোয়ান্টাম - ক্লাসিক্যাল</strong> মেশিন লার্নিং স্থাপত্তের উন্নয়ন এবং পরীক্ষা করা অত্যন্ত সহজ বানিয়ে ফেলে।</p>
+<div class="section" id="সুচি:">
+<h2>সুচি:<a class="headerlink" href="#সুচি:" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p><a class="reference external" href="#Part-1:-Simple-Classification-&amp;-Regression">প্রথম অধ্যায়: সরল শ্রেণীবিভাগ ও প্রত্যাবর্তন</a></p>
+<p>এই পাঠসমূহের প্রথম ভাগে কিভাবে কোয়ান্টাম নিউরাল নেটওয়ার্ক PyTorch - এর স্বয়ংক্রিয় বিভাজন যন্ত্র (<code class="docutils literal notranslate"><span class="pre">torch.autograd</span></code>, <a class="reference external" href="https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html">link</a>) দিয়ে সহজ শ্রেণিবিন্যাস এবং রিগ্রেশন কাজের জন্যে প্রশিক্ষণ করা যেতে পারে সেটা দেখানো হয়েছে।</p>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="#1.-Classification">Classification</a></p>
+<li><p><a class="reference external" href="#1.-Classification">শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন)</a></p>
 <ol class="arabic simple">
-<li><p>Classification with PyTorch and <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code></p></li>
-<li><p>Classification with PyTorch and <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code></p></li>
+<li><p>PyTorch এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> দ্বারা শ্রেণিবিন্যাসকরণ</p></li>
+<li><p>PyTorch এবং <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> দ্বারা শ্রেণিবিন্যাসকরণ</p></li>
 </ol>
 </li>
-<li><p><a class="reference external" href="#2.-Regression">Regression</a></p>
+<li><p><a class="reference external" href="#2.-Regression">রিগ্রেশন</a></p>
 <ol class="arabic simple">
-<li><p>Regression with PyTorch and <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code></p></li>
+<li><p>PyTorch এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> দ্বারা রিগ্রেশন</p></li>
 </ol>
 </li>
 </ol>
 <p><a class="reference external" href="#Part-2:-MNIST-Classification,-Hybrid-QNNs">Part 2: MNIST Classification, Hybrid QNNs</a></p>
-<p>The second part of this tutorial illustrates how to embed a (Quantum) <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> into a target PyTorch workflow (in this case, a typical CNN architecture) to classify MNIST data in a hybrid quantum-classical manner.</p>
+<p>এই পাঠসমূহের দ্বিতীয় ভাগে PyTorch কর্মধারায় (কোয়ান্টাম) <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> বসিয়ে MNIST থেকে নেওয়া তথ্য দোআঁশলা কোয়ান্টাম - ক্লাসিক্যাল পদ্ধতি দিয়ে শ্রেণীবদ্ধ কিভাবে করা যেতে পারে সেটা দেখানো হয়েছে। এই ক্ষেত্রে একটি সাধারণ CNN (বিভ্রান্তিকর নিউরাল নেটওয়ার্ক) ব্যবহার করা হয়েছে।</p>
 <hr class="docutils" />
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -556,11 +555,11 @@ novel <strong>hybrid quantum-classical</strong> machine learning architectures.<
 </div>
 </div>
 </div>
-<div class="section" id="Part-1:-Simple-Classification-&amp;-Regression">
-<h2>Part 1: Simple Classification &amp; Regression<a class="headerlink" href="#Part-1:-Simple-Classification-&-Regression" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<div class="section" id="1.-Classification">
-<h3>1. Classification<a class="headerlink" href="#1.-Classification" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>First, we show how <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> allows to train a Quantum <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> to solve a classification tasks using PyTorch’s automatic differentiation engine. In order to illustrate this, we will perform <strong>binary classification</strong> on a randomly generated dataset.</p>
+<div class="section" id="পর্ব-1:-সরল-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)-ও-রিগ্রেশন">
+<h2>পর্ব 1: সরল শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন) ও রিগ্রেশন<a class="headerlink" href="#পর্ব-1:-সরল-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)-ও-রিগ্রেশন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<div class="section" id="1.-শ্রেণিবিভাগ-(ক্লাসিফিকেশন)">
+<h3>1. শ্রেণিবিভাগ (ক্লাসিফিকেশন)<a class="headerlink" href="#1.-শ্রেণিবিভাগ-(ক্লাসিফিকেশন)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>প্রথমত কিভাবে PyTorch - এর স্বয়ংক্রিয় বিভাজন যন্ত্র ব্যবহার করে <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> একটি কোয়ান্টাম <code class="docutils literal notranslate"><span class="pre">NeuralNetwork</span></code> দ্বারা শ্রেণিবিন্যাসকরণ করতে সাহায্য করে সেটা আমরা দেখিয়েছি। উদাহরণ হিসাবে আমরা এখানে একটি যথেচ্ছভাবে বানানো ডেটাসেটের ওপরে দুইভাগবিশিষ্ট / দ্বিমূল শ্রেণীবিন্যাস করেছি।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -603,9 +602,9 @@ novel <strong>hybrid quantum-classical</strong> machine learning architectures.<
 <img alt="../_images/tutorials_05_torch_connector_4_0.png" src="../_images/tutorials_05_torch_connector_4_0.png" />
 </div>
 </div>
-<div class="section" id="A.-Classification-with-PyTorch-and-OpflowQNN">
-<h4>A. Classification with PyTorch and <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code><a class="headerlink" href="#A.-Classification-with-PyTorch-and-OpflowQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
-<p>Linking an <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> to PyTorch is relatively straightforward. Here we illustrate this using the <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>, a sub-case of <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> introduced in previous tutorials.</p>
+<div class="section" id="A.-PyTorch-এবং-OpflowQNN-দ্বারা-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)">
+<h4>A. PyTorch এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> দ্বারা শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন)<a class="headerlink" href="#A.-PyTorch-এবং-OpflowQNN-দ্বারা-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<p>PyTorch এর সাথে একটি <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> লিঙ্ক করা তুলনামূলকভাবে সহজবোধ্য। এখানে আমরা <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>, পূর্ববর্তী পাঠসমূহে (টিউটোরিয়ালস) <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> এর একটি সাব-কেস ব্যবহার করে এটি ব্যাখ্যা করেছি।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -667,14 +666,13 @@ Initial weights:  [ 0.05426413 -0.09584961  0.02672965  0.04976078 -0.0002986  -
 tensor([-0.0547], grad_fn=&lt;_TorchNNFunctionBackward&gt;)
 </pre></div></div>
 </div>
-<div class="section" id="Optimizer">
-<h5>Optimizer<a class="headerlink" href="#Optimizer" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h5>
-<p>The choice of optimizer for training any machine learning model can be crucial in determining the success of our training’s outcome. When using <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code>, we get access to all of the optimizer algorithms defined in the [<code class="docutils literal notranslate"><span class="pre">torch.optim</span></code>] package (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html">link</a>). Some of the most famous algorithms used in popular machine learning architectures include <em>Adam</em>, <em>SGD</em>, or <em>Adagrad</em>. However, for this tutorial we will be using the L-BFGS algorithm
-(<code class="docutils literal notranslate"><span class="pre">torch.optim.LBFGS</span></code>), one of the most well know second-order optimization algorithms for numerical optimization.</p>
+<div class="section" id="অনুকূলায়ক">
+<h5>অনুকূলায়ক<a class="headerlink" href="#অনুকূলায়ক" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h5>
+<p>যে কোন মেশিন লার্নিং মডেলকে প্রশিক্ষণের জন্য অনুকূলায়ক -এর (অপটিমাইজার) পছন্দ আমাদের প্রশিক্ষণের ফলাফলের সাফল্য নির্ধারণে গুরুত্বপূর্ণ হতে পারে। <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> ব্যবহার করার সময়, আমরা [<code class="docutils literal notranslate"><span class="pre">torch.optim</span></code>] প্যাকেজে (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html">link</a>) সংজ্ঞায়িত সমস্ত অপটিমাইজার অ্যালগরিদমগুলিতে অ্যাক্সেস পাই। জনপ্রিয় মেশিন লার্নিং আর্কিটেকচারে ব্যবহৃত কিছু বিখ্যাত অ্যালগরিদমের মধ্যে রয়েছে <a href="#id1"><span class="problematic" id="id2">*</span></a>অ্যাডাম <a href="#id3"><span class="problematic" id="id4">*</span></a>, <a href="#id5"><span class="problematic" id="id6">*</span></a>এসজিডি <a href="#id7"><span class="problematic" id="id8">*</span></a>, অথবা <a href="#id9"><span class="problematic" id="id10">*</span></a>অ্যাডাগ্রেড <a href="#id11"><span class="problematic" id="id12">*</span></a>(Adagrad)। যাইহোক, এই টিউটোরিয়ালের জন্য আমরা L-BFGS অ্যালগরিদম (<code class="docutils literal notranslate"><span class="pre">torch.optim.LBFGS</span></code>) ব্যবহার করব, সংখ্যাসূচক অপ্টিমাইজেশনের জন্য সবচেয়ে ভালোভাবে পরিচিত দ্বিতীয়-অর্ডার অনুকূলকরণ (অপটিমাইজার) অ্যালগরিদম।</p>
 </div>
-<div class="section" id="Loss-Function">
-<h5>Loss Function<a class="headerlink" href="#Loss-Function" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h5>
-<p>As for the loss function, we can also take advantage of PyTorch’s pre-defined modules from <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code>, such as the <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross-Entropy</a> or <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html">Mean Squared Error</a> losses.</p>
+<div class="section" id="হ্রাস-ফাংশন-(Loss-Function)">
+<h5>হ্রাস ফাংশন (Loss Function)<a class="headerlink" href="#হ্রাস-ফাংশন-(Loss-Function)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h5>
+<p>হ্রাস (লস) ফাংশনের ক্ষেত্রে, আমরা <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> থেকে PyTorch- এর পূর্বনির্ধারিত মডিউলগুলির সুবিধা নিতে পারি, যেমন <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross-Entropy</a> অথবা <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html">Mean Squared Error</a> হ্রাস।</p>
 <p><strong>💡 Clarification :</strong> In classical machine learning, the general rule of thumb is to apply a Cross-Entropy loss to classification tasks, and MSE loss to regression tasks. However, this recommendation is given under the assumption that the output of the classification network is a class probability value in the [0,1] range (usually this is achieved through a Softmax layer). Because the following example for <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> does not include such layer, and we don’t apply any mapping to the output
 (the following section shows an example of application of parity mapping with <code class="docutils literal notranslate"><span class="pre">CircuitQNNs</span></code>), the QNN’s output can take any value in the range [-1,1]. In case you were wondering, this is the reason why this particular example uses MSELoss for classification despite it not being the norm (but we encourage you to experiment with different loss functions and see how they can impact training results).</p>
 <div class="nbinput docutils container">
@@ -786,14 +784,14 @@ Accuracy: 0.55
 <img alt="../_images/tutorials_05_torch_connector_10_1.png" src="../_images/tutorials_05_torch_connector_10_1.png" />
 </div>
 </div>
-<p>The red circles indicate wrongly classified data points.</p>
+<p>লাল বৃত্তগুলি ভুলভাবে শ্রেণিবদ্ধ ডেটা পয়েন্ট নির্দেশ করছে।</p>
 </div>
 </div>
-<div class="section" id="B.-Classification-with-PyTorch-and-CircuitQNN">
-<h4>B. Classification with PyTorch and <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code><a class="headerlink" href="#B.-Classification-with-PyTorch-and-CircuitQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
-<p>Linking an <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> to PyTorch requires a bit more attention than <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code>. Without the correct setup, backpropagation is not possible.</p>
-<p>In particular, we must make sure that we are returning a dense array of probabilities in the network’s forward pass (<code class="docutils literal notranslate"><span class="pre">sparse=False</span></code>). This parameter is set up to <code class="docutils literal notranslate"><span class="pre">False</span></code> by default, so we just have to make sure that it has not been changed.</p>
-<p><strong>⚠️ Attention:</strong> If we define a custom interpret function ( in the example: <code class="docutils literal notranslate"><span class="pre">parity</span></code>), we must remember to explicitly provide the desired output shape ( in the example: <code class="docutils literal notranslate"><span class="pre">2</span></code>). For more info on the initial parameter setup for <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code>, please check out the <a class="reference external" href="https://qiskit.org/documentation/machine-learning/stubs/qiskit_machine_learning.neural_networks.CircuitQNN.html">official qiskit documentation</a>.</p>
+<div class="section" id="B.-PyTorch-এবং-CircuitQNN-এর-সঙ্গে-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)">
+<h4>B. PyTorch এবং <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> এর সঙ্গে শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন)<a class="headerlink" href="#B.-PyTorch-এবং-CircuitQNN-এর-সঙ্গে-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<p>PyTorch এর সাথে <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> যোগ করাটা <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code>- এর যোগ করা থেকে অনেকটা আলাদা। ঠিক করে যোগ না করলে পিছনের দিকে প্রচার করাটা (ব্যাকপ্রপাগেশন) সম্ভব হয়ে উঠবে না।</p>
+<p>বিশেষ করে, আমাদের এটা নিশ্চিত করতে হবে যে নেটওয়ার্কের সামনের দিকে যাবার সময় আমরা সম্ভাবনার একটি ঘন বিন্যাস (array) ফেরাচ্ছি (<code class="docutils literal notranslate"><span class="pre">sparse=False</span></code> করে)। এই স্থিতিমাপ বা প্যারামিটারটা স্বতঃসিদ্ধ নিয়মানুসারে <code class="docutils literal notranslate"><span class="pre">False</span></code> এই থাকে।</p>
+<p><strong>⚠️ সাবধান:</strong> যদি একটি বিশেষায়িত (কাস্টম) ফাংশন ব্যাখ্যা কর থাকে (উদাহরণে: &quot;সমতা&quot;) তবে আকাঙ্ক্ষিত আউটপুটের আকার দেওয়া দরকার এখানে। <a class="reference external" href="https://qiskit.org/documentation/machine-learning/stubs/qiskit_machine_learning.neural_networks.CircuitQNN.html">Qiskit এর প্রদর্শকের (ডকুমেন্টেশন)</a> মধ্যে <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> এর স্থিতিমাপ বা প্যারামিটার নিয়ে আরো চর্চা করা রয়েছে</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -834,7 +832,7 @@ Accuracy: 0.55
 Initial weights:  [-0.09792517  0.00037492 -0.00084534 -0.07323409]
 </pre></div></div>
 </div>
-<p>For a reminder on optimizer and loss function choices, you can go back to <a class="reference external" href="#Optimizer">this section</a>.</p>
+<p>অনুকূলায়ক (অপটিমাইজার) এবং লস ফাংশন পছন্দগুলির একটি স্মরণচিহ্নর জন্য, আপনি <a class="reference external" href="#Optimizer">এই অধ্যায়</a> ফিরে যেতে পারেন।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -930,11 +928,11 @@ Accuracy: 0.75
 <img alt="../_images/tutorials_05_torch_connector_16_1.png" src="../_images/tutorials_05_torch_connector_16_1.png" />
 </div>
 </div>
-<p>The red circles indicate wrongly classified data points.</p>
+<p>লাল বৃত্তগুলি ভুলভাবে শ্রেণিবদ্ধ ডেটা পয়েন্ট নির্দেশ করছে।</p>
 </div>
 </div>
-<div class="section" id="2.-Regression">
-<h3>2. Regression<a class="headerlink" href="#2.-Regression" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<div class="section" id="2.-রিগ্রেশন">
+<h3>2. রিগ্রেশন<a class="headerlink" href="#2.-রিগ্রেশন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>We use a model based on the <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> to also illustrate how to perform a regression task. The chosen dataset in this case is randomly generated following a sine wave.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -964,8 +962,8 @@ Accuracy: 0.75
 <img alt="../_images/tutorials_05_torch_connector_19_0.png" src="../_images/tutorials_05_torch_connector_19_0.png" />
 </div>
 </div>
-<div class="section" id="A.-Regression-with-PyTorch-and-OpflowQNN">
-<h4>A. Regression with PyTorch and <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code><a class="headerlink" href="#A.-Regression-with-PyTorch-and-OpflowQNN" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<div class="section" id="A.-PyTorch-এবং-OpflowQNN-দিয়ে-রিগ্রেশন">
+<h4>A. PyTorch এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> দিয়ে রিগ্রেশন<a class="headerlink" href="#A.-PyTorch-এবং-OpflowQNN-দিয়ে-রিগ্রেশন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <p>The network definition and training loop will be analogous to those of the classification task using <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>. In this case, we define our own feature map and ansatz, instead of using the default values.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -1011,7 +1009,7 @@ ComposedOp([
 ])
 </pre></div></div>
 </div>
-<p>For a reminder on optimizer and loss function choices, you can go back to <a class="reference external" href="#Optimizer">this section</a>.</p>
+<p>অনুকূলায়ক (অপটিমাইজার) এবং লস ফাংশন পছন্দগুলির একটি স্মরণচিহ্নর জন্য, আপনি <a class="reference external" href="#Optimizer">এই অধ্যায়</a> ফিরে যেতে পারেন।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -1125,8 +1123,8 @@ tensor(21.3484, grad_fn=&lt;MseLossBackward&gt;)
 </pre></div>
 </div>
 </div>
-<div class="section" id="Step-1:-Defining-Data-loaders-for-train-and-test">
-<h3>Step 1: Defining Data-loaders for train and test<a class="headerlink" href="#Step-1:-Defining-Data-loaders-for-train-and-test" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<div class="section" id="ধাপ-১:-প্রশিক্ষণ-এবং-পরীক্ষার-জন্য-ডেটা-লোডার-সংজ্ঞায়িত-করা">
+<h3>ধাপ ১: প্রশিক্ষণ এবং পরীক্ষার জন্য ডেটা-লোডার সংজ্ঞায়িত করা<a class="headerlink" href="#ধাপ-১:-প্রশিক্ষণ-এবং-পরীক্ষার-জন্য-ডেটা-লোডার-সংজ্ঞায়িত-করা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>We take advantage of the <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> <a class="reference external" href="https://pytorch.org/vision/stable/datasets.html">API</a> to directly load a subset of the <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST dataset</a> and define torch <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>s (<a class="reference external" href="https://pytorch.org/docs/stable/data.html">link</a>) for train and test.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -1219,7 +1217,7 @@ tensor(21.3484, grad_fn=&lt;MseLossBackward&gt;)
 <div class="section" id="Step-2:-Defining-the-QNN-and-Hybrid-Model">
 <h3>Step 2: Defining the QNN and Hybrid Model<a class="headerlink" href="#Step-2:-Defining-the-QNN-and-Hybrid-Model" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>This second step shows the power of the <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code>. After defining our quantum neural network layer (in this case, a <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>), we can embed it into a layer in our torch <code class="docutils literal notranslate"><span class="pre">Module</span></code> by initializing a torch connector as <code class="docutils literal notranslate"><span class="pre">TorchConnector(qnn)</span></code>.</p>
-<p><strong>⚠️ Attention:</strong> In order to have an adequate gradient backpropagation in hybrid models, we MUST set the initial parameter <code class="docutils literal notranslate"><span class="pre">input_gradients</span></code> to TRUE during the qnn initialization.</p>
+<p><strong>⚠️ সাবধান:</strong> কোয়ান্টাম নিউরাল নেটওয়ার্ক বানানোর সময়ে আমাদের প্রাথমিক <code class="docutils literal notranslate"><span class="pre">input_gradients</span></code> স্থিতিমাপ বা প্যারামিটারটি TRUE থাকা দরকার যাতে নতিমাত্রা যথেষ্ট ভাবে পিছনের দিকে প্রচার করা (ব্যাকপ্রপাগেশন) যায়।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -1289,8 +1287,8 @@ ComposedOp([
 </div>
 </div>
 </div>
-<div class="section" id="Step-3:-Training">
-<h3>Step 3: Training<a class="headerlink" href="#Step-3:-Training" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<div class="section" id="ধাপ-৩:-প্রশিক্ষণ">
+<h3>ধাপ ৩: প্রশিক্ষণ<a class="headerlink" href="#ধাপ-৩:-প্রশিক্ষণ" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
@@ -1359,8 +1357,8 @@ Training [100%] Loss: -2.4982
 </div>
 </div>
 </div>
-<div class="section" id="Step-4:-Evaluation">
-<h3>Step 4: Evaluation<a class="headerlink" href="#Step-4:-Evaluation" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<div class="section" id="ধাপ-৪:-মূল্যায়ন">
+<h3>ধাপ ৪: মূল্যায়ন<a class="headerlink" href="#ধাপ-৪:-মূল্যায়ন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
@@ -1477,7 +1475,7 @@ Performance on test data:
         <a href="../release_notes.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="04_qgans_for_loading_random_distributions.html" class="btn btn-neutral" title="qGANs for Loading Random Distributions" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="04_qgans_for_loading_random_distributions.html" class="btn btn-neutral" title="দৈব বণ্টন (র‍্যান্ডম ডিস্ট্রিবিউশন) লোড করার জন্য qGANS" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1509,29 +1507,29 @@ Performance on test data:
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Torch Connector and Hybrid QNNs</a><ul>
-<li><a class="reference internal" href="#Content:">Content:</a></li>
-<li><a class="reference internal" href="#Part-1:-Simple-Classification-&amp;-Regression">Part 1: Simple Classification &amp; Regression</a><ul>
-<li><a class="reference internal" href="#1.-Classification">1. Classification</a><ul>
-<li><a class="reference internal" href="#A.-Classification-with-PyTorch-and-OpflowQNN">A. Classification with PyTorch and <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code></a><ul>
-<li><a class="reference internal" href="#Optimizer">Optimizer</a></li>
-<li><a class="reference internal" href="#Loss-Function">Loss Function</a></li>
+<li><a class="reference internal" href="#">টর্চ (PyTorch) সংযোগকারী এবং দোআঁশলা কোয়ান্টাম নিউরাল নেটওয়ার্ক</a><ul>
+<li><a class="reference internal" href="#সুচি:">সুচি:</a></li>
+<li><a class="reference internal" href="#পর্ব-1:-সরল-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)-ও-রিগ্রেশন">পর্ব 1: সরল শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন) ও রিগ্রেশন</a><ul>
+<li><a class="reference internal" href="#1.-শ্রেণিবিভাগ-(ক্লাসিফিকেশন)">1. শ্রেণিবিভাগ (ক্লাসিফিকেশন)</a><ul>
+<li><a class="reference internal" href="#A.-PyTorch-এবং-OpflowQNN-দ্বারা-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)">A. PyTorch এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> দ্বারা শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন)</a><ul>
+<li><a class="reference internal" href="#অনুকূলায়ক">অনুকূলায়ক</a></li>
+<li><a class="reference internal" href="#হ্রাস-ফাংশন-(Loss-Function)">হ্রাস ফাংশন (Loss Function)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#B.-Classification-with-PyTorch-and-CircuitQNN">B. Classification with PyTorch and <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code></a></li>
+<li><a class="reference internal" href="#B.-PyTorch-এবং-CircuitQNN-এর-সঙ্গে-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন)">B. PyTorch এবং <code class="docutils literal notranslate"><span class="pre">CircuitQNN</span></code> এর সঙ্গে শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#2.-Regression">2. Regression</a><ul>
-<li><a class="reference internal" href="#A.-Regression-with-PyTorch-and-OpflowQNN">A. Regression with PyTorch and <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code></a></li>
+<li><a class="reference internal" href="#2.-রিগ্রেশন">2. রিগ্রেশন</a><ul>
+<li><a class="reference internal" href="#A.-PyTorch-এবং-OpflowQNN-দিয়ে-রিগ্রেশন">A. PyTorch এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> দিয়ে রিগ্রেশন</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Part-2:-MNIST-Classification,-Hybrid-QNNs">Part 2: MNIST Classification, Hybrid QNNs</a><ul>
-<li><a class="reference internal" href="#Step-1:-Defining-Data-loaders-for-train-and-test">Step 1: Defining Data-loaders for train and test</a></li>
+<li><a class="reference internal" href="#ধাপ-১:-প্রশিক্ষণ-এবং-পরীক্ষার-জন্য-ডেটা-লোডার-সংজ্ঞায়িত-করা">ধাপ ১: প্রশিক্ষণ এবং পরীক্ষার জন্য ডেটা-লোডার সংজ্ঞায়িত করা</a></li>
 <li><a class="reference internal" href="#Step-2:-Defining-the-QNN-and-Hybrid-Model">Step 2: Defining the QNN and Hybrid Model</a></li>
-<li><a class="reference internal" href="#Step-3:-Training">Step 3: Training</a></li>
-<li><a class="reference internal" href="#Step-4:-Evaluation">Step 4: Evaluation</a></li>
+<li><a class="reference internal" href="#ধাপ-৩:-প্রশিক্ষণ">ধাপ ৩: প্রশিক্ষণ</a></li>
+<li><a class="reference internal" href="#ধাপ-৪:-মূল্যায়ন">ধাপ ৪: মূল্যায়ন</a></li>
 </ul>
 </li>
 </ul>
