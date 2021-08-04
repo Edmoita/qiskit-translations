@@ -673,8 +673,7 @@ tensor([-0.0547], grad_fn=&lt;_TorchNNFunctionBackward&gt;)
 <div class="section" id="হ্রাস-ফাংশন-(Loss-Function)">
 <h5>হ্রাস ফাংশন (Loss Function)<a class="headerlink" href="#হ্রাস-ফাংশন-(Loss-Function)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h5>
 <p>হ্রাস (লস) ফাংশনের ক্ষেত্রে, আমরা <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> থেকে PyTorch- এর পূর্বনির্ধারিত মডিউলগুলির সুবিধা নিতে পারি, যেমন <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross-Entropy</a> অথবা <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.MSELoss.html">Mean Squared Error</a> হ্রাস।</p>
-<p><strong>💡 Clarification :</strong> In classical machine learning, the general rule of thumb is to apply a Cross-Entropy loss to classification tasks, and MSE loss to regression tasks. However, this recommendation is given under the assumption that the output of the classification network is a class probability value in the [0,1] range (usually this is achieved through a Softmax layer). Because the following example for <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> does not include such layer, and we don’t apply any mapping to the output
-(the following section shows an example of application of parity mapping with <code class="docutils literal notranslate"><span class="pre">CircuitQNNs</span></code>), the QNN’s output can take any value in the range [-1,1]. In case you were wondering, this is the reason why this particular example uses MSELoss for classification despite it not being the norm (but we encourage you to experiment with different loss functions and see how they can impact training results).</p>
+<p><strong>💡 স্পষ্টীকরণ :</strong> সাধারণত প্রথাগত (ক্লাসিক্যাল) মেশিন লার্নিং- এ আমরা শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন) এর সময় ক্রস-এনট্রপি ক্ষতিমাপ এবং রিগ্রেশনের ক্ষেত্রে ক্ষতির দ্বিঘাত রাশিতে উন্নীতকরণ করা গড় ক্ষতিমাপ হিসাবে ব্যবহার করি। কিন্তু এইটা এই ভেবে করা হয়ে যে শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন) নেটওয়ার্কের আউটপুট [০, ১] এর মধ্যে বিভাগের সম্ভাবনার হয়ে (সফটমাক্স স্তর এর জন্যে)। <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> এর ক্ষেত্রে এরম স্তর না থাকায় এবং আউটপুটের ওপরে কোনো রকম ম্যাপিং (চিত্রায়ন) না করে থাকায়(<code class="docutils literal notranslate"><span class="pre">CircuitQNNs</span></code> এর সাথে সমতা ম্যাপিং (চিত্রায়ন) ব্যবহার করবে উদাহরণ পরের ভাগে দেখানো রয়েছে) কোয়ান্টাম নিউরাল নেটওয়ার্ক এর আউটপুট [-১, ১] এর মধ্যে থাকবে। এই জন্যেই আমরা এখানে ক্ষতির দ্বিঘাত রাশিতে উন্নীতকরণ করা গড় ক্ষতিমাপ (MSELoss) ব্যবহার করেছি। কিন্তু আমরা পাঠকদের বিভিন্ন ক্ষতির ফাংশন নিয়ে পরীক্ষা -নিরীক্ষা করে দেখতে বলবো এবং সেই খতিমাপ ব্যবহার প্রশিক্ষণের ফলাফলকে কিভাবে প্রভাবিত করতে পারে তা দেখতে বলবো।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -933,7 +932,7 @@ Accuracy: 0.75
 </div>
 <div class="section" id="2.-রিগ্রেশন">
 <h3>2. রিগ্রেশন<a class="headerlink" href="#2.-রিগ্রেশন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>We use a model based on the <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> to also illustrate how to perform a regression task. The chosen dataset in this case is randomly generated following a sine wave.</p>
+<p>কিভাবে রিগ্রেশনের কাজ করা যাবে সেটার জন্যেও আমরা <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> এর ওপরে বানানো মডেল এখানে ব্যবহার করছি । এই ক্ষেত্রে আমরা সাইন ওয়েভ মিলিয়ে একটি ইচ্ছামতন বানানো ডেটাসেট ব্যবহার করছি।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -964,7 +963,7 @@ Accuracy: 0.75
 </div>
 <div class="section" id="A.-PyTorch-এবং-OpflowQNN-দিয়ে-রিগ্রেশন">
 <h4>A. PyTorch এবং <code class="docutils literal notranslate"><span class="pre">OpflowQNN</span></code> দিয়ে রিগ্রেশন<a class="headerlink" href="#A.-PyTorch-এবং-OpflowQNN-দিয়ে-রিগ্রেশন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
-<p>The network definition and training loop will be analogous to those of the classification task using <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>. In this case, we define our own feature map and ansatz, instead of using the default values.</p>
+<p>নেটওয়ার্ক সংজ্ঞা এবং প্রশিক্ষণ লুপ <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code> এর সাথে শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন) এর সঙ্গে অনুরূপ হবে। এই ক্ষেত্রে গতানুগতিক মান না ব্যবহার করে আমরা নিজেদের বৈশিষ্ট্য নকশা (ফিচার ম্যাপ) এবং অন্সাৎজ (ansatz) ব্যবহার করবো।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -1103,10 +1102,10 @@ tensor(21.3484, grad_fn=&lt;MseLossBackward&gt;)
 </div>
 </div>
 <hr class="docutils" />
-<div class="section" id="Part-2:-MNIST-Classification,-Hybrid-QNNs">
-<h2>Part 2: MNIST Classification, Hybrid QNNs<a class="headerlink" href="#Part-2:-MNIST-Classification,-Hybrid-QNNs" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>In this second part, we show how to leverage a hybrid quantum-classical neural network using <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code>, to perform a more complex image classification task on the MNIST handwritten digits dataset.</p>
-<p>For a more detailed (pre-<code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code>) explanation on hybrid quantum-classical neural networks, you can check out the corresponding section in the <a class="reference external" href="https://qiskit.org/textbook/ch-machine-learning/machine-learning-qiskit-pytorch.html">Qiskit Textbook</a>.</p>
+<div class="section" id="দ্বিতীয়-অধ্যায়:-MNIST-এর-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন),-দোআঁশলা-(Hybrid)-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক">
+<h2>দ্বিতীয় অধ্যায়: MNIST এর শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন), দোআঁশলা (Hybrid) কোয়ান্টাম নিউরাল নেটওয়ার্ক<a class="headerlink" href="#দ্বিতীয়-অধ্যায়:-MNIST-এর-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন),-দোআঁশলা-(Hybrid)-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<p>এই দ্বিতীয় অধ্যায়ে আমরা <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> এর সাহায্যে হাইব্রিড কোয়ান্টাম নিউরাল নেটওয়ার্ক বানানো এবং সেটা দিয়ে কিভাবে MNIST (হাতে লেখা সংখ্যা) ডেটাসেটের ওপরে আরো জটিল ছবির শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন) কাজ করা যায় সেটা দেখিয়েছি।</p>
+<p><a class="reference external" href="https://qiskit.org/textbook/ch-machine-learning/machine-learning-qiskit-pytorch.html">Qiskit Textbook</a> - এ আরো সবিশেষ ভাবে দোআঁশলা (Hybrid) কোয়ান্টাম নিউরাল নেটওয়ার্কের ব্যাপারে বোঝানো হয়েছে।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1125,7 +1124,7 @@ tensor(21.3484, grad_fn=&lt;MseLossBackward&gt;)
 </div>
 <div class="section" id="ধাপ-১:-প্রশিক্ষণ-এবং-পরীক্ষার-জন্য-ডেটা-লোডার-সংজ্ঞায়িত-করা">
 <h3>ধাপ ১: প্রশিক্ষণ এবং পরীক্ষার জন্য ডেটা-লোডার সংজ্ঞায়িত করা<a class="headerlink" href="#ধাপ-১:-প্রশিক্ষণ-এবং-পরীক্ষার-জন্য-ডেটা-লোডার-সংজ্ঞায়িত-করা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>We take advantage of the <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> <a class="reference external" href="https://pytorch.org/vision/stable/datasets.html">API</a> to directly load a subset of the <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST dataset</a> and define torch <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>s (<a class="reference external" href="https://pytorch.org/docs/stable/data.html">link</a>) for train and test.</p>
+<p>প্রশিক্ষণ এবং পরিক্ষার জন্যে <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> <a class="reference external" href="https://pytorch.org/vision/stable/datasets.html">API</a> এর সাহায্যে সরাসরি <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST dataset</a>  এর একাংশ লোড করে  <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>s (<a class="reference external" href="https://pytorch.org/docs/stable/data.html">link</a>) বর্ণনা করছি ।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1155,7 +1154,7 @@ tensor(21.3484, grad_fn=&lt;MseLossBackward&gt;)
 </pre></div>
 </div>
 </div>
-<p>If we perform a quick visualization we can see that the train dataset consists of images of handwritten 0s and 1s.</p>
+<p>ছোট করে একটি দৃশ্যায়ন বা চিত্রায়ন করলে লক্ষ করা যাবে যে ডেটাসেটিতে ইংরাজিতে হাতে লেখা ০ এবং ১ রয়েছে।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -1525,7 +1524,7 @@ Performance on test data:
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Part-2:-MNIST-Classification,-Hybrid-QNNs">Part 2: MNIST Classification, Hybrid QNNs</a><ul>
+<li><a class="reference internal" href="#দ্বিতীয়-অধ্যায়:-MNIST-এর-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন),-দোআঁশলা-(Hybrid)-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক">দ্বিতীয় অধ্যায়: MNIST এর শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন), দোআঁশলা (Hybrid) কোয়ান্টাম নিউরাল নেটওয়ার্ক</a><ul>
 <li><a class="reference internal" href="#ধাপ-১:-প্রশিক্ষণ-এবং-পরীক্ষার-জন্য-ডেটা-লোডার-সংজ্ঞায়িত-করা">ধাপ ১: প্রশিক্ষণ এবং পরীক্ষার জন্য ডেটা-লোডার সংজ্ঞায়িত করা</a></li>
 <li><a class="reference internal" href="#Step-2:-Defining-the-QNN-and-Hybrid-Model">Step 2: Defining the QNN and Hybrid Model</a></li>
 <li><a class="reference internal" href="#ধাপ-৩:-প্রশিক্ষণ">ধাপ ৩: প্রশিক্ষণ</a></li>
