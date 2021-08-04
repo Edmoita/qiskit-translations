@@ -628,7 +628,7 @@ q_2: ────────────┤1         ├
 <section id="複合(Composite)-ゲート">
 <h2>複合(Composite) ゲート<a class="headerlink" href="#複合(Composite)-ゲート" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -639,7 +639,7 @@ q_2: ────────────┤1         ├
 <span class="n">sub_circ</span><span class="o">.</span><span class="n">crz</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sub_q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sub_q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">sub_circ</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
 <span class="n">sub_circ</span><span class="o">.</span><span class="n">id</span><span class="p">(</span><span class="n">sub_q</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">sub_circ</span><span class="o">.</span><span class="n">u3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">sub_q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sub_circ</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">sub_q</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="c1"># Convert to a gate and stick it into an arbitrary place in the bigger circuit</span>
 <span class="n">sub_inst</span> <span class="o">=</span> <span class="n">sub_circ</span><span class="o">.</span><span class="n">to_instruction</span><span class="p">()</span>
@@ -656,7 +656,7 @@ q_2: ────────────┤1         ├
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -670,7 +670,7 @@ q_2: ──────────┤ X ├┤1          ├
 </div>
 <p>回路設計を高度抽象化するため、<code class="docutils literal notranslate"><span class="pre">to_instruction</span></code> での変換では、即座に分解された状態になりません。必要に応じて、コンパイル前に、サブ回路は <code class="docutils literal notranslate"><span class="pre">decompose</span></code> メソッドで分解することができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -680,23 +680,23 @@ q_2: ──────────┤ X ├┤1          ├
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
-<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">     ┌──────────┐
-q_0: ┤ U2(0,pi) ├──■──────────────────────────────────────
-     └──────────┘┌─┴─┐     ┌───┐          ░ ┌────────────┐
-q_1: ────────────┤ X ├──■──┤ H ├────■─────░─┤ U3(1,2,-2) ├
-                 └───┘┌─┴─┐└───┘┌───┴───┐ ░ └───┬───┬────┘
-q_2: ─────────────────┤ X ├─────┤ RZ(1) ├─░─────┤ I ├─────
-                      └───┘     └───────┘ ░     └───┘     </pre></div>
+<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">     ┌─────────┐
+q_0: ┤ U2(0,π) ├──■─────────────────────────────────────
+     └─────────┘┌─┴─┐     ┌───┐          ░ ┌───────────┐
+q_1: ───────────┤ X ├──■──┤ H ├────■─────░─┤ U(1,2,-2) ├
+                └───┘┌─┴─┐└───┘┌───┴───┐ ░ └───┬───┬───┘
+q_2: ────────────────┤ X ├─────┤ Rz(1) ├─░─────┤ I ├────
+                     └───┘     └───────┘ ░     └───┘    </pre></div>
 </div>
 </section>
 <section id="パラメータ化された回路">
 <h2>パラメータ化された回路<a class="headerlink" href="#パラメータ化された回路" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -726,7 +726,7 @@ q_2: ─────────────────┤ X ├─────
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -735,7 +735,7 @@ q_2: ─────────────────┤ X ├─────
 </div>
 <p>回路のパラメータを調べることができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -748,15 +748,14 @@ q_2: ─────────────────┤ X ├─────
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{Parameter(θ)}
+ParameterView([Parameter(θ)])
 </pre></div></div>
 </div>
 <section id="パラメータを値にバインド">
 <h3>パラメータを値にバインド<a class="headerlink" href="#パラメータを値にバインド" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>全ての回路パラメータは回路をバックエンドに送る前にバインド(値の設定)される必要があります。これには２つの方法があります:
-<code class="docutils literal notranslate"><span class="pre">bind_parameters</span></code> メソッドは、<code class="docutils literal notranslate"><span class="pre">Parameter</span></code> を値にマップするディクショナリーを受け取り、各パラメータを対応する値に置き換えた新しい回路を返します。部分バインドもサポートされ、この場合、値にマップされなかった <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> によるパラメータ化された回路がリターンされます。</p>
+<p>All circuit parameters must be bound before sending the circuit to a backend. This can be done as follows: - The <code class="docutils literal notranslate"><span class="pre">bind_parameters</span></code> method accepts a dictionary mapping <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>s to values, and returns a new circuit with each parameter replaced by its corresponding value. Partial binding is supported, in which case the returned circuit will be parameterized by any <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>s that were not mapped to a value.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -772,44 +771,38 @@ q_2: ─────────────────┤ X ├─────
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">     ┌───┐                     ░ ┌─────────┐ ░                     ┌───┐┌─┐
-q_0: ┤ H ├──■──────────────────░─┤ RZ(2pi) ├─░──────────────────■──┤ H ├┤M├
-     └───┘┌─┴─┐                ░ ├─────────┤ ░                ┌─┴─┐└───┘└╥┘
-q_1: ─────┤ X ├──■─────────────░─┤ RZ(2pi) ├─░─────────────■──┤ X ├──────╫─
-          └───┘┌─┴─┐           ░ ├─────────┤ ░           ┌─┴─┐└───┘      ║
-q_2: ──────────┤ X ├──■────────░─┤ RZ(2pi) ├─░────────■──┤ X ├───────────╫─
-               └───┘┌─┴─┐      ░ ├─────────┤ ░      ┌─┴─┐└───┘           ║
-q_3: ───────────────┤ X ├──■───░─┤ RZ(2pi) ├─░───■──┤ X ├────────────────╫─
-                    └───┘┌─┴─┐ ░ ├─────────┤ ░ ┌─┴─┐└───┘                ║
-q_4: ────────────────────┤ X ├─░─┤ RZ(2pi) ├─░─┤ X ├─────────────────────╫─
-                         └───┘ ░ └─────────┘ ░ └───┘                     ║
-c_0: ════════════════════════════════════════════════════════════════════╩═
-                                                                           </pre></div>
-</div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">qiskit.execute</span></code> は、<code class="docutils literal notranslate"><span class="pre">Parameter</span></code> を値にマップしたディクショナリーのリストとして指定された <code class="docutils literal notranslate"><span class="pre">parameter_binds</span></code> キーワード引数を受け取り、リスト中のディクショナリーの全てのマッピングに対してバインドし、回路を実行します。</p></li>
-</ul>
-<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
+<div class="output_area rendered_html docutils container">
+<pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">     ┌───┐                     ░ ┌────────┐ ░                     ┌───┐┌─┐
+q_0: ┤ H ├──■──────────────────░─┤ Rz(2π) ├─░──────────────────■──┤ H ├┤M├
+     └───┘┌─┴─┐                ░ ├────────┤ ░                ┌─┴─┐└───┘└╥┘
+q_1: ─────┤ X ├──■─────────────░─┤ Rz(2π) ├─░─────────────■──┤ X ├──────╫─
+          └───┘┌─┴─┐           ░ ├────────┤ ░           ┌─┴─┐└───┘      ║
+q_2: ──────────┤ X ├──■────────░─┤ Rz(2π) ├─░────────■──┤ X ├───────────╫─
+               └───┘┌─┴─┐      ░ ├────────┤ ░      ┌─┴─┐└───┘           ║
+q_3: ───────────────┤ X ├──■───░─┤ Rz(2π) ├─░───■──┤ X ├────────────────╫─
+                    └───┘┌─┴─┐ ░ ├────────┤ ░ ┌─┴─┐└───┘                ║
+q_4: ────────────────────┤ X ├─░─┤ Rz(2π) ├─░─┤ X ├─────────────────────╫─
+                         └───┘ ░ └────────┘ ░ └───┘                     ║
+c: 1/═══════════════════════════════════════════════════════════════════╩═
+                                                                        0 </pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">job</span> <span class="o">=</span> <span class="n">execute</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span>
-              <span class="n">backend</span><span class="o">=</span><span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">),</span>
-              <span class="n">parameter_binds</span><span class="o">=</span><span class="p">[{</span><span class="n">theta</span><span class="p">:</span> <span class="n">theta_val</span><span class="p">}</span> <span class="k">for</span> <span class="n">theta_val</span> <span class="ow">in</span> <span class="n">theta_range</span><span class="p">])</span>
-
+<span></span><span class="n">backend</span> <span class="o">=</span> <span class="n">BasicAer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;qasm_simulator&#39;</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">transpile</span><span class="p">(</span><span class="n">circuits</span><span class="p">,</span> <span class="n">backend</span><span class="p">))</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
-
 </pre></div>
 </div>
 </div>
 <p>回路例では、５つの量子ビットエンタングル状態に対して、<span class="math notranslate nohighlight">\(R_z(\theta)\)</span> グローバル回転を適用し、量子ビット 0 で、<span class="math notranslate nohighlight">\(5\theta\)</span> の振動を期待しています。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -829,19 +822,19 @@ c_0: ═════════════════════════
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x11dce80a0&gt;
+&lt;matplotlib.legend.Legend at 0x7f8fcb307710&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/tutorials_circuits_advanced_01_advanced_circuits_19_1.png" src="../../_images/tutorials_circuits_advanced_01_advanced_circuits_19_1.png" />
+<img alt="../../_images/tutorials_circuits_advanced_01_advanced_circuits_18_1.png" src="../../_images/tutorials_circuits_advanced_01_advanced_circuits_18_1.png" />
 </div>
 </div>
 </section>
@@ -849,7 +842,7 @@ c_0: ═════════════════════════
 <h3>コンパイルコストを減らす<a class="headerlink" href="#コンパイルコストを減らす" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>バインドする前にパラメータ回路をコンパイルしておくと、特定のケースでは、バインドされた回路のセットをコンパイルするのに比べて大幅にコンパイル時間を減らすことができます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -888,11 +881,11 @@ c_0: ═════════════════════════
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Time compiling over set of bound circuits:  8.771650075912476
+Time compiling over set of bound circuits:  2.4267938137054443
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -920,7 +913,7 @@ Time compiling over set of bound circuits:  8.771650075912476
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Time compiling over parameterized circuit, then binding:  0.8169369697570801
+Time compiling over parameterized circuit, then binding:  1.4472951889038086
 </pre></div></div>
 </div>
 </section>
@@ -929,7 +922,7 @@ Time compiling over parameterized circuit, then binding:  0.8169369697570801
 <p>パラメータ回路は標準の <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> (複数) と同様、合成できます。一般的に、２つのパラメータ回路を合成する時には、結果の回路は入力回路のパラメータの結合としてパラメータ化されます。</p>
 <p>しかしながら、パラメータ名は与えられた回路でユニークである必要があります。ターゲットの回路にすでに存在しているパラメータを追加しようとする時: 仮にソースとターゲットが同じ <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> インスタンスを共有する場合には、パラメータは同じと見なされ結合されます。もし、ソースとターゲットが異なる <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> インスタンスの場合にはエラーとなります。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -977,7 +970,7 @@ q_3: ┤1           ├──────────────
 </div>
 <p>異なるパラメータでサブ回路を追加するには、<code class="docutils literal notranslate"><span class="pre">to_instruction</span></code> メソッドにオプション引数 (<code class="docutils literal notranslate"><span class="pre">parameter_map</span></code>) を受け取り、ソースパラメータが存在する場合には、新しいパラメータに置き換える Instruction が生成されます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1009,48 +1002,48 @@ q_3: ┤1           ├──────────────
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-      ┌────────────────┐
-q1_0: ┤0               ├
-      │                │
-q1_1: ┤1 oracle(theta) ├
-      │                │
-q1_2: ┤2               ├
-      └┬──────────────┬┘
-q1_3: ─┤0             ├─
-       │              │
-q1_4: ─┤1 oracle(phi) ├─
-       │              │
-q1_5: ─┤2             ├─
-      ┌┴──────────────┴┐
-q1_6: ┤0               ├
-      │                │
-q1_7: ┤1 oracle(gamma) ├
-      │                │
-q1_8: ┤2               ├
-      └────────────────┘
-      ┌───────────┐
-q1_0: ┤ RZ(theta) ├──■─────────────────────────────────
-      └───────────┘┌─┴─┐┌───────────┐
-q1_1: ─────────────┤ X ├┤ RZ(theta) ├──■───────────────
-                   └───┘└───────────┘┌─┴─┐┌───────────┐
-q1_2: ───────────────────────────────┤ X ├┤ RZ(theta) ├
-       ┌─────────┐                   └───┘└───────────┘
-q1_3: ─┤ RZ(phi) ├───■─────────────────────────────────
-       └─────────┘ ┌─┴─┐ ┌─────────┐
-q1_4: ─────────────┤ X ├─┤ RZ(phi) ├───■───────────────
-                   └───┘ └─────────┘ ┌─┴─┐ ┌─────────┐
-q1_5: ───────────────────────────────┤ X ├─┤ RZ(phi) ├─
-      ┌───────────┐                  └───┘ └─────────┘
-q1_6: ┤ RZ(gamma) ├──■─────────────────────────────────
-      └───────────┘┌─┴─┐┌───────────┐
-q1_7: ─────────────┤ X ├┤ RZ(gamma) ├──■───────────────
-                   └───┘└───────────┘┌─┴─┐┌───────────┐
-q1_8: ───────────────────────────────┤ X ├┤ RZ(gamma) ├
-                                     └───┘└───────────┘
+       ┌────────────────┐
+q24_0: ┤0               ├
+       │                │
+q24_1: ┤1 oracle(theta) ├
+       │                │
+q24_2: ┤2               ├
+       └┬──────────────┬┘
+q24_3: ─┤0             ├─
+        │              │
+q24_4: ─┤1 oracle(phi) ├─
+        │              │
+q24_5: ─┤2             ├─
+       ┌┴──────────────┴┐
+q24_6: ┤0               ├
+       │                │
+q24_7: ┤1 oracle(gamma) ├
+       │                │
+q24_8: ┤2               ├
+       └────────────────┘
+       ┌───────────┐
+q24_0: ┤ Rz(theta) ├──■─────────────────────────────────
+       └───────────┘┌─┴─┐┌───────────┐
+q24_1: ─────────────┤ X ├┤ Rz(theta) ├──■───────────────
+                    └───┘└───────────┘┌─┴─┐┌───────────┐
+q24_2: ───────────────────────────────┤ X ├┤ Rz(theta) ├
+        ┌─────────┐                   └───┘└───────────┘
+q24_3: ─┤ Rz(phi) ├───■─────────────────────────────────
+        └─────────┘ ┌─┴─┐ ┌─────────┐
+q24_4: ─────────────┤ X ├─┤ Rz(phi) ├───■───────────────
+                    └───┘ └─────────┘ ┌─┴─┐ ┌─────────┐
+q24_5: ───────────────────────────────┤ X ├─┤ Rz(phi) ├─
+       ┌───────────┐                  └───┘ └─────────┘
+q24_6: ┤ Rz(gamma) ├──■─────────────────────────────────
+       └───────────┘┌─┴─┐┌───────────┐
+q24_7: ─────────────┤ X ├┤ Rz(gamma) ├──■───────────────
+                    └───┘└───────────┘┌─┴─┐┌───────────┐
+q24_8: ───────────────────────────────┤ X ├┤ Rz(gamma) ├
+                                      └───┘└───────────┘
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1064,14 +1057,14 @@ q1_8: ────────────────────────�
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area rendered_html docutils container">
-<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>None</td></tr><tr><td>Terra</td><td>0.15.0</td></tr><tr><td>Aer</td><td>0.5.1</td></tr><tr><td>Ignis</td><td>None</td></tr><tr><td>Aqua</td><td>None</td></tr><tr><td>IBM Q Provider</td><td>0.7.0</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.8.2 (default, Mar 26 2020, 10:43:30)
-[Clang 4.0.1 (tags/RELEASE_401/final)]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>4</td></tr><tr><td>Memory (Gb)</td><td>16.0</td></tr><tr><td colspan='2'>Fri May 08 08:42:21 2020 EDT</td></tr></table></div>
+<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td><code>qiskit-terra</code></td><td>0.19.0.dev0+be0ed5f</td></tr><tr><td><code>qiskit-aer</code></td><td>0.8.2</td></tr><tr><td><code>qiskit-ignis</code></td><td>0.6.0</td></tr><tr><td><code>qiskit-ibmq-provider</code></td><td>0.16.0.dev0+4e20edc</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.7 (default, May  6 2020, 04:59:01)
+[Clang 4.0.1 (tags/RELEASE_401/final)]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>6</td></tr><tr><td>Memory (Gb)</td><td>32.0</td></tr><tr><td colspan='2'>Sat Jul 31 01:02:16 2021 EDT</td></tr></table></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area rendered_html docutils container">
-<div style='width: 100%; background-color:#d5d9e0;padding-left: 10px; padding-bottom: 10px; padding-right: 10px; padding-top: 5px'><h3>This code is a part of Qiskit</h3><p>&copy; Copyright IBM 2017, 2020.</p><p>This code is licensed under the Apache License, Version 2.0. You may<br>obtain a copy of this license in the LICENSE.txt file in the root directory<br> of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.<p>Any modifications or derivative works of this code must retain this<br>copyright notice, and modified files need to carry a notice indicating<br>that they have been altered from the originals.</p></div></div>
+<div style='width: 100%; background-color:#d5d9e0;padding-left: 10px; padding-bottom: 10px; padding-right: 10px; padding-top: 5px'><h3>This code is a part of Qiskit</h3><p>&copy; Copyright IBM 2017, 2021.</p><p>This code is licensed under the Apache License, Version 2.0. You may<br>obtain a copy of this license in the LICENSE.txt file in the root directory<br> of this source tree or at http://www.apache.org/licenses/LICENSE-2.0.<p>Any modifications or derivative works of this code must retain this<br>copyright notice, and modified files need to carry a notice indicating<br>that they have been altered from the originals.</p></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
