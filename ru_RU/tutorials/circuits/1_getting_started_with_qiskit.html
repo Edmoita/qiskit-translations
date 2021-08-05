@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started with Qiskit &mdash; документация Qiskit 0.29.0</title>
+  <title>Начало работы с Qiskit &mdash; документация Qiskit 0.29.0</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Getting Started with Qiskit</li>
+      <li>Начало работы с Qiskit</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -570,12 +570,11 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">Примечание</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits/1_getting_started_with_qiskit.ipynb">tutorials/circuits/1_getting_started_with_qiskit.ipynb</a>.</p>
+<p>Страница создана на основе <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits/1_getting_started_with_qiskit.ipynb">tutorials/circuits/1_getting_started_with_qiskit.ipynb</a>.</p>
 </div>
-<section id="Getting-Started-with-Qiskit">
-<h1>Getting Started with Qiskit<a class="headerlink" href="#Getting-Started-with-Qiskit" title="Ссылка на этот заголовок">¶</a></h1>
-<p>Here, we provide an overview of working with Qiskit. The fundamental package of Qiskit is Terra that provides the basic building blocks necessary to program quantum computers. The fundamental unit of Qiskit is the <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">quantum circuit</a>. A basic workflow using Qiskit consists of two stages: <strong>Build</strong> and <strong>Execute</strong>. <strong>Build</strong> allows you to make different quantum circuits that represent the problem you are solving, and <strong>Execute</strong> that allows you to
-run them on different backends. After the jobs have been run, the data is collected and postprocessed depending on the desired output.</p>
+<section id="Начало-работы-с-Qiskit">
+<h1>Начало работы с Qiskit<a class="headerlink" href="#Начало-работы-с-Qiskit" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Здесь мы представляем обзор работы с Qiskit. Основной пакет Qiskit Terra предоставляет основные блоки, необходимые для программирования квантовых компьютеров. Фундаментальная единица Qiskit — это цепь <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">(quantum circuit)</a>. Базовый процесс работы с Qiskit состоит из двух этапов: <strong>Создание (Build)</strong> и <strong>Запуск (Execute)</strong>. <strong>Build</strong> позволяет создавать различные квантовые схемы, представляющие решаемую проблему, и <strong>Execute</strong>, запускающий их в разных окружениях. После выполнения задач, с окружения собираются данные и обрабатываются в зависимости от желаемого результата.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -587,11 +586,11 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<section id="Circuit-Basics">
-<h2>Circuit Basics<a class="headerlink" href="#Circuit-Basics" title="Ссылка на этот заголовок">¶</a></h2>
-<section id="Building-the-circuit">
-<h3>Building the circuit<a class="headerlink" href="#Building-the-circuit" title="Ссылка на этот заголовок">¶</a></h3>
-<p>The basic element needed for your first program is the QuantumCircuit. We begin by creating a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> comprised of three qubits.</p>
+<section id="Основы-цепей">
+<h2>Основы цепей<a class="headerlink" href="#Основы-цепей" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="Построение-цепей">
+<h3>Построение цепей<a class="headerlink" href="#Построение-цепей" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Основным элементом, необходимым для первой программы, является QuantumCircuit. Начнем с создания <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>, состоящего из трех кубитов.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -602,12 +601,15 @@ run them on different backends. After the jobs have been run, the data is collec
 </pre></div>
 </div>
 </div>
-<p>After you create the circuit with its registers, you can add gates (“operations”) to manipulate the registers. As you proceed through the tutorials you will find more gates and circuits; below is an example of a quantum circuit that makes a three-qubit GHZ state</p>
+<p>После создания цепи с регистрами, можно добавлять гейты («операции») для работы с регистрами. По мере прохождения учебных материалов Вы найдете больше гейтов и цепей; Ниже приведен пример квантовой цепи, которая создает состояние GHZ для трех кубитов</p>
 <div class="math notranslate nohighlight">
 \[|\psi\rangle = \left(|000\rangle+|111\rangle\right)/\sqrt{2}.\]</div>
-<p>To create such a state, we start with a three-qubit quantum register. By default, each qubit in the register is initialized to <span class="math notranslate nohighlight">\(|0\rangle\)</span>. To make the GHZ state, we apply the following gates: - A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0, which puts it into the superposition state <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span>. - A controlled-Not operation (<span class="math notranslate nohighlight">\(C_{X}\)</span>) between qubit 0 and qubit 1. - A controlled-Not operation between qubit 0 and qubit 2.</p>
-<p>On an ideal quantum computer, the state produced by running this circuit would be the GHZ state above.</p>
-<p>In Qiskit, operations can be added to the circuit one by one, as shown below.</p>
+<p>Чтобы создать такое состояние, необходим квантовый регистр с тремя кубитами. По умолчанию каждый кубит инициализируется в состоянии <span class="math notranslate nohighlight">\(|0\rangle\)</span>. Чтобы создать состояние GHZ, мы применяем следующее:
+- Гейт Адамара <span class="math notranslate nohighlight">\(H\)</span> на кубит с индексом 0, которая помещает его в состояние суперпозиции <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span>.
+- Гейт CNOT (контролируемое логическое «НЕ») (<span class="math notranslate nohighlight">\(C_{X}\)</span>) между кубитами с адресами 0 и 1.
+- Гейт CNOT между кубитами 0 и 2.</p>
+<p>На идеальном квантовом компьютере состояние, производимое при запуске этой цепи, было бы состояние GHZ описанное формулой выше.</p>
+<p>В Qiskit операции можно добавить к цепи один за другим, как показано ниже.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -635,9 +637,9 @@ run them on different backends. After the jobs have been run, the data is collec
 </div>
 </section>
 </section>
-<section id="Visualize-Circuit">
-<h2>Visualize Circuit<a class="headerlink" href="#Visualize-Circuit" title="Ссылка на этот заголовок">¶</a></h2>
-<p>You can visualize your circuit using Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>, which plots the circuit in the form found in many textbooks.</p>
+<section id="Визуализация-цепи">
+<h2>Визуализация цепи<a class="headerlink" href="#Визуализация-цепи" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Вы можете визуализировать свою схему с помощью метода Qiskit <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code>, который выводит схему в форме, которую можно найти во многих пособиях.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -655,20 +657,20 @@ run them on different backends. After the jobs have been run, the data is collec
 <img alt="../../_images/tutorials_circuits_1_getting_started_with_qiskit_7_0.png" src="../../_images/tutorials_circuits_1_getting_started_with_qiskit_7_0.png" />
 </div>
 </div>
-<p>In this circuit, the qubits are put in order, with qubit zero at the top and qubit two at the bottom. The circuit is read left to right (meaning that gates that are applied earlier in the circuit show up further to the left).</p>
-<div class="alert alert-block alert-info"><p>When representing the state of a multi-qubit system, the tensor order used in Qiskit is different than that used in most physics textbooks. Suppose there are <span class="math notranslate nohighlight">\(n\)</span> qubits, and qubit <span class="math notranslate nohighlight">\(j\)</span> is labeled as <span class="math notranslate nohighlight">\(Q_{j}\)</span>. Qiskit uses an ordering in which the <span class="math notranslate nohighlight">\(n^{\mathrm{th}}\)</span> qubit is on the left side of the tensor product, so that the basis vectors are labeled as <span class="math notranslate nohighlight">\(Q_{n-1}\otimes \cdots \otimes Q_1\otimes Q_0\)</span>.</p>
-<p>For example, if qubit zero is in state 0, qubit 1 is in state 0, and qubit 2 is in state 1, Qiskit would represent this state as <span class="math notranslate nohighlight">\(|100\rangle\)</span>, whereas many physics textbooks would represent it as <span class="math notranslate nohighlight">\(|001\rangle\)</span>.</p>
-<p>This difference in labeling affects the way multi-qubit operations are represented as matrices. For example, Qiskit represents a controlled-X (<span class="math notranslate nohighlight">\(C_{X}\)</span>) operation with qubit 0 being the control and qubit 1 being the target as</p>
+<p>В данной схеме кубиты нумеруются сверху вниз, начиная с нулевого. Цепь читается слева направо, то есть гейты, которые применяются раньше других, расположены левее.</p>
+<div class="alert alert-block alert-info"><p>При представлении состояния многокубитной системы, порядок, используемый в Qiskit, отличается от того, что используется в большинстве пособий по физике. Предположим, что имеется <span class="math notranslate nohighlight">\(n\)</span> кубитов, и кубит <span class="math notranslate nohighlight">\(j\)</span> отмечен как <span class="math notranslate nohighlight">\(Q_{j}\)</span>. Qiskit использует порядок, в котором кубит <span class="math notranslate nohighlight">\(n^{\mathrm{th}}\)</span> находится в левой части тензорного произведения так, что базисные векторы отмечены как <span class="math notranslate nohighlight">\(Q_{n-1}\otimes \cdots \otimes Q_1\otimes Q_0\)</span>.</p>
+<p>Например, если нулевой кубит находится в состоянии 0, 1-й кубит также находится в состоянии 0, а кубит 2 находится в состоянии 1, Qiskit представит это состояние как <span class="math notranslate nohighlight">\(|100\rangle\)</span>, в то время как многие книги по физике будут представлять его как <span class="math notranslate nohighlight">\(|001\rangle\)</span>.</p>
+<p>Это различие в обозначении влияет на то, как многокубитные операции представляются с помощью матриц. Например, Qiskit представляет управляемую операцию X (<span class="math notranslate nohighlight">\(C_{X}\)</span>) с нулевым контролирующим кубитом и 1-м целевым как</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}C_X = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\  0 &amp; 0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; 0 \\\end{pmatrix}.\end{split}\]</div>
 </div></section>
-<section id="Simulating-circuits-using-Qiskit-Aer">
-<h2>Simulating circuits using Qiskit Aer<a class="headerlink" href="#Simulating-circuits-using-Qiskit-Aer" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Qiskit Aer is our package for simulating quantum circuits. It provides many different backends for doing a simulation. There is also a basic, Python only, implementation called <code class="docutils literal notranslate"><span class="pre">BasicAer</span></code> in Terra that can be used as a drop-in replacement for <code class="docutils literal notranslate"><span class="pre">Aer</span></code> in the examples below.</p>
-<section id="Statevector-backend">
-<h3>Statevector backend<a class="headerlink" href="#Statevector-backend" title="Ссылка на этот заголовок">¶</a></h3>
-<p>The most common backend in Qiskit Aer is the <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>. This simulator returns the quantum state, which is a complex vector of dimensions <span class="math notranslate nohighlight">\(2^n\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of qubits (so be careful using this as it will quickly get too large to run on your machine).</p>
-<p>To run the above circuit using the statevector simulator, first you need to import Aer and then set the backend to <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code>.</p>
+<section id="Симуляция-цепей-с-использованием-Qiskit-Aer">
+<h2>Симуляция цепей с использованием Qiskit Aer<a class="headerlink" href="#Симуляция-цепей-с-использованием-Qiskit-Aer" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Qiskit Aer - наш пакет для симуляции квантовых цепей. Он предоставляет несколько различных окружений для выполнения симуляций. Существует также базовый пакет, написанный полностью на Python, пакет <code class="docutils literal notranslate"><span class="pre">BasicAer</span></code> в пакете Terra, который может быть использован в качестве замены пакета <code class="docutils literal notranslate"><span class="pre">Aer</span></code> в примерах ниже.</p>
+<section id="Окружение-векторного-состояния">
+<h3>Окружение векторного состояния<a class="headerlink" href="#Окружение-векторного-состояния" title="Ссылка на этот заголовок">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Симулятор</span> <span class="pre">векторного</span> <span class="pre">состояния</span> <span class="pre">(statevector_simulator)</span></code> - самый распространенный тип окружения в Qiskit Aer. Данный симулятор возвращает квантовое состояние, являющееся комплексным вектором с количеством измерений <span class="math notranslate nohighlight">\(2^n\)</span>, где <span class="math notranslate nohighlight">\(n\)</span> — это количество кубитов (будьте осторожны, так как схема может легко стать слишком сложной для запуска на Вашем компьютере).</p>
+<p>Чтобы запустить вышеописанную схему с помощью симулятора векторного состояния, сначала необходимо импортировать пакет Aer, а затем установить <code class="docutils literal notranslate"><span class="pre">statevector_simulator</span></code> в качестве используемого окружения.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -968,14 +970,14 @@ c: 3/═══════════════════╩══╩══
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Getting Started with Qiskit</a><ul>
-<li><a class="reference internal" href="#Circuit-Basics">Circuit Basics</a><ul>
-<li><a class="reference internal" href="#Building-the-circuit">Building the circuit</a></li>
+<li><a class="reference internal" href="#">Начало работы с Qiskit</a><ul>
+<li><a class="reference internal" href="#Основы-цепей">Основы цепей</a><ul>
+<li><a class="reference internal" href="#Построение-цепей">Построение цепей</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Visualize-Circuit">Visualize Circuit</a></li>
-<li><a class="reference internal" href="#Simulating-circuits-using-Qiskit-Aer">Simulating circuits using Qiskit Aer</a><ul>
-<li><a class="reference internal" href="#Statevector-backend">Statevector backend</a></li>
+<li><a class="reference internal" href="#Визуализация-цепи">Визуализация цепи</a></li>
+<li><a class="reference internal" href="#Симуляция-цепей-с-использованием-Qiskit-Aer">Симуляция цепей с использованием Qiskit Aer</a><ul>
+<li><a class="reference internal" href="#Окружение-векторного-состояния">Окружение векторного состояния</a></li>
 <li><a class="reference internal" href="#Unitary-backend">Unitary backend</a></li>
 <li><a class="reference internal" href="#OpenQASM-backend">OpenQASM backend</a></li>
 </ul>
