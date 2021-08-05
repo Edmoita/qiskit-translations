@@ -684,8 +684,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>Now that we have chosen the backend, it’s time to compile and run the quantum circuit. In Qiskit we provide the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function for this. <code class="docutils literal notranslate"><span class="pre">execute</span></code> returns a <code class="docutils literal notranslate"><span class="pre">job</span></code> object that encapsulates information about the job submitted to the backend.</p>
-<div class="alert alert-block alert-info"><p>Tip: You can obtain the above parameters in Jupyter. Simply place the text cursor on a function and press Shift+Tab.</p>
+<p>Теперь, когда мы выбрали окружение, пришло время скомпилировать и запустить квантовую цепь. Qiskit предоставляет для этого функцию <code class="docutils literal notranslate"><span class="pre">execute</span></code>. <code class="docutils literal notranslate"><span class="pre">execute</span></code> возвращает объект <code class="docutils literal notranslate"><span class="pre">job</span></code>, который включает в себя информацию о задаче, отправленной на выполнение в окружение.</p>
+<div class="alert alert-block alert-info"><p>Совет: Вы можете получить информацию о перечисленных выше параметрах в Jupyter. Поместите курсор на функцию и нажмите Shift+Tab.</p>
 </div><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -696,8 +696,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>When you run a program, a job object is made that has the following two useful methods: <code class="docutils literal notranslate"><span class="pre">job.status()</span></code> and <code class="docutils literal notranslate"><span class="pre">job.result()</span></code>, which return the status of the job and a result object, respectively.</p>
-<div class="alert alert-block alert-info"><p>Note: Jobs run asynchronously, but when the result method is called, it switches to synchronous and waits for it to finish before moving on to another task.</p>
+<p>При запуске программы создается объект задачи (job) с двумя полезными методами: <code class="docutils literal notranslate"><span class="pre">job.status()</span></code> и <code class="docutils literal notranslate"><span class="pre">job.result()</span></code>, которые возвращают текущий статус выполнения задачи и объект с результатом ее выполнения соответственно.</p>
+<div class="alert alert-block alert-info"><p>Примечание: Задачи выполняются асинхронно, но в момент вызова метода получения результата, выполнение переходит в синхронный режим и ожидает его завершения, прежде чем перейти к выполнению следующих инструкций.</p>
 </div><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -707,7 +707,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>The results object contains the data and Qiskit provides the method <code class="docutils literal notranslate"><span class="pre">result.get_statevector(circ)</span></code> to return the state vector for the quantum circuit.</p>
+<p>Для получения векторного состояния квантовой цепи из объекта с результатом выполнения задачи, Qiskit предоставляет метод <code class="docutils literal notranslate"><span class="pre">result.get_statevector(circ)</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -727,8 +727,8 @@ div.rendered_html tbody tr:hover {
  0.707+0.j]
 </pre></div></div>
 </div>
-<p>Qiskit also provides a visualization toolbox to allow you to view these results.</p>
-<p>Below, we use the visualization function to plot the real and imaginary components of the state density matrix <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
+<p>Также Qiskit предоставляет пакет визуализации, позволяющий просматривать эти результаты.</p>
+<p>Ниже мы используем функцию визуализации, позволяющую графически выразить реальные и мнимые компоненты матрицы <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -748,9 +748,9 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="Unitary-backend">
-<h3>Unitary backend<a class="headerlink" href="#Unitary-backend" title="Ссылка на этот заголовок">¶</a></h3>
-<p>Qiskit Aer also includes a <code class="docutils literal notranslate"><span class="pre">unitary_simulator</span></code> that works <em>provided all the elements in the circuit are unitary operations</em>. This backend calculates the <span class="math notranslate nohighlight">\(2^n \times 2^n\)</span> matrix representing the gates in the quantum circuit.</p>
+<section id="Унитарное-окружение">
+<h3>Унитарное окружение<a class="headerlink" href="#Унитарное-окружение" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Qiskit Aer также включает в себя <code class="docutils literal notranslate"><span class="pre">унитарный</span> <span class="pre">симулятор</span> <span class="pre">(unitary_simulator)</span></code>, который работает <em>при условии, что все элементы в цепи являются унитарными операциями</em>. Это окружение вычисляет матрицу <span class="math notranslate nohighlight">\(2^n \times 2^n\)</span> представляющую вентили в квантовой схеме.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -790,19 +790,19 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 </section>
-<section id="OpenQASM-backend">
-<h3>OpenQASM backend<a class="headerlink" href="#OpenQASM-backend" title="Ссылка на этот заголовок">¶</a></h3>
-<p>The simulators above are useful because they provide information about the state output by the ideal circuit and the matrix representation of the circuit. However, a real experiment terminates by <em>measuring</em> each qubit (usually in the computational <span class="math notranslate nohighlight">\(|0\rangle, |1\rangle\)</span> basis). Without measurement, we cannot gain information about the state. Measurements cause the quantum system to collapse into classical bits.</p>
-<p>For example, suppose we make independent measurements on each qubit of the three-qubit GHZ state</p>
+<section id="Окружение-OpenQASM">
+<h3>Окружение OpenQASM<a class="headerlink" href="#Окружение-OpenQASM" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Приведенные выше симуляторы полезны, поскольку они предоставляют информацию о результирующем состоянии с помощью идеальной цепи и ее матричного представления. Однако, реальный эксперимент заканчивается <em>измерением</em> каждого кубита (обычно в вычислительном базисе <span class="math notranslate nohighlight">\(|0\rangle, |1\rangle\)</span>). Без измерения мы не можем получить информацию о состоянии. Измерения заставляют квантовую систему схлопываться в классические биты.</p>
+<p>Например, предположим, что мы производим независимые друг от друга измерения каждого кубита состояния GHZ из трех кубитов</p>
 <div class="math notranslate nohighlight">
 \[|\psi\rangle = (|000\rangle +|111\rangle)/\sqrt{2},\]</div>
-<p>and let <span class="math notranslate nohighlight">\(xyz\)</span> denote the bitstring that results. Recall that, under the qubit labeling used by Qiskit, <span class="math notranslate nohighlight">\(x\)</span> would correspond to the outcome on qubit 2, <span class="math notranslate nohighlight">\(y\)</span> to the outcome on qubit 1, and <span class="math notranslate nohighlight">\(z\)</span> to the outcome on qubit 0.</p>
-<div class="alert alert-block alert-info"><p>Note: This representation of the bitstring puts the most significant bit (MSB) on the left, and the least significant bit (LSB) on the right. This is the standard ordering of binary bitstrings. We order the qubits in the same way (qubit representing the MSB has index 0), which is why Qiskit uses a non-standard tensor product order.</p>
-</div><p>Recall the probability of obtaining outcome <span class="math notranslate nohighlight">\(xyz\)</span> is given by</p>
+<p>и пусть <span class="math notranslate nohighlight">\(xyz\)</span> - результирующая строка из нулей и единиц. Напомним, что в системе упорядочивания, используемой Qiskit, <span class="math notranslate nohighlight">\(x\)</span> будет соответствовать результату на втором кубите, <span class="math notranslate nohighlight">\(y\)</span> - результату на 1-м кубите, и <span class="math notranslate nohighlight">\(z\)</span> - на нулевом.</p>
+<div class="alert alert-block alert-info"><p>Примечание: Такое представление битовой строки делает наиболее значительный бит (MSB - most significant bit) слева, а наименее значительный бит (LSB - least significant bit) - справа. Это стандартный порядок бинарных битовых строк. Мы упорядочиваем кубиты аналогичным образом (кубит, представляющий MSB, имеет индекс 0), поэтому Qiskit использует нестандартный порядок тензорного произведения.</p>
+</div><p>Вероятность получения одного конкретного результата <span class="math notranslate nohighlight">\(xyz\)</span> равна</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{Pr}(xyz) = |\langle xyz | \psi \rangle |^{2}\]</div>
-<p>and as such for the GHZ state probability of obtaining 000 or 111 are both 1/2.</p>
-<p>To simulate a circuit that includes measurement, we need to add measurements to the original circuit above, and use a different Aer backend.</p>
+<p>в этом случае вероятности получения 000 или 111 в состоянии GHZ равны 1/2.</p>
+<p>Для симуляции цепи, включающей измерения, необходимо добавить измерения в оригинальную схему, представленную выше, и использовать другое окружение Aer.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -839,8 +839,8 @@ q_2: ──────────┤ X ├─░──╫──╫─┤M├
 c: 3/═══════════════════╩══╩══╩═
                         0  1  2 </pre></div>
 </div>
-<p>This circuit adds a classical register, and three measurements that are used to map the outcome of qubits to the classical bits.</p>
-<p>To simulate this circuit, we use the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> in Qiskit Aer. Each run of this circuit will yield either the bitstring 000 or 111. To build up statistics about the distribution of the bitstrings (to, e.g., estimate <span class="math notranslate nohighlight">\(\mathrm{Pr}(000)\)</span>), we need to repeat the circuit many times. The number of times the circuit is repeated can be specified in the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function, via the <code class="docutils literal notranslate"><span class="pre">shots</span></code> keyword.</p>
+<p>Эта схема добавляет классические регистры и три измерения, которые используются для сопоставления результатов кубитов с классическими битами.</p>
+<p>Чтобы симулировать эту цепь, мы используем <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> из Qiskit Aer. Каждый запуск даст либо строку 000, либо 111. Чтобы собрать статистику о распределении битовых строк (т.e. оценить <span class="math notranslate nohighlight">\(\mathrm{Pr}(000)\)</span>), нам нужно повторить запуск схемы множество раз. Количество повторений запусков может быть указано в функции <code class="docutils literal notranslate"><span class="pre">execute</span></code>, при помощи именованного параметра <code class="docutils literal notranslate"><span class="pre">shots</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -859,7 +859,7 @@ c: 3/═══════════════════╩══╩══
 </pre></div>
 </div>
 </div>
-<p>Once you have a result object, you can access the counts via the function <code class="docutils literal notranslate"><span class="pre">get_counts(circuit)</span></code>. This gives you the <em>aggregated</em> binary outcomes of the circuit you submitted.</p>
+<p>После получения результата, метод <code class="docutils literal notranslate"><span class="pre">get_counts(circuit)</span></code> может дать доступ к данным счетчика. Он формирует <em>совокупные</em> бинарные результаты запускаемой цепи.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -878,7 +878,7 @@ c: 3/═══════════════════╩══╩══
 {&#39;111&#39;: 514, &#39;000&#39;: 510}
 </pre></div></div>
 </div>
-<p>Approximately 50 percent of the time, the output bitstring is 000. Qiskit also provides a function <code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code>, which allows you to view the outcomes.</p>
+<p>Приблизительно в 50% случаев, результирующая бинарная строка - 000. Qiskit также предоставляет функцию <code class="docutils literal notranslate"><span class="pre">plot_histogram</span></code>, которая позволяет просматривать результаты в виде гистограммы.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -897,7 +897,7 @@ c: 3/═══════════════════╩══╩══
 <img alt="../../_images/tutorials_circuits_1_getting_started_with_qiskit_32_0.png" src="../../_images/tutorials_circuits_1_getting_started_with_qiskit_32_0.png" />
 </div>
 </div>
-<p>The estimated outcome probabilities <span class="math notranslate nohighlight">\(\mathrm{Pr}(000)\)</span> and <span class="math notranslate nohighlight">\(\mathrm{Pr}(111)\)</span> are computed by taking the aggregate counts and dividing by the number of shots (times the circuit was repeated). Try changing the <code class="docutils literal notranslate"><span class="pre">shots</span></code> keyword in the <code class="docutils literal notranslate"><span class="pre">execute</span></code> function and see how the estimated probabilities change.</p>
+<p>Приблизительные вероятности исхода <span class="math notranslate nohighlight">\(\mathrm{Pr}(000)\)</span> и <span class="math notranslate nohighlight">\(\mathrm{Pr}(111)\)</span> вычисляются путем деления количества раз, когда был получен конкретный результат, на количество запусков (повторений). Попробуйте изменить параметр <code class="docutils literal notranslate"><span class="pre">shots</span></code> в функции <code class="docutils literal notranslate"><span class="pre">execute</span></code> и посмотрите, как изменяются вероятности.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
@@ -978,8 +978,8 @@ c: 3/═══════════════════╩══╩══
 <li><a class="reference internal" href="#Визуализация-цепи">Визуализация цепи</a></li>
 <li><a class="reference internal" href="#Симуляция-цепей-с-использованием-Qiskit-Aer">Симуляция цепей с использованием Qiskit Aer</a><ul>
 <li><a class="reference internal" href="#Окружение-векторного-состояния">Окружение векторного состояния</a></li>
-<li><a class="reference internal" href="#Unitary-backend">Unitary backend</a></li>
-<li><a class="reference internal" href="#OpenQASM-backend">OpenQASM backend</a></li>
+<li><a class="reference internal" href="#Унитарное-окружение">Унитарное окружение</a></li>
+<li><a class="reference internal" href="#Окружение-OpenQASM">Окружение OpenQASM</a></li>
 </ul>
 </li>
 </ul>
