@@ -613,9 +613,9 @@ Schedule(, name=&#34;my_example&#34;)
 <li><p><a class="reference external" href="#acquire">acquire(duration, channel, mem_slot, reg_slot)</a></p></li>
 </ul>
 <p>각 명령어 유형은 고유한 피연산자 집합이 있다. 위에서 볼 수 있듯이, 이들은 명령어가 어디에 적용될 것인가를 지정하기 위해 적어도 하나의 <code class="docutils literal notranslate"><span class="pre">Channel</span></code> 을 포함하고 있다.</p>
-<p><strong>Channels</strong> 는 제어 하드웨어에서 양자 칩까지의 신호 라인에 대한 레이블이다.</p>
+<p><strong>채널들(Channels)</strong> 은 제어 하드웨어에서 양자 칩까지의 신호 라인에 대한 레이블이다.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code>들은 일반적으로 단일 큐비트의 회전을 <em>driving</em> 하는데 사용되고,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DriveChannel</span></code>들은 일반적으로 단일 큐비트의 회전을 <em>구동</em> 하는데 사용되고,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ControlChannel</span></code>들은 일반적으로 다중 큐비트 게이트 또는 조정 가능한 큐비트의 추가 드라이브 라인에 사용되고,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MeasureChannel</span></code>들은 신호를 읽도록 하는 펄스의 전송에 한정되며,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">AcquireChannel</span></code>들은 읽은 (아날로그 신호를 디지털 신호로 바꾸어) 신호를 수집하는 디지타이저(digitizer)를 동작시키는데 사용된다.</p></li>
@@ -878,12 +878,12 @@ Schedule(, name=&#34;my_example&#34;)
 <p>여기에서는 스케줄을 작성하는 방법을 학습하고자 가장 중요한 Pulse Builder 기능을 검토한다. 이는 완전하지 않는다. 펄스 빌더를 사용하여 수행할 수 있는 작업에 대한 자세한 내용은 <a class="reference external" href="https://qiskit.org/documentation/apidoc/pulse.html">Pulse API 참조</a> 를 확인하라.</p>
 <section id="정렬-컨텍스트">
 <h2>정렬 컨텍스트<a class="headerlink" href="#정렬-컨텍스트" title="제목 주소">¶</a></h2>
-<p>The builder has alignment contexts which influence how a schedule is built. Contexts can also be nested. Try them out, and use <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> to see how the pulses are aligned.</p>
-<p>Regardless of the alignment context, the duration of the resulting schedule is as short as it can be while including every instruction and following the alignment rules. This still allows some degrees of freedom for scheduling instructions off the “longest path”. The examples below illuminate this.</p>
+<p>빌더에는 스케줄 작성 방법에 영향을 주는 정렬 컨텍스트가 있다. 컨텍스트는 다중 구조가 될 수도 있다. 펄스가 어떻게 정렬되었는지 보려면 다중 구조 밖으로 나와서 <code class="docutils literal notranslate"><span class="pre">.draw</span> <span class="pre">()</span></code> 를 사용한다.</p>
+<p>정렬 컨텍스트에 관계없이, 결과 스케줄의 지속 시간은 모든 지시사항 및 정렬 규칙을 따르는 한 가능한 짧게 된다. 이는 여전히 “가장 긴 경로” 가 아니라면 소정의 자유도를 허용한다. 아래의 예제들은 이것을 조명한다.</p>
 </section>
 <section id="align_left">
 <h2><code class="docutils literal notranslate"><span class="pre">align_left</span></code><a class="headerlink" href="#align_left" title="제목 주소">¶</a></h2>
-<p>The builder has alignment contexts that influence how a schedule is built. The default is <code class="docutils literal notranslate"><span class="pre">align_left</span></code>.</p>
+<p>빌더에는 스케줄 작성 방법에 영향을 주는 정렬 컨텍스트가 있다. 기본값은 <code class="docutils literal notranslate"><span class="pre">align_left</span></code> 이다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -908,11 +908,11 @@ Schedule(, name=&#34;my_example&#34;)
 <img alt="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_28_0.png" src="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_28_0.png" />
 </div>
 </div>
-<p>Notice how there is no scheduling freedom for the pulses on <code class="docutils literal notranslate"><span class="pre">D1</span></code>. The second waveform begins immediately after the first. The pulse on <code class="docutils literal notranslate"><span class="pre">D0</span></code> can start at any time between <code class="docutils literal notranslate"><span class="pre">t=0</span></code> and <code class="docutils literal notranslate"><span class="pre">t=100</span></code> without changing the duration of the overall schedule. The <code class="docutils literal notranslate"><span class="pre">align_left</span></code> context sets the start time of this pulse to <code class="docutils literal notranslate"><span class="pre">t=0</span></code>. You can think of this like left-justification of a text document.</p>
+<p><code class="docutils literal notranslate"><span class="pre">D1</span></code> 의 펄스에는 스케줄링의 자유도가 없다는 것을 주목하라. 두 번째 파형은 첫 번째 파형 직후에 시작된다. <code class="docutils literal notranslate"><span class="pre">D0</span></code> 의 펄스는 전반적인 스케줄의 지속 시간을 바꾸지 않고 <code class="docutils literal notranslate"><span class="pre">t=0</span></code> 과 <code class="docutils literal notranslate"><span class="pre">t=100</span></code> 사이에서 언제든지 시작할 수 있다. <code class="docutils literal notranslate"><span class="pre">align_left</span></code> 컨텍스트는 이 펄스의 시작 시간을 <code class="docutils literal notranslate"><span class="pre">t=0</span></code> 로 설정하는 것이다. 이것은 마치 글 문서에서의 왼쪽 맞춤과 비슷하게 생각할 수 있다.</p>
 </section>
 <section id="align_right">
 <h2><code class="docutils literal notranslate"><span class="pre">align_right</span></code><a class="headerlink" href="#align_right" title="제목 주소">¶</a></h2>
-<p>Unsurprisingly, <code class="docutils literal notranslate"><span class="pre">align_right</span></code> does the opposite of <code class="docutils literal notranslate"><span class="pre">align_left</span></code>. It will choose <code class="docutils literal notranslate"><span class="pre">t=100</span></code> in the above example to begin the gaussian pulse on <code class="docutils literal notranslate"><span class="pre">D0</span></code>. Left and right are also sometimes called “as soon as possible” and “as late as possible” scheduling, respectively.</p>
+<p>당연하게도 <code class="docutils literal notranslate"><span class="pre">align_right</span></code> 는 <code class="docutils literal notranslate"><span class="pre">align_left</span></code> 와는 반대의 동작을 한다. 이는 <code class="docutils literal notranslate"><span class="pre">D0</span></code> 의 가우시안 펄스를 <code class="docutils literal notranslate"><span class="pre">t=100</span></code> 일 때 시작하도록 선택할 것이다. 좌우는 때때로 각각 “가능한 한 빨리” 와 “가능한 한 늦은” 스케줄링으로 불린다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -940,7 +940,7 @@ Schedule(, name=&#34;my_example&#34;)
 </section>
 <section id="align_equispaced(duration)">
 <h2><code class="docutils literal notranslate"><span class="pre">align_equispaced(duration)</span></code><a class="headerlink" href="#align_equispaced(duration)" title="제목 주소">¶</a></h2>
-<p>If the duration of a particular block is known, you can also use <code class="docutils literal notranslate"><span class="pre">align_equispaced</span></code> to insert equal duration delays between each instruction.</p>
+<p>특정 블록의 지속 시간을 알고 있는 경우, 각 명령어 사이에 동일한 지속 시간 지연을 삽입하고자 <code class="docutils literal notranslate"><span class="pre">align_equispaced</span></code> 를 사용할 수도 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -968,7 +968,7 @@ Schedule(, name=&#34;my_example&#34;)
 </section>
 <section id="align_sequential">
 <h2><code class="docutils literal notranslate"><span class="pre">align_sequential</span></code><a class="headerlink" href="#align_sequential" title="제목 주소">¶</a></h2>
-<p>This alignment context does not schedule instructions in parallel. Each instruction will begin at the end of the previously added instruction.</p>
+<p>이 정렬 컨텍스트는 지시사항을 병렬로 스케줄하지 않는다. 각 명령어는 이전에 추가된 명령어의 끝에서 시작된다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -994,9 +994,9 @@ Schedule(, name=&#34;my_example&#34;)
 </div>
 </div>
 </section>
-<section id="Phase-and-frequency-offsets">
-<h2>Phase and frequency offsets<a class="headerlink" href="#Phase-and-frequency-offsets" title="제목 주소">¶</a></h2>
-<p>We can use the builder to help us temporarily offset the frequency or phase of our pulses on a channel.</p>
+<section id="위상-및-주파수-오프셋">
+<h2>위상 및 주파수 오프셋<a class="headerlink" href="#위상-및-주파수-오프셋" title="제목 주소">¶</a></h2>
+<p>이 빌더를 사용하여 채널의 펄스 주파수나 위상에 일시적인 오프셋을 줄 수 있다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -1020,7 +1020,7 @@ Schedule(, name=&#34;my_example&#34;)
 <img alt="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_36_0.png" src="../../_images/tutorials_circuits_advanced_06_building_pulse_schedules_36_0.png" />
 </div>
 </div>
-<p>We encourage you to visit the <a class="reference external" href="https://qiskit.org/documentation/apidoc/pulse.html">Pulse API reference</a> to learn more.</p>
+<p>더 많은 정보를 얻을 수 있도록 <a class="reference external" href="https://qiskit.org/documentation/apidoc/pulse.html">펄스 API 참조</a> 를 방문하라.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -1064,7 +1064,7 @@ Schedule(, name=&#34;my_example&#34;)
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      최종 업데이트: 2021/08/04
+      최종 업데이트: 2021/08/05
 
     </p>
   </div>
@@ -1106,7 +1106,7 @@ Schedule(, name=&#34;my_example&#34;)
 <li><a class="reference internal" href="#align_right"><code class="docutils literal notranslate"><span class="pre">align_right</span></code></a></li>
 <li><a class="reference internal" href="#align_equispaced(duration)"><code class="docutils literal notranslate"><span class="pre">align_equispaced(duration)</span></code></a></li>
 <li><a class="reference internal" href="#align_sequential"><code class="docutils literal notranslate"><span class="pre">align_sequential</span></code></a></li>
-<li><a class="reference internal" href="#Phase-and-frequency-offsets">Phase and frequency offsets</a></li>
+<li><a class="reference internal" href="#위상-및-주파수-오프셋">위상 및 주파수 오프셋</a></li>
 </ul>
 </li>
 </ul>
