@@ -707,9 +707,8 @@ optimizer_evals is 9 with initial point versus 65 without it.
 <section id="Математическое-ожидание">
 <h2>Математическое ожидание<a class="headerlink" href="#Математическое-ожидание" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Энергия гамильтониана, над которым работает VQE, является значением математического ожидания при оценке с помощью параметризованного анзаца. Для вычисления значения матожидания VQE использует экземпляр объекта <a class="reference external" href="https://qiskit.org/documentation/apidoc/qiskit.opflow.expectations.html">expectation</a>. Такой экземпляр может быть предоставлен через параметр <code class="docutils literal notranslate"><span class="pre">expectation</span></code>, или в случае по умолчанию, когда он имеет значение <code class="docutils literal notranslate"><span class="pre">None</span></code>, VQE будет использовать <code class="docutils literal notranslate"><span class="pre">ExpectationFactory</span></code> &lt;<a class="reference external" href="https://qiskit.org/documentation/stubs/qiskit.opflow.expectations.ExpectationFactory.html">https://qiskit.org/documentation/stubs/qiskit.opflow.expectations.ExpectationFactory.html</a>&gt;`__ для создания подходящего экземпляра на основе предоставленного backend.</p>
-<p>For most cases letting VQE create a suitable instance is sufficient. However the Qiskit Aer aer_simulator supports a snapshot instruction that can be used in conjunction with the operator expectation computation. If used then the outcome is ideal, i.e. like the statevector simulator, and has no shot noise. Since people normally choose the aer_simulator to have shot noise (sampling noise), and be more like a real-device outcome, VQE has an <code class="docutils literal notranslate"><span class="pre">include_custom</span></code> flag that is passed on to the
-ExpectationFactory. When using Aer qasm simulator, and this is set <code class="docutils literal notranslate"><span class="pre">True</span></code>, the factory will return <code class="docutils literal notranslate"><span class="pre">AerPauliExpectation</span></code> which uses the snapshot instruction, when <code class="docutils literal notranslate"><span class="pre">False</span></code>, default, then the regular <code class="docutils literal notranslate"><span class="pre">PauliExpectation</span></code> is returned.</p>
-<p>The following example shows <code class="docutils literal notranslate"><span class="pre">include_custom=True</span></code> where the outcome matches the statevector simulator. In fact it can be better/faster to do this than use the statevector_simulator directly. This is because in the latter case when the Hamiltonian is a sum of Paulis it must be converted to matrix form, and this is avoided when using the snapshot instruction done when include_custom is True.</p>
+<p>Для большинства случаев достаточно позволить VQE создать подходящий экземпляр. Однако Qiskit Aer aer_simulator поддерживает инструкцию snapshot, которая может быть использована вместе с вычислением математического ожидания оператора. Если ее использовать, то результат будет идеальным, т.е. как в симуляторе вектора состояния, и не будет иметь дробового шума. Поскольку люди обычно выбирают aer_simulator, чтобы он имел дробовой шум (шум выборки) и был более похож на результат реального устройства, VQE имеет опцию <code class="docutils literal notranslate"><span class="pre">include_custom</span></code>, которая передается в ExpectationFactory. При использовании симулятора Aer qasm, если данный параметр установлен <code class="docutils literal notranslate"><span class="pre">True</span></code>, фабрика возвращает <code class="docutils literal notranslate"><span class="pre">AerPauliExpectation</span></code>, который использует инструкцию snapshot, если <code class="docutils literal notranslate"><span class="pre">False</span></code> (значение по умолчанию) то возвращается обычный <code class="docutils literal notranslate"><span class="pre">PauliExpectation</span></code>.</p>
+<p>Следующий пример показывает <code class="docutils literal notranslate"><span class="pre">include_custom=True</span></code>, где результат соответствует симулятору statevector. На самом деле это может быть лучше/быстрее, чем использовать statevector_simulator напрямую. Это происходит потому, что в последнем случае, когда гамильтониан является суммой операторов Паули, он должен быть преобразован в матричную форму, а этого можно избежать при использовании инструкции snapshot, выполняемой, когда include_custom равен True.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -753,7 +752,7 @@ ExpectationFactory. When using Aer qasm simulator, and this is set <code class="
     &#39;optimizer_time&#39;: 0.17621898651123047}
 </pre></div></div>
 </div>
-<p>In case you have doubts here is the aer_simulator again but include_custom has been left to default to False. The optimization ended abruptly, presumably due to the shot noise confusing the SLSQP optimizer.</p>
+<p>Если у вас есть сомнения, вот снова aer_simulator, но значение include_custom было оставлено по умолчанию False. Оптимизация закончилась внезапно, предположительно из-за дробового шума, сбивающего с толку оптимизатор SLSQP.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -803,7 +802,7 @@ The optimal value can be seen to be wrong too, i.e. -1.074 versus the correct -1
     &#39;optimizer_time&#39;: 0.07421207427978516}
 </pre></div></div>
 </div>
-<p>Changing the optimizer to SPSA, which is designed to work in noisy environments, gets us a better result. Though the noise has affected the outcome so it’s not as accurate.</p>
+<p>Замена оптимизатора на SPSA, который предназначен для работы в шумной среде, дает нам лучший результат. Однако шум повлиял на результат, поэтому он не такой точный.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -846,7 +845,7 @@ The optimal value can be seen to be wrong too, i.e. -1.074 versus the correct -1
     &#39;optimizer_time&#39;: 1.2898402214050293}
 </pre></div></div>
 </div>
-<p>As mentioned above, an expectation object can be explicitly given (so the internal <code class="docutils literal notranslate"><span class="pre">ExpectationFactory</span></code> and include_custom are never used/needed. Below we create an <code class="docutils literal notranslate"><span class="pre">AerPauliExpectation</span></code> and pass this to VQE. We can see the result matches that above where we set include_custom to True and let VQE create its own expectation object.</p>
+<p>Как упоминалось выше, объект для расчета математического ожидания может быть задан явно, поэтому внутренние <code class="docutils literal notranslate"><span class="pre">ExpectationFactory</span></code> и include_custom никогда не понадобятся/ не нужны. Ниже мы создаём <code class="docutils literal notranslate"><span class="pre">AerPauliExpectation</span></code> и передаём его в VQE. Мы видим, что результат совпадает с результатом приведенным выше, где мы установили include_custom в True и позволили VQE создать свой собственный объект для расчета матожидания.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -890,8 +889,7 @@ The optimal value can be seen to be wrong too, i.e. -1.074 versus the correct -1
     &#39;optimizer_time&#39;: 0.20196986198425293}
 </pre></div></div>
 </div>
-<p>By default, the <code class="docutils literal notranslate"><span class="pre">PauliExpectation</span></code> object, that would have be chosen when include_custom is False (or when using Aer aer_simulator, or a real device) groups Paulis into commuting sets. This is efficient as it runs less circuits to compute the expectation. However, if for some reason you wanted to run a circuit for each Pauli then then grouping can be turned off when constructing the PauliExpectation. You need to explicitly pass in such an expectation instance to VQE to have it work this way
-though as shown below.</p>
+<p>По умолчанию объект <a href="#id1"><span class="problematic" id="id2">``</span></a>PauliExpectation““, который будет выбран, если include_custom равен False (или при использовании Aer aer_simulator, или реального устройства), группирует операторы Паули в коммутирующие множества. Это эффективно, так как запускается меньше схем для вычисления матожидания. Однако, если по какой-то причине вы хотите запустить цепь для каждого оператора Паули, то группировку можно отключить при построении PauliExpectation. Для этого нужно явно передать VQE экземпляр такого математического ожидания, как показано ниже.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -936,14 +934,14 @@ though as shown below.</p>
 </pre></div></div>
 </div>
 </section>
-<section id="Gradient">
-<h2>Gradient<a class="headerlink" href="#Gradient" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Optimizers that use a gradient-based technique can be supplied with a user defined gradient that will be used instead of their default gradient computation which is usually done by simple finite difference. Gradients are passed indirectly via to the optimizer via its <code class="docutils literal notranslate"><span class="pre">gradient</span></code> parameter.</p>
-<p>As the use of a user supplied <code class="docutils literal notranslate"><span class="pre">gradient</span></code> was shown in the Monitoring VQE Convergence tutorial I will simply refer you there. Also the <a class="reference internal" href="../operators/02_gradients_framework.html"><span class="doc">Gradients framework</span></a> tutorial has much more about the gradients themselves.</p>
+<section id="Градиент">
+<h2>Градиент<a class="headerlink" href="#Градиент" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Оптимизаторы, использующие градиентную схему, могут быть снабжены заданным пользователем градиентом, который будет использоваться вместо стандартного вычисления градиента, обычно выполняемого простыми конечными разностями. Градиенты передаются оптимизатору косвенно через его параметр <code class="docutils literal notranslate"><span class="pre">gradient</span></code>.</p>
+<p>Поскольку использование пользовательского <code class="docutils literal notranslate"><span class="pre">градиента</span></code> было показано в уроке <a href="#id1"><span class="problematic" id="id2">``</span></a>Контроль сходимости VQE &lt;02_vqe_convergence.ipynb#Using-Gradient-framework&gt;`__, я просто направлю вас туда. Также в уроке <cite>Gradients framework &lt;…/operators/02_gradients_framework.ipynb&gt;</cite> есть гораздо больше информации о самих градиентах.</p>
 </section>
-<section id="Quantum-Instance-and-advanced-simulation">
-<h2>Quantum Instance and advanced simulation<a class="headerlink" href="#Quantum-Instance-and-advanced-simulation" title="Ссылка на этот заголовок">¶</a></h2>
-<p>While you may be familiar with passing a QuantumInstancen created from a <code class="docutils literal notranslate"><span class="pre">aer_simulator_statevector</span></code> a <code class="docutils literal notranslate"><span class="pre">aer_simulator</span></code> or real device backend, it is possible to use the advanced simulation modes of Aer too when applicable. For instance we can easily use the Aer <a class="reference internal" href="../simulators/7_matrix_product_state_method.html"><span class="doc">Matrix Product State</span></a> method, that has the potential to scale to larger numbers of qubits.</p>
+<section id="Quantum-Instance-и-расширенное-моделирование">
+<h2>Quantum Instance и расширенное моделирование<a class="headerlink" href="#Quantum-Instance-и-расширенное-моделирование" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Несмотря на то, что вы можете быть знакомы с передачей QuantumInstance, созданного из <code class="docutils literal notranslate"><span class="pre">aer_simulator_statevector</span></code>, на backend <code class="docutils literal notranslate"><span class="pre">aer_simulator</span></code> или на реальное устройство, можно использовать и дополнительные режимы моделирования Aer, когда это применимо. Например, мы можем легко использовать метод Aer <a class="reference external" href=".../simulators/7_matrix_product_state_method.ipynb">Matrix Product State</a>, который позволяет увеличить число кубитов.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -1060,8 +1058,8 @@ though as shown below.</p>
 <li><a class="reference internal" href="#">Расширенное использование VQE</a><ul>
 <li><a class="reference internal" href="#Начальная-точка">Начальная точка</a></li>
 <li><a class="reference internal" href="#Математическое-ожидание">Математическое ожидание</a></li>
-<li><a class="reference internal" href="#Gradient">Gradient</a></li>
-<li><a class="reference internal" href="#Quantum-Instance-and-advanced-simulation">Quantum Instance and advanced simulation</a></li>
+<li><a class="reference internal" href="#Градиент">Градиент</a></li>
+<li><a class="reference internal" href="#Quantum-Instance-и-расширенное-моделирование">Quantum Instance и расширенное моделирование</a></li>
 </ul>
 </li>
 </ul>
