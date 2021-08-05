@@ -651,7 +651,7 @@ div.rendered_html tbody tr:hover {
 <p>We want to apply the <span class="math notranslate nohighlight">\(X\)</span> gate, only if both the results of the measurement of <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span> are <span class="math notranslate nohighlight">\(1\)</span>. We can do this using the c_if method, conditioning the application of <span class="math notranslate nohighlight">\(X\)</span> depending on the value passed as argument to c_if.</p>
 <p>We will have to encode the value to pass to the c_if method such that it will check the values 011 and 111 (in binary representation), since it does not matter what is in the rightmost position.</p>
 <p>The 2 integer values in decimal representation:</p>
-<p><img alt="0e0ac7a66b5a495a9fbc3b503ff91be4" class="no-scaled-link" src="tutorials/algorithms/../../images/binary.png" style="width: 50%;" /></p>
+<p><img alt="82e88d85bb3a490ca4b53a4f4735fb53" class="no-scaled-link" src="tutorials/algorithms/../../images/binary.png" style="width: 50%;" /></p>
 <p>We can check the solutions using the bin() method in python (the prefix <code class="docutils literal notranslate"><span class="pre">0b</span></code> indicates the binary format).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
@@ -703,8 +703,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="IPE">
-<h1>IPE<a class="headerlink" href="#IPE" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
+<section id="আইপিই-(IPE)">
+<h1>আইপিই (IPE)<a class="headerlink" href="#আইপিই-(IPE)" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h1>
 <p>The motivation for using the IPE algorithm is that QPE algorithm works fine for short depth circuits but when the circuit starts to grow, it doesn’t work properly due to gate noise and decoherence times.</p>
 <p>The detailed explanation of how the algorithm works can be found in <a class="reference external" href="https://qiskit.org/textbook/ch-labs/Lab04_IterativePhaseEstimation.html#2-iterative-phase-estimation-ipe-algorithm">Iterative Phase Estimation (IPE) Algorithm</a>. To understand QPE in depth, you can see also <a class="reference external" href="https://qiskit.org/textbook/ch-algorithms/quantum-phase-estimation.html">Ch.3.6 Quantum Phase Estimation</a>.</p>
 <section id="IPE-example-with-a-1-qubit-gate-for-U">
@@ -1285,7 +1285,7 @@ div.rendered_html tbody tr:hover {
               <ul>
 <li><a class="reference internal" href="#">ধাপে ধাপে কোয়ান্টাম দশা অনুমানকারী ধারাক্রম (অ্যালোগরিদম)</a></li>
 <li><a class="reference internal" href="#শর্তাধীন-গেট:-c_if-পদ্ধতি">শর্তাধীন গেট: c_if পদ্ধতি</a></li>
-<li><a class="reference internal" href="#IPE">IPE</a><ul>
+<li><a class="reference internal" href="#আইপিই-(IPE)">আইপিই (IPE)</a><ul>
 <li><a class="reference internal" href="#IPE-example-with-a-1-qubit-gate-for-U">IPE example with a 1-qubit gate for <span class="math notranslate nohighlight">\(U\)</span></a><ul>
 <li><a class="reference internal" href="#First-step">First step</a><ul>
 <li><a class="reference internal" href="#Initialization">Initialization</a></li>

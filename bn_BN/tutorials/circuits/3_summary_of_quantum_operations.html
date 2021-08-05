@@ -1307,8 +1307,8 @@ array([[ 0.707+0.j   , -0.   -0.707j],
 </pre></div></div>
 </div>
 </section>
-<section id="Rotation-around-Y-axis">
-<h4>Rotation around Y-axis<a class="headerlink" href="#Rotation-around-Y-axis" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="Y-অক্ষ-ঘিরে-আবর্তন">
+<h4>Y-অক্ষ ঘিরে আবর্তন<a class="headerlink" href="#Y-অক্ষ-ঘিরে-আবর্তন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}R_y(\theta) =
 \begin{pmatrix}
@@ -1356,15 +1356,15 @@ array([[ 0.707+0.j, -0.707+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Rotation-around-Z-axis">
-<h4>Rotation around Z-axis<a class="headerlink" href="#Rotation-around-Z-axis" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
+<section id="Z-অক্ষ-ঘিরে-আবর্তন">
+<h4>Z-অক্ষ ঘিরে আবর্তন<a class="headerlink" href="#Z-অক্ষ-ঘিরে-আবর্তন" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}R_z(\phi) =
 \begin{pmatrix}
 e^{-i \phi/2} &amp; 0 \\
 0 &amp; e^{i \phi/2}
 \end{pmatrix}\equiv u1(\phi)\end{split}\]</div>
-<p>Note that here we have used an equivalent as it is different to u1 by a global phase <span class="math notranslate nohighlight">\(e^{-i \phi/2}\)</span>.</p>
+<p>বিশেষ দ্রষ্টব্য এই যে,আমাদের দশার সংজ্ঞায়ন মানে u1 এর সাথে সমমানের কিন্তু <span class="math notranslate nohighlight">\(e^{-i \phi/2}\)</span> দশা অবস্থা দ্বারা ভিন্ন।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
@@ -1405,15 +1405,15 @@ array([[0.707-0.707j, 0.   +0.j   ],
        [0.   +0.j   , 0.707+0.707j]])
 </pre></div></div>
 </div>
-<p>Note this is different due only to a global phase.</p>
+<p>এই দশা শুধুমাত্র সার্বজনীন (গ্লোবাল) দশার সংজ্ঞায়নের কারণে ভিন্নতর।.</p>
 </section>
 </section>
 </section>
-<section id="Multi-Qubit-Gates">
-<h2>Multi-Qubit Gates<a class="headerlink" href="#Multi-Qubit-Gates" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<section id="Mathematical-Preliminaries">
-<h3>Mathematical Preliminaries<a class="headerlink" href="#Mathematical-Preliminaries" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The space of a quantum computer grows exponentially with the number of qubits. For <span class="math notranslate nohighlight">\(n\)</span> qubits the complex vector space has dimension <span class="math notranslate nohighlight">\(d=2^n\)</span>. To describe states of a multi-qubit system, the tensor product is used to “glue together” operators and basis vectors.</p>
+<section id="বহু-কিউবিট-যুক্তিবর্তনী">
+<h2>বহু কিউবিট যুক্তিবর্তনী<a class="headerlink" href="#বহু-কিউবিট-যুক্তিবর্তনী" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<section id="গাণিতিক-প্রারম্ভিক-আবশ্যতা">
+<h3>গাণিতিক প্রারম্ভিক আবশ্যতা<a class="headerlink" href="#গাণিতিক-প্রারম্ভিক-আবশ্যতা" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>কোয়ান্টাম কম্পিউটারের গণনা ক্ষেত্র (স্পেস) কিউবিট সংখ্যার সাথে সুচকীয় হারে বৃদ্ধি পায়। যেমন <span class="math notranslate nohighlight">\(n\)</span> কিউবিটের জন্য জটিল সংখ্যার দিকরাশিজনিত ক্ষেত্রের (কমপ্লেক্স ভেক্টর স্পেস) মাত্রা হচ্ছে <span class="math notranslate nohighlight">\(d=2^n\)</span>। বহু-কিউবিটের গঠন (সিস্টেম) অবস্থা সংজ্ঞায়নের জন্য টেন্সর গুণন ব্যবহার হয় যা কার্যকারক এবং বেসিস দিকরাশিগুলোকে একত্রে আটকে রাখে।</p>
 <p>Let’s start by considering a 2-qubit system. Given two operators <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> that each act on one qubit, the joint operator <span class="math notranslate nohighlight">\(A \otimes B\)</span> acting on two qubits is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{equation}
@@ -2685,14 +2685,14 @@ primitive gates of cx, rz and ry.</p>
 </li>
 <li><a class="reference internal" href="#প্রামাণিক-(স্টান্ডার্ড)-ঘূর্ণন">প্রামাণিক (স্টান্ডার্ড) ঘূর্ণন</a><ul>
 <li><a class="reference internal" href="#X-অক্ষ-ঘিরে-আবর্তন">X-অক্ষ ঘিরে আবর্তন</a></li>
-<li><a class="reference internal" href="#Rotation-around-Y-axis">Rotation around Y-axis</a></li>
-<li><a class="reference internal" href="#Rotation-around-Z-axis">Rotation around Z-axis</a></li>
+<li><a class="reference internal" href="#Y-অক্ষ-ঘিরে-আবর্তন">Y-অক্ষ ঘিরে আবর্তন</a></li>
+<li><a class="reference internal" href="#Z-অক্ষ-ঘিরে-আবর্তন">Z-অক্ষ ঘিরে আবর্তন</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Multi-Qubit-Gates">Multi-Qubit Gates</a><ul>
-<li><a class="reference internal" href="#Mathematical-Preliminaries">Mathematical Preliminaries</a></li>
+<li><a class="reference internal" href="#বহু-কিউবিট-যুক্তিবর্তনী">বহু কিউবিট যুক্তিবর্তনী</a><ul>
+<li><a class="reference internal" href="#গাণিতিক-প্রারম্ভিক-আবশ্যতা">গাণিতিক প্রারম্ভিক আবশ্যতা</a></li>
 <li><a class="reference internal" href="#Basis-vector-ordering-in-Qiskit">Basis vector ordering in Qiskit</a></li>
 <li><a class="reference internal" href="#Controlled-operations-on-qubits">Controlled operations on qubits</a></li>
 </ul>
