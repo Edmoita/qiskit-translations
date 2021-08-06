@@ -672,7 +672,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="스케줄러-메서드">
 <h2>스케줄러 메서드<a class="headerlink" href="#스케줄러-메서드" title="제목 주소">¶</a></h2>
-<p>The scheduler can follow multiple routines. By default, it follows an <em>as late as possible</em> (ALAP) rule. Another scheduling method is <em>as soon as possible</em>, (ASAP). For both methods, the output schedule is minimal: in the longest-duration operation path of the input circuit, the start time of each operation is the end time of the proceeding operation. The methods determine how to schedule operations outside that longest path.</p>
+<p>스케줄러는 여러 처리 순서를 따를 수 있다. 기본값으로 <em>가능한 한 늦는 (as late as possible)</em> (ALAP) 규칙을 따른다. 다른 스케줄링 메서드는 <em>가능한 한 빠른 (as soon as possible)</em> (ASAP) 이다. 두 메서드 모두 출력 스케줄이 최소이다: 입력 회로의 가장 긴 지속 시간의 연산 경로에서 각 연산의 시작 시간은 선행하는 연산의 종료 시간이다. 이 메서드들은 가장 긴 경로가 아닌 쪽에서 연산의 스케줄을 결정한다.</p>
 <p>이는 다음 예제를 통해 명확하게 작성된다:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -697,7 +697,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <p>모조 백엔드에서는, 이 <span class="math notranslate nohighlight">\(X\)</span> 게이트 연산들의 지속 시간 (<code class="docutils literal notranslate"><span class="pre">duration</span> <span class="pre">=</span> <span class="pre">160</span> <span class="pre">dt</span></code>)이 같다. 스케줄을 최소화하려면 큐비트 0에 가해지는 두 <span class="math notranslate nohighlight">\(X\)</span> 연산이 잇따라 스케줄되어야 하며, 측정 펄스가 두 펄스들 직후에 바로 따라와야 한다.</p>
-<p>ALAP will choose the latest valid time to schedule lesser-constrained operations, so the <span class="math notranslate nohighlight">\(X\)</span> gate on qubit 1 will play in sync with the second <span class="math notranslate nohighlight">\(X\)</span> gate on qubit 0.</p>
+<p>ALAP는 유효한 시간 중 가장 나중을 택하여 제한이 적은 연산을 스케줄할 것이며, 따라서 큐비트 1의 <span class="math notranslate nohighlight">\(X\)</span> 게이트는 큐비트 0의 두 번째 <span class="math notranslate nohighlight">\(X\)</span> 게이트와 동시에 발생된다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -717,7 +717,7 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_circuits_advanced_07_pulse_scheduler_11_0.png" src="../../_images/tutorials_circuits_advanced_07_pulse_scheduler_11_0.png" />
 </div>
 </div>
-<p>On the other hand, as the name suggests, ASAP will schedule operations as soon as its resources are free. Thus, the <span class="math notranslate nohighlight">\(X\)</span> gate on qubit 1 will be scheduled at <code class="docutils literal notranslate"><span class="pre">time=0</span></code>, in sync with the first <span class="math notranslate nohighlight">\(X\)</span> gate on qubit 0.</p>
+<p>한편, 이름이 암시하는 바와 같이, ASAP는 자원이 되는 한 가장 빠르게 연산을 스케줄할 것이다. 고로, 큐비트 1의 <span class="math notranslate nohighlight">\(X\)</span> 게이트는 큐비트 0의 첫 번째 <span class="math notranslate nohighlight">\(X\)</span> 게이트와 동시인 <code class="docutils literal notranslate"><span class="pre">time=0</span></code> 으로 스케줄될 것이다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -737,7 +737,7 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_circuits_advanced_07_pulse_scheduler_13_0.png" src="../../_images/tutorials_circuits_advanced_07_pulse_scheduler_13_0.png" />
 </div>
 </div>
-<p>ALAP is the default because it allows qubits to remain idle as long as possible. In this case, the difference between ALAP and ASAP may be negligible, but in ALAP, qubit 0 has <em>no</em> time to decay from the excited state before measurement.</p>
+<p>ALAP가 기본값인 이유는 큐비트들이 가능한 한 오랫동한 유휴 상태를 유지할 수 있기 때문이다. 이 경우, ALAP와 ASAP의 차이는 무시할 수 있지만, ALAP에선 큐비트 0은 측정 전에 들뜬 상태에서 붕괴할 수 있는 시간이 <em>없다.</em></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
