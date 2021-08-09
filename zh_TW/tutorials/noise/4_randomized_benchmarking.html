@@ -605,12 +605,12 @@ div.rendered_html tbody tr:hover {
 <ul class="simple">
 <li><p><strong>nseeds:</strong> 種子數。 對於每一個種子，您將取得 rb_circs 中個別輸出電路清單。</p></li>
 <li><p><strong>length_vector：</strong> Clifford 長度向量的長度必須是以遞增順序排列。 增加長度的 RB 序列以前序列為基礎增長。</p></li>
-<li><p><strong>rb_pattern:</strong> A list of the form [[i,j],[k],…] which will make simultaneous RB sequences where Qi,Qj are a 2-qubit RB sequence and Qk is a 1-qubit sequence, etc. The number of qubits is the sum of the entries. For ‘regular’ RB the qubit_pattern is just [[0]],[[0,1]].</p></li>
-<li><p><strong>length_multiplier:</strong> If this is an array it scales each rb_sequence by the multiplier.</p></li>
+<li><p><strong>rb_pattern:</strong> 為一個以 [[i, j], [k],…] 格式的清單，此清單將同時生成 RB 序列，其中 Qi 和 Qj 是二量子位元 RB 序列，Qk 是一量子位元序列等。量子位元的數目是輸入項目的總和。 對於 ‘regular’ RB 而言， 其 qubit_pattern 即為 [[0]],[[0,1]]。</p></li>
+<li><p><strong>length_multiplier:</strong> 如果這是一個陣列，其將對每一個 rb_sequence 乘以一個乘數。</p></li>
 <li><p><strong>seed_offset:</strong> 種子起始位置（例如，如果稍後要新增更多種子）。</p></li>
 <li><p><strong>align_cliffs:</strong> If true adds a barrier across all qubits in rb_pattern after each set of cliffords.</p></li>
 </ul>
-<p>In this example we have 3 qubits Q0,Q1,Q2. We are running 2Q RB (on qubits Q0,Q2) and 1Q RB (on qubit Q1) simultaneously, where there are twice as many 1Q Clifford gates.</p>
+<p>在此範例中，我們有 3 個量子位元 Q0，Q1，Q2。 我們同時執行 2Q RB （在量子位元 Q0、Q2 上）和 1Q RB （在量子位元 Q1 上），其中有兩倍多的 1Q Clifford閘。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
