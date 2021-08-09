@@ -820,7 +820,7 @@ ComposedOp([
 \[G(\theta)= e^{-i\theta g}.\]</div>
 <p>Então, gradientes quânticos podem ser calculados usando deslocamentos dependentes do autovalor <span class="math notranslate nohighlight">\(r\)</span> para os parâmetros. Todas as <a class="reference external" href="https://github.com/Qiskit/qiskit-terra/tree/master/qiskit/circuit/library/standard_gates">portas padrões e parametrizadas do Qiskit</a> podem ser deslocadas com <span class="math notranslate nohighlight">\(\pi/2\)</span>, isto é,</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial\langle\psi\left(\theta\right)|\hat{O}\left(\omega\right)|\psi\left(\theta\right)\rangle}{\partial\theta} =  \left(\langle\psi\left(\theta+\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta+\pi/2\right)\rangle -\partial\langle\psi\left(\theta-\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta-\pi/2\right)\rangle\right) / 2.\]</div>
+\[\frac{\partial\langle\psi\left(\theta\right)|\hat{O}\left(\omega\right)|\psi\left(\theta\right)\rangle}{\partial\theta} =  \left(\langle\psi\left(\theta+\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta+\pi/2\right)\rangle -\langle\psi\left(\theta-\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta-\pi/2\right)\rangle\right) / 2.\]</div>
 <p>Os gradientes da probabilidade são computados equivalentemente.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:

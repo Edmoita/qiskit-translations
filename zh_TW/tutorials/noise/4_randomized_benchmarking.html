@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Randomized Benchmarking &mdash; Qiskit 0.29.0 說明文件</title>
+  <title>設立隨機化基準 &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Randomized Benchmarking</li>
+      <li>設立隨機化基準</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -572,11 +572,11 @@ div.rendered_html tbody tr:hover {
 <p class="admonition-title">備註</p>
 <p>此頁面是從 <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/noise/4_randomized_benchmarking.ipynb">tutorials/noise/4_randomized_benchmarking.ipynb</a> 產生的。</p>
 </div>
-<section id="Randomized-Benchmarking">
-<h1>Randomized Benchmarking<a class="headerlink" href="#Randomized-Benchmarking" title="本標題的永久連結">¶</a></h1>
+<section id="設立隨機化基準">
+<h1>設立隨機化基準<a class="headerlink" href="#設立隨機化基準" title="本標題的永久連結">¶</a></h1>
 <section id="簡介">
 <h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
-<p><strong>Randomization benchmarking (RB)</strong> is a well-known technique to measure average gate performance by running sequences of random Clifford gates that should return the qubits to the initial state. Qiskit Ignis has tools to generate one- and two-qubit Clifford gate sequences simultaneously.</p>
+<p><strong>Randomization benchmarking (RB)</strong> 是一種眾所周知的方法，可通過執行隨機Clifford閘的序列來測量平均閘效能，這些序列會將量子位元返回到初始狀態。 Qiskit Ignis 有工具可以同時產生一個和兩個量子位元的 Clifford 的閘序列。</p>
 <p>This notebook gives an example for how to use the <code class="docutils literal notranslate"><span class="pre">ignis.verification.randomized_benchmarking</span></code> module. This particular example shows how to run 2-qubit randomized benchmarking (RB) simultaneous with 1-qubit RB. There are also examples on how to use some of the companion functions for predicting RB fidelity.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -601,10 +601,10 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="1）選取-RB-執行的參數">
 <h2>1）選取 RB 執行的參數<a class="headerlink" href="#1）選取-RB-執行的參數" title="本標題的永久連結">¶</a></h2>
-<p>First, we need to choose the following parameters:</p>
+<p>首先，我們需要選擇以下參數：</p>
 <ul class="simple">
-<li><p><strong>nseeds:</strong> The number of seeds. For each seed you will get a separate list of output circuits in rb_circs.</p></li>
-<li><p><strong>length_vector:</strong> The length vector of Clifford lengths. Must be in ascending order. RB sequences of increasing length grow on top of the previous sequences.</p></li>
+<li><p><strong>nseeds:</strong> 種子數。 對於每一個種子，您將取得 rb_circs 中個別輸出電路清單。</p></li>
+<li><p><strong>length_vector：</strong> Clifford 長度向量的長度必須是以遞增順序排列。 增加長度的 RB 序列以前序列為基礎增長。</p></li>
 <li><p><strong>rb_pattern:</strong> A list of the form [[i,j],[k],…] which will make simultaneous RB sequences where Qi,Qj are a 2-qubit RB sequence and Qk is a 1-qubit sequence, etc. The number of qubits is the sum of the entries. For ‘regular’ RB the qubit_pattern is just [[0]],[[0,1]].</p></li>
 <li><p><strong>length_multiplier:</strong> If this is an array it scales each rb_sequence by the multiplier.</p></li>
 <li><p><strong>seed_offset:</strong> 種子起始位置（例如，如果稍後要新增更多種子）。</p></li>
@@ -1252,7 +1252,7 @@ Predicted 2Q Error per Clifford: 1.313111e-02
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Randomized Benchmarking</a><ul>
+<li><a class="reference internal" href="#">設立隨機化基準</a><ul>
 <li><a class="reference internal" href="#簡介">簡介</a></li>
 <li><a class="reference internal" href="#1）選取-RB-執行的參數">1）選取 RB 執行的參數</a></li>
 <li><a class="reference internal" href="#2）產生其-RB-序列">2）產生其 RB 序列</a></li>

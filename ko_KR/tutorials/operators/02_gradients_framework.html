@@ -820,7 +820,7 @@ ComposedOp([
 \[G(\theta)= e^{-i\theta g}.\]</div>
 <p>그러면 양자 경사들은 고윳값 <span class="math notranslate nohighlight">\(r\)</span> 에 의존하는 이동으로 계산될 수 있다. 모든 <a class="reference external" href="https://github.com/Qiskit/qiskit-terra/tree/master/qiskit/circuit/library/standard_gates">매개변수화된 기본 Qiskit 게이트들</a> 은 <span class="math notranslate nohighlight">\(\pi/2\)</span> 만큼 이동될 수 있다.</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial\langle\psi\left(\theta\right)|\hat{O}\left(\omega\right)|\psi\left(\theta\right)\rangle}{\partial\theta} =  \left(\langle\psi\left(\theta+\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta+\pi/2\right)\rangle -\partial\langle\psi\left(\theta-\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta-\pi/2\right)\rangle\right) / 2.\]</div>
+\[\frac{\partial\langle\psi\left(\theta\right)|\hat{O}\left(\omega\right)|\psi\left(\theta\right)\rangle}{\partial\theta} =  \left(\langle\psi\left(\theta+\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta+\pi/2\right)\rangle -\langle\psi\left(\theta-\pi/2\right)|\hat{O}\left(\omega\right)|\psi\left(\theta-\pi/2\right)\rangle\right) / 2.\]</div>
 <p>확률 경사도 동등하게 계산된다.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
