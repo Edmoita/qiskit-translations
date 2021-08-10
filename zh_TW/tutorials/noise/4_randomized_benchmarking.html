@@ -633,12 +633,12 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="2）產生其-RB-序列">
 <h2>2）產生其 RB 序列<a class="headerlink" href="#2）產生其-RB-序列" title="本標題的永久連結">¶</a></h2>
-<p>We generate RB sequences. We start with a small example (so it doesn’t take too long to run).</p>
-<p>In order to generate the RB sequences <strong>rb_circs</strong>, which is a list of lists of quantum circuits, we run the function <code class="docutils literal notranslate"><span class="pre">rb.randomized_benchmarking_seq</span></code>.</p>
+<p>我們產生 RB 序列。 我們從一個小例子開始（如此才不會花太多時間來執行）。</p>
+<p>為了產生 RB 序列 <strong>rb_cris</strong>，我們運行了 ` <code class="docutils literal notranslate"><span class="pre">rb.randomized_benchmarking_seq</span></code> 函數。(<a href="#id1"><span class="problematic" id="id2">**</span></a>rb_circs**是一個清單，此清單的每個元素各自為一個量子電路清單。)</p>
 <p>此函數傳回：</p>
 <ul class="simple">
-<li><p><strong>rb_circs:</strong> A list of lists of circuits for the rb sequences (separate list for each seed).</p></li>
-<li><p><strong>xdata:</strong> The Clifford lengths (with multiplier if applicable).</p></li>
+<li><p><strong>rb_circs:</strong> 對於序列，一個元素為電路清單的清單（每一個種子的個別清單）。</p></li>
+<li><p><strong>xdata:</strong> Clifford 長度（適用時具有乘數）。</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -654,7 +654,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>As an example, we print the circuit corresponding to the first RB sequence:</p>
+<p>舉例，我們列印對應於第一個 RB 序列的電路：</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
