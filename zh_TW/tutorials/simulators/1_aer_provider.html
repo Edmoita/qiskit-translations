@@ -1024,9 +1024,9 @@ Circuit unitary:
 </table>
 <p><strong>Notes:</strong> * These instructions must be applied to all qubits in a circuit, otherwise an exception will be raised. * The input state must also be a valid state (statevector, density matrix, unitary etc) otherwise an exception will be raised. * These instructions can be applied at any location in a circuit and will override the current state with the specified one. Any classical register values (e.g. from preceding measurements) will be unaffected * Set state instructions are only supported
 by the Aer simulator and will result in an error if a circuit containing them is run on a non-simulator backend such as an IBM Quantum device.</p>
-<section id="Setting-a-custom-statevector">
-<h4>Setting a custom statevector<a class="headerlink" href="#Setting-a-custom-statevector" title="本標題的永久連結">¶</a></h4>
-<p>The <code class="docutils literal notranslate"><span class="pre">set_statevector</span></code> instruction can be used to set a custom <code class="docutils literal notranslate"><span class="pre">Statevector</span></code> state. The input statevector must be valid (<span class="math notranslate nohighlight">\(|\langle\psi|\psi\rangle|=1\)</span>)</p>
+<section id="設定自訂狀態向量">
+<h4>設定自訂狀態向量<a class="headerlink" href="#設定自訂狀態向量" title="本標題的永久連結">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">set_statevector</span></code> 指令可用來設定自訂義 <code class="docutils literal notranslate"><span class="pre">Statevector</span></code> 狀態。 輸入狀態向量必須是有效的(<span class="math notranslate nohighlight">\(|\langle\psi|\psi\rangle|=1\)</span>)</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -1306,7 +1306,7 @@ by the Aer simulator and will result in an error if a circuit containing them is
 </ul>
 </li>
 <li><a class="reference internal" href="#Setting-the-simulator-to-a-custom-state">Setting the simulator to a custom state</a><ul>
-<li><a class="reference internal" href="#Setting-a-custom-statevector">Setting a custom statevector</a></li>
+<li><a class="reference internal" href="#設定自訂狀態向量">設定自訂狀態向量</a></li>
 <li><a class="reference internal" href="#使用-initialize-指令">使用 initialize 指令</a></li>
 <li><a class="reference internal" href="#Setting-a-custom-density-matrix">Setting a custom density matrix</a></li>
 <li><a class="reference internal" href="#Setting-a-custom-stabilizer-state">Setting a custom stabilizer state</a></li>
