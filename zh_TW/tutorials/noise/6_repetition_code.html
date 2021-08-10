@@ -577,10 +577,9 @@ div.rendered_html tbody tr:hover {
 <section id="簡介">
 <h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
 <p>In quantum error correction we take many noisy qubits (which we call <em>physical qubits</em>) and use them to store a smaller number of <em>logical qubits</em>. The error correction procedure is designed to detect and correct for the effects of noise. This makes the logical qubits much less noisy and more reliable than the physical ones from which they are built.</p>
-<p>The repetition code is a simple example of quantum error correction, in which a logical <em>bit</em> is stored rather than a logical <em>qubit</em>. A given instance of the repetition code is defined by two numbers, which we call <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(T\)</span>.</p>
-<p>The <span class="math notranslate nohighlight">\(d\)</span> parameter determines how many physical qubits are used. The actual information about the logical bit is stored in <span class="math notranslate nohighlight">\(d\)</span> qubits (which we’ll call <em>code qubits</em>). The encoding is done in a very simple way: to encode a <code class="docutils literal notranslate"><span class="pre">0</span></code>, all these qubits are set in the state <span class="math notranslate nohighlight">\(|0\rangle\)</span>, to encode a <code class="docutils literal notranslate"><span class="pre">1</span></code> they are set to <span class="math notranslate nohighlight">\(|1\rangle\)</span>. To readout the value, you can just look at any qubit. To read it out in a way that protects against single qubit errors, you can read out all the
-qubits and take a majority vote.</p>
-<p>It is not only at readout that we can extract useful information that will help us correct errors. We can also extract information while the logical bit sits idle, or even while it is involved in computation.</p>
+<p>重複碼是量子誤差修正的一個簡單例子，其中是邏輯 <em>位元</em> 被儲存，而不是邏輯 <em>量子位元</em>。重複碼的一個實例是由兩個數字定義的，我們稱之為 <span class="math notranslate nohighlight">\(d\)</span> 和 <span class="math notranslate nohighlight">\(T\)</span>。</p>
+<p>此參數 <span class="math notranslate nohighlight">\(d\)</span> 決定被使用的實體量子位元數目。 邏輯位元的實際資訊會儲存在 <span class="math notranslate nohighlight">\(d\)</span> 個量子位元內 （我們將之稱為 <em>代碼量子位元</em>）。 其編碼可以很簡單的方式完成：若要編一個 <code class="docutils literal notranslate"><span class="pre">0</span></code>，我們可以將所有的量子位元設定在此狀態 <span class="math notranslate nohighlight">\(|0\rangle\)</span>，若要編一個 <code class="docutils literal notranslate"><span class="pre">1</span></code>，我們可以將所有的量子位元設定在此狀態 <span class="math notranslate nohighlight">\(|1\rangle\)</span>。 若要重新讀取該數值，您只需查看任何一個量子位元。 如果要以防止量子位元誤差的方式來讀取該數值，您可以讀取所有量子位元並進行多數決。</p>
+<p>我們不僅可以在讀取的時候汲取能幫助我們修正誤差的有用資訊，還能在該邏輯位元閒置時汲取資訊，或甚至是在該邏輯位元正在運算的時候。</p>
 <p>Since this is an exercise in quantum error correction, we will do this in a way that would also work for logical <em>qubits</em>. Specifically, our method of extracting information about errors must not extract any information regarding the stored logical information. In the quantum case, this is required so that we do not disturb superposition states of the stored qubits.</p>
 <p>We will extract information over <span class="math notranslate nohighlight">\(T\)</span> rounds of <em>syndrome measurements</em>. For the repetition code, these are based on the fact that all code qubits should be in the same state (all <span class="math notranslate nohighlight">\(|0\rangle\)</span> or all <span class="math notranslate nohighlight">\(|1\rangle\)</span>). Any departure from this is therefore a signature of error. Specifically, we imagine our <span class="math notranslate nohighlight">\(d\)</span> code qubits sitting along a line. We will then perform a measurement on each pair of neighboring code qubits. This will tell us whether they are the same or different,
 without extracting any information on what their values are.</p>
@@ -629,7 +628,7 @@ link_qubit_0: |0&gt;┤ X ├┤ X ├
 </section>
 <section id="Creating-a-repetition-code">
 <h2>Creating a repetition code<a class="headerlink" href="#Creating-a-repetition-code" title="本標題的永久連結">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">repetition_code</span></code> class creates a code for given values of <span class="math notranslate nohighlight">\(d\)</span> and <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>其 <code class="docutils literal notranslate"><span class="pre">repetition_code</span></code> 類建立一個給定值為 <span class="math notranslate nohighlight">\(d\)</span> 和 :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>T`的程式代碼。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -660,7 +659,7 @@ link_qubit_0: |0&gt;┤ X ├┤ X ├
 {&#39;code_qubit&#39;, &#39;link_qubit&#39;}
 </pre></div></div>
 </div>
-<p>These registers are also attributes of the <code class="docutils literal notranslate"><span class="pre">repetition_code</span></code> object.</p>
+<p>這些暫存器也是 <code class="docutils literal notranslate"><span class="pre">repetition_code</span></code> 物件的的特性。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -1067,7 +1066,7 @@ round_0_link_bit_1: 0 ═══════════════════�
 <section id="Running-a-repetition-code">
 <h2>Running a repetition code<a class="headerlink" href="#Running-a-repetition-code" title="本標題的永久連結">¶</a></h2>
 <p>The code object produces the circuits required for the code. The user can then run them using any method they prefer, allowing full control over compilation, backends, noise models and so on.</p>
-<p>For example, here we run them without noise on the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code>.</p>
+<p>例如，在這裡我們用 <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> 來執行沒有雜訊的程式碼。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -1167,7 +1166,7 @@ also do not detect anything, but this no longer represents a change and hence re
 </pre></div>
 </div>
 </div>
-<p>This can then be run to generate noisy results. Let’s make a quick function to do this, and then run it.</p>
+<p>執行此模型可產生具有雜訊的結果。 讓我們做一個快速簡易的函數功能來完成這個動作，然後執行它。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -1308,7 +1307,7 @@ also do not detect anything, but this no longer represents a change and hence re
 </section>
 <section id="Decoding-a-repetition-code">
 <h2>Decoding a repetition code<a class="headerlink" href="#Decoding-a-repetition-code" title="本標題的永久連結">¶</a></h2>
-<p>Noisy results can change the logical value at readout, and so affect our ability to read out the logical qubit. This can be mitigated by looking at the syndrome values. These can tell us whether or not the logical values are most likely to have changed, and so allow us to correct for the errors. The process of analyzing the syndrome to correct for the errors is called ‘decoding’. We do this by building a decoding object for our code.</p>
+<p>具有雜訊的結果可以在讀出時改變邏輯值，從而影響我們讀出邏輯量子位元的能力。通過查看症狀值可以減緩這種影響。 這些症狀值可以告訴我們哪些邏輯值是否最有可能發生改變，因此允許我們更正錯誤。 對錯誤進行分析和處理的過程稱為「解碼」。 我們通過為我們的程式碼建立一個解碼物件來完成這一任務。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -1481,7 +1480,7 @@ logical error probability for postselection = 0.0
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/09。
+      最後更新於 2021/08/10。
 
     </p>
   </div>
