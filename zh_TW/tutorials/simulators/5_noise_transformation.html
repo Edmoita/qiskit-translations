@@ -570,12 +570,12 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">備註</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/simulators/5_noise_transformation.ipynb">tutorials/simulators/5_noise_transformation.ipynb</a>.</p>
+<p>此頁面是從 <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/simulators/5_noise_transformation.ipynb">tutorials/simulators/5_noise_transformation.ipynb</a> 產生的.</p>
 </div>
 <section id="Noise-Transformation">
 <h1>Noise Transformation<a class="headerlink" href="#Noise-Transformation" title="本標題的永久連結">¶</a></h1>
-<section id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="本標題的永久連結">¶</a></h2>
+<section id="簡介">
+<h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
 <p>This notebook shows how to use the Qiskit Aer utility functions <code class="docutils literal notranslate"><span class="pre">approximate_quantum_error</span></code> and <code class="docutils literal notranslate"><span class="pre">approximate_noise_model</span></code> to transform quantum noise channels into a different, more suitable, noise channel.</p>
 <p>Our guiding example is Clifford simulation. A Clifford simulator can efficiently simulate quantum computations which include gates only from a limited, non-universal set of gates (the Clifford gates). Not all quantum noises can be added to such simulations; hence, we aim to find a “close” noise channel which can be simulated in a Clifford simulator.</p>
 <p>We begin by importing the transformation functions from the Aer provider utilities</p>
@@ -806,7 +806,7 @@ QuantumError on 1 qubits. Noise circuits:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/10。
+      最後更新於 2021/08/12。
 
     </p>
   </div>
@@ -826,7 +826,7 @@ QuantumError on 1 qubits. Noise circuits:
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Noise Transformation</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
+<li><a class="reference internal" href="#簡介">簡介</a></li>
 <li><a class="reference internal" href="#Overview">Overview</a></li>
 <li><a class="reference internal" href="#Example:-Approximating-amplitude-damping-noise-with-reset-noise.">Example: Approximating amplitude damping noise with reset noise.</a></li>
 <li><a class="reference internal" href="#Different-input-types">Different input types</a></li>

@@ -325,8 +325,8 @@
 <section id="installation">
 <h2>স্থাপন (ইনস্টলেশন)<a class="headerlink" href="#installation" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <div class="tabbed-set docutils">
-<input checked="checked" id="ce1d9b7b-4a2e-4e85-90e5-349bf2422964" name="1f1ec70f-59c7-4276-a72b-d69b26ffe705" type="radio">
-</input><label class="tabbed-label" for="ce1d9b7b-4a2e-4e85-90e5-349bf2422964">
+<input checked="checked" id="ea447b27-a680-43fd-a111-281344278996" name="85592df2-dca8-467f-bfbe-0cad8b362b6e" type="radio">
+</input><label class="tabbed-label" for="ea447b27-a680-43fd-a111-281344278996">
 স্থানীয়ভাবে শুরু করা</label><div class="tabbed-content docutils">
 <p>Qiskit, পাইথন ৩. ৬ বা তার পরের সংস্করণগুলোতে চলে। তা সত্ত্বেও, যেহেতু Qiskit ও পাইথন উভয়ই আপডেট হয়ে চলেছে, তাই একটার নতুন সংস্করণ অন্যটাতে কিছু অসুবিধা করতে পারে।</p>
 <p>আমরা <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a>, স্থাপন (ইন্সটল) করাকে উৎসাহিত করি যা বৈজ্ঞানিক গণনাকর্মের জন্য বিভিন্ন প্ল্যাটফর্মে ব্যবহৃত Python এর একটি ডিস্ট্রিবিউশন। Qiskit ব্যবহারের জন্য অ্যানাকোন্ডার অন্তর্ভুক্ত জুপিটার প্রস্তাব করা হয়ে থাকে।</p>
@@ -336,45 +336,36 @@
 <li><p>ম্যাকওএস ১০.১২.৬ বা তার পরবর্তী সংস্করণ</p></li>
 <li><p>উইন্ডোজ ৭ বা তার পরবর্তী সংস্করণ</p></li>
 </ul>
-<p>We recommend using Python virtual environments to cleanly separate Qiskit from
-other applications and improve your experience.</p>
-<p>The simplest way to use environments is by using the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command,
-included with Anaconda. A Conda environment allows you to specify a specific
-version of Python and set of libraries. Open a terminal window in the directory
-where you want to work.</p>
-<p>It is preferred that you use Anaconda prompt installed with the Anaconda.
-All you have to do is create a virtual environment inside Anaconda and activate the environment.
-These commands can be run in Anaconda prompt irrespective of Windows or Linux machine.</p>
-<p>Create a minimal environment with only Python installed in it.</p>
+<p>উন্নত অভিজ্ঞতা অর্জনের লক্ষ্যে, Qiskit কে অন্যান্য কার্যক্রম থেকে বিচ্ছিন্ন করে রাখার জন্য আমরা Python এর কৃত্রিম কর্মপরিবেশ (ভার্চুয়াল এনভায়রনমেন্ট) ব্যবহারের পরামর্শ দেই।</p>
+<p>কর্মপরিবেশগুলো (এনভায়রনমেন্ট) ব্যবহারের সবচেয়ে সহজ উপায় হচ্ছে Anaconda এর অন্তর্ভুক্ত <code class="docutils literal notranslate"><span class="pre">conda</span></code> নির্দেশনা ব্যবহার করা। কোন্ডার (conda) কর্মপরিবেশ (এনভায়রনমেন্ট) Python (পাইথন ) এর একটি নির্দিষ্ট সংস্করণ এবং এর অন্তর্ভুক্ত লাইব্রেরিগুলো ব্যবহারের অনুমতি দেয়। আপনি কাজ করতে চান এমন একটি ডিরেক্টরিতে টার্মিনাল উইন্ডো চালু করে সেখানে কাজ করতে পারেন।</p>
+<p>অ্যানাকোন্ডার সাথে যে অ্যানাকোন্ডা প্রম্পট ইন্সটল হয় সেটি ব্যবহার করা শ্রেয়। আপনাকে যা করতে হবে তা হলো, অ্যানাকোন্ডায় একটি কৃত্রিম কর্মপরিবেশ (ভার্চুয়াল এনভায়রনমেন্ট) তৈরি এবং সক্রিয় করতে হবে। উইন্ডোজ বা লিনাক্স যেকোনো অপারেটিং ব্যবস্থায় এই নির্দেশনাসমূহ চালানো যাবে।</p>
+<p>শুধুমাত্র Python স্থাপন (install) করে একটি ঊন (minimal) কর্মপরিবেশ (এনভায়রনমেন্ট) তৈরি করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda create -n ENV_NAME <span class="nv">python</span><span class="o">=</span><span class="m">3</span>
 </pre></div>
 </div>
-<p>Activate your new environment.</p>
+<p>আপনার নতুন কর্মপরিবেশ (এনভায়রনমেন্ট) সক্রিয় করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda activate ENV_NAME
 </pre></div>
 </div>
-<p>Next, install the Qiskit package.</p>
+<p>এর পরে, Qiskit প্যাকেজ ইনস্টল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install qiskit
 </pre></div>
 </div>
-<p>If the packages were installed correctly, you can run <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> to see the active
-packages in your virtual environment.</p>
-<p>If you intend to use visualization functionality or Jupyter notebooks it is
-recommended to install Qiskit with the extra <code class="docutils literal notranslate"><span class="pre">visualization</span></code> support:</p>
+<p>যদি প্যাকেজগুলো সঠিকভাবে স্থাপন করা হয়ে থাকে তবে কৃত্রিম কর্মপরিবেশে (ভার্চুয়াল এনভায়রনমেন্টে) সক্রিয় প্যাকেজগুলো দেখার জন্য আপনি <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">list</span></code> নির্দেশনাটি চালাতে পারেন।</p>
+<p>আপনি যদি ভিজুয়ালাইজেশন (দৃশ্যায়ন) ফাংশনালিটি অথবা জুপিটার নোটবুক ব্যবহার করতে চান তাহলে ভিজুয়ালাইজেশনের (দৃশ্যায়ন) যথোপযুক্ত শর্তগুলি (রিকোয়ারমেন্টস) সমেত qiskit স্থাপন করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install qiskit<span class="o">[</span>visualization<span class="o">]</span>
 </pre></div>
 </div>
-<p>It is worth pointing out that if you're a zsh user (which is the default shell on newer
-versions of macOS), you'll need to put <code class="docutils literal notranslate"><span class="pre">qiskit[visualization]</span></code> in quotes:</p>
+<p>মনে করিয়ে দেয়া প্রয়োজন, আপনি যদি zsh (ম্যাকওএস এর নতুনতর সংস্করণগুলোতে এটি পূর্বনির্ধারিত (ডিফল্ট) শেল) ব্যবহারকারী হয়ে থাকেন তাহলে আপনাকে উদ্ধৃতির মধ্যে <code class="docutils literal notranslate"><span class="pre">qiskit[visualization]</span></code> লিখতে হবে:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install <span class="s1">&#39;qiskit[visualization]&#39;</span>
 </pre></div>
 </div>
 </div>
-<input id="5d628baf-c4fb-468d-bdac-d376bf4434b6" name="1f1ec70f-59c7-4276-a72b-d69b26ffe705" type="radio">
-</input><label class="tabbed-label" for="5d628baf-c4fb-468d-bdac-d376bf4434b6">
-Start on the cloud</label><div class="tabbed-content docutils">
+<input id="bf6f0a77-fbe0-43c2-b901-a689fb4abafd" name="85592df2-dca8-467f-bfbe-0cad8b362b6e" type="radio">
+</input><label class="tabbed-label" for="bf6f0a77-fbe0-43c2-b901-a689fb4abafd">
+ক্লাউড এ শুরু করুন</label><div class="tabbed-content docutils">
 <blockquote>
-<div><p>The following cloud vendors have Qiskit pre-installed in their environments:</p>
+<div><p>নিম্নলিখিত ক্লাউড বিক্রেতাদের Qiskit তাদের পরিবেশে প্রাক-ইনস্টলড রয়েছে:</p>
 </div></blockquote>
 <div id="tutorial-cards-container">
 <hr class="tutorials-hr">
@@ -427,153 +418,113 @@ Start on the cloud</label><div class="tabbed-content docutils">
 </div>
 </div>
 </div></div>
-<input id="f0752337-3c4b-4cc9-ac53-ce12d1d7eab3" name="1f1ec70f-59c7-4276-a72b-d69b26ffe705" type="radio">
-</input><label class="tabbed-label" for="f0752337-3c4b-4cc9-ac53-ce12d1d7eab3">
-Install from source</label><div class="tabbed-content docutils">
-<p>Installing the elements from source allows you to access the most recently
-updated version of Qiskit instead of using the version in the Python Package
-Index (PyPI) repository. This will give you the ability to inspect and extend
-the latest version of the Qiskit code more efficiently.</p>
-<p>When installing the elements and components from source, by default their
-<code class="docutils literal notranslate"><span class="pre">development</span></code> version (which corresponds to the <code class="docutils literal notranslate"><span class="pre">master</span></code> git branch) will
-be used, as opposed to the <code class="docutils literal notranslate"><span class="pre">stable</span></code> version (which contains the same codebase
-as the published <code class="docutils literal notranslate"><span class="pre">pip</span></code> packages). Since the <code class="docutils literal notranslate"><span class="pre">development</span></code> versions of an
-element or component usually include new features and changes, they generally
-require using the <code class="docutils literal notranslate"><span class="pre">development</span></code> version of the rest of the items as well.</p>
-<p>The Terra and Aer packages both require a compiler to build from source before
-you can install. Ignis, Aqua, and the IBM Quantum Provider backend
-do not require a compiler.</p>
-<p>Installing elements from source requires the following order of installation to
-prevent installing versions of elements that may be lower than those desired if the
-<code class="docutils literal notranslate"><span class="pre">pip</span></code> version is behind the source versions:</p>
+<input id="7bc7b99a-3e63-432b-a6e4-ea98c63a23c7" name="85592df2-dca8-467f-bfbe-0cad8b362b6e" type="radio">
+</input><label class="tabbed-label" for="7bc7b99a-3e63-432b-a6e4-ea98c63a23c7">
+উৎস থেকে স্থাপন</label><div class="tabbed-content docutils">
+<p>উত্স থেকে উপাদানগুলি ইনস্টল করলে আপনি Qiskit সর্বাধিক আপডেট হওয়া সংস্করণটি আপনি ব্যবহার করতে পারবেন Python Package Index (PyPI) রিপোসিটোরি থেকে ইনস্টল করার তুলনায়। এটি আপনাকে Qiskit কোডের সর্বশেষ সংস্করণটি আরও নিখুঁত ভাবে পরিদর্শন করার এবং প্রসারিত করার দক্ষতা দেবে।.</p>
+<p>উৎস থেকে উপাদানগুলো ইন্সটল করার সময় <code class="docutils literal notranslate"><span class="pre">stable</span></code> সংস্করণের (যার কিনা <code class="docutils literal notranslate"><span class="pre">pip</span></code> প্যাকেজের সমতুল্য কোড বেস আছে) বিপরীতে ডিফল্ট হিসেবে <code class="docutils literal notranslate"><span class="pre">development</span></code> সংস্করণ (<code class="docutils literal notranslate"><span class="pre">master</span></code> গিট শাখার) ব্যবহৃত হয়। <code class="docutils literal notranslate"><span class="pre">development</span></code> সংস্করণে নতুন ফিচার এবং পরিবর্তন অন্তর্ভুক্ত থাকায় সাধারণত অন্য সব উপাদানের জুন্যও <code class="docutils literal notranslate"><span class="pre">development</span></code> সংস্করণ ব্যবহৃত হয়।</p>
+<p>টেরা এবং এয়ার প্যাকেজ উভয়েরই উত্স থেকে ইনস্টল করার আগে কম্পাইলার প্রয়োজন। ইগনিস, একোয়া, এবং আই বি এম কোয়ান্টাম প্রোভাইডার ব্যাকএন্ড এর জন্যে কম্পাইলার প্রয়োজন নয়।</p>
+<p>যদি <code class="docutils literal notranslate"><span class="pre">pip</span></code> এর সংস্করণ উৎসের সংস্করণের চেয়ে পুরোনো হয় তবে উপাদানগুলির নিম্নতর সংস্করণ ইনস্টল করা থেকে বিরত থাকার জন্য উৎস থেকে উপাদানগুলি ইনস্টল করার নিম্নলিখিত ক্রম অনুসরণ করা প্রয়োজন ।</p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="#install-qiskit-terra"><span class="std std-ref">qiskit-terra</span></a></p></li>
 <li><p><a class="reference internal" href="#install-qiskit-aer"><span class="std std-ref">qiskit-aer</span></a></p></li>
 <li><p><a class="reference internal" href="#install-qiskit-ignis"><span class="std std-ref">qiskit-ignis</span></a></p></li>
 <li><p><a class="reference internal" href="#install-qiskit-aqua"><span class="std std-ref">qiskit-aqua</span></a></p></li>
-<li><p><a class="reference internal" href="#install-qiskit-ibmq-provider"><span class="std std-ref">qiskit-ibmq-provider</span></a>
-(if you want to connect to the IBM Quantum devices or online
-simulator)</p></li>
+<li><p><a class="reference internal" href="#install-qiskit-ibmq-provider"><span class="std std-ref">qiskit-ibmq-provider</span></a> (আপনি যদি আই বি এম কোয়ান্টামযন্ত্র বা অনলাইন সিমুলেটরের সাথে যুক্ত হতে চান)</p></li>
 </ol>
-<p>To work with several components and elements simultaneously, use the following
-steps for each element.</p>
+<p>একসাথে বেশ কয়েকটি উপাদানের সাথে কাজ করতে প্রতিটি উপাদানের জন্য নিম্নলিখিত পদক্ষেপগুলি ব্যবহার করুন।</p>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>Due to the use of namespace packaging in Python, care must be taken in how you
-install packages. If you're planning to install any element from source, do not
-use the <code class="docutils literal notranslate"><span class="pre">qiskit</span></code> meta-package. Also, follow this guide and use a separate virtual
-environment for development. If you do choose to mix an existing installation
-with your development, refer to
-<a class="reference external" href="https://github.com/pypa/sample-namespace-packages/blob/master/table.md">https://github.com/pypa/sample-namespace-packages/blob/master/table.md</a>
-for the set of combinations of installation methods that work together.</p>
+<p>Python এর নেমস্পেস প্যাকেজিংয়ের কারণে প্যাকেজ ইন্সটল (স্থাপন) করার সময় সতর্ক হতে হবে। উৎস থেকে ইন্সটল (স্থাপন) করার সময় <code class="docutils literal notranslate"><span class="pre">qiskit</span></code> মেটা প্যাকেজ ব্যবহার করবেন না। এই নির্দেশিকাটি অনুসরণ করুন এবং একটি পৃথক কৃত্রিম কর্মপরিবেশ তৈরি করুন। আপনি যদি ইন্সটল করা বিদ্যমান কোনো প্যাকেজ সংযুক্ত করতে চান তবে একসাথে কাজ করে এমন উপযুক্ত কম্বিনেশনের জন্য <a class="reference external" href="https://github.com/pypa/sample-namespace-packages/blob/master/table.md">https://github.com/pypa/sample-namespace-packages/blob/master/table.md</a> অনুসরণ করুন।</p>
 </div>
 <h3>Set up the Virtual Development Environment</h3><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda create -y -n QiskitDevenv <span class="nv">python</span><span class="o">=</span><span class="m">3</span>
 conda activate QiskitDevenv
 </pre></div>
 </div>
-<h2>Installing Terra from Source</h2><p>Installing from source requires that you have a C++ compiler on your system that supports
-C++11.</p>
+<h2>Installing Terra from Source</h2><p>উত্স থেকে ইনস্টল করার জন্য আপনার সিস্টেমে আপনার C++ কম্পাইলার থাকা দরকার যা C++ 11 সমর্থন করে।</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="ec41c039-d10f-412a-8211-b36eaa9e31a6" name="f7ea205e-e276-4781-88c9-4fe0526f04fc" type="radio">
-</input><label class="tabbed-label" for="ec41c039-d10f-412a-8211-b36eaa9e31a6">
-Compiler for Linux</label><div class="tabbed-content docutils">
-<p>On most Linux platforms, the necessary GCC compiler is already installed.</p>
+<input checked="checked" id="b9f07bb4-b8e1-42f1-9bf8-c9d48017b0f8" name="3617a097-f794-4a14-a490-3ab3c9b7f1a1" type="radio">
+</input><label class="tabbed-label" for="b9f07bb4-b8e1-42f1-9bf8-c9d48017b0f8">
+লিনাক্স এর কম্পাইলার</label><div class="tabbed-content docutils">
+<p>বেশিরভাগ লিনাক্স প্ল্যাটফর্মে, প্রয়োজনীয় জিসিসি কম্পাইলার ইতিমধ্যে ইনস্টল করা থাকে।</p>
 </div>
-<input id="2ff0aaf3-d40f-417e-87d4-fdb57a28c033" name="f7ea205e-e276-4781-88c9-4fe0526f04fc" type="radio">
-</input><label class="tabbed-label" for="2ff0aaf3-d40f-417e-87d4-fdb57a28c033">
-Compiler for macOS</label><div class="tabbed-content docutils">
-<p>If you use macOS, you can install the Clang compiler by installing XCode.
-Check if you have XCode and Clang installed by opening a terminal window and entering the
-following.</p>
+<input id="751db7d0-20ef-4735-8f89-29a206850ef8" name="3617a097-f794-4a14-a490-3ab3c9b7f1a1" type="radio">
+</input><label class="tabbed-label" for="751db7d0-20ef-4735-8f89-29a206850ef8">
+ম্যাক ও এস এর কম্পাইলার</label><div class="tabbed-content docutils">
+<p>আপনি যদি ম্যাক ও এস ব্যবহার করেন তাহলে Xcode ইনস্টল করে ক্ল্যাঙ (CLang) ইনস্টল করতে পারেন পর। একটি টার্মিনাল এর সাহায্যে দেখেনিন XCode এবং Clang ইনস্টল করা আছে কিনা।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>clang --version
 </pre></div>
 </div>
-<p>Install XCode and Clang by using the following command.</p>
+<p>নিম্নোক্ত কম্যান্ড(আদেশ) অনুসারে এক্সকোড এবং ক্ল্যাঙ ইনস্টল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>xcode-select --install
 </pre></div>
 </div>
 </div>
-<input id="384a05e6-c8c1-4860-b75b-65fca9cb3adf" name="f7ea205e-e276-4781-88c9-4fe0526f04fc" type="radio">
-</input><label class="tabbed-label" for="384a05e6-c8c1-4860-b75b-65fca9cb3adf">
-Compiler for Windows</label><div class="tabbed-content docutils">
-<p>On Windows, it is easiest to install the Visual C++ compiler from the
-<a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019">Build Tools for Visual Studio 2019</a>.
-You can instead install Visual Studio version 2015 or 2017, making sure to select the
-options for installing the C++ compiler.</p>
+<input id="3eeddb64-8b25-495a-a010-595422ec4db5" name="3617a097-f794-4a14-a490-3ab3c9b7f1a1" type="radio">
+</input><label class="tabbed-label" for="3eeddb64-8b25-495a-a010-595422ec4db5">
+উইন্ডোস এর কম্পাইলার</label><div class="tabbed-content docutils">
+<p>উইন্ডোজে <a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017">ভিজ্যুয়াল ষ্টুডিও ২০১৭ এর জন্য বিল্ড টুলস</a> থেকে ভিজ্যুয়াল সি++(C++) ইনস্টল করা সহজতম।এছাড়াও আপনি সি++(C++) কম্পাইলার ইনস্টল করার বিকল্প নির্বাচন সুনিশ্চিত করে ভিজ্যুয়াল স্টুডিওর ২০১৫ অথবা ২০১৭ সংস্করণ ইনস্টল করতে পারেন।</p>
 </div>
 </div>
-<p>Once the compilers are installed, you are ready to install Qiskit Terra.</p>
+<p>কম্পাইলার ইনস্টল হয়ে যাওয়ার পর আপনি Qiskit টেরা ইনস্টল করার জন্যে তৈরী।</p>
 <ol class="arabic">
-<li><p>Clone the Terra repository.</p>
+<li><p>টেরা রিপোজিটরিটির ক্লোন বা প্রতিলিপি করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Qiskit/qiskit-terra.git
 </pre></div>
 </div>
 </li>
-<li><p>Cloning the repository creates a local folder called <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code>.</p>
+<li><p>রিপোসিটোরিটিকে ক্লোন করলে <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> নামক একটি স্থানীয় ফোল্ডার তৈরী হবে।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> qiskit-terra
 </pre></div>
 </div>
 </li>
-<li><p>Install the Python requirements libraries from your <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> directory.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> ডিরেক্টরি থেকে Python এর যাবতীয় দরকারি লিব্র্যাবরি ইনস্টল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install cython
 </pre></div>
 </div>
 </li>
-<li><p>If you want to run tests or linting checks, install the developer requirements.</p>
+<li><p>টেস্ট রান করানোর জন্য বা লিনটিং চেক করার জন্য, ডেভেলপারের রেকোইরেমেন্ট ইনস্টল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
 </pre></div>
 </div>
 </li>
-<li><p>Install <code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code>.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">qiskit-terra</span></code> ইনস্টল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install .
 </pre></div>
 </div>
 </li>
 </ol>
-<p>If you want to install it in editable mode, meaning that code changes to the
-project don't require a reinstall to be applied, you can do this with:</p>
+<p>আপনি যদি এটিকে সম্পাদনযোগ্য মোডে ইনস্টল করতে চান, মানে এই প্রকল্পের কোড পরিবর্তনের জন্য প্রয়োগ করার জন্য পুনরায় ইনস্টল করা প্রয়োজন না, আপনি এটি করতে পারেন:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -e .
 </pre></div>
 </div>
-<p>You can then run the code examples after installing Terra. You can
-run the example with the following command.</p>
+<p>টেরা ইনস্টল করার পরে আপনি কোডের উদাহরণগুলি চালাতে পারেন। আপনি নিম্নলিখিত কমান্ড দিয়ে উদাহরণ চালাতে পারেন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python examples/python/using_qiskit_terra_level_0.py
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>If you do not intend to install any other components, qiskit-terra will
-emit a <code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code> warning that both qiskit-aer and
-qiskit-ibmq-provider are not installed. This is done because
-users commonly intend to use the additional elements,
-but do not realize they are not installed, or that the installation
-of either Aer or the IBM Quantum Provider failed for some reason. If you wish
-to suppress these warnings, add:</p>
+<p>আপনি যদি আর কোনো উপাদান ইনস্টল না করে থাকেন তবে qiskit-টেরা একটি <code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code> সতর্কীকরণ দেবে যে qiskit-এয়ার এবং qiskit-আইবিএমকিউ-প্রোভাইডার কোনোটিই ইনস্টল করা নেই। এটি ঘটে থাকে কারণ সাধারণত ব্যবহারকারীরা অতিরিক্ত উপাদান ব্যবহার করতে চাইলেও উপলব্ধি করতে পারেননা যে হয় কোনোটিই ইনস্টল করা নেই অথবা এয়ার (Aer) বা আইবিএম কোয়ান্টাম প্রোভাইডার এর ইনস্টলেশন কোনোকারণে ব্যর্থ হয়েছে। আপনি যদি এইরূপ সতর্কীকরণ দমিত করতে চান, যুক্ত করুন:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">,</span>
                         <span class="n">module</span><span class="o">=</span><span class="s1">&#39;qiskit&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>before any <code class="docutils literal notranslate"><span class="pre">qiskit</span></code> imports in your code. This will suppress the
-warning about the missing qiskit-aer and qiskit-ibmq-provider, but
-will continue to display any other warnings from qiskit or other packages.</p>
+<p>আপনার কোডে কোনোরকম <code class="docutils literal notranslate"><span class="pre">Qiskit</span></code> ইম্পর্টের পূর্বে। এটি অনুপস্থিত Qiskit-aer এবং Qiskit-আইবিএমকিউ-প্রোভাইডার এর সতর্কীকরণ কে দমিত করলেও  Qiskit বা অন্যান্য প্যাকেজ এর সতর্কীকরণ দেখাবে।</p>
 </div>
 <h2>Installing Aer from Source</h2><ol class="arabic">
-<li><p>Clone the Aer repository.</p>
+<li><p>এয়ার রিপোজিটরিটির ক্লোন বা প্রতিলিপি করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Qiskit/qiskit-aer
 </pre></div>
 </div>
 </li>
-<li><p>Install build requirements.</p>
+<li><p>বিল্ড করার শর্তগুলো (রিকোয়ারমেন্ট) ইন্সটল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install cmake scikit-build cython
 </pre></div>
 </div>
 </li>
 </ol>
-<p>After this, the steps to install Aer depend on which operating system you are
-using. Since Aer is a compiled C++ program with a Python interface, there are
-non-Python dependencies for building the Aer binary which can't be installed
-universally depending on operating system.</p>
+<p>পরের ধাপগুলো নির্ভর করে আপনি কোন অপারেটিং সিস্টেম ব্যবহার করছেন তার ওপর। যেহেতু এয়ার Python ইন্টারফেসযুক্ত সি++ এ কম্পাইল করা ফ্রেমওয়ার্ক, তাই এয়ার বাইনারি ফাইলগুলো গঠন করতে কিছু Python-নয় এমন ডিপেন্ডেন্সি বা শর্ত প্রয়োজন হয় যেগুলো সব অপারেটিং সিস্টেমে সার্বজনীনভাবে ইন্সটল করা যায় না।</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
 Linux<div class="summary-down docutils">
@@ -582,25 +533,23 @@ Linux<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
 <ol class="arabic" start="3">
-<li><p class="card-text">Install compiler requirements.</p>
-<p class="card-text">Building Aer requires a C++ compiler and development headers.</p>
-<p class="card-text">If you're using Fedora or an equivalent Linux distribution,
-install using:</p>
+<li><p class="card-text">কম্পাইলার ব্যবহারের শর্তগুলো (রিকোয়ারমেন্ট) ইন্সটল করুন।</p>
+<p class="card-text">এয়ার বিল্ড বা গঠনের জন্য সি++ কম্পাইলার এবং ডেভেলপমেন্ট হেডার প্রয়োজন।</p>
+<p class="card-text">ফেডোরা বা সমপর্যায়ের লিনাক্স বিতরণ (ডিস্ট্রিবিউশন) ব্যবহারকারীদের জন্যঃ</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dnf install @development-tools
 </pre></div>
 </div>
-<p class="card-text">For Ubuntu/Debian install it using:</p>
+<p class="card-text">উবুন্টু/ডেবিয়ান সিস্টেম ব্যবহারকারীদের জন্যঃ</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>apt-get install build-essential
 </pre></div>
 </div>
 </li>
-<li><p class="card-text">Install OpenBLAS development headers.</p>
-<p class="card-text">If you're using Fedora or an equivalent Linux distribution,
-install using:</p>
+<li><p class="card-text">OpenBLAS ডেভেলাপমেন্ট হেডারগুলো ইন্সটল করুন।</p>
+<p class="card-text">ফেডোরা বা সমপর্যায়ের লিনাক্স বিতরণ (ডিস্ট্রিবিউশন) ব্যবহারকারীদের জন্যঃ</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dnf install openblas-devel
 </pre></div>
 </div>
-<p class="card-text">For Ubuntu/Debian install it using:</p>
+<p class="card-text">উবুন্টু/ডেবিয়ান সিস্টেম ব্যবহারকারীদের জন্যঃ</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>apt-get install libopenblas-dev
 </pre></div>
 </div>
@@ -615,20 +564,17 @@ macOS<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
 <ol class="arabic" start="3">
-<li><p class="card-text">Install dependencies.</p>
-<p class="card-text">To use the <a class="reference external" href="https://clang.llvm.org/">Clang</a> compiler on macOS, you need to install
-an extra library for supporting <a class="reference external" href="https://www.openmp.org/">OpenMP</a>.  You can use <a class="reference external" href="https://brew.sh/">brew</a>
-to install this and other dependencies.</p>
+<li><p class="card-text">ডিপেন্ডেন্সি বা শর্তগুলো ইন্সটল করুন।</p>
+<p class="card-text">ম্যাকওএস এ <a class="reference external" href="https://clang.llvm.org/">Clang</a> কম্পাইলার ব্যবহার করতে <a class="reference external" href="https://www.openmp.org/">OpenMP</a> সমর্থিত একটি অতিরিক্ত লাইব্রেরি ইন্সটল করতে হবে আপনাকে। আপনি <a class="reference external" href="https://brew.sh/">brew</a> ব্যবহার করে এটি এবং অন্যান্য ডিপেন্ডেন্সি বা শর্তগুলো ইন্সটল করতে পারেন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>brew install libomp
 </pre></div>
 </div>
 </li>
-<li><p class="card-text">Then install a BLAS implementation; <a class="reference external" href="https://www.openblas.net/">OpenBLAS</a>
-is the default choice.</p>
+<li><p class="card-text">তারপর BLAS রূপায়ণ (ইমপ্লিমেন্টেশন) ইন্সটল করুন; <a class="reference external" href="https://www.openblas.net/">OpenBLAS</a> ডিফল্টভাবে বা শুরুতে নির্বাচিত থাকে।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>brew install openblas
 </pre></div>
 </div>
-<p class="card-text">Next, install <code class="docutils literal notranslate"><span class="pre">Xcode</span> <span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Tools</span></code>.</p>
+<p class="card-text">শেষে <code class="docutils literal notranslate"><span class="pre">Xcode</span> <span class="pre">Command</span> <span class="pre">Line</span> <span class="pre">Tools</span></code> ইন্সটল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>xcode-select --install
 </pre></div>
 </div>
@@ -642,80 +588,58 @@ Windows<div class="summary-down docutils">
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">On Windows you need to use <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a>
-or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> to install all the
-dependencies.</p>
+<p class="card-text">উইন্ডোজে ডিপেন্ডেন্সি বা শর্তগুলো ইন্সটল করতে <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a> অথবা <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> ব্যবহার করতে হবে।</p>
 <ol class="arabic" start="3">
-<li><p class="card-text">Install compiler requirements.</p>
+<li><p class="card-text">কম্পাইলার ব্যবহারের শর্তগুলো (রিকোয়ারমেন্ট) ইন্সটল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda install --update-deps vs2017_win-64 vs2017_win-32 msvc_runtime
 </pre></div>
 </div>
 </li>
 </ol>
 </div>
-</details><p>Qiskit Aer is a high performance simulator framework for quantum circuits. It
-provides <a class="reference external" href="apidoc/aer_provider.html#simulator-backends">several backends</a>
-to achieve different simulation goals.</p>
+</details><p>Qiskit এয়ার কোয়ান্টাম বর্তনী (সার্কিট) কার্যকর করার একটি উচ্চ কর্মদক্ষতাসম্পন্ন সিমুলেটর ফ্রেমওয়ার্ক। এটি বিভিন্ন ধরনের অবস্থা অনুকরণের (সিমুলেশনের) জন্য <a class="reference external" href="apidoc/providers/aer/aer_backends.html">several backends</a> সরবরাহ করে।</p>
 <blockquote>
 <div><div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda install --update-deps -c conda-forge -y openblas cmake
 </pre></div>
 </div>
 </div></blockquote>
 <ol class="arabic" start="5">
-<li><p>Build and install qiskit-aer directly</p>
-<p>If you have pip &lt;19.0.0 installed and your environment doesn't require a
-custom build, run:</p>
+<li><p>qiskit-এয়ার সরাসরি গঠন (বিল্ড) এবং ইন্সটল করুন।</p>
+<p>যদি আপনার পিপ (pip) &lt;১৯.০.০ ইন্সটল করা থাকে এবং এনভায়রনমেন্টে কাস্টম বিল্ড প্রয়োজন না হয় তবে নিচের নির্দেশনাগুলো কার্যকর করুনঃ</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> qiskit-aer
 pip install .
 </pre></div>
 </div>
-<p>This will both build the binaries and install Aer.</p>
-<p>Alternatively, if you have a newer pip installed, or have some custom requirement,
-you can build a Python wheel manually.</p>
+<p>এর ফলে বাইনারি বিল্ডের সাথে এয়ারও ইন্সটল হবে।</p>
+<p>অথবা আপনার যদি পিপ এর নতুন সংস্করণ ইন্সটল করা থাকে অথবা কিছু কাস্টম রিকোয়ারমেন্ট থেকে থাকে, তাহলে আপনি ম্যানুয়ালি একটি Python হুইল তৈরি (বিল্ড) করতে পারেন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> qiskit-aer
 python ./setup.py bdist_wheel
 </pre></div>
 </div>
-<p>If you need to set a custom option during the wheel build, refer to
-<a class="reference internal" href="contributing_to_qiskit.html#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a>.</p>
-<p>After you build the Python wheel, it will be stored in the <code class="docutils literal notranslate"><span class="pre">dist/</span></code> dir in the
-Aer repository. The exact version will depend</p>
+<p>হুইল বিল্ডের সময় কাস্টম অপশন নির্ধারণ করে থাকলে <a class="reference internal" href="contributing_to_qiskit.html#aer-wheel-build-options"><span class="std std-ref">Custom options during wheel builds</span></a> এ নির্দেশ করুন।</p>
+<p>Python হুইল গঠন করার পর এটি এয়ার রিপোজিটরির <code class="docutils literal notranslate"><span class="pre">dist/</span></code> ডিরেক্টরিতে সংরক্ষিত থাকবে। যথাযথ সংস্করণটির জন্য প্রয়োজন হবে</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> dist
 pip install qiskit_aer-*.whl
 </pre></div>
 </div>
-<p>The exact filename of the output wheel file depends on the current version of
-Aer under development.</p>
+<p>আউটপুট হুইল ফাইলের নামটি নির্ভর করে ডেভেলাপমেন্ট বা অগ্রগতি চলতে থাকা এয়ারের বর্তমান সংস্করণের ওপর।</p>
 </li>
 </ol>
-<h4>Custom options</h4><p>The Aer build system uses <a class="reference external" href="https://scikit-build.readthedocs.io/en/latest/index.html">scikit-build</a>
-to run the compilation when building it with the Python interface. It acts as an interface for
-<a class="reference external" href="https://setuptools.readthedocs.io/en/latest/">setuptools</a> to call <a class="reference external" href="https://cmake.org/">CMake</a>
-and compile the binaries for your local system.</p>
-<p>Due to the complexity of compiling the binaries, you may need to pass options
-to a certain part of the build process. The way to pass variables is:</p>
+<h4>Custom options</h4><p>এয়ার সম্পাদনার (কম্পাইলেশনের) জন্য পাইথন ইন্টারফেসের সাথে <a class="reference external" href="https://scikit-build.readthedocs.io/en/latest/index.html">scikit-build</a> ব্যবহার করে। এটি <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/">setuptools</a> এর জন্য একটি ইন্টারফেস হিসেবে কাজ করে যাতে <a class="reference external" href="https://cmake.org/">CMake</a> কল হয় এবং স্থানীয় ব্যবস্থায় দ্বিমিকগুলো (বাইনারি) সম্পাদিত (কম্পাইল) হয়।</p>
+<p>বাইনারিগুলি সংকলনের জটিলতার কারণে আপনার বিল্ড প্রক্রিয়াটির একটি নির্দিষ্ট অংশে বিকল্পগুলি সরবরাহ করতে হতে পারে। ভেরিয়েবলগুলি সরবরাহ করার উপায়টি হল:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python setup.py bdist_wheel <span class="o">[</span>skbuild_opts<span class="o">]</span> <span class="o">[</span>-- <span class="o">[</span>cmake_opts<span class="o">]</span> <span class="o">[</span>-- build_tool_opts<span class="o">]]</span>
 </pre></div>
 </div>
-<p>where the elements within square brackets <cite>[]</cite> are optional, and
-<code class="docutils literal notranslate"><span class="pre">skbuild_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">cmake_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">build_tool_opts</span></code> are to be replaced by
-flags of your choice. A list of <em>CMake</em> options is available here:
-<a class="reference external" href="https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options">https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options</a>. For
-example, you could run something like:</p>
+<p>যেখানে <cite>[]</cite> ৩য় বন্ধনী ভিতরের উপাদান (এলিমেন্টস) ঐচ্ছিক এবং <code class="docutils literal notranslate"><span class="pre">skbuild_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">cmake_opts</span></code>, <code class="docutils literal notranslate"><span class="pre">build_tool_opts</span></code> কে আপনার পছন্দের চিহ্ন (ফ্ল্যাগ) দিয়ে পুনঃস্থাপন করতে পারবেন। <em>CMake</em> অপশনের একটি তালিকা এখানে পাওয়া যাবেঃ <a class="reference external" href="https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options">https://cmake.org/cmake/help/v3.6/manual/cmake.1.html#options</a>। যেমন, আপনি যদি এমন কিছু কার্যকর করতে চানঃ</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python setup.py bdist_wheel -- -- -j8
 </pre></div>
 </div>
-<p>This is passing the flag <cite>-j8</cite> to the underlying build system (which in this
-case is <a class="reference external" href="https://www.gnu.org/software/automake/">Automake</a>), telling it that you want
-to build in parallel using 8 processes.</p>
-<p>For example, a common use case for these flags on linux is to specify a
-specific version of the C++ compiler to use (normally if the default is too
-old):</p>
+<p>এটি গঠন ব্যবস্থায় <cite>-j8</cite> চিহ্ন (ফ্ল্যাগ) (যেটি এক্ষেত্রে <a class="reference external" href="https://www.gnu.org/software/automake/">Automake</a>) পাঠায় যাতে আপনি আটটি প্রসেস সমান্তরালে গঠন করেন।</p>
+<p>উদাহরণস্বরূপ, লিনাক্স মেশিনে C++ কম্পাইলারের নির্দিষ্ট সংস্করণ নির্দেশিত করা (সাধারণত যদি ডিফল্ট সংস্করণটি খুব পুরোনো হয়) এই নিশানগুলোর (ফ্ল্যাগ) একটি পরিচিত ব্যবহারক্ষেত্র।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python setup.py bdist_wheel -- -DCMAKE_CXX_COMPILER<span class="o">=</span>g++-7
 </pre></div>
 </div>
-<p>which will tell CMake to use the g++-7 command instead of the default g++ when
-compiling Aer.</p>
+<p>যেটি Aer কম্পাইল করার সময় সিমেক (CMake) কে চিরাচরিত g++ কমান্ডের পরিবর্তে g++-7 কম্যান্ড ব্যবহার করার নির্দেশ দিবে।</p>
 <p>Another common use case for this, depending on your environment, is that you may
 need to specify your platform name and turn off static linking.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python setup.py bdist_wheel --plat-name macosx-10.9-x86_64 <span class="se">\</span>
@@ -839,19 +763,17 @@ project don't require a reinstall to be applied:</p>
 </pre></div>
 </div>
 </li>
-<li><p>Cloning the repository creates a local directory called <code class="docutils literal notranslate"><span class="pre">qiskit-ibmq-provider</span></code>.</p>
+<li><p>রিপোজিটিরিটি ক্লোন বা প্রতিলিপি করায় <code class="docutils literal notranslate"><span class="pre">qiskit-ibmq-provider</span></code> নামে একটি স্থানীয় ডিরেক্টরি তৈরি হবে।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> qiskit-ibmq-provider
 </pre></div>
 </div>
 </li>
-<li><p>If you want to run tests or linting checks, install the developer requirements.
-This is not required to install or use the qiskit-ibmq-provider package when
-installing from source.</p>
+<li><p>যদি আপনি পরীক্ষা চালাতে চান তাহলে ডেভেলাপার রিকোয়ারমেন্টস বা আবশ্যিক শর্তসমূহ ইন্সটল করবেন। উৎস থেকে qiskit-ibmq-provider ইন্সটল বা ব্যবহার করতে এর প্রয়োজন নেই।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
 </pre></div>
 </div>
 </li>
-<li><p>Install qiskit-ibmq-provider.</p>
+<li><p>qiskit-ibmq-provider ইন্সটল করুন।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install .
 </pre></div>
 </div>
@@ -866,7 +788,7 @@ project don't require a reinstall to be applied:</p>
 </div>
 </section>
 <section id="ready-to-get-going">
-<h2>Ready to get going?...<a class="headerlink" href="#ready-to-get-going" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<h2>যেতে প্রস্তুত ?...<a class="headerlink" href="#ready-to-get-going" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <div class="tutorials-callout-container">
    <div class="row"><p><div class="col-md-6">
     <div class="text-container">
@@ -901,7 +823,7 @@ project don't require a reinstall to be applied:</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      2021/08/10 সর্বশেষ পরিবর্তন করা হয়েছে।
+      2021/08/12 সর্বশেষ পরিবর্তন করা হয়েছে।
 
     </p>
   </div>
@@ -922,7 +844,7 @@ project don't require a reinstall to be applied:</p>
               <ul>
 <li><a class="reference internal" href="#">শুরুর নির্দেশনা</a><ul>
 <li><a class="reference internal" href="#installation">স্থাপন (ইনস্টলেশন)</a></li>
-<li><a class="reference internal" href="#ready-to-get-going">Ready to get going?...</a></li>
+<li><a class="reference internal" href="#ready-to-get-going">যেতে প্রস্তুত ?...</a></li>
 </ul>
 </li>
 </ul>
@@ -946,7 +868,7 @@ project don't require a reinstall to be applied:</p>
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

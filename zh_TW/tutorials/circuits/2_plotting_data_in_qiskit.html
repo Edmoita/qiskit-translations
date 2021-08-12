@@ -585,11 +585,11 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<section id="Plot-histogram">
-<h2>Plot histogram<a class="headerlink" href="#Plot-histogram" title="本標題的永久連結">¶</a></h2>
-<p>To visualize the data from a quantum circuit run on a real device or <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> we have made a simple function</p>
+<section id="繪製直方圖">
+<h2>繪製直方圖<a class="headerlink" href="#繪製直方圖" title="本標題的永久連結">¶</a></h2>
+<p>為了圖示化量子電路在實體量子電腦或 <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code> 執行的計算結果，我們提供一個簡單的函數做使用</p>
 <p><code class="docutils literal notranslate"><span class="pre">plot_histogram(data)</span></code></p>
-<p>As an example we make a 2-qubit Bell state</p>
+<p>我們以兩個量子位元的 Bell state 做舉例</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -637,8 +637,8 @@ div.rendered_html tbody tr:hover {
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_4_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_4_0.png" />
 </div>
 </div>
-<section id="Options-when-plotting-a-histogram">
-<h3>Options when plotting a histogram<a class="headerlink" href="#Options-when-plotting-a-histogram" title="本標題的永久連結">¶</a></h3>
+<section id="繪製直方圖函數的可調參數">
+<h3>繪製直方圖函數的可調參數<a class="headerlink" href="#繪製直方圖函數的可調參數" title="本標題的永久連結">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">plot_histogram()</span></code> has a few options to adjust the output graph. The first option is the <code class="docutils literal notranslate"><span class="pre">legend</span></code> kwarg. This is used to provide a label for the executions. It takes a list of strings use to label each execution’s results. This is mostly useful when plotting multiple execution results in the same histogram. The <code class="docutils literal notranslate"><span class="pre">sort</span></code> kwarg is used to adjust the order the bars in the histogram are rendered. It can be set to either ascending order with <code class="docutils literal notranslate"><span class="pre">asc</span></code> or descending order with <code class="docutils literal notranslate"><span class="pre">desc</span></code>. The
 <code class="docutils literal notranslate"><span class="pre">number_to_keep</span></code> kwarg takes an integer for the number of terms to show, the rest are grouped together in a single bar called rest. You can adjust the color of the bars with the <code class="docutils literal notranslate"><span class="pre">color</span></code> kwarg which either takes a string or a list of strings for the colors to use for the bars for each execution. You can adjust whether labels are printed above the bars or not with the <code class="docutils literal notranslate"><span class="pre">bar_labels</span></code> kwarg. The last option available is the <code class="docutils literal notranslate"><span class="pre">figsize</span></code> kwarg which takes a tuple of the size in inches to make the
 output figure.</p>
@@ -683,15 +683,15 @@ output figure.</p>
 </div>
 </div>
 </section>
-<section id="Using-the-output-from-plot_histogram()">
-<h3>Using the output from plot_histogram()<a class="headerlink" href="#Using-the-output-from-plot_histogram()" title="本標題的永久連結">¶</a></h3>
+<section id="使用-plot_histogram()-的輸出">
+<h3>使用 plot_histogram() 的輸出<a class="headerlink" href="#使用-plot_histogram()-的輸出" title="本標題的永久連結">¶</a></h3>
 <p>When using the plot_histogram() function it returns a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> for the rendered visualization. Jupyter notebooks understand this return type and render it for us in this tutorial, but when running outside of Jupyter you do not have this feature automatically. However, the <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> class natively has methods to both display and save the visualization. You can call <code class="docutils literal notranslate"><span class="pre">.show()</span></code> on the returned object from <code class="docutils literal notranslate"><span class="pre">plot_histogram()</span></code> to open the image in a new window (assuming
 your configured matplotlib backend is interactive). Or alternatively you can call <code class="docutils literal notranslate"><span class="pre">.savefig('out.png')</span></code> to save the figure to <code class="docutils literal notranslate"><span class="pre">out.png</span></code>. The <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> method takes a path so you can adjust the location and filename where you’re saving the output.</p>
 </section>
 </section>
 <section id="繪製狀態">
 <h2>繪製狀態<a class="headerlink" href="#繪製狀態" title="本標題的永久連結">¶</a></h2>
-<p>In many situations you want to see the state of a quantum computer. This could be for debugging. Here we assume you have this state (either from simulation or state tomography) and the goal is to visualize the quantum state. This requires exponential resources, so we advise to only view the state of small quantum systems. There are several functions for generating different types of visualization of a quantum state</p>
+<p>在多數情況下，您可能是爲了代碼除錯，會想看到量子計算機中的態。 我們假設你有這個量子態（無論是從模擬或是 state tomography 中得到），而我們希望將這量子態視覺化。這需要指數級的運算資源，因此我們建議只檢視小量子系統的狀態。有幾種不同的函數可用於實現量子態的視覺化</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>plot_state_city(quantum_state)
 plot_state_qsphere(quantum_state)
 plot_state_paulivec(quantum_state)
@@ -699,19 +699,19 @@ plot_state_hinton(quantum_state)
 plot_bloch_multivector(quantum_state)
 </pre></div>
 </div>
-<p>A quantum state is either a state matrix <span class="math notranslate nohighlight">\(\rho\)</span> (Hermitian matrix) or statevector <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> (complex vector). The state matrix is related to the statevector by</p>
+<p>量子態由一個狀態矩陣 <span class="math notranslate nohighlight">\(\rho\)</span> （Hermitian 矩陣）或狀態向量 <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> （複數向量）表示。狀態矩陣與狀態向量的關係是：</p>
 <div class="math notranslate nohighlight">
 \[\rho = |\psi\rangle\langle \psi|,\]</div>
-<p>and is more general as it can represent mixed states (positive sum of statevectors)</p>
+<p>另有可以代表混合狀態（狀態向量的正數和）的更一般的形式：</p>
 <div class="math notranslate nohighlight">
 \[\rho = \sum_k p_k |\psi_k\rangle\langle \psi_k |.\]</div>
-<p>The visualizations generated by the functions are:</p>
+<p>實現視覺化的函數有：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_city'</span></code>: The standard view for quantum states where the real and imaginary (imag) parts of the state matrix are plotted like a city.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_qsphere'</span></code>: The Qiskit unique view of a quantum state where the amplitude and phase of the state vector are plotted in a spherical ball. The amplitude is the thickness of the arrow and the phase is the color. For mixed states it will show different <code class="docutils literal notranslate"><span class="pre">'qsphere'</span></code> for each component.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_paulivec'</span></code>: The representation of the state matrix using Pauli operators as the basis <span class="math notranslate nohighlight">\(\rho=\sum_{q=0}^{d^2-1}p_jP_j/d\)</span>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_hinton'</span></code>: Same as <code class="docutils literal notranslate"><span class="pre">'city'</span></code> but where the size of the element represents the value of the matrix element.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">'plot_bloch_multivector'</span></code>: The projection of the quantum state onto the single qubit space and plotting on a bloch sphere.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_city'</span></code>：量子狀態的標準視圖，量子態矩陣的實部與虛部（imag）將繪製成像城市一樣。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_qsphere'</span></code>：Qiskit 獨特的量子態視圖。它將狀態向量的振幅和相位繪製在一個球體中。振幅由箭頭的厚度表示，而相位則是由顏色。對於混合狀態，它將對每個部分顯示不同的 <code class="docutils literal notranslate"><span class="pre">'qsphere'</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_paulivec'</span></code>：以 Pauli 運算子作爲基底表示的量子態矩陣 <span class="math notranslate nohighlight">\(\rho=\sum_{q=0}^{d^2-1}p_jP_j/d\)</span>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'plot_state_hinton'</span></code>：與 <code class="docutils literal notranslate"><span class="pre">'city'</span></code> 相同，但各部分面積的大小表示矩陣元素的值。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'plot_bloch_multivector'</span></code>：將量子狀態投影到單量子位元的空間，並繪製在 Bloch 球上。</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -821,15 +821,15 @@ plot_bloch_multivector(quantum_state)
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_17_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_17_0.png" />
 </div>
 </div>
-<p>Here we see that there is no information about the quantum state in the single qubit space as all vectors are zero.</p>
-<section id="Options-when-using-state-plotting-functions">
-<h3>Options when using state plotting functions<a class="headerlink" href="#Options-when-using-state-plotting-functions" title="本標題的永久連結">¶</a></h3>
-<p>The various functions for plotting quantum states provide a number of options to adjust how the plots are rendered. Which options are available depends on the function being used.</p>
-<p><strong>plot_state_city()</strong> options</p>
+<p>這裡我們看到，在單量子位元空間中沒有量子態的訊息，因為所有的向量都是零。</p>
+<section id="量子態繪圖函數的選項">
+<h3>量子態繪圖函數的選項<a class="headerlink" href="#量子態繪圖函數的選項" title="本標題的永久連結">¶</a></h3>
+<p>各種量子態繪圖函數提供了許多選項來調整繪圖的呈現方式。可用的選項取決於所使用的繪製函數。</p>
+<p><strong>plot_state_city()</strong> 選項</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
-<li><p><strong>color</strong> (list): a list of len=2 giving colors for real and imaginary components of matrix elements.</p></li>
+<li><p><strong>title</strong> (str)：表示繪圖標題的字串</p></li>
+<li><p><strong>figsize</strong> (tuple)：圖片尺寸（英吋）（寬度，高度）。</p></li>
+<li><p><strong>color</strong> (list)：len=2 表示矩陣元素的實部和虛部顏色的列表。</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
@@ -848,10 +848,10 @@ plot_bloch_multivector(quantum_state)
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_21_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_21_0.png" />
 </div>
 </div>
-<p><strong>plot_state_hinton()</strong> options</p>
+<p><strong>plot_state_hinton()</strong> 選項</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
+<li><p><strong>title</strong> (str)：表示繪圖標題的字串</p></li>
+<li><p><strong>figsize</strong> (tuple)：圖片尺寸（英吋）（寬度，高度）。</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
@@ -870,11 +870,11 @@ plot_bloch_multivector(quantum_state)
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_23_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_23_0.png" />
 </div>
 </div>
-<p><strong>plot_state_paulivec()</strong> options</p>
+<p><strong>plot_state_paulivec()</strong> 選項</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
-<li><p><strong>color</strong> (list or str): color of the expectation value bars.</p></li>
+<li><p><strong>title</strong> (str)：表示繪圖標題的字串</p></li>
+<li><p><strong>figsize</strong> (tuple)：圖片尺寸（英吋）（寬度，高度）。</p></li>
+<li><p><strong>color</strong> (list or str)：期望值長條的顏色。</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -893,14 +893,14 @@ plot_bloch_multivector(quantum_state)
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_25_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_25_0.png" />
 </div>
 </div>
-<p><strong>plot_state_qsphere()</strong> options</p>
+<p><strong>plot_state_qsphere()</strong> 選項</p>
 <ul class="simple">
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
+<li><p><strong>figsize</strong> (tuple)：圖片尺寸（英吋）（寬度，高度）。</p></li>
 </ul>
-<p><strong>plot_bloch_multivector()</strong> options</p>
+<p><strong>plot_bloch_multivector()</strong> 選項</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
+<li><p><strong>title</strong> (str)：表示繪圖標題的字串</p></li>
+<li><p><strong>figsize</strong> (tuple)：圖片尺寸（英吋）（寬度，高度）。</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
@@ -920,16 +920,16 @@ plot_bloch_multivector(quantum_state)
 </div>
 </div>
 </section>
-<section id="Using-the-output-from-state-plotting-functions">
-<h3>Using the output from state plotting functions<a class="headerlink" href="#Using-the-output-from-state-plotting-functions" title="本標題的永久連結">¶</a></h3>
+<section id="使用量子態繪圖函數的輸出">
+<h3>使用量子態繪圖函數的輸出<a class="headerlink" href="#使用量子態繪圖函數的輸出" title="本標題的永久連結">¶</a></h3>
 <p>When using any of the state plotting functions it returns a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> for the rendered visualization. Jupyter notebooks understand this return type and render it for us in this tutorial, but when running outside of Jupyter you do not have this feature automatically. However, the <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> class natively has methods to both display and save the visualization. You can call <code class="docutils literal notranslate"><span class="pre">.show()</span></code> on the returned object to open the image in a new window (assuming your configured
 matplotlib backend is interactive). Or alternatively you can call <code class="docutils literal notranslate"><span class="pre">.savefig('out.png')</span></code> to save the figure to <code class="docutils literal notranslate"><span class="pre">out.png</span></code> in the current working directory. The <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> method takes a path so you can adjust the location and filename where you’re saving the output.</p>
 </section>
 </section>
-<section id="Plot-Bloch-Vector">
-<h2>Plot Bloch Vector<a class="headerlink" href="#Plot-Bloch-Vector" title="本標題的永久連結">¶</a></h2>
-<p>A standard way of plotting a quantum system is using the Bloch vector. This only works for a single qubit and takes as input the Bloch vector.</p>
-<p>The Bloch vector is defined as <span class="math notranslate nohighlight">\([x = \mathrm{Tr}[X \rho], y = \mathrm{Tr}[Y \rho], z = \mathrm{Tr}[Z \rho]]\)</span>, where <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>, and <span class="math notranslate nohighlight">\(Z\)</span> are the Pauli operators for a single qubit and <span class="math notranslate nohighlight">\(\rho\)</span> is the state matrix.</p>
+<section id="繪製-Bloch-向量圖">
+<h2>繪製 Bloch 向量圖<a class="headerlink" href="#繪製-Bloch-向量圖" title="本標題的永久連結">¶</a></h2>
+<p>一個繪製量子系統的標準方法是使用 Bloch 向量。 這只適用於單一量子位元 ，並以 Bloch 向量作爲輸入。</p>
+<p>Bloch 向量的定義為 <span class="math notranslate nohighlight">\([x = \mathrm{Tr}[X \rho], y = \mathrm{Tr}[Y \rho], z = \mathrm{Tr}[Z \rho]]\)</span>，其中 <span class="math notranslate nohighlight">\(X\)</span>，<span class="math notranslate nohighlight">\(Y\)</span> 和 <span class="math notranslate nohighlight">\(Z\)</span> 是單量子位元的 Pauli 運算子，而 <span class="math notranslate nohighlight">\(\rho\)</span> 是量子態矩陣。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
@@ -956,11 +956,11 @@ matplotlib backend is interactive). Or alternatively you can call <code class="d
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_32_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_32_0.png" />
 </div>
 </div>
-<section id="Options-for-plot_bloch_vector()">
-<h3>Options for plot_bloch_vector()<a class="headerlink" href="#Options-for-plot_bloch_vector()" title="本標題的永久連結">¶</a></h3>
+<section id="plot_bloch_vector()-的選項">
+<h3>plot_bloch_vector() 的選項<a class="headerlink" href="#plot_bloch_vector()-的選項" title="本標題的永久連結">¶</a></h3>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): Figure size in inches (width, height).</p></li>
+<li><p><strong>title</strong> (str)：表示繪圖標題的字串</p></li>
+<li><p><strong>figsize</strong> (tuple)：圖片尺寸（英吋）（寬度，高度）。</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
@@ -980,8 +980,8 @@ matplotlib backend is interactive). Or alternatively you can call <code class="d
 </div>
 </div>
 </section>
-<section id="Adjusting-the-output-from-plot_bloch_vector()">
-<h3>Adjusting the output from plot_bloch_vector()<a class="headerlink" href="#Adjusting-the-output-from-plot_bloch_vector()" title="本標題的永久連結">¶</a></h3>
+<section id="調整-plot_bloch_vector()-的輸出">
+<h3>調整 plot_bloch_vector() 的輸出<a class="headerlink" href="#調整-plot_bloch_vector()-的輸出" title="本標題的永久連結">¶</a></h3>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">plot_bloch_vector</span></code> function it returns a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> for the rendered visualization. Jupyter notebooks understand this return type and render it for us in this tutorial, but when running outside of Jupyter you do not have this feature automatically. However, the <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> class natively has methods to both display and save the visualization. You can call <code class="docutils literal notranslate"><span class="pre">.show()</span></code> on the returned object to open the image in a new window (assuming your configured
 matplotlib backend is interactive). Or alternatively you can call <code class="docutils literal notranslate"><span class="pre">.savefig('out.png')</span></code> to save the figure to <code class="docutils literal notranslate"><span class="pre">out.png</span></code> in the current working directory. The <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> method takes a path so you can adjust the location and filename where you’re saving the output.</p>
 <div class="nbinput docutils container">
@@ -1039,7 +1039,7 @@ matplotlib backend is interactive). Or alternatively you can call <code class="d
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/10。
+      最後更新於 2021/08/12。
 
     </p>
   </div>
@@ -1059,19 +1059,19 @@ matplotlib backend is interactive). Or alternatively you can call <code class="d
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Qiskit 視覺化</a><ul>
-<li><a class="reference internal" href="#Plot-histogram">Plot histogram</a><ul>
-<li><a class="reference internal" href="#Options-when-plotting-a-histogram">Options when plotting a histogram</a></li>
-<li><a class="reference internal" href="#Using-the-output-from-plot_histogram()">Using the output from plot_histogram()</a></li>
+<li><a class="reference internal" href="#繪製直方圖">繪製直方圖</a><ul>
+<li><a class="reference internal" href="#繪製直方圖函數的可調參數">繪製直方圖函數的可調參數</a></li>
+<li><a class="reference internal" href="#使用-plot_histogram()-的輸出">使用 plot_histogram() 的輸出</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#繪製狀態">繪製狀態</a><ul>
-<li><a class="reference internal" href="#Options-when-using-state-plotting-functions">Options when using state plotting functions</a></li>
-<li><a class="reference internal" href="#Using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+<li><a class="reference internal" href="#量子態繪圖函數的選項">量子態繪圖函數的選項</a></li>
+<li><a class="reference internal" href="#使用量子態繪圖函數的輸出">使用量子態繪圖函數的輸出</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Plot-Bloch-Vector">Plot Bloch Vector</a><ul>
-<li><a class="reference internal" href="#Options-for-plot_bloch_vector()">Options for plot_bloch_vector()</a></li>
-<li><a class="reference internal" href="#Adjusting-the-output-from-plot_bloch_vector()">Adjusting the output from plot_bloch_vector()</a></li>
+<li><a class="reference internal" href="#繪製-Bloch-向量圖">繪製 Bloch 向量圖</a><ul>
+<li><a class="reference internal" href="#plot_bloch_vector()-的選項">plot_bloch_vector() 的選項</a></li>
+<li><a class="reference internal" href="#調整-plot_bloch_vector()-的輸出">調整 plot_bloch_vector() 的輸出</a></li>
 </ul>
 </li>
 </ul>

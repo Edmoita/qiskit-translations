@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Device backend noise model simulations &mdash; Qiskit 0.29.0 說明文件</title>
+  <title>裝置後端雜訊模型模擬 &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Device backend noise model simulations</li>
+      <li>裝置後端雜訊模型模擬</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -572,12 +572,12 @@ div.rendered_html tbody tr:hover {
 <p class="admonition-title">備註</p>
 <p>此頁面是從 <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/simulators/2_device_noise_simulation.ipynb">tutorials/simulators/2_device_noise_simulation.ipynb</a> 產生的。</p>
 </div>
-<section id="Device-backend-noise-model-simulations">
-<h1>Device backend noise model simulations<a class="headerlink" href="#Device-backend-noise-model-simulations" title="本標題的永久連結">¶</a></h1>
+<section id="裝置後端雜訊模型模擬">
+<h1>裝置後端雜訊模型模擬<a class="headerlink" href="#裝置後端雜訊模型模擬" title="本標題的永久連結">¶</a></h1>
 <section id="簡介">
 <h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
-<p>This notebook shows how to use the Qiskit Aer <code class="docutils literal notranslate"><span class="pre">noise</span></code> module to automatically generate a basic noise model for an IBMQ hardware device, and use this model to do noisy simulations of <code class="docutils literal notranslate"><span class="pre">QuantumCircuits</span></code> to study the effects of errors which occur on real devices.</p>
-<p>Note, that these automatic models are only an <em>approximation</em> of the real errors that occur on actual devices, due to the fact that they must be build from a limited set of input parameters related to <em>average error rates</em> on gates. The study of quantum errors on real devices is an active area of research and we discuss the Qiskit Aer tools for configuring more detailed noise models in another notebook.</p>
+<p>此筆記本說明如何使用 Qiskit Aer``noise`` 模組來為 IBMQ 硬體裝置自動生成雜訊模型，並用此模型來對 <code class="docutils literal notranslate"><span class="pre">QuantumCircuits</span></code> 進行具有雜訊的模擬，以研究真實裝置之誤差的影響。</p>
+<p>請注意，這些自動模型只是真實裝置之錯誤的 <a href="#id1"><span class="problematic" id="id2">*</span></a>近似值 * ，因為它們是用和平均錯誤率相關的有限組參數建置而成的。 真實裝置上的量子誤差研究是一個活躍的研究領域，我們會在另一個筆記本中討論 Qiskit Aer 中能用來建置更詳細的雜訊模型的工具。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -593,9 +593,9 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="裝置後端雜訊模型">
 <h2>裝置後端雜訊模型<a class="headerlink" href="#裝置後端雜訊模型" title="本標題的永久連結">¶</a></h2>
-<p>The <em>Qiskit Aer</em> device noise model automatically generates a simplified noise model for a real device. This model is generated using the calibration information reported in the <code class="docutils literal notranslate"><span class="pre">BackendProperties</span></code> of a device and takes into account</p>
+<p><em>Qiskit Aer</em> 裝置雜訊模型會自動為真實裝置生成簡化的雜訊模型。 此模型是使用在裝置的 <code class="docutils literal notranslate"><span class="pre">BackendProperties</span></code> 中報告的校正資訊所產生的，且此模型考慮到</p>
 <ul class="simple">
-<li><p>The <em>gate_error</em> probability of each basis gate on each qubit.</p></li>
+<li><p>每一個量子位元上的每個基底閘的*gatew_error* 機率。</p></li>
 <li><p>每一個量子位元上每一個基底閘的 <em>gate_length</em> 。</p></li>
 <li><p>各量子位元的 <span class="math notranslate nohighlight">\(T_1\)</span>，<span class="math notranslate nohighlight">\(T_2\)</span> 弛緩時間常數。</p></li>
 <li><p>每一個量子位元的讀出錯誤機率。</p></li>
@@ -660,19 +660,18 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>By storing the device properties in <code class="docutils literal notranslate"><span class="pre">vigo_simulator</span></code>, we ensure that the appropriate basis gates and coupling map are used when compiling circuits for simulation, thereby most closely mimicking the gates that will be executed on a real device. In addition <code class="docutils literal notranslate"><span class="pre">vigo_simulator</span></code> contains an approximate noise model consisting of:</p>
+<p>通過在 <code class="docutils literal notranslate"><span class="pre">vigo_simulator</span></code> 中儲存裝置的特性，我們可以確保在編譯用於模擬的電路時，我們使用的基底閘和耦合映射是適當的，從而最仿真地模擬將在真實裝置上執行的閘。此外 <code class="docutils literal notranslate"><span class="pre">vigo_simulator</span></code> 包含一個近似雜訊模型，此模型由以下三者構成：</p>
 <ul class="simple">
-<li><p><strong>Single-qubit gate errors</strong> consisting of a single qubit depolarizing error followed by a single qubit thermal relaxation error.</p></li>
-<li><p><strong>Two-qubit gate errors</strong> consisting of a two-qubit depolarizing error followed by single-qubit thermal relaxation errors on both qubits in the gate.</p></li>
-<li><p><strong>Single-qubit readout errors</strong> on the classical bit value obtained from measurements on individual qubits.</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">**</span></a>單量子位元閘誤差 ** 由單量子位元的去極化誤差和接續的單量子位元的熱弛緩誤差所組成。</p></li>
+<li><p><strong>雙量子位元閘誤差</strong> 由一個雙量子位元去極化誤差，和接續發生在兩個量子位元上的閘中單量子位元熱弛緩誤差組成。</p></li>
+<li><p>個別量子位元測量所獲得的古典位元數值的**單量子位元讀出誤差**。</p></li>
 </ul>
-<p>For the gate errors the error parameter of the thermal relaxation errors is derived using the <code class="docutils literal notranslate"><span class="pre">thermal_relaxation_error</span></code> function from <code class="docutils literal notranslate"><span class="pre">aer.noise.errors</span></code> module, along with the individual qubit <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> parameters, and the <code class="docutils literal notranslate"><span class="pre">gate_time</span></code> parameter from the device backend properties. The probability of the depolarizing error is then set so that the combined average gate infidelity from the depolarizing error followed by the thermal relaxation is equal to the <code class="docutils literal notranslate"><span class="pre">gate_error</span></code>
-value from the backend properties.</p>
-<p>For the readout errors the probability that the recorded classical bit value will be flipped from the true outcome after a measurement is given by the qubit <code class="docutils literal notranslate"><span class="pre">readout_errors</span></code>.</p>
-<section id="Running-a-noise-simulation">
-<h3>Running a noise simulation<a class="headerlink" href="#Running-a-noise-simulation" title="本標題的永久連結">¶</a></h3>
-<p>Once we have created a noisy simulator backend based on a real device we can use it to run noisy simulations.</p>
-<p><strong>Important:</strong> When running noisy simulations it is <em>critical</em> to <code class="docutils literal notranslate"><span class="pre">transpile</span></code> the circuit for the backend so that the circuit is transpiled to the correct noisy basis gate set for the backend.</p>
+<p>對於閘的誤差，通過使用來自 <code class="docutils literal notranslate"><span class="pre">aer.noise.errors</span></code> 模組中的 <code class="docutils literal notranslate"><span class="pre">thermal_relaxation_error</span></code> 函數以及其個別的量子位元 <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> 參數，以及來自裝置後端特性的 <code class="docutils literal notranslate"><span class="pre">gate_time</span></code> 參數，我們可以推導出該熱弛緩的誤差參數。接著，我們可以設定去極化誤差的機率，使得來自去極化誤差和接續的熱弛緩的加總平均閘不保真度(combined average gate infidelity) 等同於來自其後端特性的 <code class="docutils literal notranslate"><span class="pre">gate_error</span></code> 值。</p>
+<p>至於讀出誤差，量子位元的``readout_errors`` 會告訴我們測量之後得到的古典位元值，有多大的機率會翻轉成和真實結果相反。</p>
+<section id="執行雜訊模擬">
+<h3>執行雜訊模擬<a class="headerlink" href="#執行雜訊模擬" title="本標題的永久連結">¶</a></h3>
+<p>一旦我們基於真實的裝置建立了具有雜訊的模擬器後端，我們就可以使用它來執行具有雜訊的模擬。</p>
+<p><strong>重要:</strong> 執行具有雜訊的模擬時，幫後端」轉譯」電路*非常重要*。電路必須被轉譯為該後端可以執行的基底閘的集合。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -697,7 +696,7 @@ value from the backend properties.</p>
 <img alt="../../_images/tutorials_simulators_2_device_noise_simulation_11_0.png" src="../../_images/tutorials_simulators_2_device_noise_simulation_11_0.png" />
 </div>
 </div>
-<p>If transpilation is skipped noise from the device noise model will not be applied to gates in the circuit that are supported by the simulator, but not supported by the mimicked backend.</p>
+<p>如果轉譯被跳過，來自裝置雜訊模型的雜訊將不會被套用於在此電路中的閘。此電路被該模擬器支援，但並不被仿真後端支援。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -751,7 +750,7 @@ value from the backend properties.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/10。
+      最後更新於 2021/08/12。
 
     </p>
   </div>
@@ -770,7 +769,7 @@ value from the backend properties.</p>
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Device backend noise model simulations</a><ul>
+<li><a class="reference internal" href="#">裝置後端雜訊模型模擬</a><ul>
 <li><a class="reference internal" href="#簡介">簡介</a></li>
 <li><a class="reference internal" href="#裝置後端雜訊模型">裝置後端雜訊模型</a><ul>
 <li><a class="reference internal" href="#Terra-模擬後端">Terra 模擬後端</a></li>
@@ -778,7 +777,7 @@ value from the backend properties.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#產生一個模擬真實器件的模擬器">產生一個模擬真實器件的模擬器</a><ul>
-<li><a class="reference internal" href="#Running-a-noise-simulation">Running a noise simulation</a></li>
+<li><a class="reference internal" href="#執行雜訊模擬">執行雜訊模擬</a></li>
 </ul>
 </li>
 </ul>

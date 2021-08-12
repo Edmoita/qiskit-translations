@@ -574,7 +574,8 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="基本電路">
 <h1>基本電路<a class="headerlink" href="#基本電路" title="本標題的永久連結">¶</a></h1>
-<p>在這裡，我們提供使用 Qiskit 的概述。Qiskit 提供了程式量子計算機所需的基本構建塊。Qiskit 的基本單位是 <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">量子電路</a>。使用 Qiskit 的基本工作流程由兩個階段組成： <strong>Build</strong> 和 <strong>Run</strong>。<strong>Build</strong> 可讓您製作不同的量子電路，代表您正在解決的問題，<a href="#id1"><span class="problematic" id="id2">**</span></a>Run**可讓您在不同的後端執行它們。在執行工作之後，根據想要的輸出，您可以收集訊息並進行後續的處理。</p>
+<p>Here, we provide an overview of working with Qiskit. Qiskit provides the basic building blocks necessary to program quantum computers. The fundamental unit of Qiskit is the <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_circuit">quantum circuit</a>. A basic workflow using Qiskit consists of two stages: <strong>Build</strong> and <strong>Run</strong>. <strong>Build</strong> allows you to make different quantum circuits that represent the problem you are solving, and <strong>Run</strong> that allows you to run them on different backends. After the jobs
+have been run, the data is collected and postprocessed depending on the desired output.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -587,8 +588,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<section id="電路建立">
-<h2>電路建立<a class="headerlink" href="#電路建立" title="本標題的永久連結">¶</a></h2>
+<section id="Building-the-circuit">
+<h2>Building the circuit<a class="headerlink" href="#Building-the-circuit" title="本標題的永久連結">¶</a></h2>
 <p>您的第一個程式所需的基本元素是 QuantumCircuit。首先，我們建立一個由三個位元組成的 <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -605,7 +606,7 @@ div.rendered_html tbody tr:hover {
 \[|\psi\rangle = \left(|00\rangle+|11\rangle\right)/\sqrt{2}.\]</div>
 <p>To create such a state, we start with a three-qubit quantum register. By default, each qubit in the register is initialized to <span class="math notranslate nohighlight">\(|0\rangle\)</span>. To make the GHZ state, we apply the following gates: - A Hadamard gate <span class="math notranslate nohighlight">\(H\)</span> on qubit 0, which puts it into the superposition state <span class="math notranslate nohighlight">\(\left(|0\rangle+|1\rangle\right)/\sqrt{2}\)</span>. - A controlled-Not operation (<span class="math notranslate nohighlight">\(C_{X}\)</span>) between qubit 0 and qubit 1. - A controlled-Not operation between qubit 0 and qubit 2.</p>
 <p>On an ideal quantum computer, the state produced by running this circuit would be the GHZ state above.</p>
-<p>在 Qiskit 中，多個操作可以被依次增加到電路中，如下所示。</p>
+<p>In Qiskit, operations can be added to the circuit one by one, as shown below.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -651,8 +652,8 @@ div.rendered_html tbody tr:hover {
 <div class="output_area docutils container">
 <img alt="../../_images/tutorials_circuits_01_circuit_basics_7_0.svg" src="../../_images/tutorials_circuits_01_circuit_basics_7_0.svg" /></div>
 </div>
-<p>在此電路中，量子位元是照順序排列的，qubit 0 在頂端，而 qubit 2在底端。電路是由左至右讀取（表示在電路中較早應用的閘會顯示在左側）。</p>
-<div class="alert alert-block alert-info"><p>在表示多量子位元系統的狀態時，Qiskit 中使用的張量順序與大多數物理教科書中所使用的不同。假設有 <span class="math notranslate nohighlight">\(n\)</span> 個量子元位，其中第 <span class="math notranslate nohighlight">\(j\)</span> 個被標記為 <span class="math notranslate nohighlight">\(Q_{j}\)</span>。Qiskit 使用的順序是第 <span class="math notranslate nohighlight">\(n\)</span> 個 qubit 放在張量積的最左邊，所以基底向量被標記為 <span class="math notranslate nohighlight">\(Q_{n-1}\otimes \cdots \otimes Q_1\otimes Q_0\)</span>。</p>
+<p>In this circuit, the qubits are put in order, with qubit zero at the top and qubit two at the bottom. The circuit is read left to right (meaning that gates that are applied earlier in the circuit show up further to the left).</p>
+<div class="alert alert-block alert-info"><p>When representing the state of a multi-qubit system, the tensor order used in Qiskit is different than that used in most physics textbooks. Suppose there are <span class="math notranslate nohighlight">\(n\)</span> qubits, and qubit <span class="math notranslate nohighlight">\(j\)</span> is labeled as <span class="math notranslate nohighlight">\(Q_{j}\)</span>. Qiskit uses an ordering in which the <span class="math notranslate nohighlight">\(n^{\mathrm{th}}\)</span> qubit is on the left side of the tensor product, so that the basis vectors are labeled as <span class="math notranslate nohighlight">\(Q_{n-1}\otimes \cdots \otimes Q_1\otimes Q_0\)</span>.</p>
 <p>For example, if qubit zero is in state 0, qubit 1 is in state 0, and qubit 2 is in state 1, Qiskit would represent this state as <span class="math notranslate nohighlight">\(|100\rangle\)</span>, whereas many physics textbooks would represent it as <span class="math notranslate nohighlight">\(|001\rangle\)</span>.</p>
 <p>This difference in labeling affects the way multi-qubit operations are represented as matrices. For example, Qiskit represents a controlled-X (<span class="math notranslate nohighlight">\(C_{X}\)</span>) operation with qubit 0 being the control and qubit 1 being the target as</p>
 <div class="math notranslate nohighlight">
@@ -718,7 +719,7 @@ $$
  \end{bmatrix}
 $$</div></div>
 </div>
-<p>Qiskit 還提供了視覺化工具盒，讓您檢視狀態。</p>
+<p>Qiskit also provides a visualization toolbox to allow you to view the state.</p>
 <p>Below, we use the visualization function to plot the qsphere and a hinton representing the real and imaginary components of the state density matrix <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -956,7 +957,7 @@ array([[ 0.70710678+0.j,  0.70710678+0.j,  0.        +0.j,
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/10。
+      最後更新於 2021/08/12。
 
     </p>
   </div>
@@ -976,7 +977,7 @@ array([[ 0.70710678+0.j,  0.70710678+0.j,  0.        +0.j,
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">基本電路</a><ul>
-<li><a class="reference internal" href="#電路建立">電路建立</a></li>
+<li><a class="reference internal" href="#Building-the-circuit">Building the circuit</a></li>
 <li><a class="reference internal" href="#電路視覺化">電路視覺化</a></li>
 <li><a class="reference internal" href="#電路模擬">電路模擬</a></li>
 <li><a class="reference internal" href="#電路的么正表示">電路的么正表示</a></li>

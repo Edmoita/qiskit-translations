@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Operator Flow &mdash; Qiskit 0.29.0 說明文件</title>
+  <title>運算子流程 &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Operator Flow</li>
+      <li>運算子流程</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -572,14 +572,14 @@ div.rendered_html tbody tr:hover {
 <p class="admonition-title">備註</p>
 <p>此頁面是從 <a href="#id1"><span class="problematic" id="id2">`</span></a>tutorials/operators/01_operator_flow.ipynb`__所產生的。</p>
 </div>
-<section id="Operator-Flow">
-<h1>Operator Flow<a class="headerlink" href="#Operator-Flow" title="本標題的永久連結">¶</a></h1>
-<section id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="本標題的永久連結">¶</a></h2>
-<p>Qiskit provides classes representing states and operators and sums, tensor products, and compositions thereof. These algebraic constructs allow us to build expressions representing operators.</p>
-<p>We introduce expressions by building them from Pauli operators. In subsequent sections we explore in more detail operators and states, how they are represented, and what we can do with them. In the last section we construct a state, evolve it with a Hamiltonian, and compute expectation values of an observable.</p>
-<section id="Pauli-operators,-sums,-compositions,-and-tensor-products">
-<h3>Pauli operators, sums, compositions, and tensor products<a class="headerlink" href="#Pauli-operators,-sums,-compositions,-and-tensor-products" title="本標題的永久連結">¶</a></h3>
+<section id="運算子流程">
+<h1>運算子流程<a class="headerlink" href="#運算子流程" title="本標題的永久連結">¶</a></h1>
+<section id="簡介">
+<h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
+<p>Qiskit 提供代表狀態、運算元、總和、張量積的類別。 這些代數建構讓我們可以建立表示運算子的表示式。</p>
+<p>我們透過將表示式從 Pauli 運算子建置，來引入表示式。 在接下來的章節中，我們會在更詳細的運算子和狀態中探索它們的代表方式，以及我們可以用它們來做什麼。 在最後一節中，我們建構一個狀態，並以 Hamiltonian 演化，並計算可觀察值的期望值。</p>
+<section id="Pauli-運算子、總和、組合及張量積">
+<h3>Pauli 運算子、總和、組合及張量積<a class="headerlink" href="#Pauli-運算子、總和、組合及張量積" title="本標題的永久連結">¶</a></h3>
 <p>最重要的基本運算子是 Pauli 運算子。 Pauli 運算子的代表方式是這樣。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -696,7 +696,7 @@ iI
 + 1j * X
 </pre></div></div>
 </div>
-<p>And tensoring two sums gives</p>
+<p>對兩個和作張量積我們得到</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -780,8 +780,8 @@ PauliOp(Pauli(&#39;XYZ&#39;), coeff=2.0)
 <p>In the following we take a broader and deeper look at Qiskit’s operators, states, and the building blocks of quantum algorithms.</p>
 </section>
 </section>
-<section id="Part-I:-State-Functions-and-Measurements">
-<h2>Part I: State Functions and Measurements<a class="headerlink" href="#Part-I:-State-Functions-and-Measurements" title="本標題的永久連結">¶</a></h2>
+<section id="第一部分：狀態函數和測量">
+<h2>第一部分：狀態函數和測量<a class="headerlink" href="#第一部分：狀態函數和測量" title="本標題的永久連結">¶</a></h2>
 <p>Quantum states are represented by subclasses of the class <code class="docutils literal notranslate"><span class="pre">StateFn</span></code>. There are four representations of quantum states: <code class="docutils literal notranslate"><span class="pre">DictStateFn</span></code> is a sparse representation in the computational basis, backed by a <code class="docutils literal notranslate"><span class="pre">dict</span></code>. <code class="docutils literal notranslate"><span class="pre">VectorStateFn</span></code> is a dense representation in the computational basis backed by a numpy array. <code class="docutils literal notranslate"><span class="pre">CircuitStateFn</span></code> is backed by a circuit and represents the state obtained by executing the circuit on the all-zero computational-basis state. <code class="docutils literal notranslate"><span class="pre">OperatorStateFn</span></code> represents mixed states
 via a density matrix. (As we will see later, <code class="docutils literal notranslate"><span class="pre">OperatorStateFn</span></code> is also used to represent observables.)</p>
 <p>Several <code class="docutils literal notranslate"><span class="pre">StateFn</span></code> instances are provided for convenience. For example <code class="docutils literal notranslate"><span class="pre">Zero,</span> <span class="pre">One,</span> <span class="pre">Plus,</span> <span class="pre">Minus</span></code>.</p>
@@ -866,7 +866,7 @@ q_0: ┤ X ├┤ H ├
 </pre></div></div>
 </div>
 <p>The dual vector of a quantum state, that is the <em>bra</em> corresponding to a <em>ket</em> is obtained via the <code class="docutils literal notranslate"><span class="pre">adjoint</span></code> method. The <code class="docutils literal notranslate"><span class="pre">StateFn</span></code> carries a flag <code class="docutils literal notranslate"><span class="pre">is_measurement</span></code>, which is <code class="docutils literal notranslate"><span class="pre">False</span></code> if the object is a ket and <code class="docutils literal notranslate"><span class="pre">True</span></code> if it is a bra.</p>
-<p>Here, we construct <span class="math notranslate nohighlight">\(\langle 1 |\)</span>.</p>
+<p>在這裡，我們建構 <span class="math notranslate nohighlight">\(\langle 1 |\)</span>。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -909,7 +909,7 @@ DictStateFn({&#39;1&#39;: 1}, coeff=1.0, is_measurement=True)
 <p>Many algebraic operations and predicates between <code class="docutils literal notranslate"><span class="pre">StateFn</span></code>s are supported, including: * <code class="docutils literal notranslate"><span class="pre">+</span></code> - addition * <code class="docutils literal notranslate"><span class="pre">-</span></code> - subtraction, negation (scalar multiplication by -1) * <code class="docutils literal notranslate"><span class="pre">*</span></code> - scalar multiplication * <code class="docutils literal notranslate"><span class="pre">/</span></code> - scalar division * <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> - composition * <code class="docutils literal notranslate"><span class="pre">^</span></code> - tensor product or tensor power (tensor with self n times) * <code class="docutils literal notranslate"><span class="pre">**</span></code> - composition power (compose with self n times) * <code class="docutils literal notranslate"><span class="pre">==</span></code> - equality * <code class="docutils literal notranslate"><span class="pre">~</span></code> - adjoint, alternating between a State Function and Measurement</p>
 <p>Be aware that parentheses are often necessary to override <strong>operator precedence</strong>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">StateFn</span></code>s carry a coefficient. This allows us multiply states by a scalar, and so to construct sums.</p>
-<p>Here, we construct <span class="math notranslate nohighlight">\((2 + 3i)|0\rangle\)</span>.</p>
+<p>在這裡，我們建構 <span class="math notranslate nohighlight">\(（2 + 3i）|0\r角\)</span>。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1268,8 +1268,8 @@ q_1: ┤ RY(θ[1]) ├┤ X ├┤ RY(θ[3]) ├┤ X ├┤ RY(θ[5]) ├┤ X 
 </div>
 </section>
 </section>
-<section id="Part-II:-PrimitiveOps">
-<h2>Part II: <code class="docutils literal notranslate"><span class="pre">PrimitiveOp</span></code>s<a class="headerlink" href="#Part-II:-PrimitiveOps" title="本標題的永久連結">¶</a></h2>
+<section id="第二部分：-``PrimitiveOp``s">
+<h2>第二部分： <a href="#id1"><span class="problematic" id="id2">``</span></a>PrimitiveOp``s<a class="headerlink" href="#第二部分：-``PrimitiveOp``s" title="本標題的永久連結">¶</a></h2>
 <p>The basic Operators are subclasses of <code class="docutils literal notranslate"><span class="pre">PrimitiveOp</span></code>. Just like <code class="docutils literal notranslate"><span class="pre">StateFn</span></code>, <code class="docutils literal notranslate"><span class="pre">PrimitiveOp</span></code> is also a factory for creating the correct type of <code class="docutils literal notranslate"><span class="pre">PrimitiveOp</span></code> for a given primitive. Currently, the following primitives can be passed into the constructor, listed alongside the <code class="docutils literal notranslate"><span class="pre">PrimitiveOp</span></code> subclass they produce:</p>
 <ul class="simple">
 <li><p>Terra’s Pauli -&gt; PauliOp</p></li>
@@ -2260,7 +2260,7 @@ ComposedOp([
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/10。
+      最後更新於 2021/08/12。
 
     </p>
   </div>
@@ -2279,16 +2279,16 @@ ComposedOp([
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Operator Flow</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#Pauli-operators,-sums,-compositions,-and-tensor-products">Pauli operators, sums, compositions, and tensor products</a></li>
+<li><a class="reference internal" href="#">運算子流程</a><ul>
+<li><a class="reference internal" href="#簡介">簡介</a><ul>
+<li><a class="reference internal" href="#Pauli-運算子、總和、組合及張量積">Pauli 運算子、總和、組合及張量積</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Part-I:-State-Functions-and-Measurements">Part I: State Functions and Measurements</a><ul>
+<li><a class="reference internal" href="#第一部分：狀態函數和測量">第一部分：狀態函數和測量</a><ul>
 <li><a class="reference internal" href="#Algebraic-operations-and-predicates">Algebraic operations and predicates</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Part-II:-PrimitiveOps">Part II: <code class="docutils literal notranslate"><span class="pre">PrimitiveOp</span></code>s</a><ul>
+<li><a class="reference internal" href="#第二部分：-``PrimitiveOp``s">第二部分： ``PrimitiveOp``s</a><ul>
 <li><a class="reference internal" href="#Matrix-elements">Matrix elements</a></li>
 <li><a class="reference internal" href="#Applying-an-operator-to-a-state-vector">Applying an operator to a state vector</a></li>
 </ul>

@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Advanced Circuits &mdash; Qiskit 0.29.0 說明文件</title>
+  <title>進階電路 &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -290,7 +290,7 @@
       </li>
 
         
-      <li>Advanced Circuits</li>
+      <li>進階電路</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -572,8 +572,8 @@ div.rendered_html tbody tr:hover {
 <p class="admonition-title">備註</p>
 <p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits_advanced/01_advanced_circuits.ipynb">tutorials/circuits_advanced/01_advanced_circuits.ipynb</a>.</p>
 </div>
-<section id="Advanced-Circuits">
-<h1>Advanced Circuits<a class="headerlink" href="#Advanced-Circuits" title="本標題的永久連結">¶</a></h1>
+<section id="進階電路">
+<h1>進階電路<a class="headerlink" href="#進階電路" title="本標題的永久連結">¶</a></h1>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -693,8 +693,8 @@ q_2: ────────────────┤ X ├─────┤
                      └───┘     └───────┘ ░     └───┘    </pre></div>
 </div>
 </section>
-<section id="參數化電路(Parameterized-circuits)">
-<h2>參數化電路(Parameterized circuits)<a class="headerlink" href="#參數化電路(Parameterized-circuits)" title="本標題的永久連結">¶</a></h2>
+<section id="參數化電路">
+<h2>參數化電路<a class="headerlink" href="#參數化電路" title="本標題的永久連結">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -800,7 +800,7 @@ c: 1/═════════════════════════
 </pre></div>
 </div>
 </div>
-<p>在範例電路中，我們把全域 <span class="math notranslate nohighlight">\(R_z(\theta)\)</span> 旋轉作用在 5 量子位元的糾纏態上，我們預期在 <span class="math notranslate nohighlight">\(5\theta\)</span> 處看到 qubit-0 的振盪。</p>
+<p>In the example circuit, we apply a global <span class="math notranslate nohighlight">\(R_z(\theta)\)</span> rotation on a five-qubit entangled state, and so expect to see oscillation in qubit-0 at <span class="math notranslate nohighlight">\(5\theta\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -968,7 +968,8 @@ q_3: ┤1           ├──────────────
      └────────────┘
 </pre></div></div>
 </div>
-<p>To insert a subcircuit under a different parameterization, the <code class="docutils literal notranslate"><span class="pre">to_instruction</span></code> method accepts an optional argument (<code class="docutils literal notranslate"><span class="pre">parameter_map</span></code>) which, when present, will generate instructions with the source parameter replaced by a new parameter.</p>
+<p>為了在不同的參數化下插入子電路，<code class="docutils literal notranslate"><span class="pre">to_instruction</span></code> 方法接受一個可選參數（<code class="docutils literal notranslate"><span class="pre">parameter_map</span></code>），
+該參數在存在時將生成指令，源參數將被新參數替換。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -1095,7 +1096,7 @@ q24_8: ────────────────────────�
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/10。
+      最後更新於 2021/08/12。
 
     </p>
   </div>
@@ -1114,10 +1115,10 @@ q24_8: ────────────────────────�
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Advanced Circuits</a><ul>
+<li><a class="reference internal" href="#">進階電路</a><ul>
 <li><a class="reference internal" href="#Opaque-gates">Opaque gates</a></li>
 <li><a class="reference internal" href="#複合閘">複合閘</a></li>
-<li><a class="reference internal" href="#參數化電路(Parameterized-circuits)">參數化電路(Parameterized circuits)</a><ul>
+<li><a class="reference internal" href="#參數化電路">參數化電路</a><ul>
 <li><a class="reference internal" href="#綁定參數值">綁定參數值</a></li>
 <li><a class="reference internal" href="#降低編譯成本">降低編譯成本</a></li>
 <li><a class="reference internal" href="#Composition">Composition</a></li>
