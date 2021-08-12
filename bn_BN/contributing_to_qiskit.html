@@ -532,29 +532,20 @@ stable patch.</p>
 that apply to the stable release too and may be suitable for
 backporting once a fix lands in master. Once the backport has been
 proposed, the tag should be removed.</p>
-<p>Include <code class="docutils literal notranslate"><span class="pre">[Stable]</span></code> in the title of the PR against the stable branch,
-as a sign that setting the target branch as stable was not
-a mistake. Also, reference to the PR number in master that you are
-porting.</p>
+<p>স্টেবল শাখায় পুল রিকোয়েস্টের শিরোনামে <code class="docutils literal notranslate"><span class="pre">[Stable]</span></code> যুক্ত করবেন, যাতে বোঝা যায় যে টারগেট শাখাকে স্টেবল হিসেবে চিহ্নিত করা ভুল হয়নি। এবং ব্যাকপোর্ট করা পুল রিকোয়েস্টের নম্বর মাস্টার (প্রধান) শাখায় রেফারেন্স হিসেবে দিতে হবে।</p>
 </section>
 </section>
 </section>
 <section id="contributing-to-documentation">
-<h2>Contributing to Documentation<a class="headerlink" href="#contributing-to-documentation" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
+<h2>ডকুমেন্টেশনে কন্ট্রিবিউট করা<a class="headerlink" href="#contributing-to-documentation" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
 <p>Qiskit documentation is shaped by the <a class="reference external" href="https://www.writethedocs.org/guide/docs-as-code/">docs as code</a> philosophy, primarily
 drawn from Qiskit code comments in the <a class="reference external" href="https://alistapart.com/article/the-ten-essentials-for-good-api-documentation/">style of API documentation</a>.</p>
-<p>The documentation is built from the master branch of <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> using <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a>. The majority of documentation, under
-<a class="reference external" href="https://qiskit.org/documentation/apidoc/qiskit.html">API Reference</a>, is
-drawn from code comments in the repositories listed in <a class="reference internal" href="#where-things-are"><span class="std std-ref">সূচিপত্র</span></a>.</p>
+<p>এই ডকুমেন্টেশনটি মাস্টার ব্রাঞ্চ এর <a class="reference external" href="https://github.com/Qiskit/qiskit/tree/master/docs">Qiskit/qiskit/docs</a> এর সঙ্গে <a class="reference external" href="http://www.sphinx-doc.org/en/master/">Sphinx</a> ব্যবহার করে তৈরী করা হয়েছে। এর বেশিরভাগ <a class="reference external" href="https://qiskit.org/documentation/apidoc/qiskit.html">API Reference</a> এর মধ্যে, <a class="reference internal" href="#where-things-are"><span class="std std-ref">সূচিপত্র</span></a> এর কোড কমেন্ট রিপোসিটোরি থেকে নেয়া হয়েছে।</p>
 <section id="documentation-structure">
-<h3>Documentation Structure<a class="headerlink" href="#documentation-structure" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The way documentation is structured in Qiskit is to push as much of the actual
-documentation into the docstrings as possible. This makes it easier for
-additions and corrections to be made during development, because the majority
-of the documentation lives near the code being changed. There are three levels in
-the normal documentation structure in Terra:</p>
+<h3>ডকুমেন্টেশন কাঠামো<a class="headerlink" href="#documentation-structure" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>Qiskit এর বিবরণী (ডকুমেন্টেশন) গঠন করার সময় যতটা সম্ভব প্রকৃত বিবরনীগুলো ডকস্ট্রিং এ রাখা হয়েছে। এর ফলে ডেভেলাপমেন্টের সময় সংযোজন ও সংশোধন সহজতর হয়েছে কারণ বেশিরভাগ বিবরণী কোডের সাথে অবস্থান করে। টেরায় সাধারণত তিন ধাপে বিবরণী (ডকুমেন্টেশন) গঠিতঃ</p>
 <dl>
-<dt>The <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files in the <code class="docutils literal notranslate"><span class="pre">docs/apidocs</span></code></dt><dd><p>These files are used to tell Sphinx which modules to include in the rendered
+<dt><code class="docutils literal notranslate"><span class="pre">docs/apidocs</span></code> এর মধ্যে <code class="docutils literal notranslate"><span class="pre">.rst</span></code> ফাইলসমূহ</dt><dd><p>These files are used to tell Sphinx which modules to include in the rendered
 documentation. This contains two pieces of information:
 an <a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#reference-names">internal reference</a>
 or <a class="reference external" href="https://www.sphinx-doc.org/en/latest/usage/restructuredtext/roles.html#ref-role">cross reference</a>
@@ -572,30 +563,10 @@ file contains:</p>
    <span class="p">:</span><span class="n">no</span><span class="o">-</span><span class="n">special</span><span class="o">-</span><span class="n">members</span><span class="p">:</span>
 </pre></div>
 </div>
-<p>The only <code class="docutils literal notranslate"><span class="pre">.rst</span></code> file outside of this is <code class="docutils literal notranslate"><span class="pre">qiskit.rst</span></code>, which contains the table of
-contents. If you're adding a new <code class="docutils literal notranslate"><span class="pre">.rst</span></code> file for a new module's documentation, make
-sure to add it to the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#table-of-contents">toctree</a>
-in that file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">qiskit.rst</span></code> এর বাইরে একমাত্র <code class="docutils literal notranslate"><span class="pre">.rst</span></code> ফাইলটি সূচিপত্র নির্দেশ করে। যদি আপনি কোনো মডিউলের বিবরণী তৈরির সময় একটি নতুন <code class="docutils literal notranslate"><span class="pre">.rst</span></code> ফাইল তৈরি করেন, তাহলে সেটি ওই ফাইলের <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#table-of-contents">toctree</a> তে যোগ করবেন।</p>
 </dd>
-<dt>The module-level docstring</dt><dd><p>This docstring is at the module
-level for the module specified in the <code class="docutils literal notranslate"><span class="pre">automodule</span></code> directive in the rst file.
-If the module specified is a directory/namespace, the docstring should be
-specified in the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file for that directory. This module-level
-docstring contains more details about the module being documented.
-The normal structure to this docstring is to outline all the classes and
-functions of the public API that are contained in that module. This is typically
-done using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html">autosummary directive</a>
-(or <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">autodoc directives</a>
-directly if the module is simple, such as in the case of <code class="docutils literal notranslate"><span class="pre">qiskit.execute</span></code>). The
-autosummary directive is used to autodoc a list of different Python elements
-(classes, functions, etc.) directly without having to manually call out the
-autodoc directives for each one. The module-level docstring is where to
-provide a high-level overview of what functionality the module provides.
-This is normally done by grouping the different
-components of the public API together into multiple subsections.</p>
-<p>For example, as in the previous dagcircuit module example, the
-contents of the module docstring for <code class="docutils literal notranslate"><span class="pre">qiskit/dagcircuit/__init__.py</span></code> would
-be:</p>
+<dt>মডিউল-লেভেল ডকস্ট্রিং</dt><dd><p>এই ডকস্ট্রিংটি আরএসটি (rst) ফাইলের <code class="docutils literal notranslate"><span class="pre">automodule</span></code> এর মডিউল লেভেলে আছে। যদি মডিউলটি কোনো ডিরেক্টরি/নেমস্পেসে নির্দিষ্ট করা থাকে তবে ডকস্ট্রিংটি ওই ডিরেক্টরির <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> ফাইলে থাকবে। এই মডিউল-লেভেল ডকস্ট্রিং এ মডিউলের বিবরণী (ডকুমেন্টেশন) সম্পর্কিত বিশদ বিবরণ থাকে। মডিউলের সব পাবলিক এপিআই (API) এর ক্লাস এবং ফাংশনগুলোর বিবরণ এই ডকস্ট্রিং এ থাকে। এটা সাধারণত <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/autosummary.html">autosummary directive</a> (অথবা যদি সাধারণ মডিউল হয়, যেমন <code class="docutils literal notranslate"><span class="pre">qiskit.execute</span></code> এর ক্ষেত্রে সরাসরি <a class="reference external" href="http://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">autodoc directives</a> ) এ করা হয়ে থাকে। অটোসামারি ডিরেক্টিভে বিভিন্ন Python (পাইথন) উপাদান যেমন ক্লাস, ফাংশন ইত্যাদির একটি তালিকা (লিস্ট) থাকে যাতে ম্যানুয়ালি প্রত্যেকটি আলাদাভাবে লিখতে না হয়। কোনো মডিউল কী কাজ করে সে সংক্রান্ত বিবরণ মডিউল-লেভেল ডকস্ট্রিং এ থাকে। এটা সাধারণত পাবলিক এপিআই (API) এর বিভিন্ন অংশ একত্রীত করে কয়েকটি উপ শাখায় বিভক্ত করে করা হয়।</p>
+<p>উদাহরণস্বরূপ, ড্যাগসার্কিট (dagcircuit) মডিউলের মত, <code class="docutils literal notranslate"><span class="pre">qiskit/dagcircuit/__init__.py</span></code> মডিউলের বিষয়বস্তুর ডকস্ট্রিং হবেঃ</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">=======================================</span>
 <span class="sd">DAG Circuits (:mod:`qiskit.dagcircuit`)</span>
@@ -617,11 +588,10 @@ be:</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">নোট</p>
-<p>This is just an example and the actual module docstring for the dagcircuit
-module might diverge from this.</p>
+<p>এটি শুধুমাত্র একটি উদাহরণ এবং ড্যাগসার্কিট (dagcircuit) মডিউলের আসল মডিউল ডকস্ট্রিংটি এর থেকে ভিন্ন হতে পারে।</p>
 </div>
 </dd>
-<dt>The actual docstring for the elements listed in the module docstring</dt><dd><p>You should strive to document thoroughly all the public interfaces
+<dt>মডিউল ডকস্ট্রিং এ তালিকাভুক্ত উপাদানগুলির প্রকৃত ডকস্ট্রিং</dt><dd><p>You should strive to document thoroughly all the public interfaces
 exposed using examples when necessary. For docstrings, <a class="reference external" href="https://google.github.io/styleguide/pyguide.html?showone=Comments#38-comments-and-docstrings">Google Python Style
 Docstrings</a>
 are used. This is parsed using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html">napoleon
@@ -785,13 +755,13 @@ conda activate QiskitDevenv
 <span id="install-qiskit-terra"></span><h3>উৎস থেকে টেরা স্থাপন করুন<a class="headerlink" href="#installing-terra-from-source" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <p>উত্স থেকে ইনস্টল করার জন্য আপনার সিস্টেমে আপনার C++ কম্পাইলার থাকা দরকার যা C++ 11 সমর্থন করে।</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="88b29fb6-1c4d-4cec-bde1-9a695bf0d692" name="08fd8295-81df-4495-871a-2ac649c90568" type="radio">
-</input><label class="tabbed-label" for="88b29fb6-1c4d-4cec-bde1-9a695bf0d692">
+<input checked="checked" id="38c56292-31f0-42d3-bbc6-d76b7817d3d0" name="f6c02564-a940-4bea-856d-385aff907fae" type="radio">
+</input><label class="tabbed-label" for="38c56292-31f0-42d3-bbc6-d76b7817d3d0">
 লিনাক্স এর কম্পাইলার</label><div class="tabbed-content docutils">
 <p>বেশিরভাগ লিনাক্স প্ল্যাটফর্মে, প্রয়োজনীয় জিসিসি কম্পাইলার ইতিমধ্যে ইনস্টল করা থাকে।</p>
 </div>
-<input id="bf54611b-d5b9-4182-9670-81ae090ac865" name="08fd8295-81df-4495-871a-2ac649c90568" type="radio">
-</input><label class="tabbed-label" for="bf54611b-d5b9-4182-9670-81ae090ac865">
+<input id="1e3f7142-9221-4d19-aacf-0d7eeb0cd719" name="f6c02564-a940-4bea-856d-385aff907fae" type="radio">
+</input><label class="tabbed-label" for="1e3f7142-9221-4d19-aacf-0d7eeb0cd719">
 ম্যাক ও এস এর কম্পাইলার</label><div class="tabbed-content docutils">
 <p>আপনি যদি ম্যাক ও.এস. ব্যবহার করেন  তাহলে আপনি ক্ল্যাঙ( Clang)  ইনস্টল করতে পারেন Xcode ইনস্টল করার পর। দেখেনিন  আপনার XCode এবং Clang একটি টার্মিনাল এর সাহায্যে ইনস্টল করা আছে কিনা ।</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>clang --version
@@ -802,8 +772,8 @@ conda activate QiskitDevenv
 </pre></div>
 </div>
 </div>
-<input id="7d4ac5ce-8cfe-4c13-81e0-8023caedaa23" name="08fd8295-81df-4495-871a-2ac649c90568" type="radio">
-</input><label class="tabbed-label" for="7d4ac5ce-8cfe-4c13-81e0-8023caedaa23">
+<input id="e2f28997-6829-46ff-a1c8-779a7373eb6b" name="f6c02564-a940-4bea-856d-385aff907fae" type="radio">
+</input><label class="tabbed-label" for="e2f28997-6829-46ff-a1c8-779a7373eb6b">
 উইন্ডোস এর কম্পাইলার</label><div class="tabbed-content docutils">
 <p>উইন্ডোজে <a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017">Build Tools for Visual Studio 2017</a> থেকে ভিজ্যুয়াল সি++(C++) ইনস্টল করা সহজতম।এছাড়াও আপনি সি++(C++) কম্পাইলার ইনস্টল করার বিকল্প নির্বাচন সুনিশ্চিত করে ভিজ্যুয়াল স্টুডিওর ২০১৫ অথবা ২০১৭ সংস্করণ ইনস্টল করতে পারেন।</p>
 </div>
@@ -884,8 +854,8 @@ using. Since Aer is a compiled C++ program with a Python interface, there are
 non-Python dependencies for building the Aer binary which can't be installed
 universally depending on operating system.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="81fc4432-e3a4-4c29-a83a-2a5fd8d1bfbe" name="d5b86890-bd54-40c4-8a6b-341867ddb27c" type="radio">
-</input><label class="tabbed-label" for="81fc4432-e3a4-4c29-a83a-2a5fd8d1bfbe">
+<input checked="checked" id="b2ce5bae-0fe6-43c5-b976-534774d819fc" name="35bb0736-fe7c-4c1f-a68a-af2ac887c468" type="radio">
+</input><label class="tabbed-label" for="b2ce5bae-0fe6-43c5-b976-534774d819fc">
 Linux</label><div class="tabbed-content docutils">
 <ol class="arabic" start="3">
 <li><p>Install compiler requirements.</p>
@@ -913,8 +883,8 @@ install using:</p>
 </li>
 </ol>
 </div>
-<input id="174d5eaa-68ae-4dd9-8e8f-c35876068ec6" name="d5b86890-bd54-40c4-8a6b-341867ddb27c" type="radio">
-</input><label class="tabbed-label" for="174d5eaa-68ae-4dd9-8e8f-c35876068ec6">
+<input id="c1ca17d8-71b6-4295-9834-e005947af5f2" name="35bb0736-fe7c-4c1f-a68a-af2ac887c468" type="radio">
+</input><label class="tabbed-label" for="c1ca17d8-71b6-4295-9834-e005947af5f2">
 macOS</label><div class="tabbed-content docutils">
 <ol class="arabic" start="3">
 <li><p>Install dependencies.</p>
@@ -937,8 +907,8 @@ is the default choice.</p>
 </li>
 </ol>
 </div>
-<input id="119a99ea-ba18-4813-9a40-4545b61413db" name="d5b86890-bd54-40c4-8a6b-341867ddb27c" type="radio">
-</input><label class="tabbed-label" for="119a99ea-ba18-4813-9a40-4545b61413db">
+<input id="628c09aa-3fbe-4eea-8cf9-a5f8f9bb3c78" name="35bb0736-fe7c-4c1f-a68a-af2ac887c468" type="radio">
+</input><label class="tabbed-label" for="628c09aa-3fbe-4eea-8cf9-a5f8f9bb3c78">
 Windows</label><div class="tabbed-content docutils">
 <p>On Windows you need to use <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a>
 or <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> to install all the
@@ -1343,8 +1313,8 @@ multiple elements more transparent.</p>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#contributing-to-documentation">Contributing to Documentation</a><ul>
-<li><a class="reference internal" href="#documentation-structure">Documentation Structure</a><ul>
+<li><a class="reference internal" href="#contributing-to-documentation">ডকুমেন্টেশনে কন্ট্রিবিউট করা</a><ul>
+<li><a class="reference internal" href="#documentation-structure">ডকুমেন্টেশন কাঠামো</a><ul>
 <li><a class="reference internal" href="#documentation-integration">Documentation Integration</a></li>
 </ul>
 </li>
