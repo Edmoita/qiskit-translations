@@ -164,6 +164,8 @@
     <dl>
       <dt>Previous Releases</dt>
       
+        <dd><a class="version" href="/documentation/stable/0.19/index.html">0.19</a></dd>
+      
         <dd><a class="version" href="/documentation/stable/0.24/index.html">0.24</a></dd>
       
         <dd><a class="version" href="/documentation/stable/0.25/index.html">0.25</a></dd>
@@ -696,13 +698,13 @@ conda activate QiskitDevenv
 <span id="install-qiskit-terra"></span><h3>Installazione di Terra dal codice sorgente<a class="headerlink" href="#installing-terra-from-source" title="Link a questa intestazione">¶</a></h3>
 <p>L’installazione da codice sorgente richiede di disporre di un compilatore C++ sul sistema che supporti C++11.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0891d792-df56-4051-9e2d-21cda1c1e3ea" name="90f53444-5a46-4778-bc88-56e6eef3416f" type="radio">
-</input><label class="tabbed-label" for="0891d792-df56-4051-9e2d-21cda1c1e3ea">
+<input checked="checked" id="7d1faf0f-13ed-4375-874f-f6bb6306a738" name="3c0a8a36-feb6-4d52-a118-34408fe1a327" type="radio">
+</input><label class="tabbed-label" for="7d1faf0f-13ed-4375-874f-f6bb6306a738">
 Compilatore per Linux</label><div class="tabbed-content docutils">
 <p>Sulla maggior parte delle piattaforme Linux, il compilatore GCC necessario è già installato.</p>
 </div>
-<input id="c760ec10-02ed-4c08-aa41-b072426ad5ef" name="90f53444-5a46-4778-bc88-56e6eef3416f" type="radio">
-</input><label class="tabbed-label" for="c760ec10-02ed-4c08-aa41-b072426ad5ef">
+<input id="c127be55-d84d-48ad-a253-d15918a2220f" name="3c0a8a36-feb6-4d52-a118-34408fe1a327" type="radio">
+</input><label class="tabbed-label" for="c127be55-d84d-48ad-a253-d15918a2220f">
 Compilatore per macOS</label><div class="tabbed-content docutils">
 <p>Se si utilizza macOS, è possibile installare il compilatore Clang installando XCode. Da terminale, eseguire i seguenti comandi per verificare se XCode e Clang sono effettivamente presenti.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>clang --version
@@ -713,8 +715,8 @@ Compilatore per macOS</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="19d5ce91-df57-44a6-9780-40f08d492ddd" name="90f53444-5a46-4778-bc88-56e6eef3416f" type="radio">
-</input><label class="tabbed-label" for="19d5ce91-df57-44a6-9780-40f08d492ddd">
+<input id="a8a9cb79-a3a0-4403-9da3-a204dac5b9d9" name="3c0a8a36-feb6-4d52-a118-34408fe1a327" type="radio">
+</input><label class="tabbed-label" for="a8a9cb79-a3a0-4403-9da3-a204dac5b9d9">
 Compilatore per Windows</label><div class="tabbed-content docutils">
 <p>Su Windows, è più facile installare il compilatore Visual C++ da <a class="reference external" href="https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2017">Build Tools per Visual Studio 2017</a>. È possibile altrimenti installare Visual Studio versione 2015 o 2017, assicurandosi di selezionare le opzioni per l’installazione del compilatore C++.</p>
 </div>
@@ -782,8 +784,8 @@ Compilatore per Windows</label><div class="tabbed-content docutils">
 </ol>
 <p>A questo punto, i passi per installare Aer dipendono da quale sistema operativo si sta utilizzando. Poiché Aer è un programma C++ compilato con interfaccia Python, ci sono dipendenze non-Python per la costruzione del binario Aer che non può essere installato universalmente a seconda del sistema operativo.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="2a9406c3-1e3e-4271-90f7-3b2844ba62f8" name="594be8a6-5f1c-473f-a44c-583abef8ac79" type="radio">
-</input><label class="tabbed-label" for="2a9406c3-1e3e-4271-90f7-3b2844ba62f8">
+<input checked="checked" id="9d35abf6-c5a3-40b6-960c-5e5c86f28f8b" name="77a464e2-bc7c-400a-ae64-14c9fb9036bc" type="radio">
+</input><label class="tabbed-label" for="9d35abf6-c5a3-40b6-960c-5e5c86f28f8b">
 Linux</label><div class="tabbed-content docutils">
 <ol class="arabic" start="3">
 <li><p>Installare i requisiti del compilatore.</p>
@@ -809,8 +811,8 @@ Linux</label><div class="tabbed-content docutils">
 </li>
 </ol>
 </div>
-<input id="21e29dc9-f4e5-41f1-a7c0-65775a918abd" name="594be8a6-5f1c-473f-a44c-583abef8ac79" type="radio">
-</input><label class="tabbed-label" for="21e29dc9-f4e5-41f1-a7c0-65775a918abd">
+<input id="bfabae33-d66b-4f10-b59e-328e3999a5c8" name="77a464e2-bc7c-400a-ae64-14c9fb9036bc" type="radio">
+</input><label class="tabbed-label" for="bfabae33-d66b-4f10-b59e-328e3999a5c8">
 macOS</label><div class="tabbed-content docutils">
 <ol class="arabic" start="3">
 <li><p>Installare le dipendenze.</p>
@@ -830,8 +832,8 @@ macOS</label><div class="tabbed-content docutils">
 </li>
 </ol>
 </div>
-<input id="adbcf1f6-aebe-470e-ae2d-5e8efc17a054" name="594be8a6-5f1c-473f-a44c-583abef8ac79" type="radio">
-</input><label class="tabbed-label" for="adbcf1f6-aebe-470e-ae2d-5e8efc17a054">
+<input id="8c9ed07f-ae7f-4032-8163-a184d8eddfe5" name="77a464e2-bc7c-400a-ae64-14c9fb9036bc" type="radio">
+</input><label class="tabbed-label" for="8c9ed07f-ae7f-4032-8163-a184d8eddfe5">
 Windows</label><div class="tabbed-content docutils">
 <p>Su Windows è necessario utilizzare <a class="reference external" href="https://www.anaconda.com/distribution/#windows">Anaconda3</a> o <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3</a> per installare tutte le dipendenze.</p>
 <ol class="arabic" start="3">
