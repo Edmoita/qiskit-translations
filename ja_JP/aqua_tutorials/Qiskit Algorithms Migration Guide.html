@@ -776,7 +776,7 @@ qiskit.opflow.primitive_ops.pauli_sum_op.PauliSumOp
 <!-- See the documentation of the [deprecated Grover](https://qiskit.org/documentation/stubs/qiskit.aqua.algorithms.Grover.html#qiskit.aqua.algorithms.Grover) and [new Grover](#). --></section>
 <section id="移行ガイド">
 <h2>移行ガイド<a class="headerlink" href="#移行ガイド" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>For oracles provided as circuits and a <code class="docutils literal notranslate"><span class="pre">is_good_state</span></code> function to determine good states</p>
+<p>回路として提供されるオラクルと、良い状態を判断する <code class="docutils literal notranslate"><span class="pre">is_good_state</span></code> 関数に対して</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -837,7 +837,7 @@ Top measurement: 11
 Top measurement: 11
 </pre></div></div>
 </div>
-<p>Since we are streamlining all algorithms to use the <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> class as base primitive, defining oracles using the <code class="docutils literal notranslate"><span class="pre">qiskit.aqua.compontents.Oracle</span></code> class is deprecated. Instead of using e.g. the <code class="docutils literal notranslate"><span class="pre">LogicalExpressionOracle</span></code> you can now use the <code class="docutils literal notranslate"><span class="pre">PhaseOracle</span></code> circuit from the circuit library.</p>
+<p>基本プリミティブとして <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> クラスを使うようにすべてのアルゴリズムを合理化しているので、<code class="docutils literal notranslate"><span class="pre">qiskit.aqua.compontents.Oracle</span></code> クラスを使ってオラクルを定義することは非推奨となっています。例えば <code class="docutils literal notranslate"><span class="pre">LogicalExpressionOracle</span></code> を使う代わりに、circuit libraryの <code class="docutils literal notranslate"><span class="pre">PhaseOracle</span></code> 回路を使うことができます。</p>
 <p><strong>以前のコード:</strong></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:

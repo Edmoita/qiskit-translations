@@ -376,7 +376,7 @@ following four high-level steps:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
-Total count for 00 and 11 are: {&#39;11&#39;: 507, &#39;00&#39;: 493}
+Total count for 00 and 11 are: {&#39;11&#39;: 510, &#39;00&#39;: 490}
 </pre></div>
 </div>
 <div class="output text_html"><pre style="word-wrap: normal;white-space: pre;background: #fff0;line-height: 1.1;font-family: &quot;Courier New&quot;,Courier,monospace">     ┌───┐     ┌─┐   
@@ -478,35 +478,25 @@ c: 2/═══════════╩══╩═
                 0  1 </pre></div></div>
 </div>
 <p>Trong mạch lượng tử này, các qubit được sắp xếp theo thứ tự với qubit số 0 ở phía trên và qubit số 1 ở phía dưới. Mạch lượng tử được đọc từ trái sang phải, có nghĩa là các cổng được tác động lên các qubits trước hay sau theo thứ tự từ trái sang phải.</p>
-<p>The default backend for <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> or <code class="docutils literal notranslate"><span class="pre">qiskit.visualization.circuit_drawer()</span></code>
-is the text backend. However, depending on your local environment you may want to change
-these defaults to something better suited for your use case. This is done with the user
-config file.  By default the user config file should be located in
-<code class="docutils literal notranslate"><span class="pre">~/.qiskit/settings.conf</span></code> and is a <code class="docutils literal notranslate"><span class="pre">.ini</span></code> file.</p>
-<p>For example, a <code class="docutils literal notranslate"><span class="pre">settings.conf</span></code> file for setting a Matplotlib drawer is:</p>
+<p>Phần backend mặc định cho hàm <code class="docutils literal notranslate"><span class="pre">QuantumCircuit.draw()</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">qiskit.visualization.circuit_drawer()</span></code> là text backend. Tuy nhiên, tùy vào môi trường trên máy của mình bạn có thể thay đổi cấu hình mặc định này cho phù hợp với nhu cầu của bạn hơn. Điều này thể được làm bằng cách thay đổi file config của người dùng. Theo mặc định file này được đặt ở <code class="docutils literal notranslate"><span class="pre">~/.qiskit/settings.conf</span></code> và có định dạng <code class="docutils literal notranslate"><span class="pre">.ini</span></code>.</p>
+<p>Ví dụ, file <code class="docutils literal notranslate"><span class="pre">settings.conf</span></code> để cài đặt công cụ vẽ cho thư viện Matplotlib là:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[default]
 circuit_drawer = mpl
 </pre></div>
 </div>
-<p>You can use any of the valid circuit drawer backends as the value for this config, this includes
-text, mpl, latex, and latex_source.</p>
+<p>Bạn cũng có thể sử dụng bất kì backend vẽ mạch đúng chuẩn như giá trị cho config, nó bao gồm text, mpl, latex và latex_source.</p>
 </section>
 <section id="step-5-simulate-the-experiment">
-<h3>Step 5 : Simulate the Experiment<a class="headerlink" href="#step-5-simulate-the-experiment" title="Permalink to this headline">¶</a></h3>
-<p>Qiskit Aer is a high performance simulator framework for quantum circuits. It
-provides <a class="reference external" href="apidoc/providers/aer/aer_backends.html">several backends</a>
-to achieve different simulation goals.</p>
-<p>If you have issues installing Aer, you can alternatively use the Basic Aer
-provider by replacing <cite>Aer</cite> with <cite>BasicAer</cite>. Basic Aer is included in Qiskit
-Terra.</p>
+<h3>Bước 5: Mô phỏng thí nghiệm<a class="headerlink" href="#step-5-simulate-the-experiment" title="Permalink to this headline">¶</a></h3>
+<p>Qiskit Aer là một framework mô phỏng hiệu năng cao cho các mạch lượng tử. Nó cung cấp <a class="reference external" href="apidoc/providers/aer/aer_backends.html">một vài backend</a> để đạt được các mục tiêu mô phỏng khác nhau.</p>
+<p>Nếu bạn có các vấn đề cài đặt Aer, bạn có thể sử dụng Basic Aer bằng cách thay <cite>Aer</cite> bằng <cite>BasicAer</cite>. BasicAer đươc tích hợp trong Qiskit Terra.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>import numpy as np
 from qiskit import QuantumCircuit, transpile
 from qiskit.providers.basicaer import QasmSimulatorPy
 ...
 </pre></div>
 </div>
-<p>To simulate this circuit, you will use the <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code>. Each run of this
-circuit will yield either the bit string 00 or 11.</p>
+<p>Để mô phỏng mạch lượng tử này, bạn sẽ sử dụng <code class="docutils literal notranslate"><span class="pre">qasm_simulator</span></code>. Mỗi lần chạy mô phỏng mạch này sẽ cho ra kết quả là chuỗi 00 hoặc 11.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simulator</span> <span class="o">=</span> <span class="n">QasmSimulator</span><span class="p">()</span>
@@ -520,15 +510,12 @@ circuit will yield either the bit string 00 or 11.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
-Total count for 00 and 11 are: {&#39;11&#39;: 491, &#39;00&#39;: 509}
+Total count for 00 and 11 are: {&#39;11&#39;: 462, &#39;00&#39;: 538}
 </pre></div>
 </div>
 </div>
 </div>
-<p>As expected, the output bit string is 00 approximately 50 percent of the time.
-The number of times the circuit is run can be specified via the <code class="docutils literal notranslate"><span class="pre">shots</span></code>
-argument of the <code class="docutils literal notranslate"><span class="pre">execute</span></code> method. The number of shots of the simulation was
-set to be 1000 (the default is 1024).</p>
+<p>Như dự kiến, kết chuỗi bit đầu ra 00 là xấp xỉ 50% thời gian. Số lần chạy mạch có thể được xác định thông qua sô ́ <code class="docutils literal notranslate"><span class="pre">shots</span></code> thực thi của phương thức <code class="docutils literal notranslate"><span class="pre">execute</span></code>. Số shots của mô phỏng được đặt là 1000 (mặc định là 1024).</p>
 <p>Once you have a <code class="docutils literal notranslate"><span class="pre">result</span></code> object, you can access the counts via the method
 <code class="docutils literal notranslate"><span class="pre">get_counts(circuit)</span></code>. This gives you the aggregate outcomes of the
 experiment you ran.</p>
@@ -618,7 +605,7 @@ the estimated probabilities change.</p>
 <li><a class="reference internal" href="#step-2-initialize-variables">Bước 2 : Khởi tạo các biến</a></li>
 <li><a class="reference internal" href="#step-3-add-gates">Bước 3: Thêm cổng</a></li>
 <li><a class="reference internal" href="#step-4-visualize-the-circuit">Bước 4: Hiển thị mạch lượng tử</a></li>
-<li><a class="reference internal" href="#step-5-simulate-the-experiment">Step 5 : Simulate the Experiment</a></li>
+<li><a class="reference internal" href="#step-5-simulate-the-experiment">Bước 5: Mô phỏng thí nghiệm</a></li>
 <li><a class="reference internal" href="#step-6-visualize-the-results">Step 6 : Visualize the Results</a></li>
 </ul>
 </li>
