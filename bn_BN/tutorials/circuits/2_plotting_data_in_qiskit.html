@@ -641,9 +641,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="আয়তলেখ-(হিস্টোগ্রাম)-আঁকার-বিভিন্ন-উপায়">
 <h3>আয়তলেখ (হিস্টোগ্রাম) আঁকার বিভিন্ন উপায়<a class="headerlink" href="#আয়তলেখ-(হিস্টোগ্রাম)-আঁকার-বিভিন্ন-উপায়" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">plot_histogram()</span></code> has a few options to adjust the output graph. The first option is the <code class="docutils literal notranslate"><span class="pre">legend</span></code> kwarg. This is used to provide a label for the executions. It takes a list of strings use to label each execution’s results. This is mostly useful when plotting multiple execution results in the same histogram. The <code class="docutils literal notranslate"><span class="pre">sort</span></code> kwarg is used to adjust the order the bars in the histogram are rendered. It can be set to either ascending order with <code class="docutils literal notranslate"><span class="pre">asc</span></code> or descending order with <code class="docutils literal notranslate"><span class="pre">desc</span></code>. The
-<code class="docutils literal notranslate"><span class="pre">number_to_keep</span></code> kwarg takes an integer for the number of terms to show, the rest are grouped together in a single bar called rest. You can adjust the color of the bars with the <code class="docutils literal notranslate"><span class="pre">color</span></code> kwarg which either takes a string or a list of strings for the colors to use for the bars for each execution. You can adjust whether labels are printed above the bars or not with the <code class="docutils literal notranslate"><span class="pre">bar_labels</span></code> kwarg. The last option available is the <code class="docutils literal notranslate"><span class="pre">figsize</span></code> kwarg which takes a tuple of the size in inches to make the
-output figure.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_histogram()</span></code> এর থেকে প্রাপ্ত লেখচিত্রগুলি সাজানোর জন্য কিছু বিকল্প আছে। প্রথম বিকল্প হলো <code class="docutils literal notranslate"><span class="pre">legend</span></code> কীওয়ার্ড আর্গুমেন্ট (kwarg)। এর কাজ হলো ফলাফলের নাম (লেবেল) দেওয়া। এটা একটা নামের তালিকা নিয়ে প্রত্যেকটি ফলাফলের আলাদা আলাদা নাম (লেবেল) দেয়। যখন একই হিস্টোগ্রামে অনেকগুলো ফলাফল একসঙ্গে দেখানো হয় তখন এটা খুবই কাজে লাগে। <code class="docutils literal notranslate"><span class="pre">sort</span></code> কীওয়ার্ড আর্গুমেন্ট (kwarg) এর সাহায্যে হিস্টোগ্রামের স্তম্ভগুলি মানের ক্রমানুসারে সাজানো যায়। ক্রমবর্ধমান বা ক্রমহাসমান নির্দেশ করা যায় যথাক্রমে <code class="docutils literal notranslate"><span class="pre">asc</span></code> ও <code class="docutils literal notranslate"><span class="pre">desc</span></code> এর সাহায্যে। <code class="docutils literal notranslate"><span class="pre">number_to_keep</span></code> কীওয়ার্ড আর্গুমেন্ট (kwarg) এর কাজ হলো কতগুলো ফল এক করে দেখাবে, যদি এই সংখ্যা মোট ফলাফল সংখ্যার চেয়ে কম হয় তখন বাকি ফলগুলো একসঙ্গে &quot;rest&quot; নামক একটি স্তম্ভে দেখানো হয়। স্তম্ভগুলির রং <code class="docutils literal notranslate"><span class="pre">color</span></code> কীওয়ার্ড আর্গুমেন্ট (kwarg) এর সাহায্যে নির্বাচন করা যায়। সব স্তম্ভে এক রং দিতে চাইলে একটি রং এর নাম বা প্রত্যেক স্তম্ভে আলাদা আলাদা রং চাইলে রঙের নামের তালিকা পাঠানো যায়। স্তম্ভের নামগুলি স্তম্ভের উপরে না নিচে দেখাবে তা ঠিক করা যায় <code class="docutils literal notranslate"><span class="pre">bar_labels</span></code> কীওয়ার্ড আর্গুমেন্ট (kwarg) এর সাহায্যে। শেষ বিকল্পটি হলো <code class="docutils literal notranslate"><span class="pre">figsize</span></code> কীওয়ার্ড আর্গুমেন্ট (kwarg) যার কাজ একটি টাপল এর মাধ্যমে অন্তিম চিত্রটির আকার ইঞ্চি এককে নেওয়া।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -825,12 +823,12 @@ plot_bloch_multivector(quantum_state)
 <p>এখানে আমরা দেখছি যে এক কিউবিট স্থানে কোয়ান্টাম অবস্থার কোনো তথ্য নেই, কারণ সব ভেক্টরের মান শুন্য।</p>
 <section id="অবস্থা-লেখচিত্র-বানানোর-ফাংশনগুলি-ব্যবহারের-সময়-থাকা-অপশনগুলো-নিম্নরূপ">
 <h3>অবস্থা লেখচিত্র বানানোর ফাংশনগুলি ব্যবহারের সময় থাকা অপশনগুলো নিম্নরূপ<a class="headerlink" href="#অবস্থা-লেখচিত্র-বানানোর-ফাংশনগুলি-ব্যবহারের-সময়-থাকা-অপশনগুলো-নিম্নরূপ" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>The various functions for plotting quantum states provide a number of options to adjust how the plots are rendered. Which options are available depends on the function being used.</p>
-<p><strong>plot_state_city()</strong> options</p>
+<p>কোয়ান্টাম স্টেটের লেখচিত্র আঁকার জন্য থাকা ফাংশনগুলোর মধ্যে অনেক অপশন থাকে যাতে আমরা লেখচিত্রটিকে নিজেদের মতো সাজাতে পারি। কিভাবে সাজাবো তা নির্ভর করে আমরা কোন ফাংশন আমরা ব্যবহার করছি তার ওপর।</p>
+<p><strong>plot_state_city()</strong> এর অপশনগুলো নিম্নরূপ</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
-<li><p><strong>color</strong> (list): a list of len=2 giving colors for real and imaginary components of matrix elements.</p></li>
+<li><p><strong>title</strong> (str): একটি স্ট্রিং যা লেখচিত্রের নাম প্রদর্শন করে</p></li>
+<li><p><strong>figsize</strong> (tuple): ইঞ্চি এককে লেখচিত্রের আকার (দৈর্ঘ্য, প্রস্থ)।</p></li>
+<li><p><strong>color</strong> (list): এখানে একটি রঙের নামের তালিকা পাঠানো হয় যাতে দুটি নাম থাকে, একটি ম্যাট্রিক্সের বাস্তব উপাদানগুলোর রঙের নাম আর অন্যটি কাল্পনিক উপাদানগুলোর রঙের নাম।</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
@@ -849,10 +847,10 @@ plot_bloch_multivector(quantum_state)
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_21_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_21_0.png" />
 </div>
 </div>
-<p><strong>plot_state_hinton()</strong> options</p>
+<p><strong>plot_state_hinton()</strong> এর অপশনগুলো নিম্নরূপ</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
+<li><p><strong>title</strong> (str): একটি স্ট্রিং যা লেখচিত্রের নাম প্রদর্শন করে</p></li>
+<li><p><strong>figsize</strong> (tuple): ইঞ্চি এককে লেখচিত্রের আকার (দৈর্ঘ্য, প্রস্থ)।</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
@@ -871,11 +869,11 @@ plot_bloch_multivector(quantum_state)
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_23_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_23_0.png" />
 </div>
 </div>
-<p><strong>plot_state_paulivec()</strong> options</p>
+<p><strong>plot_state_paulivec()</strong> এর অপশনগুলো নিম্নরূপ</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
-<li><p><strong>color</strong> (list or str): color of the expectation value bars.</p></li>
+<li><p><strong>title</strong> (str): একটি স্ট্রিং যা লেখচিত্রের নাম প্রদর্শন করে</p></li>
+<li><p><strong>figsize</strong> (tuple): ইঞ্চি এককে লেখচিত্রের আকার (দৈর্ঘ্য, প্রস্থ)।</p></li>
+<li><p><strong>color</strong> (list or str): যে যে স্তম্ভ (bar) গুলো আসবে তাদের সবার একই রং চাইলে একটি রঙের নাম, বা সবার আলাদা রং চাইলে প্রত্যেক স্তম্ভের জন্য আলাদা রঙের নামের তালিকা দিতে হবে।</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -894,14 +892,14 @@ plot_bloch_multivector(quantum_state)
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_25_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_25_0.png" />
 </div>
 </div>
-<p><strong>plot_state_qsphere()</strong> options</p>
+<p><strong>plot_state_paulivec()</strong> এর অপশনগুলো নিম্নরূপ</p>
 <ul class="simple">
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
+<li><p><strong>figsize</strong> (tuple): ইঞ্চি এককে লেখচিত্রের আকার (দৈর্ঘ্য, প্রস্থ)।</p></li>
 </ul>
-<p><strong>plot_bloch_multivector()</strong> options</p>
+<p><strong>plot_bloch_multivector()</strong> এর অপশনগুলো নিম্নরূপ</p>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): figure size in inches (width, height).</p></li>
+<li><p><strong>title</strong> (str): একটি স্ট্রিং যা লেখচিত্রের নাম প্রদর্শন করে</p></li>
+<li><p><strong>figsize</strong> (tuple): ইঞ্চি এককে লেখচিত্রের আকার (দৈর্ঘ্য, প্রস্থ)।</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
@@ -921,16 +919,15 @@ plot_bloch_multivector(quantum_state)
 </div>
 </div>
 </section>
-<section id="Using-the-output-from-state-plotting-functions">
-<h3>Using the output from state plotting functions<a class="headerlink" href="#Using-the-output-from-state-plotting-functions" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>When using any of the state plotting functions it returns a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> for the rendered visualization. Jupyter notebooks understand this return type and render it for us in this tutorial, but when running outside of Jupyter you do not have this feature automatically. However, the <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> class natively has methods to both display and save the visualization. You can call <code class="docutils literal notranslate"><span class="pre">.show()</span></code> on the returned object to open the image in a new window (assuming your configured
-matplotlib backend is interactive). Or alternatively you can call <code class="docutils literal notranslate"><span class="pre">.savefig('out.png')</span></code> to save the figure to <code class="docutils literal notranslate"><span class="pre">out.png</span></code> in the current working directory. The <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> method takes a path so you can adjust the location and filename where you’re saving the output.</p>
+<section id="স্টেট-এর-লেখচিত্রের-ফাংশনগুলোর-ফলাফল-ব্যবহার-করে">
+<h3>স্টেট এর লেখচিত্রের ফাংশনগুলোর ফলাফল ব্যবহার করে<a class="headerlink" href="#স্টেট-এর-লেখচিত্রের-ফাংশনগুলোর-ফলাফল-ব্যবহার-করে" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p>যখনই কোন মান বা অবস্থা লেখচিত্র বানানোর ফাংশন ব্যবহার হয় সেটা একটা <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> জিনিস বানিয়ে ফেরত দেয়, যার মধ্যে লেখচিত্রের দৃশ্যায়ন থাকে। এই শিক্ষনীতে জুপিটার নোটবুক এই জিনিসটি চিনতে পারে এবং আমাদের জন্য ফলাফল ছবিটি এঁকে দেয়। কিন্তু জুপিটারের বাইরে এই সুবিধাটি নিজে থেকে আসে না। <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> এই ক্লাসটির মধ্যে ছবি আঁকার ও দৃশ্যায়নটি সংরক্ষণ করার দুই পদ্ধতিই লেখা আছে। প্রয়োজনমতো এর উপর <code class="docutils literal notranslate"><span class="pre">.show()</span></code> ফাংশন ডেকে অন্য একটি উইন্ডোতে ছবিটি দেখা যেতে পারে(যদি matplotlib এর ব্যাকএন্ড মিথষ্ক্রিয় (ইন্টারেক্টিভ) ঠিকঠাক সাজানো থাকে)। অথবা <code class="docutils literal notranslate"><span class="pre">.savefig('out.png')</span></code> ফাংশন ডেকে ছবিটি <code class="docutils literal notranslate"><span class="pre">out.png</span></code> নামে বতর্মান ডিরেক্টরিতে সংরক্ষণ করা যেতে পারে। <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> পদ্ধতিটি একটি পথ নেয় যাতে কোথায় কি নামে ছবিটি সংরক্ষণ হচ্ছে সেটা আমরা নিয়ন্ত্রণ করতে পারি।</p>
 </section>
 </section>
 <section id="ব্লক-ভেক্টরের-লেখচিত্র">
 <h2>ব্লক ভেক্টরের লেখচিত্র<a class="headerlink" href="#ব্লক-ভেক্টরের-লেখচিত্র" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h2>
-<p>A standard way of plotting a quantum system is using the Bloch vector. This only works for a single qubit and takes as input the Bloch vector.</p>
-<p>The Bloch vector is defined as <span class="math notranslate nohighlight">\([x = \mathrm{Tr}[X \rho], y = \mathrm{Tr}[Y \rho], z = \mathrm{Tr}[Z \rho]]\)</span>, where <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>, and <span class="math notranslate nohighlight">\(Z\)</span> are the Pauli operators for a single qubit and <span class="math notranslate nohighlight">\(\rho\)</span> is the state matrix.</p>
+<p>কোয়ান্টাম সিস্টেম লেখচিত্র বানানোর একটি সাধারণ পদ্ধতি হলো ব্লক ভেক্টরের মাধ্যমে। এটা কেবল একটা কিউবিটের ক্ষেত্রে কাজ করে এবং ইনপুটরূপে একটা ব্লক ভেক্টর নেয়।</p>
+<p>ব্লক ভেক্টরকে এভাবে সংজ্ঞায়িত করা হয় <span class="math notranslate nohighlight">\([x = \mathrm{Tr}[X \rho], y = \mathrm{Tr}[Y \rho], z = \mathrm{Tr}[Z \rho]]\)</span>, যেখানে <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>, এবং <span class="math notranslate nohighlight">\(Z\)</span> হলো একটি কিউবিটের পাউলি অপারেটর (Pauli operator) এবং <span class="math notranslate nohighlight">\(\rho\)</span> হলো স্টেট ম্যাট্রিক্স।</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
@@ -957,11 +954,11 @@ matplotlib backend is interactive). Or alternatively you can call <code class="d
 <img alt="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_32_0.png" src="../../_images/tutorials_circuits_2_plotting_data_in_qiskit_32_0.png" />
 </div>
 </div>
-<section id="Options-for-plot_bloch_vector()">
-<h3>Options for plot_bloch_vector()<a class="headerlink" href="#Options-for-plot_bloch_vector()" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<section id="plot_bloch_vector()-এর-অপশনগুলো-নিম্নরূপ">
+<h3>plot_bloch_vector() এর অপশনগুলো নিম্নরূপ<a class="headerlink" href="#plot_bloch_vector()-এর-অপশনগুলো-নিম্নরূপ" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
 <ul class="simple">
-<li><p><strong>title</strong> (str): a string that represents the plot title</p></li>
-<li><p><strong>figsize</strong> (tuple): Figure size in inches (width, height).</p></li>
+<li><p><strong>title</strong> (str): একটি স্ট্রিং যা লেখচিত্রের নাম প্রদর্শন করে</p></li>
+<li><p><strong>figsize</strong> (tuple): ইঞ্চি এককে লেখচিত্রের আকার (দৈর্ঘ্য, প্রস্থ)।</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
@@ -981,10 +978,9 @@ matplotlib backend is interactive). Or alternatively you can call <code class="d
 </div>
 </div>
 </section>
-<section id="Adjusting-the-output-from-plot_bloch_vector()">
-<h3>Adjusting the output from plot_bloch_vector()<a class="headerlink" href="#Adjusting-the-output-from-plot_bloch_vector()" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>When using the <code class="docutils literal notranslate"><span class="pre">plot_bloch_vector</span></code> function it returns a <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> for the rendered visualization. Jupyter notebooks understand this return type and render it for us in this tutorial, but when running outside of Jupyter you do not have this feature automatically. However, the <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> class natively has methods to both display and save the visualization. You can call <code class="docutils literal notranslate"><span class="pre">.show()</span></code> on the returned object to open the image in a new window (assuming your configured
-matplotlib backend is interactive). Or alternatively you can call <code class="docutils literal notranslate"><span class="pre">.savefig('out.png')</span></code> to save the figure to <code class="docutils literal notranslate"><span class="pre">out.png</span></code> in the current working directory. The <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> method takes a path so you can adjust the location and filename where you’re saving the output.</p>
+<section id="plot_bloch_vector()-এর-থেকে-পাওয়া-ফলাফলকে-সাজানো">
+<h3>plot_bloch_vector() এর থেকে পাওয়া ফলাফলকে সাজানো<a class="headerlink" href="#plot_bloch_vector()-এর-থেকে-পাওয়া-ফলাফলকে-সাজানো" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">plot_bloch_vector</span></code> ফাংশন একটি <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> ফেরত পাঠায় যেটি দৃশ্যায়নটিকে বানায়। এই শিক্ষনীতে জুপিটার নোটবুক এই জিনিসটি চিনতে পারে এবং আমাদের জন্য ফলাফল ছবিটি এঁকে দেয়। কিন্তু জুপিটারের বাইরে এই সুবিধাটি নিজে থেকে আসে না। <code class="docutils literal notranslate"><span class="pre">matplotlib.Figure</span></code> এই ক্লাসটির মধ্যে ছবি আঁকার ও দৃশ্যায়নটি সংরক্ষণ করার দুই পদ্ধতিই লেখা আছে। প্রয়োজনমতো এর ফলাফলের উপর <code class="docutils literal notranslate"><span class="pre">.show()</span></code> ফাংশন ডেকে অন্য একটি উইন্ডোতে ছবিটি দেখা যেতে পারে(যদি matplotlib এর ব্যাকএন্ড পারস্পরিক ক্রিয়াশীল থাকে)। অথবা <code class="docutils literal notranslate"><span class="pre">.savefig('out.png')</span></code> ফাংশন ডেকে ছবিটি <code class="docutils literal notranslate"><span class="pre">out.png</span></code> নামে বর্তমান ডিরেক্টরিতে সংরক্ষণ করা যেতে পারে। <code class="docutils literal notranslate"><span class="pre">savefig()</span></code> পদ্ধতিটি একটি পথ নেয় যাতে কোথায় কি নামে ছবিটি সংরক্ষণ হচ্ছে সেটা আমরা নিয়ন্ত্রণ করতে পারি।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
@@ -1067,12 +1063,12 @@ matplotlib backend is interactive). Or alternatively you can call <code class="d
 </li>
 <li><a class="reference internal" href="#লেখচিত্রের-অবস্থা">লেখচিত্রের অবস্থা</a><ul>
 <li><a class="reference internal" href="#অবস্থা-লেখচিত্র-বানানোর-ফাংশনগুলি-ব্যবহারের-সময়-থাকা-অপশনগুলো-নিম্নরূপ">অবস্থা লেখচিত্র বানানোর ফাংশনগুলি ব্যবহারের সময় থাকা অপশনগুলো নিম্নরূপ</a></li>
-<li><a class="reference internal" href="#Using-the-output-from-state-plotting-functions">Using the output from state plotting functions</a></li>
+<li><a class="reference internal" href="#স্টেট-এর-লেখচিত্রের-ফাংশনগুলোর-ফলাফল-ব্যবহার-করে">স্টেট এর লেখচিত্রের ফাংশনগুলোর ফলাফল ব্যবহার করে</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ব্লক-ভেক্টরের-লেখচিত্র">ব্লক ভেক্টরের লেখচিত্র</a><ul>
-<li><a class="reference internal" href="#Options-for-plot_bloch_vector()">Options for plot_bloch_vector()</a></li>
-<li><a class="reference internal" href="#Adjusting-the-output-from-plot_bloch_vector()">Adjusting the output from plot_bloch_vector()</a></li>
+<li><a class="reference internal" href="#plot_bloch_vector()-এর-অপশনগুলো-নিম্নরূপ">plot_bloch_vector() এর অপশনগুলো নিম্নরূপ</a></li>
+<li><a class="reference internal" href="#plot_bloch_vector()-এর-থেকে-পাওয়া-ফলাফলকে-সাজানো">plot_bloch_vector() এর থেকে পাওয়া ফলাফলকে সাজানো</a></li>
 </ul>
 </li>
 </ul>
