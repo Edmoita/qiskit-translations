@@ -1213,9 +1213,9 @@ tensor(21.3484, grad_fn=&lt;MseLossBackward&gt;)
 </div>
 </div>
 </div>
-<div class="section" id="Step-2:-Defining-the-QNN-and-Hybrid-Model">
-<h3>Step 2: Defining the QNN and Hybrid Model<a class="headerlink" href="#Step-2:-Defining-the-QNN-and-Hybrid-Model" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
-<p>This second step shows the power of the <code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code>. After defining our quantum neural network layer (in this case, a <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>), we can embed it into a layer in our torch <code class="docutils literal notranslate"><span class="pre">Module</span></code> by initializing a torch connector as <code class="docutils literal notranslate"><span class="pre">TorchConnector(qnn)</span></code>.</p>
+<div class="section" id="ধাপ-২:-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক-বানানো-এবং-দোআঁশলা-(Hybrid)-মডেল">
+<h3>ধাপ ২: কোয়ান্টাম নিউরাল নেটওয়ার্ক বানানো এবং দোআঁশলা (Hybrid) মডেল<a class="headerlink" href="#ধাপ-২:-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক-বানানো-এবং-দোআঁশলা-(Hybrid)-মডেল" title="এই শিরোনামের পার্মালিঙ্ক">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">TorchConnector</span></code> এর ক্ষমতা এই দ্বিতীয় ধাপে দেখা যাচ্ছে। আমাদের কোয়ান্টাম নিউরাল নেটওয়ার্কটি (এই ক্ষেত্রে একটি <code class="docutils literal notranslate"><span class="pre">TwoLayerQNN</span></code>) বানানোর পরে এটা আমরা নিজেদের torch <code class="docutils literal notranslate"><span class="pre">Module</span></code> - এ <code class="docutils literal notranslate"><span class="pre">TorchConnector(qnn)</span></code> দ্বারা ঢোকাতে পারবো</p>
 <p><strong>⚠️ সাবধান:</strong> কোয়ান্টাম নিউরাল নেটওয়ার্ক বানানোর সময়ে আমাদের প্রাথমিক <code class="docutils literal notranslate"><span class="pre">input_gradients</span></code> স্থিতিমাপ বা প্যারামিটারটি TRUE থাকা দরকার যাতে নতিমাত্রা যথেষ্ট ভাবে পিছনের দিকে প্রচার করা (ব্যাকপ্রপাগেশন) যায়।</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1434,7 +1434,7 @@ Performance on test data:
 <img alt="../_images/tutorials_05_torch_connector_43_0.png" src="../_images/tutorials_05_torch_connector_43_0.png" />
 </div>
 </div>
-<p>🎉🎉🎉🎉 <strong>You are now able to experiment with your own hybrid datasets and architectures using Qiskit Machine Learning.</strong> <strong>Good Luck!</strong></p>
+<p>🎉🎉🎉🎉 ** Qiskit Machine Learning দিয়ে এই পর্যায়ে এসে আশা করা যায় যে আপনারা এবার নিজের গবেষণার জনে দোআঁশলা (Hybrid) ডেটাসেট এবং স্থাপত্য (architectures) বানাতে পারবেন।** <strong>আমাদের শুভকামনা রইলো!</strong></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
@@ -1526,7 +1526,7 @@ Performance on test data:
 </li>
 <li><a class="reference internal" href="#দ্বিতীয়-অধ্যায়:-MNIST-এর-শ্রেণিবিন্যাসকরণ-(ক্লাসিফিকেশন),-দোআঁশলা-(Hybrid)-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক">দ্বিতীয় অধ্যায়: MNIST এর শ্রেণিবিন্যাসকরণ (ক্লাসিফিকেশন), দোআঁশলা (Hybrid) কোয়ান্টাম নিউরাল নেটওয়ার্ক</a><ul>
 <li><a class="reference internal" href="#ধাপ-১:-প্রশিক্ষণ-এবং-পরীক্ষার-জন্য-ডেটা-লোডার-সংজ্ঞায়িত-করা">ধাপ ১: প্রশিক্ষণ এবং পরীক্ষার জন্য ডেটা-লোডার সংজ্ঞায়িত করা</a></li>
-<li><a class="reference internal" href="#Step-2:-Defining-the-QNN-and-Hybrid-Model">Step 2: Defining the QNN and Hybrid Model</a></li>
+<li><a class="reference internal" href="#ধাপ-২:-কোয়ান্টাম-নিউরাল-নেটওয়ার্ক-বানানো-এবং-দোআঁশলা-(Hybrid)-মডেল">ধাপ ২: কোয়ান্টাম নিউরাল নেটওয়ার্ক বানানো এবং দোআঁশলা (Hybrid) মডেল</a></li>
 <li><a class="reference internal" href="#ধাপ-৩:-প্রশিক্ষণ">ধাপ ৩: প্রশিক্ষণ</a></li>
 <li><a class="reference internal" href="#ধাপ-৪:-মূল্যায়ন">ধাপ ৪: মূল্যায়ন</a></li>
 </ul>
@@ -1554,7 +1554,7 @@ Performance on test data:
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
      
 
   
