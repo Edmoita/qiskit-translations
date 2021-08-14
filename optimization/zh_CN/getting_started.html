@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting started &mdash; Qiskit Optimization 0.3.0 文档</title>
+  <title>入门 &mdash; Qiskit Optimization 0.2.1 文档</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
     <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="search.html" />
+    <link rel="search" title="搜寻" href="search.html" />
     <link rel="next" title="Qiskit Optimization API Reference" href="apidocs/qiskit_optimization.html" />
     <link rel="prev" title="Qiskit Optimization documentation" href="index.html" /> 
 
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>语言</dt>
       
         <dd><a class="version" href="/documentation/optimization/getting_started.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apidocs/qiskit_optimization.html">API 参考资料</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">发布说明</a></li>
 </ul>
 
             
@@ -200,7 +200,7 @@
       </li>
 
         
-      <li>Getting started</li>
+      <li>入门</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -231,9 +231,9 @@
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
   <br><br><br><div class="section" id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="永久链接至标题">¶</a></h1>
+<h1>入门<a class="headerlink" href="#getting-started" title="永久链接至标题">¶</a></h1>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="永久链接至标题">¶</a></h2>
+<h2>安装<a class="headerlink" href="#installation" title="永久链接至标题">¶</a></h2>
 <p>Qiskit Optimization depends on the main Qiskit package which has its own
 <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Getting Started</a> detailing the
 installation options for Qiskit and its supported environments/platforms. You should refer to
@@ -241,13 +241,12 @@ that first. Then the information here can be followed which focuses on the addit
 specific to Qiskit Optimization.</p>
 <p>Qiskit Optimization has some functions that have been made optional where the dependent code and/or
 support program(s) are not (or cannot be) installed by default. Those are IBM CPLEX, CVXPY and Matplotlib.
-See <a class="reference internal" href="#optional-installs"><span class="std std-ref">Optional installs</span></a> for more information.</p>
+See <a class="reference internal" href="#optional-installs"><span class="std std-ref">可选安装</span></a> for more information.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="11610e45-81b5-49e8-9e6f-4cc9563a3b8a" name="8dc8af4c-b611-49b6-bc49-7fb0ded30af8" type="radio">
-</input><label class="tabbed-label" for="11610e45-81b5-49e8-9e6f-4cc9563a3b8a">
-Start locally</label><div class="tabbed-content docutils">
-<p>The simplest way to get started is to follow the getting started ‘Start locally’ for Qiskit
-here <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Getting Started</a></p>
+<input checked="checked" id="5119c75c-f9a1-4468-80bc-837d9f2ff47b" name="6fa31af7-ffd5-4da1-bac9-5d6da9430be9" type="radio">
+</input><label class="tabbed-label" for="5119c75c-f9a1-4468-80bc-837d9f2ff47b">
+在本端启动</label><div class="tabbed-content docutils">
+<p>入门最简单的方法是按照Qiskit入门’Start locally’ <a href="#id2"><span class="problematic" id="id3">`Qiskit 入门ˊ&lt;https://qiskit.org/documentation/getting_started.html&gt;`__</span></a></p>
 <p>In your virtual environment where you installed Qiskit simply add <code class="docutils literal notranslate"><span class="pre">optimization</span></code> to the
 extra list in a similar manner to how the extra <code class="docutils literal notranslate"><span class="pre">visualization</span></code> support is installed for
 Qiskit, i.e:</p>
@@ -260,9 +259,9 @@ versions of macOS), you’ll need to put <code class="docutils literal notransla
 </pre></div>
 </div>
 </div>
-<input id="e4eec6ae-63f4-466e-98bd-af8d57ecb074" name="8dc8af4c-b611-49b6-bc49-7fb0ded30af8" type="radio">
-</input><label class="tabbed-label" for="e4eec6ae-63f4-466e-98bd-af8d57ecb074">
-Install from source</label><div class="tabbed-content docutils">
+<input id="08b17dbd-915a-4cfc-822c-27decce89e1b" name="6fa31af7-ffd5-4da1-bac9-5d6da9430be9" type="radio">
+</input><label class="tabbed-label" for="08b17dbd-915a-4cfc-822c-27decce89e1b">
+从来源安装</label><div class="tabbed-content docutils">
 <p>Installing Qiskit Optimization from source allows you to access the most recently
 updated version under development instead of using the version in the Python Package
 Index (PyPI) repository. This will give you the ability to inspect and extend
@@ -283,7 +282,7 @@ Qiskit Optimization.</p>
 </pre></div>
 </div>
 </li>
-<li><p>If you want to run tests or linting checks, install the developer requirements.</p>
+<li><p>如果要执行测试或代码校验，请安装开发人员需求。</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -r requirements-dev.txt
 </pre></div>
 </div>
@@ -294,8 +293,7 @@ Qiskit Optimization.</p>
 </div>
 </li>
 </ol>
-<p>If you want to install it in editable mode, meaning that code changes to the
-project don’t require a reinstall to be applied, you can do this with:</p>
+<p>如果您想安装在可编辑模式下，即改变项目中的代码时不需要重装就能应用，您可以输入以下命令：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install -e .
 </pre></div>
 </div>
@@ -303,10 +301,11 @@ project don’t require a reinstall to be applied, you can do this with:</p>
 </div>
 </div>
 <div class="section" id="optional-installs">
-<span id="id1"></span><h2>Optional installs<a class="headerlink" href="#optional-installs" title="永久链接至标题">¶</a></h2>
+<span id="id1"></span><h2>可选安装<a class="headerlink" href="#optional-installs" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p><strong>IBM CPLEX</strong> may be installed using <cite>pip install ‘qiskit-optimization[cplex]’</cite> to enable the reading of <cite>LP</cite> files and the usage of
-the <cite>CplexOptimizer</cite>, wrapper for <code class="docutils literal notranslate"><span class="pre">cplex.Cplex</span></code>.</p></li>
+the <cite>CplexOptimizer</cite>, wrapper for <code class="docutils literal notranslate"><span class="pre">cplex.Cplex</span></code>. Currently there is no python 3.9 version of CPLEX. In this case, the CPLEX install
+command will have no effect.</p></li>
 <li><p><strong>CVXPY</strong>, may be installed using command <cite>pip install ‘qiskit-optimization[cvx]’</cite> to install the
 package. CVXPY being installed will enable the usage of the Goemans-Williamson algorithm as an optimizer <cite>GoemansWilliamsonOptimizer</cite>.</p></li>
 <li><p><strong>Matplotlib</strong>, may be installed using command <cite>pip install ‘qiskit-optimization[matplotlib]’</cite> to install the
@@ -373,9 +372,9 @@ package. Gurobipy being installed will enable the usage of the GurobiOptimizer.<
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Getting started</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#optional-installs">Optional installs</a></li>
+<li><a class="reference internal" href="#">入门</a><ul>
+<li><a class="reference internal" href="#installation">安装</a></li>
+<li><a class="reference internal" href="#optional-installs">可选安装</a></li>
 <li><a class="reference internal" href="#ready-to-get-going">Ready to get going?…</a></li>
 </ul>
 </li>

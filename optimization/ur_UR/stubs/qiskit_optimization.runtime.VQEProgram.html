@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>VQEProgram &mdash; Qiskit Optimization 0.3.0 documentation</title>
+  <title>VQEProgram &mdash; Qiskit Optimization 0.2.1 documentation</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -247,11 +247,11 @@ for the Qiskit Optimization's <code class="docutils literal notranslate"><span c
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ansatz</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>) -- A parameterized circuit used as Ansatz for the wave function.</p></li>
-<li><p><strong>optimizer</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) -- A dictionary specifying a classical optimizer.
-Currently only SPSA and QN-SPSA are supported. Per default, SPSA is used.
-The dictionary must contain a key <code class="docutils literal notranslate"><span class="pre">name</span></code> for the name of the optimizer and may
-contain additional keys for the settings.
-E.g. <code class="docutils literal notranslate"><span class="pre">{'name':</span> <span class="pre">'SPSA',</span> <span class="pre">'maxiter':</span> <span class="pre">100}</span></code>.</p></li>
+<li><p><strong>optimizer</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) -- An optimizer or dictionary specifying a classical optimizer.
+If a dictionary, only SPSA and QN-SPSA are supported. The dictionary must contain a
+key <code class="docutils literal notranslate"><span class="pre">name</span></code> for the name of the optimizer and may contain additional keys for the
+settings. E.g. <code class="docutils literal notranslate"><span class="pre">{'name':</span> <span class="pre">'SPSA',</span> <span class="pre">'maxiter':</span> <span class="pre">100}</span></code>.
+Per default, SPSA is used.</p></li>
 <li><p><strong>backend</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Backend</span></code>]) -- The backend to run the circuits on.</p></li>
 <li><p><strong>initial_point</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>]) -- An optional initial point (i.e. initial parameter values)
 for the optimizer. If <code class="docutils literal notranslate"><span class="pre">None</span></code> a random vector is used.</p></li>

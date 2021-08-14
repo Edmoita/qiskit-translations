@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ADMM Optimizer &mdash; documentação Qiskit Optimization 0.3.0</title>
+  <title>Otimizador ADMM &mdash; documentação Qiskit Optimization 0.2.1</title>
   
 
   
@@ -36,9 +36,9 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Índice" href="../genindex.html" />
-    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="search" title="Pesquisar" href="../search.html" />
     <link rel="next" title="Max-Cut and Traveling Salesman Problem" href="06_examples_max_cut_and_tsp.html" />
-    <link rel="prev" title="Grover Optimizer" href="04_grover_optimizer.html" /> 
+    <link rel="prev" title="Otimizador de Grover" href="04_grover_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Idiomas</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/05_admm_optimizer.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Primeiros Passos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">Referências de API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutoriais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Notas da Versão</a></li>
 </ul>
 
             
@@ -202,7 +202,7 @@
         
           <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
         
-      <li>ADMM Optimizer</li>
+      <li>Otimizador ADMM</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,27 +480,27 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/05_admm_optimizer.ipynb">docs/tutorials/05_admm_optimizer.ipynb</a>.</p>
 </div>
-<div class="section" id="ADMM-Optimizer">
-<h1>ADMM Optimizer<a class="headerlink" href="#ADMM-Optimizer" title="Link permanente para este título">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Link permanente para este título">¶</a></h2>
-<p>The ADMM Optimizer can solve classes of mixed-binary constrained optimization problems, hereafter (MBCO), which often appear in logistic, finance, and operation research. In particular, the ADMM Optimizer here designed can tackle the following optimization problem <span class="math notranslate nohighlight">\((P)\)</span>:</p>
+<div class="section" id="Otimizador-ADMM">
+<h1>Otimizador ADMM<a class="headerlink" href="#Otimizador-ADMM" title="Link permanente para este título">¶</a></h1>
+<div class="section" id="Introdução">
+<h2>Introdução<a class="headerlink" href="#Introdução" title="Link permanente para este título">¶</a></h2>
+<p>O Otimizador ADMM pode resolver classes de problemas de otimização mistos-binários restritos, daqui em diante (MBCO), que geralmente aparecem em pesquisas logísticas, financeiras e de operações. Em particular, o Otimizador ADMM aqui projetado pode resolver o seguinte problema de otimização <span class="math notranslate nohighlight">\((P)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\min_{x \in \mathcal{X},u\in\mathcal{U} \subseteq \mathbb{R}^l } \quad q(x) + \varphi(u),\]</div>
-<p>subject to the constraints:</p>
+<p>sujeito às restrições:</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{s.t.:~} \quad G x = b, \quad  g(x) \leq 0, \quad \ell(x, u) \leq 0,\]</div>
-<p>with the corresponding functional assumptions.</p>
+<p>com as premissas funcionais correspondentes.</p>
 <ol class="arabic simple">
-<li><p>Function <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> is quadratic, i.e., <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> for a given symmetric squared matrix <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, and vector <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
-<li><p>The set <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> enforces the binary constraints;</p></li>
-<li><p>Matrix <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, vector <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, and function <span class="math notranslate nohighlight">\(g: \mathbb{R}^n \to \mathbb{R}\)</span> is convex;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> is convex and <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> is a convex set;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> is <em>jointly</em> convex in <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
+<li><p>A função <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> é quadrática, p.ex., <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> para uma determinada matriz quadrada simétrica <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, e vetor <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
+<li><p>O conjunto <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> impõe as restrições binárias;</p></li>
+<li><p>Matriz <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, vector <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, e função <span class="math notranslate nohighlight">\(g: \mathbb{R}^n \to \mathbb{R}\)</span> são convexos;</p></li>
+<li><p>Função <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> é convexa e <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> é um conjunto convexo;</p></li>
+<li><p>Função <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> é <em>conjuntamente</em> convexa em <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
 </ol>
 <p>In order to solve MBO problems, [1] proposed heuristics for <span class="math notranslate nohighlight">\((P)\)</span> based on the Alternating Direction Method of Multipliers (ADMM) [2]. ADMM is an operator splitting algorithm with a long history in convex optimization, and it is known to have residual, objective and dual variable convergence properties, provided that convexity assumptions are holding.</p>
 <p>The method of [1] (referred to as 3-ADMM-H) leverages the ADMM operator-splitting procedure to devise a decomposition for certain classes of MBOs into: - a QUBO subproblem to be solved by on the quantum device via variational algorithms, such as VQE or QAOA; - continuous convex constrained subproblem, which can be efficiently solved with classical optimization solvers.</p>
@@ -858,7 +858,7 @@ fval=1.00
         <a href="06_examples_max_cut_and_tsp.html" class="btn btn-neutral float-right" title="Max-Cut and Traveling Salesman Problem" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="Grover Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="Otimizador de Grover" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -890,8 +890,8 @@ fval=1.00
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">ADMM Optimizer</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
+<li><a class="reference internal" href="#">Otimizador ADMM</a><ul>
+<li><a class="reference internal" href="#Introdução">Introdução</a></li>
 <li><a class="reference internal" href="#References">References</a></li>
 <li><a class="reference internal" href="#Initialization">Initialization</a></li>
 <li><a class="reference internal" href="#Example">Example</a></li>
@@ -928,7 +928,7 @@ fval=1.00
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

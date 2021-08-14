@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Vehicle Routing &mdash; Qiskit Optimization 0.3.0 belgelendirmesi</title>
+  <title>Vehicle Routing &mdash; Qiskit Optimization 0.2.1 belgelendirmesi</title>
   
 
   
@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
-    <link rel="next" title="Improving Variational Quantum Optimization using CVaR" href="08_cvar_optimization.html" />
+    <link rel="next" title="CVaR Kullanarak Değişimsel Kuantum Optimizasyonunu İyileştirme" href="08_cvar_optimization.html" />
     <link rel="prev" title="Max-Cut and Traveling Salesman Problem" href="06_examples_max_cut_and_tsp.html" /> 
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Optimizasyon Eğitimleri</a> &gt;</li>
         
       <li>Vehicle Routing</li>
     
@@ -480,58 +480,54 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/07_examples_vehicle_routing.ipynb">docs/tutorials/07_examples_vehicle_routing.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
 <div class="section" id="Vehicle-Routing">
 <h1>Vehicle Routing<a class="headerlink" href="#Vehicle-Routing" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
-<div class="section" id="The-Introduction">
-<h2>The Introduction<a class="headerlink" href="#The-Introduction" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Logistics is a major industry, with some estimates valuing it at USD 8183 billion globally in 2015. Most service providers operate a number of vehicles (e.g., trucks and container ships), a number of depots, where the vehicles are based overnight, and serve a number of client locations with each vehicle during each day. There are many optimization and control problems that consider these parameters. Computationally, the key challenge is how to design routes from depots to a number of client
-locations and back to the depot, so as to minimize vehicle-miles traveled, time spent, or similar objective functions. In this notebook we formalize an idealized version of the problem and showcase its solution using the quantum approximate optimization approach of Farhi, Goldstone, and Gutmann (2014).</p>
-<p>The overall workflow we demonstrate comprises:</p>
+<div class="section" id="Giriş">
+<h2>Giriş<a class="headerlink" href="#Giriş" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Lojistik, 2015 yılında küresel olarak 8183 milyar ABD doları değerinde olduğunu tahmin eden önemli bir sektördür. Hizmet sağlayıcıların çoğu, bir dizi aracı (örneğin, kamyonlar ve konteyner gemileri), araçların gece boyu kaldığı ve gün boyunca müşteri konumlarına tüm araçlar ile hizmet veren birkaç depoyu işletmektedir. Bu parametreleri dikkate alan birçok optimizasyon ve kontrol problemi vardır. Hesaplama açısından, temel zorluk, gidilen araç millerini, harcanan zamanı veya benzer amaç işlevlerini en aza indirgemek için depodan bir dizi müşteri konumuna ve depoya geri dönüş yollarının nasıl tasarlanacağıdır. Bu not defterinde, problemin idealize edilmiş bir versiyonunu şekillendiriyoruz ve Farhi, Goldstone ve Gutman’ın (2014) kuantum yaklaşık optimizasyon yaklaşımını kullanarak çözümünü sergiliyoruz.</p>
+<p>Gösterdiğimiz genel iş akışı şunları içerir:</p>
 <ol class="arabic simple">
-<li><p>establish the client locations. Normally, these would be available ahead of the day of deliveries from a database. In our use case, we generate these randomly.</p></li>
-<li><p>compute the pair-wise distances, travel times, or similar. In our case, we consider the Euclidean distance, “as the crow flies”, which is perhaps the simplest possible.</p></li>
-<li><p>compute the actual routes. This step is run twice, actually. First, we obtain a reference value by a run of a classical solver (IBM CPLEX) on the classical computer. Second, we run an alternative, hybrid algorithm partly on the quantum computer.</p></li>
-<li><p>visualization of the results. In our case, this is again a simplistic plot.</p></li>
+<li><p>müşteri konumlarını belirleyin. Normalde, bunlar bir veri tabanından teslimatların yapılacağı günden önce mevcut olacaktır. Bizim kullanım durumumuzda bunları rastgele oluşturuyoruz.</p></li>
+<li><p>ikili mesafeleri, seyahat sürelerini veya benzerlerini hesaplayın. Bizim durumumuzda, belki de mümkün olan en basit olan “as the crow flies” Öklid mesafesini düşünüyoruz.</p></li>
+<li><p>gerçek rotaları hesaplayın. Bu adım aslında iki kez çalıştırılır. İlk olarak, klasik bilgisayarda bir klasik çözücü (IBM CPLEX) çalıştırarak bir referans değeri elde ediyoruz. İkinci olarak, kısmen kuantum bilgisayarda alternatif, hibrit bir algoritma çalıştırıyoruz.</p></li>
+<li><p>sonuçların görseli. Bizim örneğimizde, bu yine basit bir çizimdir.</p></li>
 </ol>
-<p>In the following, we first explain the model, before we proceed with the installation of the pre-requisites and the data loading.</p>
+<p>Aşağıda, ön koşulların kurulumuna ve veri yüklemesine geçmeden önce modeli açıklıyoruz.</p>
 </div>
-<div class="section" id="The-Model">
-<h2>The Model<a class="headerlink" href="#The-Model" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Mathematically speaking, the vehicle routing problem (VRP) is a combinatorial problem, wherein the best routes from a depot to a number of clients and back to the depot are sought, given a number of available vehicles. There are a number of formulations possible, extending a number of formulations of the traveling salesman problem [Applegate et al, 2006]. Here, we present a formulation known as MTZ [Miller, Tucker, Zemlin, 1960].</p>
-<p>Let <span class="math notranslate nohighlight">\(n\)</span> be the number of clients (indexed as <span class="math notranslate nohighlight">\(1,\dots,n\)</span>), and <span class="math notranslate nohighlight">\(K\)</span> be the number of available vehicles. Let <span class="math notranslate nohighlight">\(x_{ij} = \{0,1\}\)</span> be the binary decision variable which, if it is <span class="math notranslate nohighlight">\(1\)</span>, activates the segment from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span>. The node index runs from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>, where <span class="math notranslate nohighlight">\(0\)</span> is (by convention) the depot. There are twice as many distinct decision variables as edges. For example, in a fully connected graph, there are <span class="math notranslate nohighlight">\(n(n+1)\)</span> binary
-decision variables.</p>
-<p>If two nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> have a link from <span class="math notranslate nohighlight">\(i\)</span> to <span class="math notranslate nohighlight">\(j\)</span>, we write <span class="math notranslate nohighlight">\(i \sim j\)</span>. We also denote with <span class="math notranslate nohighlight">\(\delta(i)^+\)</span> the set of nodes to which <span class="math notranslate nohighlight">\(i\)</span> has a link, i.e., <span class="math notranslate nohighlight">\(j \in \delta(i)^+\)</span> if and only if <span class="math notranslate nohighlight">\(i \sim j\)</span>. Similarly, we denote with <span class="math notranslate nohighlight">\(\delta(i)^-\)</span> the set of nodes which are connected to <span class="math notranslate nohighlight">\(i\)</span>, in the sense that <span class="math notranslate nohighlight">\(j \in \delta(i)^-\)</span> if and only if <span class="math notranslate nohighlight">\(j \sim i\)</span>.</p>
-<p>In addition, we consider continuous variables, for all nodes <span class="math notranslate nohighlight">\(i = 1,\dots, n\)</span>, denoted <span class="math notranslate nohighlight">\(u_i\)</span>. These variables are needed in the MTZ formulation of the problem to eliminate sub-tours between clients.</p>
-<p>The VRP can be formulated as:</p>
+<div class="section" id="Model">
+<h2>Model<a class="headerlink" href="#Model" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Matematiksel olarak konuşursak, araç rotalama problemi (VRP), bir depodan bir dizi müşteriye ve depoya geri dönen en iyi rotaların, bir dizi mevcut araç göz önüne alındığında arandığı bir kombinatoryal problemdir. Gezgin satıcı probleminin bir dizi formülasyonunu genişleten bir dizi olası formülasyon vardır [Applegate ve diğerleri, 2006]. Burada MTZ [Miller, Tucker, Zemlin, 1960] olarak bilinen bir formülasyon sunuyoruz.</p>
+<p><span class="math notranslate nohighlight">\(n\)</span> müşteri sayısı olsun ( <span class="math notranslate nohighlight">\(1,\dots,n\)</span> şeklinde indekslenmiş) ve <span class="math notranslate nohighlight">\(K\)</span> mevcut araç sayısı olsun. <span class="math notranslate nohighlight">\(x_{ij} = \{0,1\}\)</span> ikili karar değişkeni olsun, eğer <span class="math notranslate nohighlight">\(1\)</span> ise, <span class="math notranslate nohighlight">\(i\)</span> düğümünden :math düğümüne segmenti etkinleştirir :<cite>j</cite>. Düğüm dizini <span class="math notranslate nohighlight">\(0\)</span> ile <span class="math notranslate nohighlight">\(n\)</span> arasında çalışır, burada <span class="math notranslate nohighlight">\(0\)</span> (geleneksel olarak) depodur. Kenarlardan iki kat daha fazla farklı karar değişkeni vardır. Örneğin, tam bağlantılı bir grafikte <span class="math notranslate nohighlight">\(n(n+1)\)</span> ikili karar değişkenleri vardır.</p>
+<p><span class="math notranslate nohighlight">\(i\)</span> ve <span class="math notranslate nohighlight">\(j\)</span> düğümlerinin <span class="math notranslate nohighlight">\(i\)</span> ile <span class="math notranslate nohighlight">\(j\)</span> arasında bir bağlantısı varsa, <span class="math notranslate nohighlight">\(i \sim j\)</span> yazarız. Ayrıca <span class="math notranslate nohighlight">\(i\)</span>delta(i)^+` ile gösteririz, yani <span class="math notranslate nohighlight">\(j \in \delta(i)^+\)</span> eğer ve sadece <span class="math notranslate nohighlight">\(i \sim j\)</span> ise. Benzer şekilde, <span class="math notranslate nohighlight">\(\delta(i)^-\)</span> anlamında <span class="math notranslate nohighlight">\(i\)</span> ile bağlantılı düğümler kümesini <span class="math notranslate nohighlight">\(j \in \delta(i)^-\)</span> ile belirtiriz, ancak ve ancak <span class="math notranslate nohighlight">\(j \sim i\)</span>.</p>
+<p>Ayrıca, <span class="math notranslate nohighlight">\(u_i\)</span> ile gösterilen tüm düğümler için <span class="math notranslate nohighlight">\(i = 1,\dots, n\)</span>, sürekli değişkenleri dikkate alıyoruz. Bu değişkenler, istemciler arasındaki alt turları ortadan kaldırmak için sorunun MTZ formülasyonunda gereklidir.</p>
+<p>VRP şu şekilde formüle edilebilir:</p>
 <div class="math notranslate nohighlight">
 \[(VRP) \quad  f = \min_{\{x_{ij}\}_{i\sim j}\in \{0,1\}, \{u_i\}_{i=1,\dots,n}\in \mathbb{R}} \quad \sum_{i \sim j} w_{ij} x_{ij}\]</div>
-<p>subject to the node-visiting constraint:</p>
+<p>düğüm-ziyareti kısıtlamasına tabi:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{j \in \delta(i)^+} x_{ij} = 1, \,\sum_{j \in \delta(i)^-} x_{ji} = 1,\, \forall i \in \{1,\dots,n\},\]</div>
-<p>the depot-visiting constraints:</p>
+<p>depo-ziyareti kısıtlamaları:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i \in \delta(0)^+} x_{0i} = K, \, \sum_{j \in \delta(0)^+} x_{j0} = K,\]</div>
-<p>and the sub-tour elimination constraints:</p>
+<p>ve alt tur eleme kısıtlamaları:</p>
 <div class="math notranslate nohighlight">
 \[u_i - u_j + Q x_{ij} \leq Q-q_j, \, \forall i \sim j, \,i ,j \neq 0, \quad q_i \leq u_i \leq Q,\, \forall i, i \neq 0.\]</div>
-<p>In particular, - The cost function is linear in the cost functions and weighs the different arches based on a positive weight <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span> (typically the distance between node <span class="math notranslate nohighlight">\(i\)</span> and node <span class="math notranslate nohighlight">\(j\)</span>); - The first set of constraints enforce that from and to every client, only one link is allowed; - The second set of constraints enforce that from and to the depot, exactly <span class="math notranslate nohighlight">\(K\)</span> links are allowed; - The third set of constraints enforce the sub-tour elimination constraints and are
-bounds on <span class="math notranslate nohighlight">\(u_i\)</span>, with <span class="math notranslate nohighlight">\(Q&gt;q_j&gt;0\)</span>, and <span class="math notranslate nohighlight">\(Q,q_i \in \mathbb{R}\)</span>.</p>
+<p>Özellikle, - Maliyet fonksiyonu, maliyet fonksiyonlarında doğrusaldır ve <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span> pozitif ağırlığına (tipik olarak <span class="math notranslate nohighlight">\(i\)</span> düğümü ile <span class="math notranslate nohighlight">\(j\)</span> düğümü arasındaki mesafe) dayalı olarak farklı yayları tartar; - İlk kısıtlama grubu, her istemciden ve istemciye yalnızca bir bağlantıya izin verilmesini zorunlu kılar; - İkinci kısıtlama grubu, depodan ve depoya tam olarak <span class="math notranslate nohighlight">\(K\)</span> bağlantılarına izin verilmesini zorunlu kılar; - Üçüncü kısıtlama grubu, alt tur eleme kısıtlamalarını zorlar ve <span class="math notranslate nohighlight">\(u_i\)</span>, <span class="math notranslate nohighlight">\(Q&gt;q_j&gt;0\)</span> ve <span class="math notranslate nohighlight">\(Q,q_i \in \mathbb{R}\)</span> ile sınırlar.</p>
 </div>
-<div class="section" id="Classical-solution">
-<h2>Classical solution<a class="headerlink" href="#Classical-solution" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>We can solve the VRP classically, e.g., by using CPLEX. CPLEX uses a branch-and-bound-and-cut method to find an approximate solution of the VRP, which, in this formulation, is a mixed-integer linear program (MILP). For the sake of notation, we pack the decision variables in one vector as</p>
+<div class="section" id="Klasik-çözüm">
+<h2>Klasik çözüm<a class="headerlink" href="#Klasik-çözüm" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>VRP’yi klasik olarak, örneğin CPLEX kullanarak çözebiliriz. CPLEX, bu formülasyonda bir karma tamsayılı doğrusal program (MILP) olan VRP’nin yaklaşık bir çözümünü bulmak için bir dal-ve-sınır-ve-kes yöntemi kullanır. Notasyon amacıyla, karar değişkenlerini bir vektörde şu şekilde topluyoruz</p>
 <div class="math notranslate nohighlight">
 \[{\bf z} = [x_{01},x_{02},\ldots,x_{10}, x_{12},\ldots,x_{n(n-1)}]^T,\]</div>
-<p>wherein <span class="math notranslate nohighlight">\({\bf z} \in \{0,1\}^N\)</span>, with <span class="math notranslate nohighlight">\(N = n (n+1)\)</span>. So the dimension of the problem scales quadratically with the number of nodes. Let us denote the optimal solution by <span class="math notranslate nohighlight">\({\bf z}^*\)</span>, and the associated optimal cost <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
+<p>burada <span class="math notranslate nohighlight">\({\bf z} \in \{0,1\}^N\)</span>, <span class="math notranslate nohighlight">\(N = n (n+1)\)</span> ile. Böylece problemin boyutu düğüm sayısı ile ikinci dereceden ölçeklenir. Hadi en uygun çözümü <span class="math notranslate nohighlight">\({\bf z}^*\)</span> ve ilişkili optimal maliyeti <span class="math notranslate nohighlight">\(f^*\)</span> ile gösterelim.</p>
 </div>
-<div class="section" id="Quantum-solution">
-<h2>Quantum solution<a class="headerlink" href="#Quantum-solution" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Here, we demonstrate an approach that combines classical and quantum computing steps, following the quantum approximate optimization approach of Farhi, Goldstone, and Gutmann (2014). In particular, we use the variational quantum eigensolver (VQE). We stress that given the use of limited depth of the quantum circuits employed (variational forms), it is hard to discuss the speed-up of the algorithm, as the solution obtained is heuristic in nature. At the same time, due to the nature and importance
-of the target problems, it is worth investigating heuristic approaches, which may be worthwhile for some problem classes.</p>
+<div class="section" id="Kuantum-Çözümü">
+<h2>Kuantum Çözümü<a class="headerlink" href="#Kuantum-Çözümü" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Burada, Farhi, Goldstone ve Gutmann’ın (2014) kuantum yaklaşık optimizasyon yaklaşımını izleyerek klasik ve kuantum hesaplama adımlarını birleştiren bir yaklaşım gösteriyoruz. Özellikle, varyasyonel kuantum özçözücüyü (VQE) kullanıyoruz. Kullanılan kuantum devrelerinin (varyasyon formları) sınırlı derinliğinin kullanımı göz önüne alındığında, elde edilen çözüm doğada buluşsal olduğu için algoritmanın hızlanmasını tartışmanın zor olduğunu vurguluyoruz. Aynı zamanda, hedef problemlerin doğası ve önemi nedeniyle, bazı problem sınıfları için faydalı olabilecek sezgisel yaklaşımları araştırmaya değer.</p>
 <p>Following [5], the algorithm can be summarized as follows:</p>
 <ul class="simple">
 <li><p>Preparation steps:</p>
@@ -1134,7 +1130,7 @@ of the ILP. Even within the VQE, one may provide stronger guarantees, for specif
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="08_cvar_optimization.html" class="btn btn-neutral float-right" title="Improving Variational Quantum Optimization using CVaR" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="08_cvar_optimization.html" class="btn btn-neutral float-right" title="CVaR Kullanarak Değişimsel Kuantum Optimizasyonunu İyileştirme" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="06_examples_max_cut_and_tsp.html" class="btn btn-neutral" title="Max-Cut and Traveling Salesman Problem" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -1170,10 +1166,10 @@ of the ILP. Even within the VQE, one may provide stronger guarantees, for specif
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Vehicle Routing</a><ul>
-<li><a class="reference internal" href="#The-Introduction">The Introduction</a></li>
-<li><a class="reference internal" href="#The-Model">The Model</a></li>
-<li><a class="reference internal" href="#Classical-solution">Classical solution</a></li>
-<li><a class="reference internal" href="#Quantum-solution">Quantum solution</a><ul>
+<li><a class="reference internal" href="#Giriş">Giriş</a></li>
+<li><a class="reference internal" href="#Model">Model</a></li>
+<li><a class="reference internal" href="#Klasik-çözüm">Klasik çözüm</a></li>
+<li><a class="reference internal" href="#Kuantum-Çözümü">Kuantum Çözümü</a><ul>
 <li><a class="reference internal" href="#Construct-the-Ising-Hamiltonian">Construct the Ising Hamiltonian</a></li>
 <li><a class="reference internal" href="#From-Hamiltonian-to-QP-formulation">From Hamiltonian to QP formulation</a></li>
 </ul>
@@ -1211,7 +1207,7 @@ of the ILP. Even within the VQE, one may provide stronger guarantees, for specif
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

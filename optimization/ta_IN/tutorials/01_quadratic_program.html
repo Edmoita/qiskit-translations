@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quadratic Programs &mdash; Qiskit Optimization 0.3.0 documentation</title>
+  <title>இருபடி திட்டங்கள் &mdash; Qiskit Optimization 0.2.1 documentation</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -202,7 +202,7 @@
         
           <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
         
-      <li>Quadratic Programs</li>
+      <li>இருபடி திட்டங்கள்</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,15 +480,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/01_quadratic_program.ipynb">docs/tutorials/01_quadratic_program.ipynb</a>.</p>
 </div>
-<div class="section" id="Quadratic-Programs">
-<h1>Quadratic Programs<a class="headerlink" href="#Quadratic-Programs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="இருபடி-திட்டங்கள்">
+<h1>இருபடி திட்டங்கள்<a class="headerlink" href="#இருபடி-திட்டங்கள்" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial, we briefly introduce how to build optimization problems using Qiskit’s optimization module. Qiskit introduces the <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> class to make a model of an optimization problem. More precisely, it deals with quadratically constrained quadratic programs given as follows:</p>
+<p>இந்த டுடோரியலில், qiskit தேர்வுமுறை தொகுதியைப் பயன்படுத்தி தேர்வுமுறை சிக்கல்களை எவ்வாறு உருவாக்குவது என்பதை சுருக்கமாக அறிமுகப்படுத்துகிறோம். தேர்வுமுறை சிக்கலின் மாதிரியை உருவாக்க qiskit <code class="docutils literal notranslate"><span class="pre">இருபடி</span> <span class="pre">திட்டங்கள்</span></code> வகுப்பை அறிமுகப்படுத்துகிறது. இன்னும் துல்லியமாக, இது பின்வருமாறு கொடுக்கப்பட்டுள்ள இருபடி கட்டுப்படுத்தப்பட்ட இருபடி திட்டங்களுடன் தொடர்புடையது:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \text{minimize}\quad&amp; x^\top Q_0 x + c^\top x\\
@@ -496,11 +496,11 @@ div.rendered_html tbody tr:hover {
 &amp; x^\top Q_i x + a_i^\top x \leq r_i, \quad 1,\dots,i,\dots,q\\
 &amp; l_i \leq x_i \leq u_i, \quad 1,\dots,i,\dots,n,
 \end{align}\end{split}\]</div>
-<p>where the <span class="math notranslate nohighlight">\(Q_i\)</span> are <span class="math notranslate nohighlight">\(n \times n\)</span> matrices, <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix , <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> are <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors, <span class="math notranslate nohighlight">\(b\)</span> is an <span class="math notranslate nohighlight">\(m\)</span>-dimensional vector, and where <span class="math notranslate nohighlight">\(x\)</span> can defined as binary, integer, or continuous variables. In addition to “<span class="math notranslate nohighlight">\(\leq\)</span>” constraints ‘QuadraticProgram’ also supports “<span class="math notranslate nohighlight">\(\geq\)</span>” and “<span class="math notranslate nohighlight">\(=\)</span>”.</p>
+<p>எங்கே <span class="math notranslate nohighlight">\(Q_i\)</span> are <span class="math notranslate nohighlight">\(n \times n\)</span> மெட்ரிக்குகள், <span class="math notranslate nohighlight">\(A\)</span> என்பது ஒரு <span class="math notranslate nohighlight">\(m \times n\)</span> matrix , <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> are <span class="math notranslate nohighlight">\(n\)</span>-பரிமாண திசையன்கள், <span class="math notranslate nohighlight">\(b\)</span> என்பது ஒரு <span class="math notranslate nohighlight">\(m\)</span>-பரிமாண திசையன், மற்றும் எங்கே <span class="math notranslate nohighlight">\(x\)</span> பைனரி, முழு எண் அல்லது தொடர்ச்சியான மாறிகள் என வரையறுக்கப்படுகிறது . “<span class="math notranslate nohighlight">\(\leq\)</span>” தடைகளுக்கு மேலதிகமாக ‘இருபடி திட்டங்கள்’ மேலும் “<span class="math notranslate nohighlight">\(\geq\)</span>” and “<span class="math notranslate nohighlight">\(=\)</span>” ஐ ஆதரிக்கிறது.</p>
 </div>
-<div class="section" id="Loading-a-Quadratic-Program-from-an-LP-file">
-<h2>Loading a <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> from an LP file<a class="headerlink" href="#Loading-a-Quadratic-Program-from-an-LP-file" title="Permalink to this headline">¶</a></h2>
-<p>As setup, you need to import the following module.</p>
+<div class="section" id="LP-கோப்பிலிருந்து-இருபடி-நிரலை-ஏற்றுகிறது">
+<h2>LP கோப்பிலிருந்து <code class="docutils literal notranslate"><span class="pre">இருபடி</span> <span class="pre">நிரலை</span></code> ஏற்றுகிறது<a class="headerlink" href="#LP-கோப்பிலிருந்து-இருபடி-நிரலை-ஏற்றுகிறது" title="Permalink to this headline">¶</a></h2>
+<p>அமைப்பாக, நீங்கள் பின்வரும் தொகுதியை இறக்குமதி செய்ய வேண்டும்.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -603,8 +603,8 @@ End
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Directly-constructing-a-QuadraticProgram">
-<h2>Directly constructing a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code><a class="headerlink" href="#Directly-constructing-a-QuadraticProgram" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="நேரடியாக-குவாட்ராடிக்-புரோகிராம்-ஐ-உருவாக்குகிறது">
+<h2>நேரடியாக <code class="docutils literal notranslate"><span class="pre">குவாட்ராடிக்</span> <span class="pre">புரோகிராம்</span></code> ஐ உருவாக்குகிறது<a class="headerlink" href="#நேரடியாக-குவாட்ராடிக்-புரோகிராம்-ஐ-உருவாக்குகிறது" title="Permalink to this headline">¶</a></h2>
 <p>We then explain how to make model of an optimization problem directly using <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>. Let’s start from an empty model.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -1134,11 +1134,11 @@ Error: &#39;Cannot substitute by variable that gets substituted itself: y &lt;- 
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Quadratic Programs</a><ul>
+<li><a class="reference internal" href="#">இருபடி திட்டங்கள்</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#Loading-a-Quadratic-Program-from-an-LP-file">Loading a <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> from an LP file</a></li>
+<li><a class="reference internal" href="#LP-கோப்பிலிருந்து-இருபடி-நிரலை-ஏற்றுகிறது">LP கோப்பிலிருந்து <code class="docutils literal notranslate"><span class="pre">இருபடி</span> <span class="pre">நிரலை</span></code> ஏற்றுகிறது</a></li>
 <li><a class="reference internal" href="#Loading-a-QuadraticProgram-from-a-docplex-model">Loading a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> from a docplex model</a></li>
-<li><a class="reference internal" href="#Directly-constructing-a-QuadraticProgram">Directly constructing a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code></a></li>
+<li><a class="reference internal" href="#நேரடியாக-குவாட்ராடிக்-புரோகிராம்-ஐ-உருவாக்குகிறது">நேரடியாக <code class="docutils literal notranslate"><span class="pre">குவாட்ராடிக்</span> <span class="pre">புரோகிராம்</span></code> ஐ உருவாக்குகிறது</a></li>
 <li><a class="reference internal" href="#Adding/removing-linear-and-quadratic-constraints">Adding/removing linear and quadratic constraints</a></li>
 <li><a class="reference internal" href="#Substituting-Variables">Substituting Variables</a></li>
 </ul>
@@ -1163,7 +1163,7 @@ Error: &#39;Cannot substitute by variable that gets substituted itself: y &lt;- 
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

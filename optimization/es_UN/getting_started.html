@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Primeros Pasos &mdash; documentación de Qiskit Optimization - 0.3.0</title>
+  <title>Primeros Pasos &mdash; documentación de Qiskit Optimization - 0.2.1</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -237,25 +237,24 @@
 <p>Qiskit Optimization depende del paquete principal de Qiskit, que tiene su propio <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Primeros Pasos</a> que detalla las opciones de instalación de Qiskit y sus entornos/plataformas compatibles. Deberías referirte a eso primero. Luego, se puede seguir la información que está aquí la cual se centra en la instalación adicional específica de Qiskit Optimization.</p>
 <p>Qiskit Optimization tiene algunas funciones que se han hecho opcionales cuando el código dependiente y/o los programa(s) de soporte no están (o no pueden ser) instalados de forma predeterminada. Esos son IBM CPLEX, CVXPY y Matplotlib. Consulte <a class="reference internal" href="#optional-installs"><span class="std std-ref">Instalaciones opcionales</span></a> para obtener más información.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="1e997273-2086-467c-ba9c-d945c2783d9a" name="4f8c5184-f12c-4849-833c-f2613383ceca" type="radio">
-</input><label class="tabbed-label" for="1e997273-2086-467c-ba9c-d945c2783d9a">
+<input checked="checked" id="fb86a086-bad4-4cd1-95ce-5a42aa75fe9d" name="e7139bed-387c-47c4-a102-b37b70c1c4bf" type="radio">
+</input><label class="tabbed-label" for="fb86a086-bad4-4cd1-95ce-5a42aa75fe9d">
 Comenzar localmente</label><div class="tabbed-content docutils">
 <p>La forma más sencilla de empezar es seguir la introducción “Comenzar localmente” para Qiskit que se encuentra aquí <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Primeros Pasos</a></p>
 <p>En tu entorno virtual donde instalaste Qiskit, simplemente agrega <code class="docutils literal notranslate"><span class="pre">optimization</span></code> a la lista adicional de manera similar a cómo se instala el soporte adicional de <code class="docutils literal notranslate"><span class="pre">visualization</span></code> para Qiskit, es decir:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install qiskit<span class="o">[</span>optimization<span class="o">]</span>
 </pre></div>
 </div>
-<p>It is worth pointing out that if you’re a zsh user (which is the default shell on newer
-versions of macOS), you’ll need to put <code class="docutils literal notranslate"><span class="pre">qiskit[optimization]</span></code> in quotes:</p>
+<p>Vale la pena señalar que si eres un usuario de zsh (que es el shell predeterminado en las versiones más recientes de macOS), deberás poner <code class="docutils literal notranslate"><span class="pre">qiskit[optimization]</span></code> entre comillas:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install <span class="s1">&#39;qiskit[optimization]&#39;</span>
 </pre></div>
 </div>
 </div>
-<input id="391ec048-066e-4b7c-a382-7670d4f202c6" name="4f8c5184-f12c-4849-833c-f2613383ceca" type="radio">
-</input><label class="tabbed-label" for="391ec048-066e-4b7c-a382-7670d4f202c6">
+<input id="66d286a8-c40d-429f-9acc-6a5de48a7400" name="e7139bed-387c-47c4-a102-b37b70c1c4bf" type="radio">
+</input><label class="tabbed-label" for="66d286a8-c40d-429f-9acc-6a5de48a7400">
 Instalar desde el código fuente</label><div class="tabbed-content docutils">
 <p>La instalación de Qiskit Optimization desde el código fuente te permite acceder a la versión actualizada más recientemente en desarrollo en lugar de usar la versión en el repositorio Python Package Index (PyPI). Esto te dará la capacidad de inspeccionar y ampliar la última versión del código de Optimization de manera más eficiente.</p>
-<p>Dado que Qiskit Optimization depende de Qiskit, y sus últimos cambios pueden requerir funciones nuevas o modificadas de Qiskit, primero debe seguir las instrucciones de «Instalar desde el código fuente» de Qiskit aquí <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Primeros Pasos</a></p>
+<p>Dado que Qiskit Optimization depende de Qiskit, y sus últimos cambios pueden requerir funciones nuevas o modificadas de Qiskit, primero debes seguir las instrucciones de «Instalar desde el código fuente» de Qiskit aquí <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Primeros Pasos</a></p>
 <h2>Installing Qiskit Optimization from Source</h2><p>Con el mismo entorno de desarrollo en el que instalaste Qiskit, estás listo para instalar Qiskit Optimization.</p>
 <ol class="arabic">
 <li><p>Clonar el repositorio de Qiskit Optimization.</p>
@@ -263,7 +262,7 @@ Instalar desde el código fuente</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </li>
-<li><p>Cloning the repository creates a local folder called <code class="docutils literal notranslate"><span class="pre">qiskit-optimization</span></code>.</p>
+<li><p>El clonar el repositorio crea un folder local llamado <code class="docutils literal notranslate"><span class="pre">qiskit-optimization</span></code>.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> qiskit-optimization
 </pre></div>
 </div>
@@ -289,11 +288,12 @@ Instalar desde el código fuente</label><div class="tabbed-content docutils">
 <div class="section" id="optional-installs">
 <span id="id1"></span><h2>Instalaciones opcionales<a class="headerlink" href="#optional-installs" title="Enlazar permanentemente con este título">¶</a></h2>
 <ul class="simple">
-<li><p>** IBM CPLEX* * puede ser instalado utilizando <cite>pip install “qiskit-optimization[cplex]”</cite> para permitir la lectura de archivos <cite>LP</cite> y el uso de <cite>CplexOptimizer</cite> para <code class="docutils literal notranslate"><span class="pre">cplex.Cplex</span></code>.</p></li>
-<li><p><a href="#id1"><span class="problematic" id="id2">**</span></a>CVXPY* <a href="#id3"><span class="problematic" id="id4">*</span></a>, se puede instalar utilizando el comando ` pip install “qiskit-optimization[cvx]” ` para instalar el paquete. Que CVXPY esté instalado habilitará el uso del algoritmo Goemans-Williamson como optimizador ` GoemansWilliamsonOptimizer <a href="#id5"><span class="problematic" id="id6">`</span></a>.</p></li>
-<li><p>** Matplotlib**, puede ser instalado utilizando el comando <cite>pip install “qiskit-optimization[matplotlib]”</cite> para instalar el paquete. La instalación de Matplotlib permitirá el uso del método <cite>draw</cite> en las clases de aplicación de optimización de gráficos.</p></li>
-<li><p><strong>Gurobipy</strong> may be installed using command <cite>pip install “qiskit-optimization[gurobi]”</cite> to install the
-package. Gurobipy being installed will enable the usage of the GurobiOptimizer.</p></li>
+<li><p><strong>IBM CPLEX</strong> may be installed using <cite>pip install “qiskit-optimization[cplex]”</cite> to enable the reading of <cite>LP</cite> files and the usage of
+the <cite>CplexOptimizer</cite>, wrapper for <code class="docutils literal notranslate"><span class="pre">cplex.Cplex</span></code>. Currently there is no python 3.9 version of CPLEX. In this case, the CPLEX install
+command will have no effect.</p></li>
+<li><p><strong>CVXPY</strong>, se puede instalar utilizando el comando <cite>pip install “qiskit-optimization[cvx]”</cite> para instalar el paquete. Que CVXPY esté instalado habilitará el uso del algoritmo Goemans-Williamson como un optimizador <cite>GoemansWilliamsonOptimizer</cite>.</p></li>
+<li><p><strong>Matplotlib</strong>, puede ser instalado utilizando el comando <cite>pip install “qiskit-optimization[matplotlib]”</cite> para instalar el paquete. La instalación de Matplotlib permitirá el uso del método <cite>draw</cite> en las clases de aplicación de optimización de grafos.</p></li>
+<li><p><strong>Gurobipy</strong> puede instalarse usando el comando <cite>pip install “qiskit-optimization [gurobi]”</cite> para instalar el paquete. La instalación de Gurobipy permitirá el uso de GurobiOptimizer.</p></li>
 </ul>
 </div>
 <hr class="docutils" />

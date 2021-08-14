@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit_optimization.runtime.vqe_program &mdash; Τεκμηρίωση του Qiskit Optimization - 0.3.0</title>
+  <title>qiskit_optimization.runtime.vqe_program &mdash; Τεκμηρίωση του Qiskit Optimization - 0.2.1</title>
   
 
   
@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../../../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Ευρετήριο" href="../../../genindex.html" />
+    <link rel="index" title="Δείκτης" href="../../../genindex.html" />
     <link rel="search" title="Αναζήτηση" href="../../../search.html" /> 
 
   
@@ -93,7 +93,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Γλώσσες</dt>
       
         <dd><a class="version" href="/documentation/optimization/_modules/qiskit_optimization/runtime/vqe_program.html">English</a></dd>
       
@@ -125,7 +125,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -154,10 +154,10 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Ξεκινώντας</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Οδηγοί εκμάθησης</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../release_notes.html">Σημειώσεις έκδοσης</a></li>
 </ul>
 
             
@@ -242,7 +242,7 @@
 <span class="sd">&quot;&quot;&quot;The Qiskit Optimization VQE Quantum Program.&quot;&quot;&quot;</span>
 
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
@@ -250,6 +250,7 @@
 <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="kn">import</span> <span class="n">Provider</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.backend</span> <span class="kn">import</span> <span class="n">Backend</span>
 <span class="kn">from</span> <span class="nn">qiskit.algorithms</span> <span class="kn">import</span> <span class="n">MinimumEigensolver</span><span class="p">,</span> <span class="n">MinimumEigensolverResult</span><span class="p">,</span> <span class="n">VQEResult</span>
+<span class="kn">from</span> <span class="nn">qiskit.algorithms.optimizers</span> <span class="kn">import</span> <span class="n">Optimizer</span><span class="p">,</span> <span class="n">SPSA</span>
 <span class="kn">from</span> <span class="nn">qiskit.opflow</span> <span class="kn">import</span> <span class="n">OperatorBase</span><span class="p">,</span> <span class="n">PauliSumOp</span>
 <span class="kn">from</span> <span class="nn">qiskit.quantum_info</span> <span class="kn">import</span> <span class="n">SparsePauliOp</span>
 
@@ -264,7 +265,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">ansatz</span><span class="p">:</span> <span class="n">QuantumCircuit</span><span class="p">,</span>
-        <span class="n">optimizer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">optimizer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">initial_point</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">provider</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Provider</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">backend</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Backend</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -276,11 +277,11 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            ansatz: A parameterized circuit used as Ansatz for the wave function.</span>
-<span class="sd">            optimizer: A dictionary specifying a classical optimizer.</span>
-<span class="sd">                Currently only SPSA and QN-SPSA are supported. Per default, SPSA is used.</span>
-<span class="sd">                The dictionary must contain a key ``name`` for the name of the optimizer and may</span>
-<span class="sd">                contain additional keys for the settings.</span>
-<span class="sd">                E.g. ``{&#39;name&#39;: &#39;SPSA&#39;, &#39;maxiter&#39;: 100}``.</span>
+<span class="sd">            optimizer: An optimizer or dictionary specifying a classical optimizer.</span>
+<span class="sd">                If a dictionary, only SPSA and QN-SPSA are supported. The dictionary must contain a</span>
+<span class="sd">                key ``name`` for the name of the optimizer and may contain additional keys for the</span>
+<span class="sd">                settings. E.g. ``{&#39;name&#39;: &#39;SPSA&#39;, &#39;maxiter&#39;: 100}``.</span>
+<span class="sd">                Per default, SPSA is used.</span>
 <span class="sd">            backend: The backend to run the circuits on.</span>
 <span class="sd">            initial_point: An optional initial point (i.e. initial parameter values)</span>
 <span class="sd">                for the optimizer. If ``None`` a random vector is used.</span>
@@ -295,7 +296,7 @@
 <span class="sd">                steps. Per default False.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">optimizer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">optimizer</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SPSA&quot;</span><span class="p">}</span>
+            <span class="n">optimizer</span> <span class="o">=</span> <span class="n">SPSA</span><span class="p">(</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 
         <span class="c1"># define program name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_program_id</span> <span class="o">=</span> <span class="s2">&quot;vqe&quot;</span>
@@ -349,21 +350,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_ansatz</span> <span class="o">=</span> <span class="n">ansatz</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;Return the dictionary describing the optimizer.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span>
 
     <span class="nd">@optimizer</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Set the optimizer.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;name&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;The settings must contain a ``name`` key specifying the type of &quot;</span> <span class="s2">&quot;the optimizer.&quot;</span>
-            <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">Optimizer</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;name&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;The optimizer dictionary must contain a ``name`` key specifying the type &quot;</span>
+                    <span class="s2">&quot;of the optimizer.&quot;</span>
+                <span class="p">)</span>
 
-        <span class="n">_validate_optimizer_settings</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+            <span class="n">_validate_optimizer_settings</span><span class="p">(</span><span class="n">optimizer</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="n">settings</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="n">optimizer</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">backend</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Backend</span><span class="p">]:</span>
@@ -447,9 +452,7 @@
             <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="VQEProgram.compute_minimum_eigenvalue"><a class="viewcode-back" href="../../../stubs/qiskit_optimization.runtime.VQEProgram.compute_minimum_eigenvalue.html#qiskit_optimization.runtime.VQEProgram.compute_minimum_eigenvalue">[τεκμηρίωση]</a>    <span class="k">def</span> <span class="nf">compute_minimum_eigenvalue</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">operator</span><span class="p">:</span> <span class="n">OperatorBase</span><span class="p">,</span>
-        <span class="n">aux_operators</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">OperatorBase</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">:</span> <span class="n">OperatorBase</span><span class="p">,</span> <span class="n">aux_operators</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">OperatorBase</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MinimumEigensolverResult</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Calls the VQE Runtime to approximate the ground state of the given operator.</span>
 
@@ -509,11 +512,6 @@
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The job </span><span class="si">{</span><span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">()</span><span class="si">}</span><span class="s2"> failed unexpectedly.&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
 
         <span class="c1"># re-build result from serialized return value</span>
-        <span class="n">vqe_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_job_result</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">vqe_result</span></div>
-
-    <span class="k">def</span> <span class="nf">_parse_job_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Build the VQE result object from the job result.&quot;&quot;&quot;</span>
         <span class="n">vqe_result</span> <span class="o">=</span> <span class="n">VQEProgramResult</span><span class="p">()</span>
         <span class="n">vqe_result</span><span class="o">.</span><span class="n">job_id</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">job_id</span><span class="p">()</span>
         <span class="n">vqe_result</span><span class="o">.</span><span class="n">cost_function_evals</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cost_function_evals&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -526,7 +524,8 @@
         <span class="n">vqe_result</span><span class="o">.</span><span class="n">optimizer_evals</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;optimizer_evals&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">vqe_result</span><span class="o">.</span><span class="n">optimizer_time</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;optimizer_time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">vqe_result</span><span class="o">.</span><span class="n">optimizer_history</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;optimizer_history&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">vqe_result</span></div>
+
+        <span class="k">return</span> <span class="n">vqe_result</span></div></div>
 
 
 <div class="viewcode-block" id="VQEProgramResult"><a class="viewcode-back" href="../../../stubs/qiskit_optimization.runtime.VQEProgramResult.html#qiskit_optimization.runtime.VQEProgramResult">[τεκμηρίωση]</a><span class="k">class</span> <span class="nc">VQEProgramResult</span><span class="p">(</span><span class="n">VQEResult</span><span class="p">):</span>
@@ -538,8 +537,8 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer_history</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_job_id</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer_history</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Dict[str, Any]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">job_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting started &mdash; Qiskit Optimization 0.3.0 documentation</title>
+  <title>Getting started &mdash; Qiskit Optimization 0.2.1 documentation</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -243,8 +243,8 @@ specific to Qiskit Optimization.</p>
 support program(s) are not (or cannot be) installed by default. Those are IBM CPLEX, CVXPY and Matplotlib.
 See <a class="reference internal" href="#optional-installs"><span class="std std-ref">Optional installs</span></a> for more information.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="36201171-91dd-4e43-b10c-bf76029436b4" name="82d14a61-f501-4195-a17e-42732cde0ddf" type="radio">
-</input><label class="tabbed-label" for="36201171-91dd-4e43-b10c-bf76029436b4">
+<input checked="checked" id="81860c49-542b-4160-ae32-b78236630858" name="154ac26f-c912-4760-885f-cf009835b8c0" type="radio">
+</input><label class="tabbed-label" for="81860c49-542b-4160-ae32-b78236630858">
 Start locally</label><div class="tabbed-content docutils">
 <p>The simplest way to get started is to follow the getting started 'Start locally' for Qiskit
 here <a class="reference external" href="https://qiskit.org/documentation/getting_started.html">Qiskit Getting Started</a></p>
@@ -260,8 +260,8 @@ versions of macOS), you'll need to put <code class="docutils literal notranslate
 </pre></div>
 </div>
 </div>
-<input id="8758496c-8d40-47b5-b645-1e3db58243d4" name="82d14a61-f501-4195-a17e-42732cde0ddf" type="radio">
-</input><label class="tabbed-label" for="8758496c-8d40-47b5-b645-1e3db58243d4">
+<input id="3bea87bb-d002-438e-85b4-7c070d7a8f8a" name="154ac26f-c912-4760-885f-cf009835b8c0" type="radio">
+</input><label class="tabbed-label" for="3bea87bb-d002-438e-85b4-7c070d7a8f8a">
 Install from source</label><div class="tabbed-content docutils">
 <p>Installing Qiskit Optimization from source allows you to access the most recently
 updated version under development instead of using the version in the Python Package
@@ -306,7 +306,8 @@ project don't require a reinstall to be applied, you can do this with:</p>
 <span id="id1"></span><h2>Optional installs<a class="headerlink" href="#optional-installs" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>IBM CPLEX</strong> may be installed using <cite>pip install 'qiskit-optimization[cplex]'</cite> to enable the reading of <cite>LP</cite> files and the usage of
-the <cite>CplexOptimizer</cite>, wrapper for <code class="docutils literal notranslate"><span class="pre">cplex.Cplex</span></code>.</p></li>
+the <cite>CplexOptimizer</cite>, wrapper for <code class="docutils literal notranslate"><span class="pre">cplex.Cplex</span></code>. Currently there is no python 3.9 version of CPLEX. In this case, the CPLEX install
+command will have no effect.</p></li>
 <li><p><strong>CVXPY</strong>, may be installed using command <cite>pip install 'qiskit-optimization[cvx]'</cite> to install the
 package. CVXPY being installed will enable the usage of the Goemans-Williamson algorithm as an optimizer <cite>GoemansWilliamsonOptimizer</cite>.</p></li>
 <li><p><strong>Matplotlib</strong>, may be installed using command <cite>pip install 'qiskit-optimization[matplotlib]'</cite> to install the

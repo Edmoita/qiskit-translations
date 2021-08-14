@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Vehicle Routing &mdash; Qiskit Optimization 0.3.0 documentazione</title>
+  <title>Vehicle Routing &mdash; Qiskit Optimization 0.2.1 documentazione</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Indice" href="../genindex.html" />
-    <link rel="search" title="Cerca" href="../search.html" />
-    <link rel="next" title="Improving Variational Quantum Optimization using CVaR" href="08_cvar_optimization.html" />
+    <link rel="search" title="Ricerca" href="../search.html" />
+    <link rel="next" title="Migliorare la Variational Quantum Optimization utilizzando CVaR" href="08_cvar_optimization.html" />
     <link rel="prev" title="Max-Cut and Traveling Salesman Problem" href="06_examples_max_cut_and_tsp.html" /> 
 
   
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Linguaggi</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/07_examples_vehicle_routing.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Come iniziare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">Riferimenti API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Note di Rilascio</a></li>
 </ul>
 
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Tutorial di Ottimizzazione</a> &gt;</li>
         
       <li>Vehicle Routing</li>
     
@@ -480,58 +480,54 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/07_examples_vehicle_routing.ipynb">docs/tutorials/07_examples_vehicle_routing.ipynb</a>.</p>
 </div>
 <div class="section" id="Vehicle-Routing">
 <h1>Vehicle Routing<a class="headerlink" href="#Vehicle-Routing" title="Link a questa intestazione">¶</a></h1>
-<div class="section" id="The-Introduction">
-<h2>The Introduction<a class="headerlink" href="#The-Introduction" title="Link a questa intestazione">¶</a></h2>
-<p>Logistics is a major industry, with some estimates valuing it at USD 8183 billion globally in 2015. Most service providers operate a number of vehicles (e.g., trucks and container ships), a number of depots, where the vehicles are based overnight, and serve a number of client locations with each vehicle during each day. There are many optimization and control problems that consider these parameters. Computationally, the key challenge is how to design routes from depots to a number of client
-locations and back to the depot, so as to minimize vehicle-miles traveled, time spent, or similar objective functions. In this notebook we formalize an idealized version of the problem and showcase its solution using the quantum approximate optimization approach of Farhi, Goldstone, and Gutmann (2014).</p>
-<p>The overall workflow we demonstrate comprises:</p>
+<div class="section" id="Introduzione">
+<h2>Introduzione<a class="headerlink" href="#Introduzione" title="Link a questa intestazione">¶</a></h2>
+<p>La logistica è settore di grande importanza, con alcune stime del suo valore globale che ammontano a 8183 miliardi di dollari nel 2015. La maggior parte dei fornitori di servizi gestisce un certo numero di veicoli (ad esempio, camion e navi portacontainer), un certo numero di depositi, dove i veicoli stazionano la notte, e serve un certo numero di luoghi clienti con ciascun veicolo ogni giorno. Ci sono molti problemi di ottimizzazione e di controllo che considerano questi parametri. Computazionalmente, la sfida chiave è come pianificare gli itinerari dai depositi ai luoghi clienti e poi di nuovo ai depositi in modo da minimizzare i chilometri percorsi, il tempo impiegato, o simili funzioni obiettivo. In questo notebook formalizziamo una versione idealizzata del problema e dimostriamo la sua soluzione usando l’approccio dell’ottimizzazione quantistica approssimata di Farhi, Goldstone e Gutmann (2014).</p>
+<p>Il processo complessivo che andiamo a dimostrare comprende:</p>
 <ol class="arabic simple">
-<li><p>establish the client locations. Normally, these would be available ahead of the day of deliveries from a database. In our use case, we generate these randomly.</p></li>
-<li><p>compute the pair-wise distances, travel times, or similar. In our case, we consider the Euclidean distance, “as the crow flies”, which is perhaps the simplest possible.</p></li>
-<li><p>compute the actual routes. This step is run twice, actually. First, we obtain a reference value by a run of a classical solver (IBM CPLEX) on the classical computer. Second, we run an alternative, hybrid algorithm partly on the quantum computer.</p></li>
-<li><p>visualization of the results. In our case, this is again a simplistic plot.</p></li>
+<li><p>stabilire le posizioni dei clienti. Normalmente, queste sarebbero disponibili in un database in anticipo rispetto al giorno delle consegne. Nel nostro caso, esse vengono generate casualmente.</p></li>
+<li><p>calcolare le distanze, tempi di percorrenza, o altre simili quantità tra coppie di posizioni. Nel nostro caso, consideriamo la distanza euclidea in linea d’aria, che è forse la più semplice possibile.</p></li>
+<li><p>calcolare gli itinerari effettivi. Questo passaggio è in realtà eseguito due volte. All’inizio otteniamo un valore di riferimento tramite l’esecuzione di un risolutore classico (IBM CPLEX) su un computer classico. In un secondo momento eseguiamo un algoritmo alternativo ibrido, in parte sul computer quantistico.</p></li>
+<li><p>visualizzare i risultati. Nel nostro caso, questo è di nuovo un grafico molto semplice.</p></li>
 </ol>
-<p>In the following, we first explain the model, before we proceed with the installation of the pre-requisites and the data loading.</p>
+<p>Nel seguito spieghiamo innanzitutto il modello, prima di procedere con l’installazione dei pre-requisiti e con il caricamento dei dati.</p>
 </div>
-<div class="section" id="The-Model">
-<h2>The Model<a class="headerlink" href="#The-Model" title="Link a questa intestazione">¶</a></h2>
-<p>Mathematically speaking, the vehicle routing problem (VRP) is a combinatorial problem, wherein the best routes from a depot to a number of clients and back to the depot are sought, given a number of available vehicles. There are a number of formulations possible, extending a number of formulations of the traveling salesman problem [Applegate et al, 2006]. Here, we present a formulation known as MTZ [Miller, Tucker, Zemlin, 1960].</p>
-<p>Let <span class="math notranslate nohighlight">\(n\)</span> be the number of clients (indexed as <span class="math notranslate nohighlight">\(1,\dots,n\)</span>), and <span class="math notranslate nohighlight">\(K\)</span> be the number of available vehicles. Let <span class="math notranslate nohighlight">\(x_{ij} = \{0,1\}\)</span> be the binary decision variable which, if it is <span class="math notranslate nohighlight">\(1\)</span>, activates the segment from node <span class="math notranslate nohighlight">\(i\)</span> to node <span class="math notranslate nohighlight">\(j\)</span>. The node index runs from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(n\)</span>, where <span class="math notranslate nohighlight">\(0\)</span> is (by convention) the depot. There are twice as many distinct decision variables as edges. For example, in a fully connected graph, there are <span class="math notranslate nohighlight">\(n(n+1)\)</span> binary
-decision variables.</p>
-<p>If two nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> have a link from <span class="math notranslate nohighlight">\(i\)</span> to <span class="math notranslate nohighlight">\(j\)</span>, we write <span class="math notranslate nohighlight">\(i \sim j\)</span>. We also denote with <span class="math notranslate nohighlight">\(\delta(i)^+\)</span> the set of nodes to which <span class="math notranslate nohighlight">\(i\)</span> has a link, i.e., <span class="math notranslate nohighlight">\(j \in \delta(i)^+\)</span> if and only if <span class="math notranslate nohighlight">\(i \sim j\)</span>. Similarly, we denote with <span class="math notranslate nohighlight">\(\delta(i)^-\)</span> the set of nodes which are connected to <span class="math notranslate nohighlight">\(i\)</span>, in the sense that <span class="math notranslate nohighlight">\(j \in \delta(i)^-\)</span> if and only if <span class="math notranslate nohighlight">\(j \sim i\)</span>.</p>
-<p>In addition, we consider continuous variables, for all nodes <span class="math notranslate nohighlight">\(i = 1,\dots, n\)</span>, denoted <span class="math notranslate nohighlight">\(u_i\)</span>. These variables are needed in the MTZ formulation of the problem to eliminate sub-tours between clients.</p>
-<p>The VRP can be formulated as:</p>
+<div class="section" id="Il-Modello">
+<h2>Il Modello<a class="headerlink" href="#Il-Modello" title="Link a questa intestazione">¶</a></h2>
+<p>Matematicamente parlando, il vehicle routing problem (VRP) è un problema combinatoro, dove si cercano i percorsi migliori da un deposito a un numero di clienti e poi di nuovo al deposito, dato un certo numero di veicoli disponibili. Ci sono diverse formulazioni possibili, che estendono un certo numero di formulazioni del problema del commesso viaggiatore [Applegate et al., 2006]. Qui presentiamo una formulazione nota come MTZ [Miller, Tucker, Zemlin, 1960].</p>
+<p>Sia <span class="math notranslate nohighlight">\(n\)</span> il numero di clienti (indicizzati come <span class="math notranslate nohighlight">\(1,\dots,n\)</span>), e <span class="math notranslate nohighlight">\(K\)</span> il numero di veicoli disponibili. Sia <span class="math notranslate nohighlight">\(x_{ij} = \{0,1\}\)</span> la variabile di decisione binaria, che se è <span class="math notranslate nohighlight">\(1\)</span> attiva il segmento dal nodo <span class="math notranslate nohighlight">\(i\)</span> al nodo <span class="math notranslate nohighlight">\(j\)</span>. L’indice del nodo va da <span class="math notranslate nohighlight">\(0\)</span> a <span class="math notranslate nohighlight">\(n\)</span>, dove <span class="math notranslate nohighlight">\(0\)</span> è (per convenzione) il deposito. Per ogni segmento vi sono due distinte variabili di decisione. Per esempio, in un grafo completamente connesso, ci sono <span class="math notranslate nohighlight">\(n(n+1)\)</span> variabili di decisione binarie.</p>
+<p>Se due nodi <span class="math notranslate nohighlight">\(i\)</span> e <span class="math notranslate nohighlight">\(j\)</span> hanno un collegamento da <span class="math notranslate nohighlight">\(i\)</span> a <span class="math notranslate nohighlight">\(j\)</span>, scriviamo <span class="math notranslate nohighlight">\(i \sim j\)</span>. Inoltre si denota con <span class="math notranslate nohighlight">\(\delta(i)^+\)</span> l’insieme dei nodi con cui <span class="math notranslate nohighlight">\(i\)</span> ha un collegamento, i.e., <span class="math notranslate nohighlight">\(j \in \delta(i)^+\)</span> se e solo se <span class="math notranslate nohighlight">\(i \sim j\)</span>. Analogamente, si denota con <span class="math notranslate nohighlight">\(\delta(i)^-\)</span> l’insieme dei nodi che sono connessi a <span class="math notranslate nohighlight">\(i\)</span>, nel senso che <span class="math notranslate nohighlight">\(j \in \delta(i)^-\)</span> se e solo se <span class="math notranslate nohighlight">\(j \sim i\)</span>.</p>
+<p>Inoltre consideriamo variabili continue per tutti i nodi <span class="math notranslate nohighlight">\(i = 1,\dots, n\)</span>, indicate con <span class="math notranslate nohighlight">\(u_i\)</span>. Queste variabili sono necessarie nella formulazione MTZ del problema per eliminare sub-tour tra clienti.</p>
+<p>IL VRP può essere formulato come:</p>
 <div class="math notranslate nohighlight">
 \[(VRP) \quad  f = \min_{\{x_{ij}\}_{i\sim j}\in \{0,1\}, \{u_i\}_{i=1,\dots,n}\in \mathbb{R}} \quad \sum_{i \sim j} w_{ij} x_{ij}\]</div>
-<p>subject to the node-visiting constraint:</p>
+<p>soggetto al vincolo di visita del nodo:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{j \in \delta(i)^+} x_{ij} = 1, \,\sum_{j \in \delta(i)^-} x_{ji} = 1,\, \forall i \in \{1,\dots,n\},\]</div>
-<p>the depot-visiting constraints:</p>
+<p>ai vincoli di visita del deposito:</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i \in \delta(0)^+} x_{0i} = K, \, \sum_{j \in \delta(0)^+} x_{j0} = K,\]</div>
-<p>and the sub-tour elimination constraints:</p>
+<p>e ai vincoli di eliminazione dei sub-tour:</p>
 <div class="math notranslate nohighlight">
 \[u_i - u_j + Q x_{ij} \leq Q-q_j, \, \forall i \sim j, \,i ,j \neq 0, \quad q_i \leq u_i \leq Q,\, \forall i, i \neq 0.\]</div>
-<p>In particular, - The cost function is linear in the cost functions and weighs the different arches based on a positive weight <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span> (typically the distance between node <span class="math notranslate nohighlight">\(i\)</span> and node <span class="math notranslate nohighlight">\(j\)</span>); - The first set of constraints enforce that from and to every client, only one link is allowed; - The second set of constraints enforce that from and to the depot, exactly <span class="math notranslate nohighlight">\(K\)</span> links are allowed; - The third set of constraints enforce the sub-tour elimination constraints and are
-bounds on <span class="math notranslate nohighlight">\(u_i\)</span>, with <span class="math notranslate nohighlight">\(Q&gt;q_j&gt;0\)</span>, and <span class="math notranslate nohighlight">\(Q,q_i \in \mathbb{R}\)</span>.</p>
+<p>In particolare: -La funzione di costo è lineare nelle funzioni di costo e pesa i differenti segmenti in base a un peso positivo <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span> (tipicamente la distanza tra il nodo <span class="math notranslate nohighlight">\(i\)</span> e il nodo <span class="math notranslate nohighlight">\(j\)</span>); - Il primo insieme di vincoli garantisce che a partire da e verso ciascun cliente sia concesso un solo collegamento; - Il secondo insieme di vincoli garantisce che a partire da e verso il deposito siano concessi esattamente <span class="math notranslate nohighlight">\(K\)</span> collegamenti; - Il terzo insieme di vincoli garantisce l’eliminazione dei sub-tour e stabilisce dei limiti sugli <span class="math notranslate nohighlight">\(u_i\)</span>, con <span class="math notranslate nohighlight">\(Q&gt;q_j&gt;0\)</span>, e <span class="math notranslate nohighlight">\(Q,q_i \in \mathbb{R}\)</span>.</p>
 </div>
-<div class="section" id="Classical-solution">
-<h2>Classical solution<a class="headerlink" href="#Classical-solution" title="Link a questa intestazione">¶</a></h2>
-<p>We can solve the VRP classically, e.g., by using CPLEX. CPLEX uses a branch-and-bound-and-cut method to find an approximate solution of the VRP, which, in this formulation, is a mixed-integer linear program (MILP). For the sake of notation, we pack the decision variables in one vector as</p>
+<div class="section" id="Soluzione-classica">
+<h2>Soluzione classica<a class="headerlink" href="#Soluzione-classica" title="Link a questa intestazione">¶</a></h2>
+<p>Si può risolvere il VRP classicamente, ad esempio usando CPLEX. CPLEX usa un metodo branch-and-bound-and-catch per trovare una soluzione approssimata del VRP, che, in questa formulazione, è un programma lineare intero misto (MILP). Per motivi di notazione raccogliamo le variabili di decisione in un vettore come</p>
 <div class="math notranslate nohighlight">
 \[{\bf z} = [x_{01},x_{02},\ldots,x_{10}, x_{12},\ldots,x_{n(n-1)}]^T,\]</div>
-<p>wherein <span class="math notranslate nohighlight">\({\bf z} \in \{0,1\}^N\)</span>, with <span class="math notranslate nohighlight">\(N = n (n+1)\)</span>. So the dimension of the problem scales quadratically with the number of nodes. Let us denote the optimal solution by <span class="math notranslate nohighlight">\({\bf z}^*\)</span>, and the associated optimal cost <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
+<p>dove <span class="math notranslate nohighlight">\({\bf z} \in \{0,1\}^N\)</span>, con <span class="math notranslate nohighlight">\(N = n (n+1)\)</span>. Quindi la dimensionalità del problema scala quadraticamente con il numero di nodi. Si indichi con <span class="math notranslate nohighlight">\({\bf z}^*\)</span> la soluzione ottimale, e con <span class="math notranslate nohighlight">\(f^*\)</span> il costo ottimale ad essa associato.</p>
 </div>
-<div class="section" id="Quantum-solution">
-<h2>Quantum solution<a class="headerlink" href="#Quantum-solution" title="Link a questa intestazione">¶</a></h2>
-<p>Here, we demonstrate an approach that combines classical and quantum computing steps, following the quantum approximate optimization approach of Farhi, Goldstone, and Gutmann (2014). In particular, we use the variational quantum eigensolver (VQE). We stress that given the use of limited depth of the quantum circuits employed (variational forms), it is hard to discuss the speed-up of the algorithm, as the solution obtained is heuristic in nature. At the same time, due to the nature and importance
-of the target problems, it is worth investigating heuristic approaches, which may be worthwhile for some problem classes.</p>
+<div class="section" id="Soluzione-quantistica">
+<h2>Soluzione quantistica<a class="headerlink" href="#Soluzione-quantistica" title="Link a questa intestazione">¶</a></h2>
+<p>Di seguito mostriamo un approccio che combina i passaggi classici e quantistici, seguendo l’approccio di ottimizzazione quantistica approssimata di Farhi, Goldstone e Gutmann (2014). In particolare usiamo un eigensolver quantistico variazionale (VQE). Ci teniamo a sottolineare che, data la profondità limitata dei circuiti quantistici utilizzati (forma variazionale), risulta difficile discutere la velocizzazione dell’algoritmo, dato che la soluzione ottenuta è per sua natura euristica. Allo stesso tempo, vista la natura e l’importanza del problema, vale la pena investigare approcci euristici, che potrebbero essere utili per alcune classi di problemi.</p>
 <p>Following [5], the algorithm can be summarized as follows:</p>
 <ul class="simple">
 <li><p>Preparation steps:</p>
@@ -1134,7 +1130,7 @@ of the ILP. Even within the VQE, one may provide stronger guarantees, for specif
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="08_cvar_optimization.html" class="btn btn-neutral float-right" title="Improving Variational Quantum Optimization using CVaR" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="08_cvar_optimization.html" class="btn btn-neutral float-right" title="Migliorare la Variational Quantum Optimization utilizzando CVaR" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="06_examples_max_cut_and_tsp.html" class="btn btn-neutral" title="Max-Cut and Traveling Salesman Problem" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -1170,10 +1166,10 @@ of the ILP. Even within the VQE, one may provide stronger guarantees, for specif
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Vehicle Routing</a><ul>
-<li><a class="reference internal" href="#The-Introduction">The Introduction</a></li>
-<li><a class="reference internal" href="#The-Model">The Model</a></li>
-<li><a class="reference internal" href="#Classical-solution">Classical solution</a></li>
-<li><a class="reference internal" href="#Quantum-solution">Quantum solution</a><ul>
+<li><a class="reference internal" href="#Introduzione">Introduzione</a></li>
+<li><a class="reference internal" href="#Il-Modello">Il Modello</a></li>
+<li><a class="reference internal" href="#Soluzione-classica">Soluzione classica</a></li>
+<li><a class="reference internal" href="#Soluzione-quantistica">Soluzione quantistica</a><ul>
 <li><a class="reference internal" href="#Construct-the-Ising-Hamiltonian">Construct the Ising Hamiltonian</a></li>
 <li><a class="reference internal" href="#From-Hamiltonian-to-QP-formulation">From Hamiltonian to QP formulation</a></li>
 </ul>
@@ -1211,7 +1207,7 @@ of the ILP. Even within the VQE, one may provide stronger guarantees, for specif
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Max-Cut and Traveling Salesman Problem &mdash; Qiskit Optimization 0.3.0 문서</title>
+  <title>최대 컷 및 외판원 문제 &mdash; Qiskit Optimization 0.2.1 문서</title>
   
 
   
@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
-    <link rel="next" title="Vehicle Routing" href="07_examples_vehicle_routing.html" />
+    <link rel="next" title="차량 라우팅" href="07_examples_vehicle_routing.html" />
     <link rel="prev" title="ADMM Optimizer" href="05_admm_optimizer.html" /> 
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,9 +200,9 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">최적화 사용 지침서</a> &gt;</li>
         
-      <li>Max-Cut and Traveling Salesman Problem</li>
+      <li>최대 컷 및 외판원 문제</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,12 +480,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a href="#id1"><span class="problematic" id="id2">`</span></a>docs/tutorials/06_examples_max_cut_and_tsp.ipynb`__에서 생성되었다.</p>
 </div>
-<div class="section" id="Max-Cut-and-Traveling-Salesman-Problem">
-<h1>Max-Cut and Traveling Salesman Problem<a class="headerlink" href="#Max-Cut-and-Traveling-Salesman-Problem" title="제목 주소">¶</a></h1>
+<div class="section" id="최대-컷-및-외판원-문제">
+<h1>최대 컷 및 외판원 문제<a class="headerlink" href="#최대-컷-및-외판원-문제" title="제목 주소">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="제목 주소">¶</a></h2>
 <p>Many problems in quantitative fields such as finance and engineering are optimization problems. Optimization problems lie at the core of complex decision-making and definition of strategies.</p>
@@ -541,9 +541,9 @@ solution.</p>
 <p>One advantage of using this sampling method compared to adiabatic approaches is that the target Ising Hamiltonian does not have to be implemented directly on hardware, allowing this algorithm not to be limited to the connectivity of the device. Furthermore, higher-order terms in the cost function, such as <span class="math notranslate nohighlight">\(Z_iZ_jZ_k\)</span>, can also be sampled efficiently, whereas in adiabatic or annealing approaches they are generally impractical to deal with.</p>
 <p>References: - A. Lucas, Frontiers in Physics 2, 5 (2014) - E. Farhi, J. Goldstone, S. Gutmann e-print arXiv 1411.4028 (2014) - D. Wecker, M. B. Hastings, M. Troyer Phys. Rev. A 94, 022309 (2016) - E. Farhi, J. Goldstone, S. Gutmann, H. Neven e-print arXiv 1703.06199 (2017)</p>
 </div>
-<div class="section" id="Application-classes">
-<h3>Application classes<a class="headerlink" href="#Application-classes" title="제목 주소">¶</a></h3>
-<p>We use the application classes for the max-cut problem and the traveling salesman problem in this page. There are application classes for other optimization problems available as well. See <a class="reference internal" href="09_application_classes.html"><span class="doc">Application Classes for Optimization Problems</span></a> for details.</p>
+<div class="section" id="응용-클래스">
+<h3>응용 클래스<a class="headerlink" href="#응용-클래스" title="제목 주소">¶</a></h3>
+<p>이 페이지에서 응용 클래스를 사용해 최대 절단 문제와 여행하는 외판원 문제를 다룬다. 다음은 사용 가능한 다른 최적화 문제에 대한 응용 클래스이다. 자세한 내용은 <a class="reference internal" href="09_application_classes.html"><span class="doc">Application Classes for Optimization Problems</span></a> 에서 볼 수 있다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -973,8 +973,8 @@ distance
 <div class="output_area docutils container">
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" /></div>
 </div>
-<div class="section" id="id1">
-<h3>Brute force approach<a class="headerlink" href="#id1" title="제목 주소">¶</a></h3>
+<div class="section" id="id2">
+<h3>Brute force approach<a class="headerlink" href="#id2" title="제목 주소">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1034,8 +1034,8 @@ Best order from brute force = (0, 1, 2) with total distance = 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Mapping to the Ising problem<a class="headerlink" href="#id2" title="제목 주소">¶</a></h3>
+<div class="section" id="id3">
+<h3>Mapping to the Ising problem<a class="headerlink" href="#id3" title="제목 주소">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1177,8 +1177,8 @@ status: SUCCESS
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id3" title="제목 주소">¶</a></h3>
+<div class="section" id="id4">
+<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id4" title="제목 주소">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1218,8 +1218,8 @@ solution objective: 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Running it on quantum computer<a class="headerlink" href="#id4" title="제목 주소">¶</a></h3>
+<div class="section" id="id5">
+<h3>Running it on quantum computer<a class="headerlink" href="#id5" title="제목 주소">¶</a></h3>
 <p>We run the optimization routine using a feedback loop with a quantum computer that uses trial functions built with Y single-qubit rotations, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, and entangler steps <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1369,7 +1369,7 @@ solution objective: 202.0
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="07_examples_vehicle_routing.html" class="btn btn-neutral float-right" title="Vehicle Routing" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="07_examples_vehicle_routing.html" class="btn btn-neutral float-right" title="차량 라우팅" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="05_admm_optimizer.html" class="btn btn-neutral" title="ADMM Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -1404,11 +1404,11 @@ solution objective: 202.0
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Max-Cut and Traveling Salesman Problem</a><ul>
+<li><a class="reference internal" href="#">최대 컷 및 외판원 문제</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#Weighted-Max-Cut">Weighted Max-Cut</a></li>
 <li><a class="reference internal" href="#Approximate-Universal-Quantum-Computing-for-Optimization-Problems">Approximate Universal Quantum Computing for Optimization Problems</a></li>
-<li><a class="reference internal" href="#Application-classes">Application classes</a></li>
+<li><a class="reference internal" href="#응용-클래스">응용 클래스</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Max-Cut-problem">Max-Cut problem</a><ul>
@@ -1419,10 +1419,10 @@ solution objective: 202.0
 </ul>
 </li>
 <li><a class="reference internal" href="#Traveling-Salesman-Problem">Traveling Salesman Problem</a><ul>
-<li><a class="reference internal" href="#id1">Brute force approach</a></li>
-<li><a class="reference internal" href="#id2">Mapping to the Ising problem</a></li>
-<li><a class="reference internal" href="#id3">Checking that the full Hamiltonian gives the right cost</a></li>
-<li><a class="reference internal" href="#id4">Running it on quantum computer</a></li>
+<li><a class="reference internal" href="#id2">Brute force approach</a></li>
+<li><a class="reference internal" href="#id3">Mapping to the Ising problem</a></li>
+<li><a class="reference internal" href="#id4">Checking that the full Hamiltonian gives the right cost</a></li>
+<li><a class="reference internal" href="#id5">Running it on quantum computer</a></li>
 </ul>
 </li>
 </ul>
@@ -1447,7 +1447,7 @@ solution objective: 202.0
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quadratic Programs &mdash; Qiskit Optimization 0.3.0 說明文件</title>
+  <title>Quadratic Programs &mdash; Qiskit Optimization 0.2.1 說明文件</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -480,15 +480,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">備註</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/01_quadratic_program.ipynb">docs/tutorials/01_quadratic_program.ipynb</a>.</p>
 </div>
 <div class="section" id="Quadratic-Programs">
 <h1>Quadratic Programs<a class="headerlink" href="#Quadratic-Programs" title="本標題的永久連結">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="本標題的永久連結">¶</a></h2>
-<p>In this tutorial, we briefly introduce how to build optimization problems using Qiskit’s optimization module. Qiskit introduces the <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> class to make a model of an optimization problem. More precisely, it deals with quadratically constrained quadratic programs given as follows:</p>
+<p>在這個入門教學中，我們將簡單介紹如何使用 Qiskit 的最佳化模組來建構最佳化問題。Qiskit 加入了 ` ` QuadricProgram`` 類別，以建立最佳化問題的模型。 更精確地說，它負責處理二次規劃，如下：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \text{minimize}\quad&amp; x^\top Q_0 x + c^\top x\\
@@ -496,11 +496,11 @@ div.rendered_html tbody tr:hover {
 &amp; x^\top Q_i x + a_i^\top x \leq r_i, \quad 1,\dots,i,\dots,q\\
 &amp; l_i \leq x_i \leq u_i, \quad 1,\dots,i,\dots,n,
 \end{align}\end{split}\]</div>
-<p>where the <span class="math notranslate nohighlight">\(Q_i\)</span> are <span class="math notranslate nohighlight">\(n \times n\)</span> matrices, <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix , <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> are <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors, <span class="math notranslate nohighlight">\(b\)</span> is an <span class="math notranslate nohighlight">\(m\)</span>-dimensional vector, and where <span class="math notranslate nohighlight">\(x\)</span> can defined as binary, integer, or continuous variables. In addition to “<span class="math notranslate nohighlight">\(\leq\)</span>” constraints ‘QuadraticProgram’ also supports “<span class="math notranslate nohighlight">\(\geq\)</span>” and “<span class="math notranslate nohighlight">\(=\)</span>”.</p>
+<p>其中，<span class="math notranslate nohighlight">\(Q_i\)</span> 是 <span class="math notranslate nohighlight">\(n\times n\)</span> 矩陣，<span class="math notranslate nohighlight">\(A\)</span> 是 <span class="math notranslate nohighlight">\(m\times n\)</span> 矩陣，<span class="math notranslate nohighlight">\(x' 和 :math:'c' 是 :math:\)</span> 维向量，<span class="math notranslate nohighlight">\(b\)</span> 是 <span class="math notranslate nohighlight">\(m\)</span> 维向量，其中，<span class="math notranslate nohighlight">\(x' 可以定義為二進位、整數或連續變數。除了 &quot;:math:\)</span>leq`」 之外，』QuadraticProgram』 還支援 「:math:』geq`」 和 「:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>=』」。</p>
 </div>
-<div class="section" id="Loading-a-Quadratic-Program-from-an-LP-file">
-<h2>Loading a <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> from an LP file<a class="headerlink" href="#Loading-a-Quadratic-Program-from-an-LP-file" title="本標題的永久連結">¶</a></h2>
-<p>As setup, you need to import the following module.</p>
+<div class="section" id="從-LP-檔加入-Quadratic-Program">
+<h2>從 LP 檔加入 <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code><a class="headerlink" href="#從-LP-檔加入-Quadratic-Program" title="本標題的永久連結">¶</a></h2>
+<p>設定時，您需要加入以下模組。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -603,9 +603,9 @@ End
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Directly-constructing-a-QuadraticProgram">
-<h2>Directly constructing a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code><a class="headerlink" href="#Directly-constructing-a-QuadraticProgram" title="本標題的永久連結">¶</a></h2>
-<p>We then explain how to make model of an optimization problem directly using <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>. Let’s start from an empty model.</p>
+<div class="section" id="直接創建一個-QuadraticProgram">
+<h2>直接創建一個 <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code><a class="headerlink" href="#直接創建一個-QuadraticProgram" title="本標題的永久連結">¶</a></h2>
+<p>然後，我們解釋如何使用 <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> 製作最佳化問題的模型。讓我們從一個空模型開始。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -1136,9 +1136,9 @@ Error: &#39;Cannot substitute by variable that gets substituted itself: y &lt;- 
               <ul>
 <li><a class="reference internal" href="#">Quadratic Programs</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#Loading-a-Quadratic-Program-from-an-LP-file">Loading a <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> from an LP file</a></li>
+<li><a class="reference internal" href="#從-LP-檔加入-Quadratic-Program">從 LP 檔加入 <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code></a></li>
 <li><a class="reference internal" href="#Loading-a-QuadraticProgram-from-a-docplex-model">Loading a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> from a docplex model</a></li>
-<li><a class="reference internal" href="#Directly-constructing-a-QuadraticProgram">Directly constructing a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code></a></li>
+<li><a class="reference internal" href="#直接創建一個-QuadraticProgram">直接創建一個 <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code></a></li>
 <li><a class="reference internal" href="#Adding/removing-linear-and-quadratic-constraints">Adding/removing linear and quadratic constraints</a></li>
 <li><a class="reference internal" href="#Substituting-Variables">Substituting Variables</a></li>
 </ul>
@@ -1164,7 +1164,7 @@ Error: &#39;Cannot substitute by variable that gets substituted itself: y &lt;- 
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

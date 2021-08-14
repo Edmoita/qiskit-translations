@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Warm-starting quantum optimization &mdash; documentación de Qiskit Optimization - 0.3.0</title>
+  <title>Warm-starting quantum optimization &mdash; documentación de Qiskit Optimization - 0.2.1</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Tutoriales de Optimización</a> &gt;</li>
         
       <li>Warm-starting quantum optimization</li>
     
@@ -480,14 +480,14 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Esta página fue generada a partir de <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/10_warm_start_qaoa.ipynb">docs/tutorials/10_warm_start_qaoa.ipynb</a>.</p>
 </div>
 <div class="section" id="Warm-starting-quantum-optimization">
 <h1>Warm-starting quantum optimization<a class="headerlink" href="#Warm-starting-quantum-optimization" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="Introducción">
+<h2>Introducción<a class="headerlink" href="#Introducción" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Optimization problems with integer variables or constraints are often hard to solve. For example, the Quadratic Unconstrained Binary Optimization (QUBO) problem, i.e.</p>
 <p><span class="math">\begin{align}
 \min_{x\in\{0,1\}^n}x^T\Sigma x + \mu^Tx,
@@ -498,8 +498,8 @@ div.rendered_html tbody tr:hover {
 \end{align}</span></p>
 <p>which becomes easy to solve as <span class="math notranslate nohighlight">\(x\)</span> now represents <span class="math notranslate nohighlight">\(n\)</span> continuous variables bound to the range <span class="math notranslate nohighlight">\([0, 1]\)</span>. Such relaxations can be leveraged to warm-start quantum optimization algorithms as shown in [1].</p>
 </div>
-<div class="section" id="References">
-<h2>References<a class="headerlink" href="#References" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="Referencias">
+<h2>Referencias<a class="headerlink" href="#Referencias" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>[1] <a class="reference external" href="http://arxiv.org/abs/2009.10095">D. J. Egger, J Marecek, S. Woerner, Warm-starting quantum optimization, arXiv:2009.10095</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -575,7 +575,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>Using DOCPLEX we build a model with binary variables.</p>
+<p>Utilizando DOCPLEX construimos un modelo con variables binarias.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -622,7 +622,7 @@ Binaries
 End
 </pre></div></div>
 </div>
-<p>Such binary problems are hard to deal with but can be solved if the problem instance is small enough. Our example above has as solution</p>
+<p>Tales problemas binarios son difíciles de tratar, pero se pueden resolver si la instancia del problema es lo suficientemente pequeña. Nuestro ejemplo anterior tiene como solución</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -738,8 +738,8 @@ status: SUCCESS
 <div class="section" id="QAOA">
 <h2>QAOA<a class="headerlink" href="#QAOA" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>Here, we illustrate how to warm-start the quantum approximate optimization algorithm (QAOA) by leveraging the relaxed problem shown above.</p>
-<div class="section" id="Standard-QAOA">
-<h3>Standard QAOA<a class="headerlink" href="#Standard-QAOA" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="QAOA-estándar">
+<h3>QAOA estándar<a class="headerlink" href="#QAOA-estándar" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>First, we use standard QAOA to solve the QUBO. To do this, we convert the QUBO to Qiskit’s QuadraticProgram class (note that the resulting problem is still a binary problem).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -825,7 +825,7 @@ H_{M,i}^{(ws)}=
 -2\sqrt{c_i^*(1-c_i^*)} & 1-2c_i^*
 \end{pmatrix}
 \end{align}</span></p>
-<p>as mixer operator for qubit <span class="math notranslate nohighlight">\(i\)</span>. Once multiplied by <span class="math notranslate nohighlight">\(-i\beta\)</span> and exponentiated this mixer produces the following mixer circuit.</p>
+<p>como operador de mezclador para el qubit <span class="math notranslate nohighlight">\(i\)</span>. Una vez multiplicado por :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>-ibeta ` y exponenciado, este mezclador produce el siguiente circuito mezclador.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -896,8 +896,8 @@ status: SUCCESS
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Analysis">
-<h3>Analysis<a class="headerlink" href="#Analysis" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="Análisis">
+<h3>Análisis<a class="headerlink" href="#Análisis" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Both results appear to give the same result. However, when we look at the underlying probability distribution we observe that the warm-start QAOA has a much higher probability of sampling the optimal solution.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -961,8 +961,8 @@ status: SUCCESS
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Warm-start QAOA<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="id2">
+<h2>Warm-start QAOA<a class="headerlink" href="#id2" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>The warm-start features above are available in the Qiskit optimization module as a single optimizer named <code class="docutils literal notranslate"><span class="pre">WarmStartQAOAOptimizer</span></code> which is illustrated below. This solver will solve a QUBO with a warm-start QAOA. It computes <span class="math notranslate nohighlight">\(c^*\)</span> by relaxing the problem. This behavior is controlled by setting <code class="docutils literal notranslate"><span class="pre">relax_for_pre_solver</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -1108,16 +1108,16 @@ status: SUCCESS
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Warm-starting quantum optimization</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#References">References</a></li>
+<li><a class="reference internal" href="#Introducción">Introducción</a></li>
+<li><a class="reference internal" href="#Referencias">Referencias</a></li>
 <li><a class="reference internal" href="#Preliminaries:-relaxing-QUBOs">Preliminaries: relaxing QUBOs</a></li>
 <li><a class="reference internal" href="#QAOA">QAOA</a><ul>
-<li><a class="reference internal" href="#Standard-QAOA">Standard QAOA</a></li>
+<li><a class="reference internal" href="#QAOA-estándar">QAOA estándar</a></li>
 <li><a class="reference internal" href="#Warm-start-QAOA">Warm-start QAOA</a></li>
-<li><a class="reference internal" href="#Analysis">Analysis</a></li>
+<li><a class="reference internal" href="#Análisis">Análisis</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">Warm-start QAOA</a></li>
+<li><a class="reference internal" href="#id2">Warm-start QAOA</a></li>
 </ul>
 </li>
 </ul>
@@ -1140,7 +1140,7 @@ status: SUCCESS
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

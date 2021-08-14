@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Application Classes for Optimization Problems &mdash; Qiskit Optimization 0.3.0 belgelendirmesi</title>
+  <title>Optimizasyon Problemleri için Uygulama Sınıfları &mdash; Qiskit Optimization 0.2.1 belgelendirmesi</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
-    <link rel="next" title="Warm-starting quantum optimization" href="10_warm_start_qaoa.html" />
-    <link rel="prev" title="Improving Variational Quantum Optimization using CVaR" href="08_cvar_optimization.html" /> 
+    <link rel="next" title="Sıcak başlangıçlı kuantum optimizasyonu" href="10_warm_start_qaoa.html" />
+    <link rel="prev" title="CVaR Kullanarak Değişimsel Kuantum Optimizasyonunu İyileştirme" href="08_cvar_optimization.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,9 +200,9 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Optimizasyon Eğitimleri</a> &gt;</li>
         
-      <li>Application Classes for Optimization Problems</li>
+      <li>Optimizasyon Problemleri için Uygulama Sınıfları</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,86 +480,86 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/09_application_classes.ipynb">docs/tutorials/09_application_classes.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
-<div class="section" id="Application-Classes-for-Optimization-Problems">
-<h1>Application Classes for Optimization Problems<a class="headerlink" href="#Application-Classes-for-Optimization-Problems" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
+<div class="section" id="Optimizasyon-Problemleri-için-Uygulama-Sınıfları">
+<h1>Optimizasyon Problemleri için Uygulama Sınıfları<a class="headerlink" href="#Optimizasyon-Problemleri-için-Uygulama-Sınıfları" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>We introduce application classes for the following optimization problems so that users can easily try various optimization problems on quantum computers.</p>
+<p>Kullanıcıların kuantum bilgisayarlarda çeşitli optimizasyon problemlerini kolayca deneyebilmeleri için aşağıdaki optimizasyon problemleri için uygulama sınıfları sunuyoruz.</p>
 <ol class="arabic simple">
-<li><p>Exact cover problem</p></li>
+<li><p>Tam kapak sorunu</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given a collection of subsets of items, find a subcollection such that each item is covered exactly once.</p></li>
+<li><p>Öğelerin alt kümelerinden oluşan bir koleksiyon verildiğinde, her öğenin tam olarak bir kez kapsanacağı bir alt koleksiyon bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="2">
-<li><p>Knapsack problem</p></li>
+<li><p>Sırt çantası problemi</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given a set of items, find a subset of items such that the total weight is within the capacity and the total value is maximized.</p></li>
+<li><p>Bir öğe kümesi verildiğinde, toplam yükü kapasite dahilinde olacak ve toplam değeri maksimize edecek şekilde bir öğe alt kümesi bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="3">
-<li><p>Number partition problem</p></li>
+<li><p>Sayı bölme sorunu</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given a multiset of positive integers, find a partition of the multiset into two subsets such that the sums of the subsets are equal.</p></li>
+<li><p>Bir pozitif tamsayı çoklu kümesi verildiğinde, çoklu kümenin, alt kümelerin toplamları eşit olacak şekilde iki alt kümeye bölündüğünü bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="4">
-<li><p>Set packing problem</p></li>
+<li><p>Paketleme sorununu ayarlama</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given a collection of subsets of items, find a subcollection such that all subsets of the subcollection are pairwise disjoint and the number of items in the subcollection is maximized.</p></li>
+<li><p>Öğelerin alt kümelerinden oluşan bir koleksiyon verildiğinde, alt koleksiyonun tüm alt kümelerinin ikili olarak ayrık olacağı ve alt koleksiyondaki öğelerin sayısı maksimize edilecek şekilde bir alt koleksiyon bulun.</p></li>
 </ul>
-<p>Graph problems</p>
+<p>Grafik problemleri</p>
 <ol class="arabic simple" start="5">
-<li><p>Clique problem</p></li>
+<li><p>Tıklama sorunu</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given an undirected graph, find a subset of nodes with a specified number or the maximum number such that the induced subgraph is complete.</p></li>
+<li><p>Yönlendirilmemiş bir grafik verildiğinde, indüklenen alt grafiğin tamamlanması için belirli bir sayıya veya maksimum sayıya sahip bir düğümün alt kümesini bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="6">
-<li><p>Graph partition problem</p></li>
+<li><p>Grafik bölümü sorunu</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given an undirected graph, find a partition into two components whose sizes are equal such that the total capacity of the edges between the two components is minimized.</p></li>
+<li><p>Yönlendirilmemiş bir grafik verildiğinde, iki bileşen arasındaki kenarların toplam kapasitesi en aza indirilecek şekilde boyutları eşit olan iki bileşene bölünen bir bölüm bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="7">
-<li><p>Max-cut problem</p></li>
+<li><p>Maksimum Kesim problemi</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given an undirected graph, find a partition of nodes into two subsets such that the total weight of the edges between the two subsets is maximized.</p></li>
+<li><p>Yönlendirilmemiş bir grafik verildiğinde, iki alt küme arasındaki kenarların toplam ağırlığı maksimize edilecek şekilde düğümlerin iki alt kümeye bölünmesini bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="8">
-<li><p>Stable set problem</p></li>
+<li><p>Kararlı küme sorunu</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given an undirected graph, find a subset of nodes such that no edge connects the nodes in the subset and the number of nodes is maximized.</p></li>
+<li><p>Yönlendirilmemiş bir grafik verildiğinde, alt kümedeki düğümleri hiçbir kenarın bağlamadığı ve düğümlerin sayısı maksimum olmayacak şekilde bir düğüm alt kümesi bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="9">
-<li><p>Traveling salesman problem</p></li>
+<li><p>Gezgin Satıcı Problemi</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given a graph, find a route with the minimum distance such that the route visits each city exactly once.</p></li>
+<li><p>Verilen bir grafikle, rota her şehri tam olarak bir kez ziyaret edecek şekilde minimum mesafeye sahip bir rota bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="10">
-<li><p>Vehicle routing problem</p></li>
+<li><p>Araç yönlendirme sorunu</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given a graph, a depot node, and the number of vehicles (routes), find a set of routes such that each node is covered exactly once except the depot and the total distance of the routes is minimized.</p></li>
+<li><p>Bir grafik, bir birikim düğümü ve araç sayısı (rotalar) verildiğinde, her düğümün depo dışında tam olarak bir kez kapsanacağı ve rotaların toplam mesafesinin en aza indirileceği bir dizi rota bulun.</p></li>
 </ul>
 <ol class="arabic simple" start="11">
-<li><p>Vertex cover problem</p></li>
+<li><p>Köşe örtme problemi</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given an undirected graph, find a subset of nodes with the minimum size such that each edge has at least one endpoint in the subsets.</p></li>
+<li><p>Yönlendirilmemiş bir grafik verildiğinde, her bir kenarın alt kümelerde en az bir uç noktası olacak şekilde minimum boyutta bir düğüm alt kümesi bulun.</p></li>
 </ul>
-<p>The application classes for graph problems (<code class="docutils literal notranslate"><span class="pre">GraphOptimizationApplication</span></code>) provide a functionality to draw graphs of an instance and a result. Note that you need to install <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> beforehand to utilize the functionality.</p>
-<p>We introduce examples of the vertex cover problem and the knapsack problem in this page.</p>
-<p>Examples of the max-cut problem and the traveling salesman problem are available in <a class="reference internal" href="06_examples_max_cut_and_tsp.html"><span class="doc">Max-Cut and Traveling Salesman Problem</span></a>.</p>
-<p>We first import packages necessary for application classes.</p>
+<p>Grafik problemleri için uygulama sınıfları (<code class="docutils literal notranslate"><span class="pre">GraphOptimizationApplication</span></code>), bir örneğin ve bir sonucun grafiklerini çizmek için bir işlevsellik sağlar. İşlevi kullanmak için önceden <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> yüklemeniz gerektiğini unutmayın.</p>
+<p>Bu sayfada köşe örtme problemi ve sırt çantası problemi örneklerini tanıtıyoruz.</p>
+<p>Maksimum Kesim problemi ve gezgin satıcı probleminin örnekleri <a class="reference internal" href="06_examples_max_cut_and_tsp.html"><span class="doc">Max-Cut and Traveling Salesman Problem</span></a>.</p>
+<p>İlk önce uygulama sınıfları için gerekli paketleri içe aktarıyoruz.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -573,10 +573,10 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </div>
-<div class="section" id="Vertex-cover-problem">
-<h2>Vertex cover problem<a class="headerlink" href="#Vertex-cover-problem" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>We introduce the application class for the vertex cover problem as an example of graph problems. Given an undirected graph, the vertex cover problem asks us to find a subset of nodes with the minimum size such that all edges are covered by any node selected.</p>
-<p>We import the application class <code class="docutils literal notranslate"><span class="pre">VertexCover</span></code> for the vertex cover problem and <code class="docutils literal notranslate"><span class="pre">networkx</span></code> to generate a random graph.</p>
+<div class="section" id="Köşe-örtme-problemi">
+<h2>Köşe örtme problemi<a class="headerlink" href="#Köşe-örtme-problemi" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Graf problemlerine bir örnek olarak köşe örtüsü problemi için uygulama sınıfını tanıtıyoruz. Yönsüz bir grafik verildiğinde, köşe örtüsü problemi, tüm kenarları seçilen herhangi bir düğümle kaplanacak şekilde minimum boyutta bir düğüm alt kümesi bulmamızı ister.</p>
+<p>Köşe örtme problemi için <code class="docutils literal notranslate"><span class="pre">VertexCover</span></code> uygulama sınıfını ve rastgele bir grafik oluşturmak için <code class="docutils literal notranslate"><span class="pre">networkx</span></code> uygulama sınıfını içe aktarıyoruz.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -617,7 +617,7 @@ div.rendered_html tbody tr:hover {
 <div class="output_area docutils container">
 <img alt="../_images/tutorials_09_application_classes_8_0.svg" src="../_images/tutorials_09_application_classes_8_0.svg" /></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">VertexCover</span></code> takes a graph as an instance and <code class="docutils literal notranslate"><span class="pre">to_quadratic_program</span></code> generates a corresponding <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> of the instance of the vertex cover problem.</p>
+<p><code class="docutils literal notranslate"><span class="pre">VertexCover</span></code>, bir örnek olarak bir grafik alır ve <code class="docutils literal notranslate"><span class="pre">to_quadratic_program</span></code>, köşe örtüsü sorununun örneğine karşılık gelen bir <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> oluşturur.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -664,7 +664,7 @@ Binaries
 End
 </pre></div></div>
 </div>
-<p>You can solve the problem as follows. <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigensolver</span></code> finds the minimum eigen vector. You can also apply QAOA. Note that the solution by QAOA is not always optimal.</p>
+<p>Sorunu aşağıdaki gibi çözebilirsiniz. <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigensolver</span></code> minimum öz vektörü bulur. QAOA’yı da uygulayabilirsiniz. QAOA’nın çözümünün her zaman optimal olmadığını unutmayın.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -737,9 +737,9 @@ time: 2.0216140747070312
 <img alt="../_images/tutorials_09_application_classes_13_1.svg" src="../_images/tutorials_09_application_classes_13_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="Knapsack-problem">
-<h2>Knapsack problem<a class="headerlink" href="#Knapsack-problem" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>The knapsack problem asks us to find a combination of items such that the total weight is within the capacity of the knapsack and maximize the total value of the items. The following examples solve an instance of the knapsack problem with 5 items by Numpy eigensolver and QAOA.</p>
+<div class="section" id="Sırt-çantası-problemi">
+<h2>Sırt çantası problemi<a class="headerlink" href="#Sırt-çantası-problemi" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Sırt çantası problemi, toplam ağırlığı sırt çantasının kapasitesi dahilinde olacak şekilde bir eşya kombinasyonu bulmamızı ve eşyaların toplam değerini maksimize etmemizi ister. Aşağıdaki örnekler, Numpy özçözücü ve QAOA tarafından 5 öğeli sırt çantası sorununun bir örneğini çözmektedir.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -845,9 +845,9 @@ time: 0.7132740020751953
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="How-to-check-the-Hamiltonian">
-<h2>How to check the Hamiltonian<a class="headerlink" href="#How-to-check-the-Hamiltonian" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>If you want to check the actual Hamiltonian generated from your problem instance, you need to apply a converter as follows.</p>
+<div class="section" id="Hamiltonyen-nasıl-kontrol-edilir">
+<h2>Hamiltonyen nasıl kontrol edilir<a class="headerlink" href="#Hamiltonyen-nasıl-kontrol-edilir" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
+<p>Problem örneğinizden üretilen gerçek Hamilton’u kontrol etmek istiyorsanız, aşağıdaki gibi bir dönüştürücü uygulamanız gerekir.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -1066,10 +1066,10 @@ num qubits: 9, offset: 1417.5
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="10_warm_start_qaoa.html" class="btn btn-neutral float-right" title="Warm-starting quantum optimization" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="10_warm_start_qaoa.html" class="btn btn-neutral float-right" title="Sıcak başlangıçlı kuantum optimizasyonu" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="08_cvar_optimization.html" class="btn btn-neutral" title="Improving Variational Quantum Optimization using CVaR" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="08_cvar_optimization.html" class="btn btn-neutral" title="CVaR Kullanarak Değişimsel Kuantum Optimizasyonunu İyileştirme" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1101,11 +1101,11 @@ num qubits: 9, offset: 1417.5
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Application Classes for Optimization Problems</a><ul>
+<li><a class="reference internal" href="#">Optimizasyon Problemleri için Uygulama Sınıfları</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#Vertex-cover-problem">Vertex cover problem</a></li>
-<li><a class="reference internal" href="#Knapsack-problem">Knapsack problem</a></li>
-<li><a class="reference internal" href="#How-to-check-the-Hamiltonian">How to check the Hamiltonian</a></li>
+<li><a class="reference internal" href="#Köşe-örtme-problemi">Köşe örtme problemi</a></li>
+<li><a class="reference internal" href="#Sırt-çantası-problemi">Sırt çantası problemi</a></li>
+<li><a class="reference internal" href="#Hamiltonyen-nasıl-kontrol-edilir">Hamiltonyen nasıl kontrol edilir</a></li>
 </ul>
 </li>
 </ul>
@@ -1128,7 +1128,7 @@ num qubits: 9, offset: 1417.5
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

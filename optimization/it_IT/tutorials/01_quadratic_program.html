@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quadratic Programs &mdash; Qiskit Optimization 0.3.0 documentazione</title>
+  <title>Programmi Quadratici &mdash; Qiskit Optimization 0.2.1 documentazione</title>
   
 
   
@@ -36,9 +36,9 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Indice" href="../genindex.html" />
-    <link rel="search" title="Cerca" href="../search.html" />
-    <link rel="next" title="Converters for Quadratic Programs" href="02_converters_for_quadratic_programs.html" />
-    <link rel="prev" title="Optimization Tutorials" href="index.html" /> 
+    <link rel="search" title="Ricerca" href="../search.html" />
+    <link rel="next" title="Convertitori per Programmi Quadratici" href="02_converters_for_quadratic_programs.html" />
+    <link rel="prev" title="Tutorial di Ottimizzazione" href="index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Linguaggi</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/01_quadratic_program.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Come iniziare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">Riferimenti API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Note di Rilascio</a></li>
 </ul>
 
             
@@ -200,9 +200,9 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Tutorial di Ottimizzazione</a> &gt;</li>
         
-      <li>Quadratic Programs</li>
+      <li>Programmi Quadratici</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,15 +480,15 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/01_quadratic_program.ipynb">docs/tutorials/01_quadratic_program.ipynb</a>.</p>
 </div>
-<div class="section" id="Quadratic-Programs">
-<h1>Quadratic Programs<a class="headerlink" href="#Quadratic-Programs" title="Link a questa intestazione">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Link a questa intestazione">¶</a></h2>
-<p>In this tutorial, we briefly introduce how to build optimization problems using Qiskit’s optimization module. Qiskit introduces the <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> class to make a model of an optimization problem. More precisely, it deals with quadratically constrained quadratic programs given as follows:</p>
+<div class="section" id="Programmi-Quadratici">
+<h1>Programmi Quadratici<a class="headerlink" href="#Programmi-Quadratici" title="Link a questa intestazione">¶</a></h1>
+<div class="section" id="Introduzione">
+<h2>Introduzione<a class="headerlink" href="#Introduzione" title="Link a questa intestazione">¶</a></h2>
+<p>In questo tutorial, presentiamo brevemente come costruire problemi di ottimizzazione utilizzando il modulo di ottimizzazione di Qiskit. Qiskit introduce la classe <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> per costruire un modello relativo ad un problema di ottimizzazione. Più precisamente, tratta programmi quadratici con vincolo quadratico formulati come segue:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \text{minimize}\quad&amp; x^\top Q_0 x + c^\top x\\
@@ -496,11 +496,11 @@ div.rendered_html tbody tr:hover {
 &amp; x^\top Q_i x + a_i^\top x \leq r_i, \quad 1,\dots,i,\dots,q\\
 &amp; l_i \leq x_i \leq u_i, \quad 1,\dots,i,\dots,n,
 \end{align}\end{split}\]</div>
-<p>where the <span class="math notranslate nohighlight">\(Q_i\)</span> are <span class="math notranslate nohighlight">\(n \times n\)</span> matrices, <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix , <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> are <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors, <span class="math notranslate nohighlight">\(b\)</span> is an <span class="math notranslate nohighlight">\(m\)</span>-dimensional vector, and where <span class="math notranslate nohighlight">\(x\)</span> can defined as binary, integer, or continuous variables. In addition to “<span class="math notranslate nohighlight">\(\leq\)</span>” constraints ‘QuadraticProgram’ also supports “<span class="math notranslate nohighlight">\(\geq\)</span>” and “<span class="math notranslate nohighlight">\(=\)</span>”.</p>
+<p>dove i <span class="math notranslate nohighlight">\(Q_i\)</span>, <span class="math notranslate nohighlight">\(A\)</span> è una matrice <span class="math notranslate nohighlight">\(m \times n\)</span>, <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(c\)</span> sono vettori <span class="math notranslate nohighlight">\(n\)</span>-dimensionali, <span class="math notranslate nohighlight">\(b\)</span> è un vettore <span class="math notranslate nohighlight">\(m\)</span>-dimensionale, e dove <span class="math notranslate nohighlight">\(x\)</span> può essere definita come variabile binaria, intera o continua. Oltre a vincoli di tipo «<span class="math notranslate nohighlight">\(\leq\)</span>», “QuadraticProgram” supporta anche «<span class="math notranslate nohighlight">\(\geq\)</span>» e «<span class="math notranslate nohighlight">\(=\)</span>».</p>
 </div>
-<div class="section" id="Loading-a-Quadratic-Program-from-an-LP-file">
-<h2>Loading a <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> from an LP file<a class="headerlink" href="#Loading-a-Quadratic-Program-from-an-LP-file" title="Link a questa intestazione">¶</a></h2>
-<p>As setup, you need to import the following module.</p>
+<div class="section" id="Caricare-un-Quadratic-Program-da-un-file-LP">
+<h2>Caricare un <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> da un file LP<a class="headerlink" href="#Caricare-un-Quadratic-Program-da-un-file-LP" title="Link a questa intestazione">¶</a></h2>
+<p>Come setup, è necessario importare il seguente modulo.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -511,12 +511,12 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>You start with an empty model. How to add variables and constraints to a model is explained in the section “Directly constructing a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>”.</p>
-<p>Qiskit’s optimization module supports the conversion from Docplex model. You can easily make a model of an optimization problem with Docplex. You can find the documentation of Docplex at <a class="reference external" href="https://ibmdecisionoptimization.github.io/docplex-doc/mp/index.html">https://ibmdecisionoptimization.github.io/docplex-doc/mp/index.html</a></p>
-<p>You can load a Docplex model to <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> by using <code class="docutils literal notranslate"><span class="pre">from_docplex_mp</span></code> function.</p>
+<p>Si inizia con un modello vuoto. Come aggiungere variabili e vincoli a un modello è spiegato nella sezione «Costruire direttamente un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>”.</p>
+<p>Il modulo di ottimizzazione di Qiskit supporta la conversione da un modello Docplex. Si può facilmente creare un modello di un problema di ottimizzazione con Docplex. La documentazione di Docplex è disponibile all’indirizzo <a class="reference external" href="https://ibmdecisionoptimization.github.io/docplex-doc/mp/index.html">https://ibmdecisionoptimization.github.io/docplex-doc/mp/index.html</a></p>
+<p>Un modello Docplex può essere caricato in un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> usando <code class="docutils literal notranslate"><span class="pre">from_docplex_mp</span></code>.</p>
 </div>
-<div class="section" id="Loading-a-QuadraticProgram-from-a-docplex-model">
-<h2>Loading a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> from a docplex model<a class="headerlink" href="#Loading-a-QuadraticProgram-from-a-docplex-model" title="Link a questa intestazione">¶</a></h2>
+<div class="section" id="Caricare-un-QuadraticProgram-da-un-modello-docplex">
+<h2>Caricare un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> da un modello docplex<a class="headerlink" href="#Caricare-un-QuadraticProgram-da-un-modello-docplex" title="Link a questa intestazione">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -603,9 +603,9 @@ End
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Directly-constructing-a-QuadraticProgram">
-<h2>Directly constructing a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code><a class="headerlink" href="#Directly-constructing-a-QuadraticProgram" title="Link a questa intestazione">¶</a></h2>
-<p>We then explain how to make model of an optimization problem directly using <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>. Let’s start from an empty model.</p>
+<div class="section" id="Costruire-direttamente-un-QuadraticProgram">
+<h2>Costruire direttamente un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code><a class="headerlink" href="#Costruire-direttamente-un-QuadraticProgram" title="Link a questa intestazione">¶</a></h2>
+<p>Vediamo ora come creare un modello di un problema di ottimizzazione utilizzando direttamente <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>. Cominciamo con un modello vuoto.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -635,10 +635,9 @@ End
 
 </pre></div></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> supports three types of variables: - Binary variable - Integer variable - Continuous variable</p>
-<p>When you add variables, you can specify names, types, lower bounds and upper bounds.</p>
-<p>When you display your problem as LP format, <code class="docutils literal notranslate"><span class="pre">Binaries</span></code> denotes binary variables and <code class="docutils literal notranslate"><span class="pre">Generals</span></code> denotes integer variables. If variables are not included in either <code class="docutils literal notranslate"><span class="pre">Binaries</span></code> or <code class="docutils literal notranslate"><span class="pre">Generals</span></code>, such variables are continuous ones with default lower bound = 0 and upper bound = infinity. Note that you cannot use ‘e’ or ‘E’ as the first character of names due to the <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.7.1/ilog.odms.cplex.help/CPLEX/FileFormats/topics/LP_VariableNames.html">specification of LP
-format</a>.</p>
+<p>Il <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> supporta tre tipi di variabili: - variabile Binaria - variabile Intera - variabile Continua</p>
+<p>Quando si aggiunge una variabile, è possibile specificare nomi, tipi, limiti inferiori e superiori.</p>
+<p>Quando si visualizza il problema in formato LP, <code class="docutils literal notranslate"><span class="pre">Binaries</span></code> denota le variabili binarie e <code class="docutils literal notranslate"><span class="pre">Generals</span></code> denota le variabili intere. Se le variabili non sono incluse in <code class="docutils literal notranslate"><span class="pre">Binaries</span></code> o <code class="docutils literal notranslate"><span class="pre">Generals</span></code>, tali variabili sono continue, con limite inferiore predefinito = 0 e limite superiore = infinito. Da notare che non è possibile utilizzare “e” o “E” come primo carattere dei nomi a causa delle <a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SSSA5P_12.7.1/ilog.odms.cplex.help/CPLEX/FileFormats/topics/LP_VariableNames.html">specifiche del formato LP</a>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -679,10 +678,10 @@ End
 
 </pre></div></div>
 </div>
-<p>You can set the objective function by invoking <code class="docutils literal notranslate"><span class="pre">QuadraticProgram.minimize</span></code> or <code class="docutils literal notranslate"><span class="pre">QuadraticProgram.maximize</span></code>. You can add a constant term as well as linear and quadratic objective function by specifying linear and quadratic terms with either list, matrix or dictionary.</p>
-<p>Note that in the LP format the quadratic part has to be scaled by a factor <span class="math notranslate nohighlight">\(1/2\)</span>. Thus, when printing as LP format, the quadratic part is first multiplied by 2 and then divided by 2 again.</p>
-<p>For quadratic programs, there are 3 pieces that have to be specified: a constant (offset), a linear term (<span class="math notranslate nohighlight">\(c^{T}x\)</span>), and a quadratic term (<span class="math notranslate nohighlight">\(x^{T}Qx\)</span>).</p>
-<p>The cell below shows how to declare an objective function using a dictionary. For the linear term, keys in the dictionary correspond to variable names, and the corresponding values are the coefficients. For the quadratic term, keys in the dictionary correspond to the two variables being multiplied, and the values are again the coefficients.</p>
+<p>È possibile impostare la funzione obiettivo tramite <code class="docutils literal notranslate"><span class="pre">QuadraticProgram.minimize</span></code> o <code class="docutils literal notranslate"><span class="pre">QuadraticProgram.maximize</span></code>. Si può aggiungere un termine costante, così come una funzione obiettivo lineare o quadratica specificando i termini lineari e quadratici con una lista, una matrice o un dizionario.</p>
+<p>Da notare che nel formato LP la parte quadratica deve essere scalata di un fattore <span class="math notranslate nohighlight">\(1/2\)</span>. Per questo motivo, quando mostrata in formato LP, la parte quadratica è prima moltiplicata per 2 e poi nuovamente divisa per 2.</p>
+<p>Per i programmi quadratici, ci sono 3 termini che devono essere specificati: una costante (offset), un termine lineare (<span class="math notranslate nohighlight">\(c^{T}x\)</span>), e un termine quadratico (<span class="math notranslate nohighlight">\(x^{T}Qx\)</span>).</p>
+<p>La cella sottostante mostra come dichiarare una funzione obiettivo utilizzando un dizionario. Per il termine lineare, le chiavi nel dizionario corrispondono ai nomi delle variabili, ed i valori corrispondenti sono i coefficienti. Per il termine quadratico, le chiavi nel dizionario corrispondono alle due variabili che si moltiplicano ed i valori sono, come prima, i coefficienti.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -721,7 +720,7 @@ End
 
 </pre></div></div>
 </div>
-<p>Another way to specify the quadratic program is using arrays. For the linear term, the array corresponds to the vector <span class="math notranslate nohighlight">\(c\)</span> in the mathematical formulation. For the quadratic term, the array corresponds to the matrix <span class="math notranslate nohighlight">\(Q\)</span>. Note that the ordering of the variables (<span class="math notranslate nohighlight">\(x\)</span> in the mathematical formulation) is the order in which the variables were originally declared in the QuadraticProgram object.</p>
+<p>Un altro modo per specificare un programma quadratico è utilizzando gli array. Per il termine lineare, l’array corrisponde al vettore <span class="math notranslate nohighlight">\(c\)</span> indicato nella formulazione matematica. Per il termine quadratico, l’array corrisponde alla matrice <span class="math notranslate nohighlight">\(Q\)</span>. Da notare che l’ordine delle variabili (<span class="math notranslate nohighlight">\(x\)</span> nella formulazione matematica) corrisponde all’ordine in cui le variabili sono state dichiarate nell’oggetto QuadraticProgram.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -760,8 +759,7 @@ End
 
 </pre></div></div>
 </div>
-<p>You can access the constant, the linear term, and the quadratic term by looking at <code class="docutils literal notranslate"><span class="pre">Quadratic.objective.{constant,</span> <span class="pre">linear,</span> <span class="pre">quadratic}</span></code>, respectively. As for linear and quadratic terms, you can get a dense matrix (<code class="docutils literal notranslate"><span class="pre">to_array</span></code>), a sparse matrix (<code class="docutils literal notranslate"><span class="pre">coefficients</span></code>), and a dictionary (<code class="docutils literal notranslate"><span class="pre">to_dict</span></code>). For dictionaries, you can specify whether to use variable indices or names as keys. Note that the quadratic terms are stored in a compressed way, e.g., <code class="docutils literal notranslate"><span class="pre">{('x',</span> <span class="pre">'y'):</span> <span class="pre">1,</span> <span class="pre">('y',</span> <span class="pre">'x'):</span> <span class="pre">2}</span></code> is stored as
-<code class="docutils literal notranslate"><span class="pre">{('x',</span> <span class="pre">'y'):</span> <span class="pre">3}</span></code>. You can get the quadratic term as a symmetric matrix by calling <code class="docutils literal notranslate"><span class="pre">to_array(symmetric=True)</span></code> or <code class="docutils literal notranslate"><span class="pre">to_dict(symmetric=True)</span></code>. If you call <code class="docutils literal notranslate"><span class="pre">to_dict(name=True)</span></code>, you can get a dictionary whose keys are pairs of variable names.</p>
+<p>È possibile accedere al termine costante, lineare e quadratico guardando rispettivamente <code class="docutils literal notranslate"><span class="pre">Quadratic.objective.{constant,</span> <span class="pre">linear,</span> <span class="pre">quadratic}</span></code>. Per i termini lineari e quadratici si può ottenere una matrice densa (<code class="docutils literal notranslate"><span class="pre">to_array</span></code>), una matrice sparsa (<code class="docutils literal notranslate"><span class="pre">coefficients</span></code>), e un dizionario (<code class="docutils literal notranslate"><span class="pre">to_dict</span></code>). Per i dizionari è possibile specificare se usare gli indici delle variabili o i loro nomi come chiavi. Si noti che i termini quadratici sono salvati in maniera compressa, ad esempio <code class="docutils literal notranslate"><span class="pre">{('x',</span> <span class="pre">'y'):</span> <span class="pre">1,</span> <span class="pre">('y',</span> <span class="pre">'x'):</span> <span class="pre">2}</span></code> è salvato come <code class="docutils literal notranslate"><span class="pre">{('x',</span> <span class="pre">'y'):</span> <span class="pre">3}</span></code>. Si può ottenere il termine quadratico come una matrice simmetrica usando <code class="docutils literal notranslate"><span class="pre">to_array(symmetric=True)</span></code> o <code class="docutils literal notranslate"><span class="pre">to_dict(symmetric=True)</span></code>. Usando <code class="docutils literal notranslate"><span class="pre">to_dict(name=True)</span></code> si ottiene un dizionario le cui chiavi sono coppie di nomi di variabili.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -810,9 +808,9 @@ quadratic matrix as sparse matrix:
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Adding/removing-linear-and-quadratic-constraints">
-<h2>Adding/removing linear and quadratic constraints<a class="headerlink" href="#Adding/removing-linear-and-quadratic-constraints" title="Link a questa intestazione">¶</a></h2>
-<p>You can add linear constraints by setting name, linear expression, sense and right-hand-side value (rhs). You can use senses ‘EQ’, ‘LE’, and ‘GE’ as Docplex supports.</p>
+<div class="section" id="Aggiungere/rimuovere-vincoli-lineari-e-quadratici">
+<h2>Aggiungere/rimuovere vincoli lineari e quadratici<a class="headerlink" href="#Aggiungere/rimuovere-vincoli-lineari-e-quadratici" title="Link a questa intestazione">¶</a></h2>
+<p>Si possono aggiungere vincoli lineari impostando nome, espressione lineare, direzione e valore destro (rhs). Si possono utilizzare le direzioni “EQ”, “LE”, e “GE” come supportato da Docplex.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -856,7 +854,7 @@ End
 
 </pre></div></div>
 </div>
-<p>You can add quadratic constraints as well as objective function and linear constraints.</p>
+<p>Si possono aggiungere vincoli quadratici, così come funzioni obiettivo e vincoli lineari.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -903,7 +901,7 @@ End
 
 </pre></div></div>
 </div>
-<p>You can access linear and quadratic terms of linear and quadratic constraints as in the same way as the objective function.</p>
+<p>È possibile accedere ai termini lineari e quadratici dei vincoli lineari e quadratici nello stesso modo in cui si accede a quelli della funzione obiettivo.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -925,7 +923,7 @@ lin_geq: {&#39;x&#39;: 1.0, &#39;y&#39;: 2.0} ConstraintSense.GE 3
 quad_geq: {&#39;x&#39;: 1.0, &#39;y&#39;: 1.0} {(&#39;x&#39;, &#39;x&#39;): 1.0, (&#39;y&#39;, &#39;z&#39;): -1.0} ConstraintSense.GE 3
 </pre></div></div>
 </div>
-<p>You can also remove linear/quadratic constraints by <code class="docutils literal notranslate"><span class="pre">remove_linear_constraint</span></code> and <code class="docutils literal notranslate"><span class="pre">remove_quadratic_constraint</span></code>.</p>
+<p>Si possono inoltre rimuovere vincoli lineari/quadratici usando <code class="docutils literal notranslate"><span class="pre">remove_linear_constraint</span></code> e <code class="docutils literal notranslate"><span class="pre">remove_quadratic_constraint</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -969,10 +967,10 @@ End
 
 </pre></div></div>
 </div>
-<p>You can substitute some of variables with constants or other variables. More precisely, <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> has a method <code class="docutils literal notranslate"><span class="pre">substitute_variables(constants=...,</span> <span class="pre">variables=...)</span></code> to deal with the following two cases. - <span class="math notranslate nohighlight">\(x \leftarrow c\)</span>: when <code class="docutils literal notranslate"><span class="pre">constants</span></code> have a dictionary <code class="docutils literal notranslate"><span class="pre">{x:</span> <span class="pre">c}</span></code>. - <span class="math notranslate nohighlight">\(x \leftarrow c y\)</span>: when <code class="docutils literal notranslate"><span class="pre">variables</span></code> have a dictionary <code class="docutils literal notranslate"><span class="pre">{x:</span> <span class="pre">(y,</span> <span class="pre">c)}</span></code>.</p>
+<p>È possibile sostituire alcune delle variabili con costanti o con altre variabili. Più precisamente, <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> contiene un metodo <code class="docutils literal notranslate"><span class="pre">substitute_variables(constants=...,</span> <span class="pre">variables=...)</span></code> per gestire i seguenti due casi. - <span class="math notranslate nohighlight">\(x \leftarrow c\)</span>: quando le <code class="docutils literal notranslate"><span class="pre">constants</span></code> hanno un dizionario <code class="docutils literal notranslate"><span class="pre">{x:</span> <span class="pre">c}</span></code>.- <span class="math notranslate nohighlight">\(x \leftarrow c y\)</span>: quando le <code class="docutils literal notranslate"><span class="pre">variables</span></code> hanno un dizionario <code class="docutils literal notranslate"><span class="pre">{x:</span> <span class="pre">(y,</span> <span class="pre">c)}</span></code>.</p>
 </div>
-<div class="section" id="Substituting-Variables">
-<h2>Substituting Variables<a class="headerlink" href="#Substituting-Variables" title="Link a questa intestazione">¶</a></h2>
+<div class="section" id="Sostituire-le-Variabili">
+<h2>Sostituire le Variabili<a class="headerlink" href="#Sostituire-le-Variabili" title="Link a questa intestazione">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1006,7 +1004,7 @@ End
 
 </pre></div></div>
 </div>
-<p>If the resulting problem is infeasible due to lower bounds or upper bounds, the methods returns the status <code class="docutils literal notranslate"><span class="pre">Status.INFEASIBLE</span></code>. We try to replace variable <code class="docutils literal notranslate"><span class="pre">x</span></code> with -1, but -1 is out of range of <code class="docutils literal notranslate"><span class="pre">x</span></code> (0 &lt;= <code class="docutils literal notranslate"><span class="pre">x</span></code> &lt;= 1). So, it returns <code class="docutils literal notranslate"><span class="pre">Status.INFEASIBLE</span></code>.</p>
+<p>Se il problema risultante è infattibile per via dei vincoli inferiori o superiori, i metodi restituiscono lo status <code class="docutils literal notranslate"><span class="pre">Status.INFEASIBLE</span></code>. Si cerca di sostituire la variabile <code class="docutils literal notranslate"><span class="pre">x</span></code> con -1, ma -1 è al di fuori dell’intervallo di <code class="docutils literal notranslate"><span class="pre">x</span></code> (0 &lt;= <code class="docutils literal notranslate"><span class="pre">x</span></code> &lt;= 1). Perciò restituisce <code class="docutils literal notranslate"><span class="pre">Status.INFEASIBLE</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1033,7 +1031,7 @@ Infeasible substitution for variable: x
 QuadraticProgramStatus.INFEASIBLE
 </pre></div></div>
 </div>
-<p>You cannot substitute variables multiple times. The method raises an error in such a case.</p>
+<p>Non è possibile sostituire più volte le variabili. In tal caso il metodo genera un errore.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1099,10 +1097,10 @@ Error: &#39;Cannot substitute by variable that gets substituted itself: y &lt;- 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="02_converters_for_quadratic_programs.html" class="btn btn-neutral float-right" title="Converters for Quadratic Programs" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="02_converters_for_quadratic_programs.html" class="btn btn-neutral float-right" title="Convertitori per Programmi Quadratici" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Optimization Tutorials" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Tutorial di Ottimizzazione" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1134,13 +1132,13 @@ Error: &#39;Cannot substitute by variable that gets substituted itself: y &lt;- 
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Quadratic Programs</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#Loading-a-Quadratic-Program-from-an-LP-file">Loading a <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> from an LP file</a></li>
-<li><a class="reference internal" href="#Loading-a-QuadraticProgram-from-a-docplex-model">Loading a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> from a docplex model</a></li>
-<li><a class="reference internal" href="#Directly-constructing-a-QuadraticProgram">Directly constructing a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code></a></li>
-<li><a class="reference internal" href="#Adding/removing-linear-and-quadratic-constraints">Adding/removing linear and quadratic constraints</a></li>
-<li><a class="reference internal" href="#Substituting-Variables">Substituting Variables</a></li>
+<li><a class="reference internal" href="#">Programmi Quadratici</a><ul>
+<li><a class="reference internal" href="#Introduzione">Introduzione</a></li>
+<li><a class="reference internal" href="#Caricare-un-Quadratic-Program-da-un-file-LP">Caricare un <code class="docutils literal notranslate"><span class="pre">Quadratic</span> <span class="pre">Program</span></code> da un file LP</a></li>
+<li><a class="reference internal" href="#Caricare-un-QuadraticProgram-da-un-modello-docplex">Caricare un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> da un modello docplex</a></li>
+<li><a class="reference internal" href="#Costruire-direttamente-un-QuadraticProgram">Costruire direttamente un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code></a></li>
+<li><a class="reference internal" href="#Aggiungere/rimuovere-vincoli-lineari-e-quadratici">Aggiungere/rimuovere vincoli lineari e quadratici</a></li>
+<li><a class="reference internal" href="#Sostituire-le-Variabili">Sostituire le Variabili</a></li>
 </ul>
 </li>
 </ul>
@@ -1163,7 +1161,7 @@ Error: &#39;Cannot substitute by variable that gets substituted itself: y &lt;- 
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

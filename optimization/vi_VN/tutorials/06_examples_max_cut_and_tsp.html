@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Max-Cut and Traveling Salesman Problem &mdash; Tài liệu Qiskit Optimization 0.3.0</title>
+  <title>Max-Cut and Traveling Salesman Problem &mdash; Tài liệu Qiskit Optimization 0.2.1</title>
   
 
   
@@ -35,10 +35,10 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="index" title="Mục lục" href="../genindex.html" />
+    <link rel="search" title="Tìm kiếm" href="../search.html" />
     <link rel="next" title="Vehicle Routing" href="07_examples_vehicle_routing.html" />
-    <link rel="prev" title="ADMM Optimizer" href="05_admm_optimizer.html" /> 
+    <link rel="prev" title="Bộ tối ưu hoá ADMM" href="05_admm_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Ngôn ngữ</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/06_examples_max_cut_and_tsp.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Bắt đầu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">Tài liệu tham khảo về API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Hướng dẫn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Thông tin phiên bản</a></li>
 </ul>
 
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Hưỡng dẫn tối ưu hóa</a> &gt;</li>
         
       <li>Max-Cut and Traveling Salesman Problem</li>
     
@@ -480,25 +480,24 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Ghi chú</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/06_examples_max_cut_and_tsp.ipynb">docs/tutorials/06_examples_max_cut_and_tsp.ipynb</a>.</p>
 </div>
 <div class="section" id="Max-Cut-and-Traveling-Salesman-Problem">
 <h1>Max-Cut and Traveling Salesman Problem<a class="headerlink" href="#Max-Cut-and-Traveling-Salesman-Problem" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>Many problems in quantitative fields such as finance and engineering are optimization problems. Optimization problems lie at the core of complex decision-making and definition of strategies.</p>
-<p>Optimization (or combinatorial optimization) means searching for an optimal solution in a finite or countably infinite set of potential solutions. Optimality is defined with respect to some criterion function, which is to be minimized or maximized. This is typically called cost function or objective function.</p>
-<p><strong>Typical optimization problems</strong></p>
-<p>Minimization: cost, distance, length of a traversal, weight, processing time, material, energy consumption, number of objects</p>
-<p>Maximization: profit, value, output, return, yield, utility, efficiency, capacity, number of objects</p>
-<p>We consider here max-cut problems of practical interest in many fields, and show how they can be mapped on quantum computers manually and how Qiskit’s optimization module supports this.</p>
-<div class="section" id="Weighted-Max-Cut">
-<h3>Weighted Max-Cut<a class="headerlink" href="#Weighted-Max-Cut" title="Permalink to this headline">¶</a></h3>
-<p>Max-Cut is an NP-complete problem, with applications in clustering, network science, and statistical physics. To grasp how practical applications are mapped into given Max-Cut instances, consider a system of many people that can interact and influence each other. Individuals can be represented by vertices of a graph, and their interactions seen as pairwise connections between vertices of the graph, or edges. With this representation in mind, it is easy to model typical marketing problems. For
-example, suppose that it is assumed that individuals will influence each other’s buying decisions, and knowledge is given about how strong they will influence each other. The influence can be modeled by weights assigned on each edge of the graph. It is possible then to predict the outcome of a marketing strategy in which products are offered for free to some individuals, and then ask which is the optimal subset of individuals that should get the free products, in order to maximize revenues.</p>
-<p>The formal definition of this problem is the following:</p>
+<p>Nhiều vấn đề trong lĩnh vực định lượng như tài chính và kỹ thuật là các vấn đề tối ưu hóa. Các vấn đề tối ưu hóa nằm ở cốt lõi của sự phức tạp của việc ra quyết định và định nghĩa của các chiến lược.</p>
+<p>Tối ưu hóa (hoặc tối ưu hóa tổ hợp) có nghĩa là tìm kiếm một giải pháp tối ưu trong một tập hợp hữu hạn hoặc vô hạn đếm được các giải pháp tiềm năng. Sự tối ưu được định nghĩa với một số hàm tiêu chuẩn mà sẽ được giảm thiểu hoá hoặc tối đa hóa. Đây thường được gọi là hàm mất mát hoặc hàm mục tiêu.</p>
+<p><strong>Các vấn đề tối ưu hóa điển hình</strong></p>
+<p>Tối thiểu hóa: chi phí, khoảng cách, quãng đường di chuyển, khối lượng, thời gian xử lý, vật liệu, năng lượng tiêu thụ, số lượng vật thể</p>
+<p>Tối đa hóa: lợi nhuận, giá trị, đầu ra, lợi suất, lợi ích, hiệu suất, sức chứa, số vật thể</p>
+<p>Chúng ta nói đến bài toán max-cut trong nhiều lĩnh vực thực tế, và thấy cách chúng có thể được ánh xạ với máy tính lượng tử và cách mà mô đun Qiskit’s optimization hỗ trợ việc này.</p>
+<div class="section" id="Cắt-Tối-đa-với-trọng-lượng">
+<h3>Cắt-Tối đa với trọng lượng<a class="headerlink" href="#Cắt-Tối-đa-với-trọng-lượng" title="Permalink to this headline">¶</a></h3>
+<p>Cắt-Tối đa là một bài toán NP-đầy đủ, với các ứng dụng trong phân cụm, khoa học mạng và vật lý thống kê. Để nắm bắt được các ứng dụng thực tế được ánh xạ như thế nào khi cho một thực thể Cắt-Tối đa, xem xét một hệ gồm nhiều người có thể tương tác và ảnh hưởng lẫn nhau. Các cá thể có thể được biểu diễn bằng các đỉnh của đồ thị, và các tương tác của họ được xem như là các kết nối đôi giữa các đỉnh của đồ thị, hoặc các cạnh. Khi hình dung ra biểu diễn này trong đầu, nó rất dễ để mô hình hoá các vấn đề tiếp thị điển hình. Ví dụ, giả sử rằng người ta cho rằng các cá nhân sẽ ảnh hưởng đến quyết định mua của nhau, và kiến thức được đưa ra về việc họ sẽ ảnh hưởng tới nhau mạnh đến mức nào. Ảnh hưởng có thể được mô hình hóa bằng trọng lượng được gán trên mỗi cạnh của đồ thị. Có thể sau đó là dự đoán kết quả của một chiến lược tiếp thị trong đó các sản phẩm được cung cấp miễn phí cho một số cá nhân, và sau đó yêu cầu đó là tập con tối ưu của các cá nhân nên có được các sản phẩm miễn phí, để tối đa hóa doanh thu.</p>
+<p>Định nghĩa chính thức của bài toán này là:</p>
 <p>Consider an <span class="math notranslate nohighlight">\(n\)</span>-node undirected graph <em>G = (V, E)</em> where <em>|V| = n</em> with edge weights <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span>, <span class="math notranslate nohighlight">\(w_{ij}=w_{ji}\)</span>, for <span class="math notranslate nohighlight">\((i, j)\in E\)</span>. A cut is defined as a partition of the original set V into two subsets. The cost function to be optimized is in this case the sum of weights of edges connecting points in the two different subsets, <em>crossing</em> the cut. By assigning <span class="math notranslate nohighlight">\(x_i=0\)</span> or <span class="math notranslate nohighlight">\(x_i=1\)</span> to each node <span class="math notranslate nohighlight">\(i\)</span>, one tries to maximize the global profit function (here
 and in the following summations run over indices 0,1,…n-1)</p>
 <div class="math notranslate nohighlight">
@@ -510,21 +509,20 @@ cost of the initial free samples, the strategy is a convenient one. An extension
 <p>In order to find a solution to this problem on a quantum computer, one needs first to map it to an Ising Hamiltonian. This can be done with the assignment <span class="math notranslate nohighlight">\(x_i\rightarrow (1-Z_i)/2\)</span>, where <span class="math notranslate nohighlight">\(Z_i\)</span> is the Pauli Z operator that has eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>. Doing this we find that</p>
 <div class="math notranslate nohighlight">
 \[C(\textbf{Z}) = \sum_{i,j} \frac{w_{ij}}{4} (1-Z_i)(1+Z_j) + \sum_i \frac{w_i}{2} (1-Z_i) = -\frac{1}{2}\left( \sum_{i&lt;j} w_{ij} Z_i Z_j +\sum_i w_i Z_i\right)+\mathrm{const},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathrm{const} = \sum_{i&lt;j}w_{ij}/2+\sum_i w_i/2\)</span>. In other terms, the weighted Max-Cut problem is equivalent to minimizing the Ising Hamiltonian</p>
+<p>trong đó <span class="math notranslate nohighlight">\(\mathrm{const} = \sum_{i&lt;j}w_{ij}/2+\sum_i w_i/2\)</span>. Nói cách khác, bài toán Cắt-Tối đa có trọng lượng tương đương với bài toán tối thiểu hoá Ising Hamiltonian</p>
 <div class="math notranslate nohighlight">
 \[H = \sum_i w_i Z_i + \sum_{i&lt;j} w_{ij} Z_iZ_j.\]</div>
 <p>Qiskit’s optimization module can generate the Ising Hamiltonian for the first profit function <span class="math notranslate nohighlight">\(\tilde{C}\)</span>. To this extent, function <span class="math notranslate nohighlight">\(\tilde{C}\)</span> can be modeled as a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>, which provides the <code class="docutils literal notranslate"><span class="pre">to_ising()</span></code> method.</p>
 </div>
-<div class="section" id="Approximate-Universal-Quantum-Computing-for-Optimization-Problems">
-<h3>Approximate Universal Quantum Computing for Optimization Problems<a class="headerlink" href="#Approximate-Universal-Quantum-Computing-for-Optimization-Problems" title="Permalink to this headline">¶</a></h3>
-<p>There has been a considerable amount of interest in recent times about the use of quantum computers to find a solution to combinatorial optimization problems. It is important to say that, given the classical nature of combinatorial problems, exponential speedup in using quantum computers compared to the best classical algorithms is not guaranteed. However, due to the nature and importance of the target problems, it is worth investigating heuristic approaches on a quantum computer that could
-indeed speed up some problem instances. Here we demonstrate an approach that is based on the <em>Quantum Approximate Optimization Algorithm</em> (QAOA) by Farhi, Goldstone, and Gutmann (2014). We frame the algorithm in the context of <em>approximate quantum computing</em>, given its heuristic nature.</p>
-<p>The algorithm works as follows:</p>
+<div class="section" id="Xấp-xỉ-Tính-toán-Lượng-tử-Phổ-quát-cho-các-vấn-đề-tối-ưu-hóa">
+<h3>Xấp xỉ Tính toán Lượng tử Phổ quát cho các vấn đề tối ưu hóa<a class="headerlink" href="#Xấp-xỉ-Tính-toán-Lượng-tử-Phổ-quát-cho-các-vấn-đề-tối-ưu-hóa" title="Permalink to this headline">¶</a></h3>
+<p>Đã có một số lượng đáng kể quan tâm trong thời gian gần đây về việc sử dụng các máy tính lượng tử để tìm ra giải pháp cho các vấn đề tối ưu hóa tổ hợp. Điều quan trọng là phải nói rằng, với bản chất cổ điển của các bài toán tổ hợp, tốc độ tăng tốc trong việc sử dụng máy tính lượng tử so với các thuật toán cổ điển tốt nhất không được đảm bảo. Tuy nhiên, do tính chất và tầm quan trọng của các vấn đề mục tiêu, nó đáng để xem xét các phương pháp tiếp cận khai phá trên một máy tính lượng tử có thể thực sự tăng tốc một số trường hợp vấn đề. Ở đây, chúng tôi chứng minh một cách tiếp cận dựa trên <em>Thuật toán Tối ưu hoá Xấp xỉ Lượng tử</em> (QAOA) của Farhi, Goldstone, và Gutmann (2014). Chúng ta đóng khung thuật toán trong ngữ cảnh của <a href="#id1"><span class="problematic" id="id2">*</span></a>xấp xỉ tính toán lượng tử <a href="#id3"><span class="problematic" id="id4">*</span></a>, do bản chất khai phá của nó.</p>
+<p>Thuật toán hoạt động như sau:</p>
 <ol class="arabic">
 <li><p>Choose the <span class="math notranslate nohighlight">\(w_i\)</span> and <span class="math notranslate nohighlight">\(w_{ij}\)</span> in the target Ising problem. In principle, even higher powers of Z are allowed.</p></li>
-<li><p>Choose the depth of the quantum circuit <span class="math notranslate nohighlight">\(m\)</span>. Note that the depth can be modified adaptively.</p></li>
+<li><p>Chọn độ sâu của mạch lượng tử <span class="math notranslate nohighlight">\(m\)</span>. Ghi chú rằng độ sâu có thể được sửa đổi theo cách thích hợp.</p></li>
 <li><p>Choose a set of controls <span class="math notranslate nohighlight">\(\theta\)</span> and make a trial function <span class="math notranslate nohighlight">\(|\psi(\boldsymbol\theta)\rangle\)</span>, built using a quantum circuit made of C-Phase gates and single-qubit Y rotations, parameterized by the components of <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>.</p></li>
-<li><p>Evaluate</p>
+<li><p>Đánh giá</p>
 <div class="math notranslate nohighlight">
 \[C(\boldsymbol\theta) = \langle\psi(\boldsymbol\theta)~|H|~\psi(\boldsymbol\theta)\rangle = \sum_i w_i \langle\psi(\boldsymbol\theta)~|Z_i|~\psi(\boldsymbol\theta)\rangle+ \sum_{i&lt;j} w_{ij} \langle\psi(\boldsymbol\theta)~|Z_iZ_j|~\psi(\boldsymbol\theta)\rangle\]</div>
 <p>by sampling the outcome of the circuit in the Z-basis and adding the expectation values of the individual Ising terms together. In general, different control points around <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> have to be estimated, depending on the classical optimizer chosen.</p>
@@ -541,8 +539,8 @@ solution.</p>
 <p>One advantage of using this sampling method compared to adiabatic approaches is that the target Ising Hamiltonian does not have to be implemented directly on hardware, allowing this algorithm not to be limited to the connectivity of the device. Furthermore, higher-order terms in the cost function, such as <span class="math notranslate nohighlight">\(Z_iZ_jZ_k\)</span>, can also be sampled efficiently, whereas in adiabatic or annealing approaches they are generally impractical to deal with.</p>
 <p>References: - A. Lucas, Frontiers in Physics 2, 5 (2014) - E. Farhi, J. Goldstone, S. Gutmann e-print arXiv 1411.4028 (2014) - D. Wecker, M. B. Hastings, M. Troyer Phys. Rev. A 94, 022309 (2016) - E. Farhi, J. Goldstone, S. Gutmann, H. Neven e-print arXiv 1703.06199 (2017)</p>
 </div>
-<div class="section" id="Application-classes">
-<h3>Application classes<a class="headerlink" href="#Application-classes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Lớp-ứng-dụng">
+<h3>Lớp ứng dụng<a class="headerlink" href="#Lớp-ứng-dụng" title="Permalink to this headline">¶</a></h3>
 <p>We use the application classes for the max-cut problem and the traveling salesman problem in this page. There are application classes for other optimization problems available as well. See <a class="reference internal" href="09_application_classes.html"><span class="doc">Application Classes for Optimization Problems</span></a> for details.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -973,8 +971,8 @@ distance
 <div class="output_area docutils container">
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" /></div>
 </div>
-<div class="section" id="id1">
-<h3>Brute force approach<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Brute force approach<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1034,8 +1032,8 @@ Best order from brute force = (0, 1, 2) with total distance = 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Mapping to the Ising problem<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Mapping to the Ising problem<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1177,8 +1175,8 @@ status: SUCCESS
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1218,8 +1216,8 @@ solution objective: 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Running it on quantum computer<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Running it on quantum computer<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>We run the optimization routine using a feedback loop with a quantum computer that uses trial functions built with Y single-qubit rotations, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, and entangler steps <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1372,7 +1370,7 @@ solution objective: 202.0
         <a href="07_examples_vehicle_routing.html" class="btn btn-neutral float-right" title="Vehicle Routing" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="05_admm_optimizer.html" class="btn btn-neutral" title="ADMM Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="05_admm_optimizer.html" class="btn btn-neutral" title="Bộ tối ưu hoá ADMM" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1406,9 +1404,9 @@ solution objective: 202.0
               <ul>
 <li><a class="reference internal" href="#">Max-Cut and Traveling Salesman Problem</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#Weighted-Max-Cut">Weighted Max-Cut</a></li>
-<li><a class="reference internal" href="#Approximate-Universal-Quantum-Computing-for-Optimization-Problems">Approximate Universal Quantum Computing for Optimization Problems</a></li>
-<li><a class="reference internal" href="#Application-classes">Application classes</a></li>
+<li><a class="reference internal" href="#Cắt-Tối-đa-với-trọng-lượng">Cắt-Tối đa với trọng lượng</a></li>
+<li><a class="reference internal" href="#Xấp-xỉ-Tính-toán-Lượng-tử-Phổ-quát-cho-các-vấn-đề-tối-ưu-hóa">Xấp xỉ Tính toán Lượng tử Phổ quát cho các vấn đề tối ưu hóa</a></li>
+<li><a class="reference internal" href="#Lớp-ứng-dụng">Lớp ứng dụng</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Max-Cut-problem">Max-Cut problem</a><ul>
@@ -1419,10 +1417,10 @@ solution objective: 202.0
 </ul>
 </li>
 <li><a class="reference internal" href="#Traveling-Salesman-Problem">Traveling Salesman Problem</a><ul>
-<li><a class="reference internal" href="#id1">Brute force approach</a></li>
-<li><a class="reference internal" href="#id2">Mapping to the Ising problem</a></li>
-<li><a class="reference internal" href="#id3">Checking that the full Hamiltonian gives the right cost</a></li>
-<li><a class="reference internal" href="#id4">Running it on quantum computer</a></li>
+<li><a class="reference internal" href="#id2">Brute force approach</a></li>
+<li><a class="reference internal" href="#id3">Mapping to the Ising problem</a></li>
+<li><a class="reference internal" href="#id4">Checking that the full Hamiltonian gives the right cost</a></li>
+<li><a class="reference internal" href="#id5">Running it on quantum computer</a></li>
 </ul>
 </li>
 </ul>
@@ -1447,7 +1445,7 @@ solution objective: 202.0
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

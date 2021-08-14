@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ADMM Optimizer &mdash; Qiskit Optimization 0.3.0 문서</title>
+  <title>ADMM Optimizer &mdash; Qiskit Optimization 0.2.1 문서</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
-    <link rel="next" title="Max-Cut and Traveling Salesman Problem" href="06_examples_max_cut_and_tsp.html" />
-    <link rel="prev" title="Grover Optimizer" href="04_grover_optimizer.html" /> 
+    <link rel="next" title="최대 컷 및 외판원 문제" href="06_examples_max_cut_and_tsp.html" />
+    <link rel="prev" title="Grover 최적화기" href="04_grover_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">최적화 사용 지침서</a> &gt;</li>
         
       <li>ADMM Optimizer</li>
     
@@ -480,9 +480,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/05_admm_optimizer.ipynb">docs/tutorials/05_admm_optimizer.ipynb</a> 에서 생성되었다.</p>
 </div>
 <div class="section" id="ADMM-Optimizer">
 <h1>ADMM Optimizer<a class="headerlink" href="#ADMM-Optimizer" title="제목 주소">¶</a></h1>
@@ -494,7 +494,7 @@ div.rendered_html tbody tr:hover {
 <p>subject to the constraints:</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{s.t.:~} \quad G x = b, \quad  g(x) \leq 0, \quad \ell(x, u) \leq 0,\]</div>
-<p>with the corresponding functional assumptions.</p>
+<p>해당 기능적 가정과 함께</p>
 <ol class="arabic simple">
 <li><p>Function <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> is quadratic, i.e., <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> for a given symmetric squared matrix <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, and vector <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
 <li><p>The set <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> enforces the binary constraints;</p></li>
@@ -502,21 +502,21 @@ div.rendered_html tbody tr:hover {
 <li><p>Function <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> is convex and <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> is a convex set;</p></li>
 <li><p>Function <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> is <em>jointly</em> convex in <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
 </ol>
-<p>In order to solve MBO problems, [1] proposed heuristics for <span class="math notranslate nohighlight">\((P)\)</span> based on the Alternating Direction Method of Multipliers (ADMM) [2]. ADMM is an operator splitting algorithm with a long history in convex optimization, and it is known to have residual, objective and dual variable convergence properties, provided that convexity assumptions are holding.</p>
-<p>The method of [1] (referred to as 3-ADMM-H) leverages the ADMM operator-splitting procedure to devise a decomposition for certain classes of MBOs into: - a QUBO subproblem to be solved by on the quantum device via variational algorithms, such as VQE or QAOA; - continuous convex constrained subproblem, which can be efficiently solved with classical optimization solvers.</p>
-<p>The algorithm 3-ADMM-H works as follows:</p>
+<p>MBO 문제를 해결하기 위해 [1]은 Alternating Direction Method of Multipliers (ADMM) [2]에 기초한 <span class="math notranslate nohighlight">\((P)\)</span> 에 대한 발견적 교수법을 제안했다. ADMM은 convex optimzation의 오랜 이력을 지닌 연산자 분할 알고리즘이며, 볼록부 가정이 유지된다는 전제 하에 잔류, 객관 및 이중 변수 수렴 특성을 갖는 것으로 알려져 있다.</p>
+<p>(3-ADMM-H라고도 불리는) [1] 의 방법은 ADMM 연산자 분할 절차를 활용하여 특정 등급의 MBO를 다음과 같이 분해한다: - 양자 장치에서 VQE 또는 QAOA와 같은 변이 알고리즘을 통해 해결할 QUBO 하위 문제; - 고전적 optimization solver로 효율적으로 해결할 수 있는 연속 볼록 제약 하위 문제.</p>
+<p>알고리즘 3-ADMM-H는 다음과 같이 작동한다:</p>
 <ol class="arabic simple" start="0">
-<li><p>Initialization phase (set the parameters and the QUBO and convex solvers);</p></li>
+<li><p>초기화 단계(매개변수, QUBO 및 convex solver 설정)</p></li>
 <li><p>For each ADMM iterations ($k = 1, 2, <span class="math">\ldots</span>, $) until termination:</p>
 <ul class="simple">
-<li><p>Solve a properly defined QUBO subproblem (with a classical or quantum solver);</p></li>
-<li><p>Solve properly defined convex problems (with a classical solver);</p></li>
+<li><p>적절히 정의된 QUBO 하위 문제를 (고전적 또는 양자 solver) 로 해결;</p></li>
+<li><p>적절히 정의된 convex 문제 (고전적 solver) 로 해결;</p></li>
 <li><p>Update the dual variables.</p></li>
 </ul>
 </li>
 <li><p>Return optimizers and cost.</p></li>
 </ol>
-<p>A comprehensive discussion on the conditions for convergence, feasibility and optimality of the algorithm can be found in [1]. A variant with 2 ADMM blocks, namely a QUBO subproblem, and a continuous convex constrained subproblem, is also introduced in [1].</p>
+<p>알고리즘의 수렴, 실현 가능성 및 최적성에 대한 포괄적인 논의는 [1] 에서 확인할 수 있다. 2개의 ADMM 블록, 즉, QUBO 하위 문제와 연속 convex 제약 하위 문제를 가진 변형 모델도 [1] 에 도입된다.</p>
 </div>
 <div class="section" id="References">
 <h2>References<a class="headerlink" href="#References" title="제목 주소">¶</a></h2>
@@ -525,7 +525,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Initialization">
 <h2>Initialization<a class="headerlink" href="#Initialization" title="제목 주소">¶</a></h2>
-<p>First of all we load all the packages that we need.</p>
+<p>가장 우선적으로 필요한 패키지를 모두 로드한다.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -855,10 +855,10 @@ fval=1.00
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="06_examples_max_cut_and_tsp.html" class="btn btn-neutral float-right" title="Max-Cut and Traveling Salesman Problem" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="06_examples_max_cut_and_tsp.html" class="btn btn-neutral float-right" title="최대 컷 및 외판원 문제" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="Grover Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="Grover 최적화기" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -927,7 +927,7 @@ fval=1.00
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Converters for Quadratic Programs &mdash; Qiskit Optimization 0.3.0 belgelendirmesi</title>
+  <title>İkinci Dereceden Programlar için Dönüştürücüler &mdash; Qiskit Optimization 0.2.1 belgelendirmesi</title>
   
 
   
@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
-    <link rel="next" title="Minimum Eigen Optimizer" href="03_minimum_eigen_optimizer.html" />
+    <link rel="next" title="Minimum Özdeğer Optimize Edici" href="03_minimum_eigen_optimizer.html" />
     <link rel="prev" title="Quadratic Programs" href="01_quadratic_program.html" /> 
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,9 +200,9 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Optimizasyon Eğitimleri</a> &gt;</li>
         
-      <li>Converters for Quadratic Programs</li>
+      <li>İkinci Dereceden Programlar için Dönüştürücüler</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,22 +480,20 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/02_converters_for_quadratic_programs.ipynb">docs/tutorials/02_converters_for_quadratic_programs.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
-<div class="section" id="Converters-for-Quadratic-Programs">
-<h1>Converters for Quadratic Programs<a class="headerlink" href="#Converters-for-Quadratic-Programs" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
-<p>Optimization problems in Qiskit’s optimization module are represented with the <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> class, which is generic and powerful representation for optimization problems. In general, optimization algorithms are defined for a certain formulation of a quadratic program and we need to convert our problem to the right type.</p>
-<p>For instance, Qiskit provides several optimization algorithms that can handle Quadratic Unconstrained Binary Optimization (QUBO) problems. These are mapped to Ising Hamiltonians, for which Qiskit uses the <code class="docutils literal notranslate"><span class="pre">qiskit.aqua.operators</span></code> module, and then their ground state is approximated. For this optimization commonly known algorithms such as VQE or QAOA can be used as underlying routine. See the following tutorial about the <a class="reference internal" href="03_minimum_eigen_optimizer.html"><span class="doc">Minimum Eigen Optimizer</span></a> for more
-detail. Note that also other algorithms exist that work differently, such as the <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code>.</p>
-<p>To map a problem to the correct input format, the optimization module of Qiskit offers a variety of converters. In this tutorial we’re providing an overview on this functionality. Currently, Qiskit contains the following converters. - <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code>: converts inequality constraints into equality constraints with additional slack variables. - <code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code>: converts integer variables into binary variables and corresponding coefficients. - <code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code>: convert
-equality constraints into additional terms of the object function. - <code class="docutils literal notranslate"><span class="pre">QuadraticProgramToQubo</span></code>: a wrapper for <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code>, <code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code>, and <code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code> for convenience.</p>
+<div class="section" id="İkinci-Dereceden-Programlar-için-Dönüştürücüler">
+<h1>İkinci Dereceden Programlar için Dönüştürücüler<a class="headerlink" href="#İkinci-Dereceden-Programlar-için-Dönüştürücüler" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
+<p>Qiskit’in optimizasyon modülündeki optimizasyon problemleri, optimizasyon problemleri için genel ve güçlü bir temsil olan <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> sınıfı ile temsil edilir. Genel olarak, karesel bir programın belirli bir formülasyonu için optimizasyon algoritmaları tanımlanır ve problemimizi doğru türe dönüştürmemiz gerekir.</p>
+<p>Örneğin, Qiskit, Karesel Kısıtsız İkili Optimizasyon (QUBO) problemlerini işleyebilen birkaç optimizasyon algoritması sağlar. Bunlar, Qiskit’in <code class="docutils literal notranslate"><span class="pre">qiskit.aqua.operators</span></code> modülünü kullandığı Ising Hamiltonyenleri ile eşleştirilir ve ardından temel durumlarına yaklaşılır. Bu optimizasyon için, temel rutin olarak VQE veya QAOA gibi yaygın olarak bilinen algoritmalar kullanılabilir. Daha fazla ayrıntı için <a class="reference internal" href="03_minimum_eigen_optimizer.html"><span class="doc">Minimum Eigen Optimizer</span></a> hakkında aşağıdaki eğiticiye bakın. <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> gibi farklı çalışan başka algoritmaların da bulunduğunu unutmayın.</p>
+<p>Bir sorunu doğru giriş biçimiyle eşleştirmek için Qiskit’in optimizasyon modülü çeşitli dönüştürücüler sunmaktadır. Bu eğitselde bu işlevselliğe genel bir bakış sağlıyoruz. Şu ana dek, Qiskit aşağıdaki dönüştürücüleri içermektedir. - <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code>: eşitsizlik kısıtlamalarını ek gevşek değişkenlerle eşitlik kısıtlamalarına dönüştürür - <code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code>: tam sayı (integer) değişkenlerini, ikili sistem (binary) değişkenlerine ve karşılık gelen kat sayılara dönüştürür. - <code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code>: eşitlik kısıtlamalarını amaç fonksiyonunun ek terimlerine dönüştürür. - <code class="docutils literal notranslate"><span class="pre">QuadraticProgramToQubo</span></code>: kolaylık sağlamak için <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code>, <code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> ve <code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code> dönüştürücülerine uygun bir sarıcıdır.</p>
 <div class="section" id="InequalityToEquality">
 <h2>InequalityToEquality<a class="headerlink" href="#InequalityToEquality" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">InequalityToEqualityConverter</span></code> converts inequality constraints into equality constraints with additional slack variables to remove inequality constraints from <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>. The upper bounds and the lower bounds of slack variables will be calculated from the difference between the left sides and the right sides of constraints. Signs of slack variables depend on symbols in constraints such as <span class="math notranslate nohighlight">\(\leq\)</span> and <span class="math notranslate nohighlight">\(\geq\)</span>.</p>
-<p>The following is an example of a maximization problem with two inequality constraints. Variable <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are binary variables and variable <span class="math notranslate nohighlight">\(z\)</span> is an integer variable.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>, an optimization model of the problem is written as follows.</p>
+<p><code class="docutils literal notranslate"><span class="pre">InequalityToEqualityConverter</span></code>, eşitsizlik kısıtlamalarını <a href="#id1"><span class="problematic" id="id2">``</span></a>QuadraticProgram``dan eşitsizlik kısıtlamalarını kaldırmak için ek durağan değişkenlerle eşitlik kısıtlamalarına dönüştürür. Durağan değişkenlerin üst sınırları ve alt sınırları, kısıtlamaların sol tarafları ile sağ tarafları arasındaki farktan hesaplanacaktır. Durağan değişkenlerin işaretleri, <span class="math notranslate nohighlight">\(\leq\)</span> ve <span class="math notranslate nohighlight">\(\geq\)</span> gibi kısıtlamalardaki sembollere bağlıdır.</p>
+<p>Aşağıdaki, iki eşitsizlik kısıtlaması olan bir maksimizasyon probleminin bir örneğidir. Değişken <span class="math notranslate nohighlight">\(x\)</span> ve <span class="math notranslate nohighlight">\(y\)</span> ikili değişkenlerdir ve değişken <span class="math notranslate nohighlight">\(z\)</span> bir tamsayı değişkendir.</p>
+<p><code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> ile bu problemin optimizasyon modeli aşağıdaki gibi yazılır.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -551,7 +549,7 @@ End
 
 </pre></div></div>
 </div>
-<p>Call <code class="docutils literal notranslate"><span class="pre">convert</span></code> method of <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code> to convert.</p>
+<p>Dönüştürmek için <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code> nin <code class="docutils literal notranslate"><span class="pre">convert</span></code> yöntemini çağırın.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -603,14 +601,13 @@ End
 
 </pre></div></div>
 </div>
-<p>After converting, the formulation of the problem looks like as the follows. As we can see, the inequality constraints are replaced with equality constraints with additional integer slack variables, <span class="math notranslate nohighlight">\(xyz\_leg\text{&#64;}int\_slack\)</span> and <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span>.</p>
-<p>Let us explain how the conversion works. For example, the lower bound of the left side of the first constraint is <span class="math notranslate nohighlight">\(0\)</span> which is the case of <span class="math notranslate nohighlight">\(x=0\)</span>, <span class="math notranslate nohighlight">\(y=0\)</span>, and <span class="math notranslate nohighlight">\(z=0\)</span>. Thus, the upperbound of the additional integer variable must be <span class="math notranslate nohighlight">\(5\)</span> to be able to satisfy even the case of <span class="math notranslate nohighlight">\(x=0\)</span>, <span class="math notranslate nohighlight">\(y=0\)</span>, and <span class="math notranslate nohighlight">\(z=0\)</span>. Note that we cut off the part after the decimal point in the converted formulation since the left side of the first constraint in the original formulation
-can be only integer values. For the second constraint, basically we apply the same approach. However, the symbol in the second constraint is <span class="math notranslate nohighlight">\(\geq\)</span>, so we add minus before <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span> to be able to satisfy even the case of <span class="math notranslate nohighlight">\(x=1, y=1\)</span>, and <span class="math notranslate nohighlight">\(z=7\)</span>.</p>
+<p>Dönüştürdükten sonra, problemin formülasyonu aşağıdaki gibi görünür. Görebildiğimiz gibi eşitsizlik kısıtlamalarının yeri, ek tam sayı gevşek değişkenleri <span class="math notranslate nohighlight">\(xyz\_leg\text{&#64;}int\_slack\)</span> ve <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span> sayesinde eşitlik kısıtlamalarının yeri ile değiştirildi.</p>
+<p>Haydi bu dönüşümün nasıl çalıştığını açıklayalım. Örneğin, ilk kısıtlamanın sol tarafının alt sınırı, <span class="math notranslate nohighlight">\(x=0\)</span>, <span class="math notranslate nohighlight">\(y=0\)</span> ve <span class="math notranslate nohighlight">\(z=0\)</span> durumu olan <span class="math notranslate nohighlight">\(0\)</span> dir. Bu yüzden, ek tam sayı değişkeninin üst sınırı, <span class="math notranslate nohighlight">\(x=0\)</span>, <span class="math notranslate nohighlight">\(y=0\)</span> ve <span class="math notranslate nohighlight">\(z=0\)</span> durumunu bile karşılayabilmek için <span class="math notranslate nohighlight">\(5\)</span> olmalıdır. Asıl formülasyondaki ilk kısıtlamanın sol tarafı sadece tam sayı değeri olabileceği için dönüştürülen formülasyonda ondalık noktadan sonraki kısmı kestiğimizi unutmayın. Temelde ikinci kısıtlama için aynı yaklaşımı uyguluyoruz. Ancak, ikinci kısıtlamadaki simge <span class="math notranslate nohighlight">\(\geq\)</span>, bu yüzden <span class="math notranslate nohighlight">\(x=1, y=1\)</span> ve <span class="math notranslate nohighlight">\(z=7\)</span> durumunu bile karşılayabilmek için <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span> den önce eksi (-) ekliyoruz.</p>
 </div>
 <div class="section" id="IntegerToBinary">
 <h2>IntegerToBinary<a class="headerlink" href="#IntegerToBinary" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> converts integer variables into binary variables and coefficients to remove integer variables from <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>. For converting, bounded-coefficient encoding proposed in <a class="reference external" href="https://arxiv.org/abs/1706.01945">arxiv:1706.01945</a> (Eq. (5)) is used. For more detail of the encoding method, please see the paper.</p>
-<p>We use the output of <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code> as starting point. Variable <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are binary variables, while the variable <span class="math notranslate nohighlight">\(z\)</span> and the slack variables <span class="math notranslate nohighlight">\(xyz\_leq\text{&#64;}int\_slack\)</span> and <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span> are integer variables. We print the problem again for reference.</p>
+<p><code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> dönüştürücüsü, <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> dan tam sayı değişkenlerini kaldırmak için tam sayı değişkenlerini ikili sistem değişkenlerine ve katsayılara dönüştürürmektedir. Dönüşüm için, önerilen sınırlı-katsayı kodlaması (encoding) <a class="reference external" href="https://arxiv.org/abs/1706.01945">arxiv:1706.01945</a> (Eq. (5)) kullanılır. Kodlama yöntemi hakkında detaylı bilgi için lütfen makaleyi inceleyiniz.</p>
+<p>Başlangıç noktası olarak <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code> dönüştürücüsünün çıktısını kullanıyoruz. <span class="math notranslate nohighlight">\(z\)</span> değişkeni, <span class="math notranslate nohighlight">\(xyz\_leq\text{&#64;}int\_slack\)</span> ve <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span> gevşek değişkenleri, tam sayı değişkenleri iken <span class="math notranslate nohighlight">\(x\)</span> ve <span class="math notranslate nohighlight">\(y\)</span> ikili sistem değişkenleridir. Kaynak göstermek için problemi tekrar yazdırıyoruz.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -651,7 +648,7 @@ End
 
 </pre></div></div>
 </div>
-<p>Call <code class="docutils literal notranslate"><span class="pre">convert</span></code> method of <code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> to convert.</p>
+<p>Dönüştürmek için <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code> dönüştürücüsünün <code class="docutils literal notranslate"><span class="pre">convert</span></code> yöntemini çağırın.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -709,15 +706,14 @@ End
 
 </pre></div></div>
 </div>
-<p>After converting, integer variables <span class="math notranslate nohighlight">\(z\)</span> is replaced with three binary variables <span class="math notranslate nohighlight">\(z\text{&#64;}0\)</span>, <span class="math notranslate nohighlight">\(z\text{&#64;}1\)</span> and <span class="math notranslate nohighlight">\(z\text{&#64;}2\)</span> with coefficients 1, 2 and 4, respectively as the above. The slack variables <span class="math notranslate nohighlight">\(xyz\_leq\text{&#64;}int\_slack\)</span> and <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span> that were introduced by <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code> are also both replaced with three binary variables with coefficients 1, 2, 2, and 1, 2, 3, respectively.</p>
-<p>Note: Essentially the coefficients mean that the sum of these binary variables with coefficients can be the sum of a subset of <span class="math notranslate nohighlight">\(\{1, 2, 4\}\)</span>, <span class="math notranslate nohighlight">\(\{1, 2, 2\}\)</span>, and <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span> to represent that acceptable values <span class="math notranslate nohighlight">\(\{0, \ldots, 7\}\)</span>, <span class="math notranslate nohighlight">\(\{0, \ldots, 5\}\)</span>, and <span class="math notranslate nohighlight">\(\{0, \ldots, 6\}\)</span>, which respects the lower bound and the upper bound of original integer variables correctly.</p>
-<p><code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> also provides <code class="docutils literal notranslate"><span class="pre">interpret</span></code> method that is the functionality to translate a given binary result back to the original integer representation.</p>
+<p>Dönüştürdükten sonra, tam sayı değişkeni <span class="math notranslate nohighlight">\(z\)</span> nin yeri, aşağıdaki şekilde sırasıyla 1, 2 ve 4 katsayılarıyla birlikte üç ikili sistem değişkeni <span class="math notranslate nohighlight">\(z\text{&#64;}0\)</span>, <span class="math notranslate nohighlight">\(z\text{&#64;}1\)</span> ve <span class="math notranslate nohighlight">\(z\text{&#64;}2\)</span> nin yeri ile değiştirilir. <code class="docutils literal notranslate"><span class="pre">InequalityToEquality</span></code> ile tanıtılan gevşek değişkenler <span class="math notranslate nohighlight">\(xyz\_leq\text{&#64;}int\_slack\)</span> ve <span class="math notranslate nohighlight">\(xyz\_geq\text{&#64;}int\_slack\)</span> nin yerleri de sırasıyla 1, 2, 2 ve 1, 2, 3 katsayılarıyla birlikte üç ikili sistem değişkeninin yeri ile değiştirilir.</p>
+<p>Not: Aslında katsayılar, asıl tam sayı değişkenlerinin üst ve alt sınırlarına doğru bir şekilde karşılık gelen kabul edilebilir <span class="math notranslate nohighlight">\(\{0, \ldots, 7\}\)</span>, <span class="math notranslate nohighlight">\(\{0, \ldots, 5\}\)</span> ve <span class="math notranslate nohighlight">\(\{0, \ldots, 6\}\)</span> değerlerini temsil etmek için <span class="math notranslate nohighlight">\(\{1, 2, 4\}\)</span>, <span class="math notranslate nohighlight">\(\{1, 2, 2\}\)</span> ve <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span> durumunun bir alt kümesinin toplamı olabilen katsayılarla birlikte ikili sistem değişkenlerinin toplamı anlamına gelir.</p>
+<p><code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> ayrıca, verilen ikili sistem sonucunu asıl tam sayı gösterimine geri çevirmek için bir işlevsellik olan <code class="docutils literal notranslate"><span class="pre">interpret</span></code> yöntemini de sağlar.</p>
 </div>
 <div class="section" id="LinearEqualityToPenalty">
 <h2>LinearEqualityToPenalty<a class="headerlink" href="#LinearEqualityToPenalty" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code> converts linear equality constraints into additional quadratic penalty terms of the objective function to map <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> to an unconstrained form. An input to the converter has to be a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> with only linear equality constraints. Those equality constraints, e.g. <span class="math notranslate nohighlight">\(\sum_i a_i x_i = b\)</span> where <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are numbers and <span class="math notranslate nohighlight">\(x_i\)</span> is a variable, will be added to the objective function in the form of
-<span class="math notranslate nohighlight">\(M(b - \sum_i a_i x_i)^2\)</span> where <span class="math notranslate nohighlight">\(M\)</span> is a large number as penalty factor. By default <span class="math notranslate nohighlight">\(M= 1e5\)</span>. The sign of the term depends on whether the problem type is a maximization or minimization.</p>
-<p>We use the output of <code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> as starting point, where all variables are binary variables and all inequality constraints have been mapped to equality constraints. We print the problem again for reference.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code> <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> ı kısıtsız bir form ile eşlemek için doğrusal eşitlik kısıtlamalarını, amaç fonksiyonunun ek ikinci dereceden ceza terimlerine dönüştürür. Dönüştürücü girdisi sadece doğrusal eşitlik kısıtlamaları ile bir <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> olmalıdır. Şu eşitlik kısıtlamaları, örneğin <span class="math notranslate nohighlight">\(a_i\)</span> ve <span class="math notranslate nohighlight">\(b\)</span> nin sayı ve <span class="math notranslate nohighlight">\(x_i\)</span> nin değişken olduğu durumdaki <span class="math notranslate nohighlight">\(\sum_i a_i x_i = b\)</span> , <span class="math notranslate nohighlight">\(M\)</span> nin ceza faktörü olarak büyük bir sayı olduğu yerde amaç fonksiyonuna <span class="math notranslate nohighlight">\(M(b - \sum_i a_i x_i)^2\)</span> biçiminde eklenecektir. Varsayılan olarak <span class="math notranslate nohighlight">\(M= 1e5\)</span>. Terimin işareti, problem türünün çoklama ya da azlama olmasına bağlıdır.</p>
+<p>Bütün değişkenlerin ikili sistem değişkenleri olduğu ve bütün eşitsizlik kısıtlamalarının eşitlik kısıtlamalarına eşlendiği yerde başlangıç noktası olarak <code class="docutils literal notranslate"><span class="pre">IntegerToBinary</span></code> dönüştürücüsünün çıktısını kullanıyoruz. Kaynak olması için problemi tekrar yazdırıyoruz.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -764,7 +760,7 @@ End
 
 </pre></div></div>
 </div>
-<p>Call <code class="docutils literal notranslate"><span class="pre">convert</span></code> method of <code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code> to convert.</p>
+<p>Dönüştürmek için <code class="docutils literal notranslate"><span class="pre">LinearEqualityToPenalty</span></code> nin <code class="docutils literal notranslate"><span class="pre">convert</span></code> yöntemini çağırın.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -844,8 +840,8 @@ End
 
 </pre></div></div>
 </div>
-<p>After converting, the equality constraints are added to the objective function as additional terms with the default penalty factor <span class="math notranslate nohighlight">\(M=1e5\)</span>. The resulting problem is now a QUBO and compatible with many quantum optimization algorithms such as VQE, QAOA and so on.</p>
-<p>This gives the same result as before.</p>
+<p>Dönüştürdükten sonra, eşitlik kısıtlaması varsayılan ceza faktörü <span class="math notranslate nohighlight">\(M=1e5\)</span> ile birlikte ek terimler olarak amaç fonksiyonuna eklenir. Ortaya çıkan problem şimdi bir QUBO (Quadratic Unconstrained Binary Optimization)’dur ve VQE, QAOA ve benzeri birçok kuantum optimizasyon algoritması ile uyumludur.</p>
+<p>Bu daha öncekiyle aynı sonucu verir.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -890,7 +886,7 @@ End
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="03_minimum_eigen_optimizer.html" class="btn btn-neutral float-right" title="Minimum Eigen Optimizer" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="03_minimum_eigen_optimizer.html" class="btn btn-neutral float-right" title="Minimum Özdeğer Optimize Edici" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="01_quadratic_program.html" class="btn btn-neutral" title="Quadratic Programs" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -925,7 +921,7 @@ End
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Converters for Quadratic Programs</a><ul>
+<li><a class="reference internal" href="#">İkinci Dereceden Programlar için Dönüştürücüler</a><ul>
 <li><a class="reference internal" href="#InequalityToEquality">InequalityToEquality</a></li>
 <li><a class="reference internal" href="#IntegerToBinary">IntegerToBinary</a></li>
 <li><a class="reference internal" href="#LinearEqualityToPenalty">LinearEqualityToPenalty</a></li>
@@ -951,7 +947,7 @@ End
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Application Classes for Optimization Problems &mdash; Qiskit Optimization 0.3.0 ドキュメント</title>
+  <title>最適化問題のアプリケーション・クラス &mdash; Qiskit Optimization 0.2.1 ドキュメント</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
     <link rel="next" title="Warm-starting quantum optimization" href="10_warm_start_qaoa.html" />
-    <link rel="prev" title="Improving Variational Quantum Optimization using CVaR" href="08_cvar_optimization.html" /> 
+    <link rel="prev" title="CVaRを使用した変分量子最適化の改善" href="08_cvar_optimization.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -202,7 +202,7 @@
         
           <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
         
-      <li>Application Classes for Optimization Problems</li>
+      <li>最適化問題のアプリケーション・クラス</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,12 +480,12 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/09_application_classes.ipynb">docs/tutorials/09_application_classes.ipynb</a>.</p>
 </div>
-<div class="section" id="Application-Classes-for-Optimization-Problems">
-<h1>Application Classes for Optimization Problems<a class="headerlink" href="#Application-Classes-for-Optimization-Problems" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="最適化問題のアプリケーション・クラス">
+<h1>最適化問題のアプリケーション・クラス<a class="headerlink" href="#最適化問題のアプリケーション・クラス" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>We introduce application classes for the following optimization problems so that users can easily try various optimization problems on quantum computers.</p>
@@ -499,7 +499,7 @@ div.rendered_html tbody tr:hover {
 <li><p>Knapsack problem</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given a set of items, find a subset of items such that the total weight is within the capacity and the total value is maximized.</p></li>
+<li><p>一連のアイテムを与えられた場合、合計重量が容量内にあり、合計値が最大化されるようなアイテムのサブセットを見つけます。</p></li>
 </ul>
 <ol class="arabic simple" start="3">
 <li><p>Number partition problem</p></li>
@@ -508,14 +508,14 @@ div.rendered_html tbody tr:hover {
 <li><p>Given a multiset of positive integers, find a partition of the multiset into two subsets such that the sums of the subsets are equal.</p></li>
 </ul>
 <ol class="arabic simple" start="4">
-<li><p>Set packing problem</p></li>
+<li><p>パッキング問題の設定</p></li>
 </ol>
 <ul class="simple">
 <li><p>Given a collection of subsets of items, find a subcollection such that all subsets of the subcollection are pairwise disjoint and the number of items in the subcollection is maximized.</p></li>
 </ul>
-<p>Graph problems</p>
+<p>グラフ問題</p>
 <ol class="arabic simple" start="5">
-<li><p>Clique problem</p></li>
+<li><p>クリーク問題</p></li>
 </ol>
 <ul class="simple">
 <li><p>Given an undirected graph, find a subset of nodes with a specified number or the maximum number such that the induced subgraph is complete.</p></li>
@@ -1069,7 +1069,7 @@ num qubits: 9, offset: 1417.5
         <a href="10_warm_start_qaoa.html" class="btn btn-neutral float-right" title="Warm-starting quantum optimization" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="08_cvar_optimization.html" class="btn btn-neutral" title="Improving Variational Quantum Optimization using CVaR" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="08_cvar_optimization.html" class="btn btn-neutral" title="CVaRを使用した変分量子最適化の改善" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1101,7 +1101,7 @@ num qubits: 9, offset: 1417.5
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Application Classes for Optimization Problems</a><ul>
+<li><a class="reference internal" href="#">最適化問題のアプリケーション・クラス</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
 <li><a class="reference internal" href="#Vertex-cover-problem">Vertex cover problem</a></li>
 <li><a class="reference internal" href="#Knapsack-problem">Knapsack problem</a></li>
@@ -1128,7 +1128,7 @@ num qubits: 9, offset: 1417.5
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

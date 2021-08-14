@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ADMM Optimizer &mdash; Qiskit Optimization 0.3.0 ドキュメント</title>
+  <title>ADMM オプティマイザー &mdash; Qiskit Optimization 0.2.1 ドキュメント</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
     <link rel="next" title="Max-Cut and Traveling Salesman Problem" href="06_examples_max_cut_and_tsp.html" />
-    <link rel="prev" title="Grover Optimizer" href="04_grover_optimizer.html" /> 
+    <link rel="prev" title="グローバーオプティマイザー" href="04_grover_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -202,7 +202,7 @@
         
           <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
         
-      <li>ADMM Optimizer</li>
+      <li>ADMM オプティマイザー</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,43 +480,43 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/05_admm_optimizer.ipynb">docs/tutorials/05_admm_optimizer.ipynb</a>.</p>
 </div>
-<div class="section" id="ADMM-Optimizer">
-<h1>ADMM Optimizer<a class="headerlink" href="#ADMM-Optimizer" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="ADMM-オプティマイザー">
+<h1>ADMM オプティマイザー<a class="headerlink" href="#ADMM-オプティマイザー" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>The ADMM Optimizer can solve classes of mixed-binary constrained optimization problems, hereafter (MBCO), which often appear in logistic, finance, and operation research. In particular, the ADMM Optimizer here designed can tackle the following optimization problem <span class="math notranslate nohighlight">\((P)\)</span>:</p>
+<p>ADMMオプティマイザーは、ロジスティック、金融、オペレーションズ・リサーチに多く見られる、混合バイナリ制約の最適化問題(以下MBCO)のクラスを解くことができます。 特に、ここで設計された ADMMオプティマイザーは、次の最適化問題 <span class="math notranslate nohighlight">\((P)\)</span> に取り組むことができます。</p>
 <div class="math notranslate nohighlight">
 \[\min_{x \in \mathcal{X},u\in\mathcal{U} \subseteq \mathbb{R}^l } \quad q(x) + \varphi(u),\]</div>
-<p>subject to the constraints:</p>
+<p>制約の対象:</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{s.t.:~} \quad G x = b, \quad  g(x) \leq 0, \quad \ell(x, u) \leq 0,\]</div>
-<p>with the corresponding functional assumptions.</p>
+<p>対応する機能的な仮定に基づいています</p>
 <ol class="arabic simple">
-<li><p>Function <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> is quadratic, i.e., <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> for a given symmetric squared matrix <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, and vector <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
-<li><p>The set <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> enforces the binary constraints;</p></li>
-<li><p>Matrix <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, vector <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, and function <span class="math notranslate nohighlight">\(g: \mathbb{R}^n \to \mathbb{R}\)</span> is convex;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> is convex and <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> is a convex set;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> is <em>jointly</em> convex in <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
+<li><p>関数 <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> は二次です。つまり、対称正方行列 <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span> と ベクトル <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span> について、 <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> です。</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> により、バイナリ制約が強制されます。</p></li>
+<li><p>行列 <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, ベクトル <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, および関数 :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>g: mathbb{R}^n to mathbb{R}`は、凸です。</p></li>
+<li><p>関数 <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span>mathcal{U}`は凸集合です。</p></li>
+<li><p>関数 <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> は <span class="math notranslate nohighlight">\(x, u\)</span> について <em>一体で</em> 凸です。</p></li>
 </ol>
-<p>In order to solve MBO problems, [1] proposed heuristics for <span class="math notranslate nohighlight">\((P)\)</span> based on the Alternating Direction Method of Multipliers (ADMM) [2]. ADMM is an operator splitting algorithm with a long history in convex optimization, and it is known to have residual, objective and dual variable convergence properties, provided that convexity assumptions are holding.</p>
-<p>The method of [1] (referred to as 3-ADMM-H) leverages the ADMM operator-splitting procedure to devise a decomposition for certain classes of MBOs into: - a QUBO subproblem to be solved by on the quantum device via variational algorithms, such as VQE or QAOA; - continuous convex constrained subproblem, which can be efficiently solved with classical optimization solvers.</p>
-<p>The algorithm 3-ADMM-H works as follows:</p>
+<p>MBO問題を解くために、[1]は Alternating Direction Method of Multipliers(ADMM)[2]に基づいて <span class="math notranslate nohighlight">\((P)\)</span> についてのヒューリスティックスを提案しました。ADMMは、凸最適化の長い歴史を持つ演算子分割アルゴリズムであり、凸性の仮定が成り立つ場合、残差、目的関数、および双対変数収束の特性を持つことが知られています。</p>
+<p>[1] の方法（3-ADMM-Hと呼ばれる）は、ADMM演算子の分割手順を利用して、ある種のMBOのクラスを次のようなサブ問題に分解する方法を考案しています。- QUBO（VQEやQAOAのようなさまざまなアルゴリズムを用いて量子デバイス上で解く）; - 連続凸制約問題（古典的な最適化ソルバーで効率的に解くことができる）。</p>
+<p>アルゴリズム 3-ADMM-H は以下のように動作します。</p>
 <ol class="arabic simple" start="0">
-<li><p>Initialization phase (set the parameters and the QUBO and convex solvers);</p></li>
-<li><p>For each ADMM iterations ($k = 1, 2, <span class="math">\ldots</span>, $) until termination:</p>
+<li><p>初期化フェーズ (パラメーターとQUBOと凸ソルバーを設定);</p></li>
+<li><p>ADMM の各反復($k = 1, 2, <span class="math">\ldots</span>, $) を、終了するまで行います:</p>
 <ul class="simple">
-<li><p>Solve a properly defined QUBO subproblem (with a classical or quantum solver);</p></li>
-<li><p>Solve properly defined convex problems (with a classical solver);</p></li>
-<li><p>Update the dual variables.</p></li>
+<li><p>適切に定義された QUBO サブ問題を (古典または量子ソルバーで) 解く;</p></li>
+<li><p>適切に定義された凸問題を(古典ソルバーで) 解く;</p></li>
+<li><p>双対変数を更新する</p></li>
 </ul>
 </li>
-<li><p>Return optimizers and cost.</p></li>
+<li><p>オプティマイザーとコストを返す</p></li>
 </ol>
-<p>A comprehensive discussion on the conditions for convergence, feasibility and optimality of the algorithm can be found in [1]. A variant with 2 ADMM blocks, namely a QUBO subproblem, and a continuous convex constrained subproblem, is also introduced in [1].</p>
+<p>アルゴリズムの収束、実現可能性、および最適化の条件に関する包括的な議論は、[1]にあります。 2つのADMMブロックを持つバリアント、つまりQUBOサブ問題と連続凸制約付きサブ問題も[1]で紹介されています。</p>
 </div>
 <div class="section" id="References">
 <h2>References<a class="headerlink" href="#References" title="このヘッドラインへのパーマリンク">¶</a></h2>
@@ -525,7 +525,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Initialization">
 <h2>Initialization<a class="headerlink" href="#Initialization" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>First of all we load all the packages that we need.</p>
+<p>まず、必要なパッケージをすべてロードします。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -634,14 +634,12 @@ End
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Classical-Solution">
-<h2>Classical Solution<a class="headerlink" href="#Classical-Solution" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>3-ADMM-H needs a QUBO optimizer to solve the QUBO subproblem, and a continuous optimizer to solve the continuous convex constrained subproblem. We first solve the problem classically: we use the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> with the <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigenSolver</span></code> as a classical and exact QUBO solver and we use the <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> as a continuous convex solver. 3-ADMM-H supports any other suitable solver available in Qiskit. For instance, VQE, QAOA, and GroverOptimizer can be invoked as quantum
-solvers, as demonstrated later. If CPLEX is installed, the <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> can also be used as both, a QUBO and convex solver.</p>
-<div class="section" id="Parameters">
-<h3>Parameters<a class="headerlink" href="#Parameters" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The 3-ADMM-H are wrapped in class <code class="docutils literal notranslate"><span class="pre">ADMMParameters</span></code>. Customized parameter values can be set as arguments of the class. In this example, parameters <span class="math notranslate nohighlight">\(\rho, \beta\)</span> are initialized to <span class="math notranslate nohighlight">\(1001\)</span> and <span class="math notranslate nohighlight">\(1000\)</span>, respectively. The penalization <code class="docutils literal notranslate"><span class="pre">factor_c</span></code> of equality constraints <span class="math notranslate nohighlight">\(Gx = b\)</span> is set to <span class="math notranslate nohighlight">\(900\)</span>. The tolerance <code class="docutils literal notranslate"><span class="pre">tol</span></code> for primal residual convergence is set to <code class="docutils literal notranslate"><span class="pre">1.e-6</span></code>. In this case, the 3-block implementation is guaranteed to converge for Theorem 4 of [1], because the
-inequality constraint with the continuous variable is always active. The 2-block implementation can be run by setting <code class="docutils literal notranslate"><span class="pre">three_block=False</span></code>, and practically converges to a feasible not optimal solution.</p>
+<div class="section" id="古典的解法">
+<h2>古典的解法<a class="headerlink" href="#古典的解法" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>3-ADMM-Hは、QUBOサブ問題を解くのにはQUBOオプティマイザを、連続凸制約問題を解くのには連続オプティマイザを必要とします。まず最初に、問題を古典的な方法で解きます: <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigenSolver</span></code> による <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> を古典的かつ正確な QUBO ソルバーとして使用し、連続凸問題ソルバーとして <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> を使用します。 3-ADMM-Hは、他にもQiskitで利用可能な適切なソルバーをすべてサポートしています。例えば、VQE、QAOA、およびGroverOptimizerは、後述するように、量子ソルバーとして呼び出すことができます。 CPLEXがインストールされていれば、<code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> をQUBOと凸ソルバーのいずれにも使用することができます。</p>
+<div class="section" id="パラメーター">
+<h3>パラメーター<a class="headerlink" href="#パラメーター" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>3-ADMM-Hは、 <code class="docutils literal notranslate"><span class="pre">ADMMParameters</span></code> クラスにラップされています。カスタマイズされたパラメーター値は、クラスの引数として設定できます。この例では、パラメーター <span class="math notranslate nohighlight">\(\rho, \beta\)</span> がそれぞれ <span class="math notranslate nohighlight">\(1001\)</span> と <span class="math notranslate nohighlight">\(1000\)</span> に初期化されています。等式制約 <span class="math notranslate nohighlight">\(Gx = b\)</span> のペナルティ <code class="docutils literal notranslate"><span class="pre">factor_c</span></code> は <span class="math notranslate nohighlight">\(900\)</span> に設定されています。一次残差収束の許容誤差 <code class="docutils literal notranslate"><span class="pre">tol</span></code> は <code class="docutils literal notranslate"><span class="pre">1.e-6</span></code> に設定されています。この場合、3変数の実装は、[1]の定理4に対して収束することが保証されています。これは、連続変数による不等式制約が常にアクティブであるためです。2ブロックの実装は <code class="docutils literal notranslate"><span class="pre">three_block=False</span></code> を設定することで実行でき、最適ではない実行可能解に実質的に収束します。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -658,9 +656,9 @@ inequality constraint with the continuous variable is always active. The 2-block
 </div>
 </div>
 </div>
-<div class="section" id="Calling-3-ADMM-H-algorithm">
-<h3>Calling 3-ADMM-H algorithm<a class="headerlink" href="#Calling-3-ADMM-H-algorithm" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>To invoke the 3-ADMM-H algorithm, an instance of the <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> class needs to be created. This takes ADMM-specific parameters and the subproblem optimizers separately into the constructor. The solution returned is an instance of <code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code> class.</p>
+<div class="section" id="3-ADMM-Hアルゴリズムを呼び出す">
+<h3>3-ADMM-Hアルゴリズムを呼び出す<a class="headerlink" href="#3-ADMM-Hアルゴリズムを呼び出す" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>3-ADMM-H アルゴリズムを呼び出すには、<code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> クラスのインスタンスを作成する必要があります。 これにより、ADMM固有のパラメータとサブ問題のオプティマイザがコンストラクタに分離されます。返されるソリューションは、<code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code> クラスのインスタンスです。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -692,9 +690,9 @@ inequality constraint with the continuous variable is always active. The 2-block
 </div>
 </div>
 </div>
-<div class="section" id="Classical-Solver-Result">
-<h3>Classical Solver Result<a class="headerlink" href="#Classical-Solver-Result" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>The 3-ADMM-H solution can be then printed and visualized. The <code class="docutils literal notranslate"><span class="pre">x</span></code> attribute of the solution contains respectively, the values of the binary decision variables and the values of the continuous decision variables. The <code class="docutils literal notranslate"><span class="pre">fval</span></code> is the objective value of the solution.</p>
+<div class="section" id="古典ソルバーの結果">
+<h3>古典ソルバーの結果<a class="headerlink" href="#古典ソルバーの結果" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>3-ADMM-Hソリューションをプリントして可視化することができます。 解の <code class="docutils literal notranslate"><span class="pre">x</span></code> 属性には、バイナリ決定変数の値と連続決定変数の値がそれぞれ含まれています。 <code class="docutils literal notranslate"><span class="pre">fval</span></code> はその解の目的値です。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -714,7 +712,7 @@ x=[1. 0. 0. 2.]
 fval=1.00
 </pre></div></div>
 </div>
-<p>Solution statistics can be accessed in the <code class="docutils literal notranslate"><span class="pre">state</span></code> field and visualized. We here display the convergence of 3-ADMM-H, in terms of primal residuals.</p>
+<p><code class="docutils literal notranslate"><span class="pre">state</span></code> フィールドで解の解析統計にアクセスし可視化することができます。ここでは、原始残差の観点から、3-ADMM-Hの収束を示します。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -736,9 +734,9 @@ fval=1.00
 </div>
 </div>
 </div>
-<div class="section" id="Quantum-Solution">
-<h2>Quantum Solution<a class="headerlink" href="#Quantum-Solution" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>We now solve the same optimization problem with QAOA as QUBO optimizer, running on simulated quantum device. First, one need to select the classical optimizer of the eigensolver QAOA. Then, the simulation backend is set. Finally, the eigensolver is wrapped into the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> class. A new instance of <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> is populated with QAOA as QUBO optimizer.</p>
+<div class="section" id="量子ソリューション">
+<h2>量子ソリューション<a class="headerlink" href="#量子ソリューション" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>シミュレートされた量子デバイス上で実行されるQUBOオプティマイザーと同じQAOAの最適化問題を解決します。まず、固有値ソルバーQAOAの古典的なオプティマイザーを選択する必要があります。次に、シミュレーションバックエンドが設定されます。最後に、固有ソルバーは <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> クラスにラップされます。 <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> の新しいインスタンスには、QUBOオプティマイザーとしてQAOAが入力されます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -768,9 +766,9 @@ fval=1.00
 </pre></div>
 </div>
 </div>
-<div class="section" id="Quantum-Solver-Results">
-<h3>Quantum Solver Results<a class="headerlink" href="#Quantum-Solver-Results" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Here we present the results obtained from the quantum solver. As in the example above <code class="docutils literal notranslate"><span class="pre">x</span></code> stands for the solution, the <code class="docutils literal notranslate"><span class="pre">fval</span></code> is for objective value.</p>
+<div class="section" id="量子ソルバーの結果">
+<h3>量子ソルバーの結果<a class="headerlink" href="#量子ソルバーの結果" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ここでは、量子ソルバーから得られた結果を紹介します。 上の例のように、<code class="docutils literal notranslate"><span class="pre">x</span></code> はソリューションの略で、<code class="docutils literal notranslate"><span class="pre">fval</span></code> は目的値を表します。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -858,7 +856,7 @@ fval=1.00
         <a href="06_examples_max_cut_and_tsp.html" class="btn btn-neutral float-right" title="Max-Cut and Traveling Salesman Problem" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="Grover Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="グローバーオプティマイザー" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -890,19 +888,19 @@ fval=1.00
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">ADMM Optimizer</a><ul>
+<li><a class="reference internal" href="#">ADMM オプティマイザー</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
 <li><a class="reference internal" href="#References">References</a></li>
 <li><a class="reference internal" href="#Initialization">Initialization</a></li>
 <li><a class="reference internal" href="#Example">Example</a></li>
-<li><a class="reference internal" href="#Classical-Solution">Classical Solution</a><ul>
-<li><a class="reference internal" href="#Parameters">Parameters</a></li>
-<li><a class="reference internal" href="#Calling-3-ADMM-H-algorithm">Calling 3-ADMM-H algorithm</a></li>
-<li><a class="reference internal" href="#Classical-Solver-Result">Classical Solver Result</a></li>
+<li><a class="reference internal" href="#古典的解法">古典的解法</a><ul>
+<li><a class="reference internal" href="#パラメーター">パラメーター</a></li>
+<li><a class="reference internal" href="#3-ADMM-Hアルゴリズムを呼び出す">3-ADMM-Hアルゴリズムを呼び出す</a></li>
+<li><a class="reference internal" href="#古典ソルバーの結果">古典ソルバーの結果</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Quantum-Solution">Quantum Solution</a><ul>
-<li><a class="reference internal" href="#Quantum-Solver-Results">Quantum Solver Results</a></li>
+<li><a class="reference internal" href="#量子ソリューション">量子ソリューション</a><ul>
+<li><a class="reference internal" href="#量子ソルバーの結果">量子ソルバーの結果</a></li>
 </ul>
 </li>
 </ul>
@@ -927,7 +925,7 @@ fval=1.00
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

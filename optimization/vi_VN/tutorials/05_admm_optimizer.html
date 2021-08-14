@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ADMM Optimizer &mdash; Tài liệu Qiskit Optimization 0.3.0</title>
+  <title>Bộ tối ưu hoá ADMM &mdash; Tài liệu Qiskit Optimization 0.2.1</title>
   
 
   
@@ -35,10 +35,10 @@
   <link rel="stylesheet" href="../_static/style.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Tìm Kiếm" href="../search.html" />
+    <link rel="index" title="Mục lục" href="../genindex.html" />
+    <link rel="search" title="Tìm kiếm" href="../search.html" />
     <link rel="next" title="Max-Cut and Traveling Salesman Problem" href="06_examples_max_cut_and_tsp.html" />
-    <link rel="prev" title="Grover Optimizer" href="04_grover_optimizer.html" /> 
+    <link rel="prev" title="Bộ tối ưu hoá Grover" href="04_grover_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Ngôn ngữ</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/05_admm_optimizer.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Bắt đầu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">Tài liệu tham khảo về API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Hướng dẫn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Thông tin phiên bản</a></li>
 </ul>
 
             
@@ -200,9 +200,9 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Hưỡng dẫn tối ưu hóa</a> &gt;</li>
         
-      <li>ADMM Optimizer</li>
+      <li>Bộ tối ưu hoá ADMM</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,43 +480,43 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Ghi chú</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/05_admm_optimizer.ipynb">docs/tutorials/05_admm_optimizer.ipynb</a>.</p>
 </div>
-<div class="section" id="ADMM-Optimizer">
-<h1>ADMM Optimizer<a class="headerlink" href="#ADMM-Optimizer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Bộ-tối-ưu-hoá-ADMM">
+<h1>Bộ tối ưu hoá ADMM<a class="headerlink" href="#Bộ-tối-ưu-hoá-ADMM" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
-<p>The ADMM Optimizer can solve classes of mixed-binary constrained optimization problems, hereafter (MBCO), which often appear in logistic, finance, and operation research. In particular, the ADMM Optimizer here designed can tackle the following optimization problem <span class="math notranslate nohighlight">\((P)\)</span>:</p>
+<p>Trình tối ưu hóa ADMM có thể giải nhiều lớp với các rằng buộc nhị phân trộn lẫn trong bài toán tối ưu hóa, ở đây sau (MBCO) thường xuất hiện trong logistic, tài chính, và các hoạt động nghiên cứu. Đặc biệt, trình tối ưu ADMM được thiết kế để giải quyết các vấn đề tối ưu hóa dưới đây <span class="math notranslate nohighlight">\((P)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\min_{x \in \mathcal{X},u\in\mathcal{U} \subseteq \mathbb{R}^l } \quad q(x) + \varphi(u),\]</div>
-<p>subject to the constraints:</p>
+<p>chịu các ràng buộc:</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{s.t.:~} \quad G x = b, \quad  g(x) \leq 0, \quad \ell(x, u) \leq 0,\]</div>
-<p>with the corresponding functional assumptions.</p>
+<p>với các giả định hàm tương ứng.</p>
 <ol class="arabic simple">
-<li><p>Function <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> is quadratic, i.e., <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> for a given symmetric squared matrix <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, and vector <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
-<li><p>The set <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> enforces the binary constraints;</p></li>
-<li><p>Matrix <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, vector <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, and function <span class="math notranslate nohighlight">\(g: \mathbb{R}^n \to \mathbb{R}\)</span> is convex;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> is convex and <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> is a convex set;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> is <em>jointly</em> convex in <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
+<li><p>Hàm <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> là bậc hai, tức, <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> cho một ma trận vuông đối xứng <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, và véc-tơ <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
+<li><p>Tập hợp <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> ép phải theo các ràng buộc nhị phân;</p></li>
+<li><p>Ma trận <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, véc-tơ <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, và hàm <span class="math notranslate nohighlight">\(g: \mathbb{R}^n \to \mathbb{R}\)</span> lồi;</p></li>
+<li><p>Hàm <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> lồi và <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> là một tập lồi;</p></li>
+<li><p>Hàm <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> thì lồi <em>chung</em> trong <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
 </ol>
 <p>In order to solve MBO problems, [1] proposed heuristics for <span class="math notranslate nohighlight">\((P)\)</span> based on the Alternating Direction Method of Multipliers (ADMM) [2]. ADMM is an operator splitting algorithm with a long history in convex optimization, and it is known to have residual, objective and dual variable convergence properties, provided that convexity assumptions are holding.</p>
-<p>The method of [1] (referred to as 3-ADMM-H) leverages the ADMM operator-splitting procedure to devise a decomposition for certain classes of MBOs into: - a QUBO subproblem to be solved by on the quantum device via variational algorithms, such as VQE or QAOA; - continuous convex constrained subproblem, which can be efficiently solved with classical optimization solvers.</p>
-<p>The algorithm 3-ADMM-H works as follows:</p>
+<p>Phương pháp của [1] (gọi là 3-ADMM-H) tận dụng các thủ tục phân tách toán tử ADMM để đưa ra một sự phân tách cho một số lớp nhất định của MBOs vào: - một vấn đề QUO để được giải trên các thiết bị lượng tử thông qua các thuật toán biến, chẳng hạn như VQE hoặc QAOA; - bài toán con bao lồi liên tục, có thể được giải hiệu quả với các bộ tối ưu hóa cổ điển.</p>
+<p>Thuật toán 3-ADMM-H hoạt động như sau:</p>
 <ol class="arabic simple" start="0">
-<li><p>Initialization phase (set the parameters and the QUBO and convex solvers);</p></li>
+<li><p>Bước khởi tạo (đặt các tham số, mô hình QUBO và trình tối ưu);</p></li>
 <li><p>For each ADMM iterations ($k = 1, 2, <span class="math">\ldots</span>, $) until termination:</p>
 <ul class="simple">
-<li><p>Solve a properly defined QUBO subproblem (with a classical or quantum solver);</p></li>
-<li><p>Solve properly defined convex problems (with a classical solver);</p></li>
-<li><p>Update the dual variables.</p></li>
+<li><p>Giải bài toán QUBO con đã được định sẵn (theo cách cổ điển hoặc cách giải lượng tử);</p></li>
+<li><p>Giải các vấn đề lồi được định nghĩa (với cách giải truyền thống);</p></li>
+<li><p>Cập nhật các biến đôi.</p></li>
 </ul>
 </li>
-<li><p>Return optimizers and cost.</p></li>
+<li><p>Trả về bộ tối ưu hoá và sự mất mát.</p></li>
 </ol>
-<p>A comprehensive discussion on the conditions for convergence, feasibility and optimality of the algorithm can be found in [1]. A variant with 2 ADMM blocks, namely a QUBO subproblem, and a continuous convex constrained subproblem, is also introduced in [1].</p>
+<p>Một cuộc tranh luận dễ hiểu về các điều kiện hội tụ, tính thực thi và tính tối ưu của thuật toán có thể tìm thấy tại [1]. Một biến thể với 2 khối ADMM, hay bài toán QUBO con, và một vấn đề con về ràng buộc lồi liên tục, cũng được giới thiệu tại [1].</p>
 </div>
 <div class="section" id="References">
 <h2>References<a class="headerlink" href="#References" title="Permalink to this headline">¶</a></h2>
@@ -525,7 +525,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="section" id="Initialization">
 <h2>Initialization<a class="headerlink" href="#Initialization" title="Permalink to this headline">¶</a></h2>
-<p>First of all we load all the packages that we need.</p>
+<p>Trước tiên chúng ta tải các gói mà chúng ta cần.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -634,12 +634,11 @@ End
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Classical-Solution">
-<h2>Classical Solution<a class="headerlink" href="#Classical-Solution" title="Permalink to this headline">¶</a></h2>
-<p>3-ADMM-H needs a QUBO optimizer to solve the QUBO subproblem, and a continuous optimizer to solve the continuous convex constrained subproblem. We first solve the problem classically: we use the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> with the <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigenSolver</span></code> as a classical and exact QUBO solver and we use the <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> as a continuous convex solver. 3-ADMM-H supports any other suitable solver available in Qiskit. For instance, VQE, QAOA, and GroverOptimizer can be invoked as quantum
-solvers, as demonstrated later. If CPLEX is installed, the <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> can also be used as both, a QUBO and convex solver.</p>
-<div class="section" id="Parameters">
-<h3>Parameters<a class="headerlink" href="#Parameters" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Lời-giải-cổ-điển">
+<h2>Lời giải cổ điển<a class="headerlink" href="#Lời-giải-cổ-điển" title="Permalink to this headline">¶</a></h2>
+<p>3-ADMM-H cần một hệ thống tối ưu QUO để giải quyết vấn đề nhỏ QUBO, và một hệ thống tối ưu liên tục để giải quyết vấn đề lồi liên tục liên tục. Chúng ta đầu tiên giải quyết vấn đề theo cách cổ điển: chúng tôi sử dụng <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> với <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigenSolver</span></code> như là một loại trình giải QUBO cổ điển và chính xác và chúng ta sử dụng <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> như là một trình giải lồi liên tục. 3-ADMM-H hỗ trợ bất kỳ trình giải thích hợp nào khác có sẵn trong Qiskit. Ví dụ, VQE, QAOA, và GroverOptimizer có thể được gọi là trình giải lượng tử, như đã được chứng minh sau. Nếu CPLEX được cài đặt, <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> cũng có thể được sử dụng như cả trình giải lồi lẫn QUBO.</p>
+<div class="section" id="Tham-số">
+<h3>Tham số<a class="headerlink" href="#Tham-số" title="Permalink to this headline">¶</a></h3>
 <p>The 3-ADMM-H are wrapped in class <code class="docutils literal notranslate"><span class="pre">ADMMParameters</span></code>. Customized parameter values can be set as arguments of the class. In this example, parameters <span class="math notranslate nohighlight">\(\rho, \beta\)</span> are initialized to <span class="math notranslate nohighlight">\(1001\)</span> and <span class="math notranslate nohighlight">\(1000\)</span>, respectively. The penalization <code class="docutils literal notranslate"><span class="pre">factor_c</span></code> of equality constraints <span class="math notranslate nohighlight">\(Gx = b\)</span> is set to <span class="math notranslate nohighlight">\(900\)</span>. The tolerance <code class="docutils literal notranslate"><span class="pre">tol</span></code> for primal residual convergence is set to <code class="docutils literal notranslate"><span class="pre">1.e-6</span></code>. In this case, the 3-block implementation is guaranteed to converge for Theorem 4 of [1], because the
 inequality constraint with the continuous variable is always active. The 2-block implementation can be run by setting <code class="docutils literal notranslate"><span class="pre">three_block=False</span></code>, and practically converges to a feasible not optimal solution.</p>
 <div class="nbinput nblast docutils container">
@@ -658,9 +657,9 @@ inequality constraint with the continuous variable is always active. The 2-block
 </div>
 </div>
 </div>
-<div class="section" id="Calling-3-ADMM-H-algorithm">
-<h3>Calling 3-ADMM-H algorithm<a class="headerlink" href="#Calling-3-ADMM-H-algorithm" title="Permalink to this headline">¶</a></h3>
-<p>To invoke the 3-ADMM-H algorithm, an instance of the <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> class needs to be created. This takes ADMM-specific parameters and the subproblem optimizers separately into the constructor. The solution returned is an instance of <code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code> class.</p>
+<div class="section" id="Gọi-thuật-toán-3-ADMM-H">
+<h3>Gọi thuật toán 3-ADMM-H<a class="headerlink" href="#Gọi-thuật-toán-3-ADMM-H" title="Permalink to this headline">¶</a></h3>
+<p>Để gọi thuật toán 3-ADMM-H, một thực thể của lớp <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> cần được tạo ra. Điều này lấy các tham số ADMM cụ thể và các bộ tối ưu hoá của các bài toán tách riêng thành hàm tạo. Giải pháp trả vê ̀ là thực thể của lớp <code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -692,9 +691,9 @@ inequality constraint with the continuous variable is always active. The 2-block
 </div>
 </div>
 </div>
-<div class="section" id="Classical-Solver-Result">
-<h3>Classical Solver Result<a class="headerlink" href="#Classical-Solver-Result" title="Permalink to this headline">¶</a></h3>
-<p>The 3-ADMM-H solution can be then printed and visualized. The <code class="docutils literal notranslate"><span class="pre">x</span></code> attribute of the solution contains respectively, the values of the binary decision variables and the values of the continuous decision variables. The <code class="docutils literal notranslate"><span class="pre">fval</span></code> is the objective value of the solution.</p>
+<div class="section" id="Kết-quả-của-phép-giải-cổ-điển">
+<h3>Kết quả của phép giải cổ điển<a class="headerlink" href="#Kết-quả-của-phép-giải-cổ-điển" title="Permalink to this headline">¶</a></h3>
+<p>Giải pháp 3-ADMM-H có thể được in và trực quan hóa. Thuộc tính``x`` của giải pháp bao gồm các giá tr tương ứng của các biến quyết định nhị phân và các giá trị của các biến quyết định liên tục. <code class="docutils literal notranslate"><span class="pre">fval</span></code> là giá trị khách quan của lời giải.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -714,7 +713,7 @@ x=[1. 0. 0. 2.]
 fval=1.00
 </pre></div></div>
 </div>
-<p>Solution statistics can be accessed in the <code class="docutils literal notranslate"><span class="pre">state</span></code> field and visualized. We here display the convergence of 3-ADMM-H, in terms of primal residuals.</p>
+<p>Thống kê giải pháp có thể được truy cập trong trường trạng thái <code class="docutils literal notranslate"><span class="pre">state</span></code> và được hiển thị. Chúng ta ở đây hiển thị sự hội tụ của 3-ADMM-H, về mặt dư sơ.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -736,9 +735,9 @@ fval=1.00
 </div>
 </div>
 </div>
-<div class="section" id="Quantum-Solution">
-<h2>Quantum Solution<a class="headerlink" href="#Quantum-Solution" title="Permalink to this headline">¶</a></h2>
-<p>We now solve the same optimization problem with QAOA as QUBO optimizer, running on simulated quantum device. First, one need to select the classical optimizer of the eigensolver QAOA. Then, the simulation backend is set. Finally, the eigensolver is wrapped into the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> class. A new instance of <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> is populated with QAOA as QUBO optimizer.</p>
+<div class="section" id="Lời-giải-lượng-tử">
+<h2>Lời giải lượng tử<a class="headerlink" href="#Lời-giải-lượng-tử" title="Permalink to this headline">¶</a></h2>
+<p>Bây giờ chúng ta giải quyết vấn đề tối ưu hóa cùng với QAOA như bộ tối ưu hóa QUBO, chạy trên thiết bị lượng tử mô phỏng. Đầu tiên, người ta cần chọn tối ưu cổ điển của bộ giải trị riêng QAOA. Sau đó, phần sau của mô phỏng được thiết lập. Cuối cùng, máy giải trị riêng được bọc trong lớp <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code>. Một thực thể mới của <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> là thêm vào với QAOA là bộ tối ưu hoá QUBO.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -768,9 +767,9 @@ fval=1.00
 </pre></div>
 </div>
 </div>
-<div class="section" id="Quantum-Solver-Results">
-<h3>Quantum Solver Results<a class="headerlink" href="#Quantum-Solver-Results" title="Permalink to this headline">¶</a></h3>
-<p>Here we present the results obtained from the quantum solver. As in the example above <code class="docutils literal notranslate"><span class="pre">x</span></code> stands for the solution, the <code class="docutils literal notranslate"><span class="pre">fval</span></code> is for objective value.</p>
+<div class="section" id="Kết-quả-của-phép-giải-lượng-tử">
+<h3>Kết quả của phép giải lượng tử<a class="headerlink" href="#Kết-quả-của-phép-giải-lượng-tử" title="Permalink to this headline">¶</a></h3>
+<p>Ở đây chúng ta có thể thấy được kết quả sau khi chạy trình giải lượng tử. Ở trong ví dụ trên, <code class="docutils literal notranslate"><span class="pre">x</span></code> đại diện cho kết quả, <code class="docutils literal notranslate"><span class="pre">fval</span></code> là giá trị mục tiêu.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -858,7 +857,7 @@ fval=1.00
         <a href="06_examples_max_cut_and_tsp.html" class="btn btn-neutral float-right" title="Max-Cut and Traveling Salesman Problem" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="Grover Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="04_grover_optimizer.html" class="btn btn-neutral" title="Bộ tối ưu hoá Grover" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -890,19 +889,19 @@ fval=1.00
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">ADMM Optimizer</a><ul>
+<li><a class="reference internal" href="#">Bộ tối ưu hoá ADMM</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
 <li><a class="reference internal" href="#References">References</a></li>
 <li><a class="reference internal" href="#Initialization">Initialization</a></li>
 <li><a class="reference internal" href="#Example">Example</a></li>
-<li><a class="reference internal" href="#Classical-Solution">Classical Solution</a><ul>
-<li><a class="reference internal" href="#Parameters">Parameters</a></li>
-<li><a class="reference internal" href="#Calling-3-ADMM-H-algorithm">Calling 3-ADMM-H algorithm</a></li>
-<li><a class="reference internal" href="#Classical-Solver-Result">Classical Solver Result</a></li>
+<li><a class="reference internal" href="#Lời-giải-cổ-điển">Lời giải cổ điển</a><ul>
+<li><a class="reference internal" href="#Tham-số">Tham số</a></li>
+<li><a class="reference internal" href="#Gọi-thuật-toán-3-ADMM-H">Gọi thuật toán 3-ADMM-H</a></li>
+<li><a class="reference internal" href="#Kết-quả-của-phép-giải-cổ-điển">Kết quả của phép giải cổ điển</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Quantum-Solution">Quantum Solution</a><ul>
-<li><a class="reference internal" href="#Quantum-Solver-Results">Quantum Solver Results</a></li>
+<li><a class="reference internal" href="#Lời-giải-lượng-tử">Lời giải lượng tử</a><ul>
+<li><a class="reference internal" href="#Kết-quả-của-phép-giải-lượng-tử">Kết quả của phép giải lượng tử</a></li>
 </ul>
 </li>
 </ul>
@@ -927,7 +926,7 @@ fval=1.00
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

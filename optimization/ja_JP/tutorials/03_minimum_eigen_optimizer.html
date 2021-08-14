@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Minimum Eigen Optimizer &mdash; Qiskit Optimization 0.3.0 ドキュメント</title>
+  <title>最小固有値オプティマイザー (Minimum Eigen Optimizer) &mdash; Qiskit Optimization 0.2.1 ドキュメント</title>
   
 
   
@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="Grover Optimizer" href="04_grover_optimizer.html" />
-    <link rel="prev" title="Converters for Quadratic Programs" href="02_converters_for_quadratic_programs.html" /> 
+    <link rel="next" title="グローバーオプティマイザー" href="04_grover_optimizer.html" />
+    <link rel="prev" title="二次計画法のコンバーター" href="02_converters_for_quadratic_programs.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -202,7 +202,7 @@
         
           <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
         
-      <li>Minimum Eigen Optimizer</li>
+      <li>最小固有値オプティマイザー (Minimum Eigen Optimizer)</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,29 +480,27 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/03_minimum_eigen_optimizer.ipynb">docs/tutorials/03_minimum_eigen_optimizer.ipynb</a>.</p>
 </div>
-<div class="section" id="Minimum-Eigen-Optimizer">
-<h1>Minimum Eigen Optimizer<a class="headerlink" href="#Minimum-Eigen-Optimizer" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="最小固有値オプティマイザー-(Minimum-Eigen-Optimizer)">
+<h1>最小固有値オプティマイザー (Minimum Eigen Optimizer)<a class="headerlink" href="#最小固有値オプティマイザー-(Minimum-Eigen-Optimizer)" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>An interesting class of optimization problems to be addressed by quantum computing are Quadratic Unconstrained Binary Optimization (QUBO) problems. Finding the solution to a QUBO is equivalent to finding the ground state of a corresponding Ising Hamiltonian, which is an important problem not only in optimization, but also in quantum chemistry and physics. For this translation, the binary variables taking values in <span class="math notranslate nohighlight">\(\{0, 1\}\)</span> are replaced by spin variables taking values in
-<span class="math notranslate nohighlight">\(\{-1, +1\}\)</span>, which allows to replace the resulting spin variables by Pauli Z matrices, and thus, an Ising Hamiltonian. For more details on this mapping we refer to [1].</p>
-<p>Qiskit provides automatic conversion from a suitable <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> to an Ising Hamiltonian, which then allows to leverage all the <code class="docutils literal notranslate"><span class="pre">MinimumEigenSolver</span></code> such as - <code class="docutils literal notranslate"><span class="pre">VQE</span></code>, - <code class="docutils literal notranslate"><span class="pre">QAOA</span></code>, or - <code class="docutils literal notranslate"><span class="pre">NumpyMinimumEigensolver</span></code> (classical exact method).</p>
-<p>Qiskit wraps the translation to an Ising Hamiltonian (in Qiskit Aqua also called <code class="docutils literal notranslate"><span class="pre">Operator</span></code>), the call to an <code class="docutils literal notranslate"><span class="pre">MinimumEigensolver</span></code> as well as the translation of the results back to <code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code> in the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code>.</p>
-<p>In the following we first illustrate the conversion from a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> to an <code class="docutils literal notranslate"><span class="pre">Operator</span></code> and then show how to use the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> with different <code class="docutils literal notranslate"><span class="pre">MinimumEigensolver</span></code> to solve a given <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>. The algorithms in Qiskit automatically try to convert a given problem to the supported problem class if possible, for instance, the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> will automatically translate integer variables to binary variables or add a linear equality constraints as a
-quadratic penalty term to the objective. It should be mentioned that Aqua will through a <code class="docutils literal notranslate"><span class="pre">QiskitOptimizationError</span></code> if conversion of a quadratic program with integer variable is attempted.</p>
-<p>The circuit depth of <code class="docutils literal notranslate"><span class="pre">QAOA</span></code> potentially has to be increased with the problem size, which might be prohibitive for near-term quantum devices. A possible workaround is Recursive QAOA, as introduced in [2]. Qiskit generalizes this concept to the <code class="docutils literal notranslate"><span class="pre">RecursiveMinimumEigenOptimizer</span></code>, which is introduced at the end of this tutorial.</p>
+<p>量子コンピューティングによって対処される興味深い最適化問題のクラスは、Quadratic Unconstrained Binary Optimization（QUBO）問題です。QUBOの解を求めることは、対応するイジング・ハミルトニアンの基底状態を見つけることに相当します。これは、最適化だけでなく、量子化学や物理学でも重要な問題です。この変換の場合、 <span class="math notranslate nohighlight">\(\{0, 1\}\)</span> の値を取るバイナリ変数は、 <span class="math notranslate nohighlight">\(\{-1, +1\}\)</span> の値を取るスピン変数に置き換えられます。これにより、パウリZ行列によって得られるスピン変数をイジング・ハミルトニアンに置換することができます。このマッピングの詳細については、[1]を参照してください。</p>
+<p>Qiskitは、適切な <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> からイジング・ハミルトニアンへの自動変換を提供します。これにより、- <code class="docutils literal notranslate"><span class="pre">VQE</span></code> 、- <code class="docutils literal notranslate"><span class="pre">QAOA</span></code> 、または- <code class="docutils literal notranslate"><span class="pre">NumpyMinimumEigensolver</span></code> （クラシカルな厳密法）などのすべての <code class="docutils literal notranslate"><span class="pre">MinimumEigenSolver</span></code> を活用できます。</p>
+<p>Qiskitは、イジング・ハミルトニアン (Qiskit Aquaでは <code class="docutils literal notranslate"><span class="pre">Operator</span></code> とも呼ばれます) への翻訳、すなわち  <code class="docutils literal notranslate"><span class="pre">MinimumEigensolver</span></code> への呼び出しと、結果の翻訳とを、ラップして <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> の <code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code> に戻します。</p>
+<p>以下では、まず、<code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> から <code class="docutils literal notranslate"><span class="pre">Operator</span></code> への変換を示します。次に、与えられた <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> を解くのに、<code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> を異なる <code class="docutils literal notranslate"><span class="pre">MinimumEigensolver</span></code> にどう使うのかを示します。Qiskitのアルゴリズムは、与えられた問題を、可能であればサポートされている問題クラスに自動的に変換しようとします。例えば、<code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> は整数変数をバイナリー変数に自動的に変換したり、線形等価制約を2次ペナルティ項として目的関数に追加したりします。整数変数を持つ二次計画問題を変換しようとすると、Aqua は <code class="docutils literal notranslate"><span class="pre">QiskitOptimizationError</span></code> を投げることに注意してください。</p>
+<p><code class="docutils literal notranslate"><span class="pre">QAOA</span></code> の回路の深さは、問題の大きさに応じて必然的に増加する可能性があり、これは近未来の量子デバイスにとっては障害となる可能性があります。考えられる回避策として、 [2] で紹介されている再帰QAOAがあります。このチュートリアルの最後で紹介しますが、Qiskit はこの概念を`RecursiveMinimumEigenOptimizer` に一般化しています。</p>
 <div class="section" id="References">
 <h3>References<a class="headerlink" href="#References" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>[1] <a class="reference external" href="https://arxiv.org/abs/1302.5843">A. Lucas, Ising formulations of many NP problems, Front. Phys., 12 (2014).</a></p>
 <p>[2] <a class="reference external" href="https://arxiv.org/abs/1910.08980">S. Bravyi, A. Kliesch, R. Koenig, E. Tang, Obstacles to State Preparation and Variational Optimization from Symmetry Protection, arXiv preprint arXiv:1910.08980 (2019).</a></p>
 </div>
 </div>
-<div class="section" id="Converting-a-QUBO-to-an-Operator">
-<h2>Converting a QUBO to an Operator<a class="headerlink" href="#Converting-a-QUBO-to-an-Operator" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="QUBOをオペレーターに変換する">
+<h2>QUBOをオペレーターに変換する<a class="headerlink" href="#QUBOをオペレーターに変換する" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
@@ -992,10 +990,10 @@ status: SUCCESS
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="04_grover_optimizer.html" class="btn btn-neutral float-right" title="Grover Optimizer" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="04_grover_optimizer.html" class="btn btn-neutral float-right" title="グローバーオプティマイザー" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="02_converters_for_quadratic_programs.html" class="btn btn-neutral" title="Converters for Quadratic Programs" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="02_converters_for_quadratic_programs.html" class="btn btn-neutral" title="二次計画法のコンバーター" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1027,12 +1025,12 @@ status: SUCCESS
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Minimum Eigen Optimizer</a><ul>
+<li><a class="reference internal" href="#">最小固有値オプティマイザー (Minimum Eigen Optimizer)</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#References">References</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Converting-a-QUBO-to-an-Operator">Converting a QUBO to an Operator</a></li>
+<li><a class="reference internal" href="#QUBOをオペレーターに変換する">QUBOをオペレーターに変換する</a></li>
 <li><a class="reference internal" href="#Solving-a-QUBO-with-the-MinimumEigenOptimizer">Solving a QUBO with the MinimumEigenOptimizer</a><ul>
 <li><a class="reference internal" href="#Analysis-of-Samples">Analysis of Samples</a></li>
 </ul>
@@ -1060,7 +1058,7 @@ status: SUCCESS
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

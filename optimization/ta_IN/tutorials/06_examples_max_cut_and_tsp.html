@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Max-Cut and Traveling Salesman Problem &mdash; Qiskit Optimization 0.3.0 documentation</title>
+  <title>Max-Cut and Traveling Salesman Problem &mdash; Qiskit Optimization 0.2.1 documentation</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -480,9 +480,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/06_examples_max_cut_and_tsp.ipynb">docs/tutorials/06_examples_max_cut_and_tsp.ipynb</a>.</p>
 </div>
 <div class="section" id="Max-Cut-and-Traveling-Salesman-Problem">
 <h1>Max-Cut and Traveling Salesman Problem<a class="headerlink" href="#Max-Cut-and-Traveling-Salesman-Problem" title="Permalink to this headline">¶</a></h1>
@@ -973,8 +973,8 @@ distance
 <div class="output_area docutils container">
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" /></div>
 </div>
-<div class="section" id="id1">
-<h3>Brute force approach<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Brute force approach<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1034,8 +1034,8 @@ Best order from brute force = (0, 1, 2) with total distance = 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Mapping to the Ising problem<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Mapping to the Ising problem<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1177,8 +1177,8 @@ status: SUCCESS
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1218,8 +1218,8 @@ solution objective: 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Running it on quantum computer<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Running it on quantum computer<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>We run the optimization routine using a feedback loop with a quantum computer that uses trial functions built with Y single-qubit rotations, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, and entangler steps <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1419,10 +1419,10 @@ solution objective: 202.0
 </ul>
 </li>
 <li><a class="reference internal" href="#Traveling-Salesman-Problem">Traveling Salesman Problem</a><ul>
-<li><a class="reference internal" href="#id1">Brute force approach</a></li>
-<li><a class="reference internal" href="#id2">Mapping to the Ising problem</a></li>
-<li><a class="reference internal" href="#id3">Checking that the full Hamiltonian gives the right cost</a></li>
-<li><a class="reference internal" href="#id4">Running it on quantum computer</a></li>
+<li><a class="reference internal" href="#id2">Brute force approach</a></li>
+<li><a class="reference internal" href="#id3">Mapping to the Ising problem</a></li>
+<li><a class="reference internal" href="#id4">Checking that the full Hamiltonian gives the right cost</a></li>
+<li><a class="reference internal" href="#id5">Running it on quantum computer</a></li>
 </ul>
 </li>
 </ul>
@@ -1447,7 +1447,7 @@ solution objective: 202.0
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

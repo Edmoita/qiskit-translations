@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Warm-starting quantum optimization &mdash; Qiskit Optimization 0.3.0 文档</title>
+  <title>Warm-starting quantum optimization &mdash; Qiskit Optimization 0.2.1 文档</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="search" title="搜寻" href="../search.html" />
     <link rel="next" title="Release Notes" href="../release_notes.html" />
     <link rel="prev" title="Application Classes for Optimization Problems" href="09_application_classes.html" /> 
 
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>语言</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/10_warm_start_qaoa.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API 参考资料</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">教程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">发布说明</a></li>
 </ul>
 
             
@@ -480,9 +480,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/10_warm_start_qaoa.ipynb">docs/tutorials/10_warm_start_qaoa.ipynb</a>.</p>
 </div>
 <div class="section" id="Warm-starting-quantum-optimization">
 <h1>Warm-starting quantum optimization<a class="headerlink" href="#Warm-starting-quantum-optimization" title="永久链接至标题">¶</a></h1>
@@ -961,8 +961,8 @@ status: SUCCESS
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Warm-start QAOA<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h2>Warm-start QAOA<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <p>The warm-start features above are available in the Qiskit optimization module as a single optimizer named <code class="docutils literal notranslate"><span class="pre">WarmStartQAOAOptimizer</span></code> which is illustrated below. This solver will solve a QUBO with a warm-start QAOA. It computes <span class="math notranslate nohighlight">\(c^*\)</span> by relaxing the problem. This behavior is controlled by setting <code class="docutils literal notranslate"><span class="pre">relax_for_pre_solver</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -1117,7 +1117,7 @@ status: SUCCESS
 <li><a class="reference internal" href="#Analysis">Analysis</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">Warm-start QAOA</a></li>
+<li><a class="reference internal" href="#id2">Warm-start QAOA</a></li>
 </ul>
 </li>
 </ul>
@@ -1141,7 +1141,7 @@ status: SUCCESS
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

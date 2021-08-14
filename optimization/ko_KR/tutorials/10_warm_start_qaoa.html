@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Warm-starting quantum optimization &mdash; Qiskit Optimization 0.3.0 문서</title>
+  <title>Warm-starting 양자 최적화 &mdash; Qiskit Optimization 0.2.1 문서</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="색인" href="../genindex.html" />
     <link rel="search" title="검색" href="../search.html" />
     <link rel="next" title="Release Notes" href="../release_notes.html" />
-    <link rel="prev" title="Application Classes for Optimization Problems" href="09_application_classes.html" /> 
+    <link rel="prev" title="최적화 문제를 위한 응용 클래스" href="09_application_classes.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,9 +200,9 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">최적화 사용 지침서</a> &gt;</li>
         
-      <li>Warm-starting quantum optimization</li>
+      <li>Warm-starting 양자 최적화</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,23 +480,23 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">참고</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>이 페이지는 <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/10_warm_start_qaoa.ipynb">docs/tutorials/10_warm_start_qaoa.ipynb</a> 에서 생성되었다.</p>
 </div>
-<div class="section" id="Warm-starting-quantum-optimization">
-<h1>Warm-starting quantum optimization<a class="headerlink" href="#Warm-starting-quantum-optimization" title="제목 주소">¶</a></h1>
+<div class="section" id="Warm-starting-양자-최적화">
+<h1>Warm-starting 양자 최적화<a class="headerlink" href="#Warm-starting-양자-최적화" title="제목 주소">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="제목 주소">¶</a></h2>
-<p>Optimization problems with integer variables or constraints are often hard to solve. For example, the Quadratic Unconstrained Binary Optimization (QUBO) problem, i.e.</p>
+<p>정수 변수나 제약 조건의 최적화 문제는 해결하기 어려운 경우가 많다. 예를 들어, Quadratic Unconstrained Binary Optimization (QUBO) 문제가 있다.</p>
 <p><span class="math">\begin{align}
 \min_{x\in\{0,1\}^n}x^T\Sigma x + \mu^Tx,
 \end{align}</span></p>
-<p>is NP-Hard. Here, <span class="math notranslate nohighlight">\(\Sigma\)</span> is an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix and <span class="math notranslate nohighlight">\(x\)</span> is a vector of <span class="math notranslate nohighlight">\(n\)</span> binary variables. Note that we could have added the linear term <span class="math notranslate nohighlight">\(\mu\)</span> to the diagonal as <span class="math notranslate nohighlight">\(x_i^2=x_i\)</span> for <span class="math notranslate nohighlight">\(x_i\in\{0, 1\}\)</span>. While QUBOs are hard to solve there exists many ways to relax them to problems that are easier to solve. For example, if <span class="math notranslate nohighlight">\(\Sigma\)</span> is semi-definite positive the QUBO can be relaxed and results in a convex Quadratic Program</p>
+<p>이는 NP-Hard이다.여기서 <span class="math notranslate nohighlight">\(\Sigma\)</span> 는 <span class="math notranslate nohighlight">\(n\times n\)</span> 매트릭스이고 <span class="math notranslate nohighlight">\(x\)</span> 는 <span class="math notranslate nohighlight">\(n\)</span> 이진 변수의 벡터이다. 참고로 일차항 <span class="math notranslate nohighlight">\(\mu\)</span> 를 대각선에 <span class="math notranslate nohighlight">\(x_i\in\{0, 1\}\)</span> 의 <span class="math notranslate nohighlight">\(x_i^2=x_i\)</span> 로 추가할 수 있었다. QUBO는 해결하기 어렵지만 해결하기 쉬운 문제로 완화시킬 수 있는 많은 방법이 있다. 예를 들어, <span class="math notranslate nohighlight">\(\Sigma\)</span> 가 반확정 양극이면 QUBO가 완화될 수 있고 convex Quadratic Program이 된다.</p>
 <p><span class="math">\begin{align}
 \min_{x\in[0,1]^n}x^T\Sigma x,
 \end{align}</span></p>
-<p>which becomes easy to solve as <span class="math notranslate nohighlight">\(x\)</span> now represents <span class="math notranslate nohighlight">\(n\)</span> continuous variables bound to the range <span class="math notranslate nohighlight">\([0, 1]\)</span>. Such relaxations can be leveraged to warm-start quantum optimization algorithms as shown in [1].</p>
+<p>이는 <span class="math notranslate nohighlight">\(x\)</span> 가 <span class="math notranslate nohighlight">\([0, 1]\)</span> 범위에 바인딩된 <span class="math notranslate nohighlight">\(n\)</span> 연속 변수를 나타내므로 쉽게 해결할 수 있다. 이러한 완화는 [1]에 나온 것처럼 양자 최적화 알고리즘을 warm-start하는 데 활용할 수 있다.</p>
 </div>
 <div class="section" id="References">
 <h2>References<a class="headerlink" href="#References" title="제목 주소">¶</a></h2>
@@ -961,8 +961,8 @@ status: SUCCESS
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>Warm-start QAOA<a class="headerlink" href="#id1" title="제목 주소">¶</a></h2>
+<div class="section" id="id2">
+<h2>Warm-start QAOA<a class="headerlink" href="#id2" title="제목 주소">¶</a></h2>
 <p>The warm-start features above are available in the Qiskit optimization module as a single optimizer named <code class="docutils literal notranslate"><span class="pre">WarmStartQAOAOptimizer</span></code> which is illustrated below. This solver will solve a QUBO with a warm-start QAOA. It computes <span class="math notranslate nohighlight">\(c^*\)</span> by relaxing the problem. This behavior is controlled by setting <code class="docutils literal notranslate"><span class="pre">relax_for_pre_solver</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -1075,7 +1075,7 @@ status: SUCCESS
         <a href="../release_notes.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="09_application_classes.html" class="btn btn-neutral" title="Application Classes for Optimization Problems" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="09_application_classes.html" class="btn btn-neutral" title="최적화 문제를 위한 응용 클래스" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1107,7 +1107,7 @@ status: SUCCESS
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Warm-starting quantum optimization</a><ul>
+<li><a class="reference internal" href="#">Warm-starting 양자 최적화</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
 <li><a class="reference internal" href="#References">References</a></li>
 <li><a class="reference internal" href="#Preliminaries:-relaxing-QUBOs">Preliminaries: relaxing QUBOs</a></li>
@@ -1117,7 +1117,7 @@ status: SUCCESS
 <li><a class="reference internal" href="#Analysis">Analysis</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">Warm-start QAOA</a></li>
+<li><a class="reference internal" href="#id2">Warm-start QAOA</a></li>
 </ul>
 </li>
 </ul>
@@ -1140,7 +1140,7 @@ status: SUCCESS
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

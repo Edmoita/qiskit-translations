@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>QAOAProgram &mdash; documentación de Qiskit Optimization - 0.3.0</title>
+  <title>QAOAProgram &mdash; documentación de Qiskit Optimization - 0.2.1</title>
   
 
   
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -244,11 +244,11 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parámetros</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>optimizer</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – A dictionary specifying a classical optimizer.
-Currently only SPSA and QN-SPSA are supported. Per default, SPSA is used.
-The dictionary must contain a key <code class="docutils literal notranslate"><span class="pre">name</span></code> for the name of the optimizer and may
-contain additional keys for the settings.
-E.g. <code class="docutils literal notranslate"><span class="pre">{'name':</span> <span class="pre">'SPSA',</span> <span class="pre">'maxiter':</span> <span class="pre">100}</span></code>.</p></li>
+<li><p><strong>optimizer</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – An optimizer or dictionary specifying a classical optimizer.
+If a dictionary, only SPSA and QN-SPSA are supported. The dictionary must contain a
+key <code class="docutils literal notranslate"><span class="pre">name</span></code> for the name of the optimizer and may contain additional keys for the
+settings. E.g. <code class="docutils literal notranslate"><span class="pre">{'name':</span> <span class="pre">'SPSA',</span> <span class="pre">'maxiter':</span> <span class="pre">100}</span></code>.
+Per default, SPSA is used.</p></li>
 <li><p><strong>reps</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the integer parameter <span class="math notranslate nohighlight">\(p\)</span> as specified in <a class="reference external" href="https://arxiv.org/abs/1411.4028">https://arxiv.org/abs/1411.4028</a>,
 Has a minimum valid value of 1.</p></li>
 <li><p><strong>initial_state</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>]) – An optional initial state to prepend the QAOA circuit with</p></li>
@@ -375,7 +375,7 @@ steps. Per default False.</p></li>
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

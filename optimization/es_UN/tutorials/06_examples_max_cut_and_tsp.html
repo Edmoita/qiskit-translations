@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Max-Cut and Traveling Salesman Problem &mdash; documentación de Qiskit Optimization - 0.3.0</title>
+  <title>Max-Cut and Traveling Salesman Problem &mdash; documentación de Qiskit Optimization - 0.2.1</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Buscar" href="../search.html" />
     <link rel="next" title="Vehicle Routing" href="07_examples_vehicle_routing.html" />
-    <link rel="prev" title="ADMM Optimizer" href="05_admm_optimizer.html" /> 
+    <link rel="prev" title="Optimizador ADMM" href="05_admm_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Tutoriales de Optimización</a> &gt;</li>
         
       <li>Max-Cut and Traveling Salesman Problem</li>
     
@@ -480,69 +480,65 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Esta página fue generada a partir de <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/06_examples_max_cut_and_tsp.ipynb">docs/tutorials/06_examples_max_cut_and_tsp.ipynb</a>.</p>
 </div>
 <div class="section" id="Max-Cut-and-Traveling-Salesman-Problem">
 <h1>Max-Cut and Traveling Salesman Problem<a class="headerlink" href="#Max-Cut-and-Traveling-Salesman-Problem" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Many problems in quantitative fields such as finance and engineering are optimization problems. Optimization problems lie at the core of complex decision-making and definition of strategies.</p>
-<p>Optimization (or combinatorial optimization) means searching for an optimal solution in a finite or countably infinite set of potential solutions. Optimality is defined with respect to some criterion function, which is to be minimized or maximized. This is typically called cost function or objective function.</p>
-<p><strong>Typical optimization problems</strong></p>
-<p>Minimization: cost, distance, length of a traversal, weight, processing time, material, energy consumption, number of objects</p>
-<p>Maximization: profit, value, output, return, yield, utility, efficiency, capacity, number of objects</p>
-<p>We consider here max-cut problems of practical interest in many fields, and show how they can be mapped on quantum computers manually and how Qiskit’s optimization module supports this.</p>
-<div class="section" id="Weighted-Max-Cut">
-<h3>Weighted Max-Cut<a class="headerlink" href="#Weighted-Max-Cut" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="Introducción">
+<h2>Introducción<a class="headerlink" href="#Introducción" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Muchos problemas en campos cuantitativos como las finanzas y la ingeniería son problemas de optimización. Los problemas de optimización se encuentran en el centro de la compleja toma de decisiones y la definición de estrategias.</p>
+<p>Optimización (u optimización combinatoria) significa buscar una solución óptima en un conjunto finito o infinito de posibles soluciones. La optimalidad se define con respecto a alguna función de criterio, que debe minimizarse o maximizarse. Por lo general, esto se denomina función de costo o función objetivo.</p>
+<p><strong>Problemas típicos de optimización</strong></p>
+<p>Minimización: costo, distancia, longitud de un recorrido, peso, tiempo de procesamiento, material, consumo de energía, número de objetos</p>
+<p>Maximización: beneficio, valor, producción, retorno, rendimiento, utilidad, eficiencia, capacidad, número de objetos</p>
+<p>Consideramos aquí problemas de corte máximo (max-cut) de interés práctico en muchos campos, y mostramos cómo se pueden mapear en computadoras cuánticas manualmente y cómo el módulo de optimización de Qiskit lo respalda.</p>
+<div class="section" id="Max-Cut-Ponderado">
+<h3>Max-Cut Ponderado<a class="headerlink" href="#Max-Cut-Ponderado" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Max-Cut is an NP-complete problem, with applications in clustering, network science, and statistical physics. To grasp how practical applications are mapped into given Max-Cut instances, consider a system of many people that can interact and influence each other. Individuals can be represented by vertices of a graph, and their interactions seen as pairwise connections between vertices of the graph, or edges. With this representation in mind, it is easy to model typical marketing problems. For
 example, suppose that it is assumed that individuals will influence each other’s buying decisions, and knowledge is given about how strong they will influence each other. The influence can be modeled by weights assigned on each edge of the graph. It is possible then to predict the outcome of a marketing strategy in which products are offered for free to some individuals, and then ask which is the optimal subset of individuals that should get the free products, in order to maximize revenues.</p>
-<p>The formal definition of this problem is the following:</p>
-<p>Consider an <span class="math notranslate nohighlight">\(n\)</span>-node undirected graph <em>G = (V, E)</em> where <em>|V| = n</em> with edge weights <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span>, <span class="math notranslate nohighlight">\(w_{ij}=w_{ji}\)</span>, for <span class="math notranslate nohighlight">\((i, j)\in E\)</span>. A cut is defined as a partition of the original set V into two subsets. The cost function to be optimized is in this case the sum of weights of edges connecting points in the two different subsets, <em>crossing</em> the cut. By assigning <span class="math notranslate nohighlight">\(x_i=0\)</span> or <span class="math notranslate nohighlight">\(x_i=1\)</span> to each node <span class="math notranslate nohighlight">\(i\)</span>, one tries to maximize the global profit function (here
-and in the following summations run over indices 0,1,…n-1)</p>
+<p>La definición formal de este problema es la siguiente:</p>
+<p>Considera un grafo <em>G = (V, E)</em> no dirigido de <span class="math notranslate nohighlight">\(n\)</span> nodos donde <em>|V| = n</em> con pesos de arista <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span>, <span class="math notranslate nohighlight">\(w_{ij}=w_{ji}\)</span>, para <span class="math notranslate nohighlight">\((i, j)\in E\)</span>. Un corte se define como una partición del conjunto V original en dos subconjuntos. La función de coste a optimizar es en este caso la suma de los pesos de las aristas que conectan los puntos en los dos subconjuntos diferentes, <em>cruzando</em> el corte. Asignando <span class="math notranslate nohighlight">\(x_i=0\)</span> o <span class="math notranslate nohighlight">\(x_i=1\)</span> a cada nodo <span class="math notranslate nohighlight">\(i\)</span>, se intenta maximizar la función de beneficio global (aquí y en las siguientes sumas los índices corren sobre 0,1,… N-1)</p>
 <div class="math notranslate nohighlight">
 \[\tilde{C}(\textbf{x}) = \sum_{i,j} w_{ij} x_i (1-x_j).\]</div>
-<p>In our simple marketing model, <span class="math notranslate nohighlight">\(w_{ij}\)</span> represents the probability that the person <span class="math notranslate nohighlight">\(j\)</span> will buy a product after <span class="math notranslate nohighlight">\(i\)</span> gets a free one. Note that the weights <span class="math notranslate nohighlight">\(w_{ij}\)</span> can in principle be greater than <span class="math notranslate nohighlight">\(1\)</span> (or even negative), corresponding to the case where the individual <span class="math notranslate nohighlight">\(j\)</span> will buy more than one product. Maximizing the total buying probability corresponds to maximizing the total future revenues. In the case where the profit probability will be greater than the
-cost of the initial free samples, the strategy is a convenient one. An extension to this model has the nodes themselves carry weights, which can be regarded, in our marketing model, as the likelihood that a person granted with a free sample of the product will buy it again in the future. With this additional information in our model, the objective function to maximize becomes</p>
+<p>En nuestro modelo de mercadotecnia simple, <span class="math notranslate nohighlight">\(w_{ij}\)</span> representa la probabilidad de que la persona <span class="math notranslate nohighlight">\(j\)</span> compre un producto después de que la persona <span class="math notranslate nohighlight">\(i\)</span> obtenga uno gratis. Ten en cuenta que los pesos <span class="math notranslate nohighlight">\(w_{ij}\)</span> pueden, en principio, ser mayores que <span class="math notranslate nohighlight">\(1\)</span> (o incluso negativos), correspondiente al caso en el que el individuo <span class="math notranslate nohighlight">\(j\)</span> comprará más de un producto. Maximizar la probabilidad de compra total corresponde a maximizar los ingresos futuros totales. En el caso de que la probabilidad de ganancia sea mayor que el costo de las muestras gratuitas iniciales, la estrategia es conveniente. Una extensión de este modelo hace que los propios nodos tengan pesos, lo que puede considerarse, en nuestro modelo de mercadotecnia, como la probabilidad de que una persona a la que se le haya otorgado una muestra gratuita del producto lo vuelva a comprar en el futuro. Con esta información adicional en nuestro modelo, la función objetivo para maximizar se convierte en</p>
 <div class="math notranslate nohighlight">
 \[C(\textbf{x}) = \sum_{i,j} w_{ij} x_i (1-x_j)+\sum_i w_i x_i.\]</div>
 <p>In order to find a solution to this problem on a quantum computer, one needs first to map it to an Ising Hamiltonian. This can be done with the assignment <span class="math notranslate nohighlight">\(x_i\rightarrow (1-Z_i)/2\)</span>, where <span class="math notranslate nohighlight">\(Z_i\)</span> is the Pauli Z operator that has eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>. Doing this we find that</p>
 <div class="math notranslate nohighlight">
 \[C(\textbf{Z}) = \sum_{i,j} \frac{w_{ij}}{4} (1-Z_i)(1+Z_j) + \sum_i \frac{w_i}{2} (1-Z_i) = -\frac{1}{2}\left( \sum_{i&lt;j} w_{ij} Z_i Z_j +\sum_i w_i Z_i\right)+\mathrm{const},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathrm{const} = \sum_{i&lt;j}w_{ij}/2+\sum_i w_i/2\)</span>. In other terms, the weighted Max-Cut problem is equivalent to minimizing the Ising Hamiltonian</p>
+<p>donde <span class="math notranslate nohighlight">\(\mathrm{const} = \sum_{i&lt;j}w_{ij}/2+\sum_i w_i/2\)</span>. En otros términos, el problema de Max-Cut ponderado es equivalente a minimizar el Hamiltoniano de Ising</p>
 <div class="math notranslate nohighlight">
 \[H = \sum_i w_i Z_i + \sum_{i&lt;j} w_{ij} Z_iZ_j.\]</div>
-<p>Qiskit’s optimization module can generate the Ising Hamiltonian for the first profit function <span class="math notranslate nohighlight">\(\tilde{C}\)</span>. To this extent, function <span class="math notranslate nohighlight">\(\tilde{C}\)</span> can be modeled as a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>, which provides the <code class="docutils literal notranslate"><span class="pre">to_ising()</span></code> method.</p>
+<p>El módulo de optimización de Qiskit puede generar el Hamiltoniano de Ising para la primera función de ganancias <span class="math notranslate nohighlight">\(\tilde{C}\)</span>. En este sentido, la función <span class="math notranslate nohighlight">\(\tilde{C}\)</span> se puede modelar como un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>, que proporciona el método <code class="docutils literal notranslate"><span class="pre">to_ising()</span></code>.</p>
 </div>
-<div class="section" id="Approximate-Universal-Quantum-Computing-for-Optimization-Problems">
-<h3>Approximate Universal Quantum Computing for Optimization Problems<a class="headerlink" href="#Approximate-Universal-Quantum-Computing-for-Optimization-Problems" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>There has been a considerable amount of interest in recent times about the use of quantum computers to find a solution to combinatorial optimization problems. It is important to say that, given the classical nature of combinatorial problems, exponential speedup in using quantum computers compared to the best classical algorithms is not guaranteed. However, due to the nature and importance of the target problems, it is worth investigating heuristic approaches on a quantum computer that could
-indeed speed up some problem instances. Here we demonstrate an approach that is based on the <em>Quantum Approximate Optimization Algorithm</em> (QAOA) by Farhi, Goldstone, and Gutmann (2014). We frame the algorithm in the context of <em>approximate quantum computing</em>, given its heuristic nature.</p>
-<p>The algorithm works as follows:</p>
+<div class="section" id="Computación-Cuántica-Universal-Aproximada-para-Problemas-de-Optimización">
+<h3>Computación Cuántica Universal Aproximada para Problemas de Optimización<a class="headerlink" href="#Computación-Cuántica-Universal-Aproximada-para-Problemas-de-Optimización" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Ha habido un interés considerable en los últimos tiempos sobre el uso de computadoras cuánticas para encontrar una solución a los problemas de optimización combinatorial. Es importante decir que, dada la naturaleza clásica de los problemas combinatorios, no se garantiza una aceleración exponencial en el uso de computadoras cuánticas en comparación con los mejores algoritmos clásicos. Sin embargo, debido a la naturaleza y la importancia de los problemas objetivo, vale la pena investigar enfoques heurísticos en una computadora cuántica que de hecho podrían acelerar algunos casos de problemas. Aquí demostramos un enfoque que se basa en el <em>Algoritmo Cuántico de Optimización Aproximada</em> (Quantum Approximate Optimization Algorithm, QAOA) de Farhi, Goldstone y Gutmann (2014). Enmarcamos el algoritmo en el contexto de <em>computación cuántica aproximada</em>, dada su naturaleza heurística.</p>
+<p>El algoritmo funciona de la siguiente manera:</p>
 <ol class="arabic">
-<li><p>Choose the <span class="math notranslate nohighlight">\(w_i\)</span> and <span class="math notranslate nohighlight">\(w_{ij}\)</span> in the target Ising problem. In principle, even higher powers of Z are allowed.</p></li>
-<li><p>Choose the depth of the quantum circuit <span class="math notranslate nohighlight">\(m\)</span>. Note that the depth can be modified adaptively.</p></li>
-<li><p>Choose a set of controls <span class="math notranslate nohighlight">\(\theta\)</span> and make a trial function <span class="math notranslate nohighlight">\(|\psi(\boldsymbol\theta)\rangle\)</span>, built using a quantum circuit made of C-Phase gates and single-qubit Y rotations, parameterized by the components of <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>.</p></li>
-<li><p>Evaluate</p>
+<li><p>Elegir <span class="math notranslate nohighlight">\(w_i\)</span> y <span class="math notranslate nohighlight">\(w_{ij}\)</span> en el problema de Ising objetivo. En principio, se permiten potencias de Z aún mayores.</p></li>
+<li><p>Elegir la profundidad del circuito cuántico <span class="math notranslate nohighlight">\(m\)</span>. Se debe tener en cuenta que la profundidad se puede modificar de forma adaptativa.</p></li>
+<li><p>Elegir un conjunto de controles <span class="math notranslate nohighlight">\(\theta\)</span> y haga una función de prueba <span class="math notranslate nohighlight">\(|\psi(\boldsymbol\theta)\rangle\)</span>, construida utilizando un circuito cuántico hecho de compuertas C-Phase y rotaciones Y de un solo qubit, parametrizada por los componentes de <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>.</p></li>
+<li><p>Evaluar</p>
 <div class="math notranslate nohighlight">
 \[C(\boldsymbol\theta) = \langle\psi(\boldsymbol\theta)~|H|~\psi(\boldsymbol\theta)\rangle = \sum_i w_i \langle\psi(\boldsymbol\theta)~|Z_i|~\psi(\boldsymbol\theta)\rangle+ \sum_{i&lt;j} w_{ij} \langle\psi(\boldsymbol\theta)~|Z_iZ_j|~\psi(\boldsymbol\theta)\rangle\]</div>
-<p>by sampling the outcome of the circuit in the Z-basis and adding the expectation values of the individual Ising terms together. In general, different control points around <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> have to be estimated, depending on the classical optimizer chosen.</p>
+<p>mediante el muestreo el resultado del circuito en la base Z y sumando los valores esperados de los términos Ising individuales. En general, se deben estimar diferentes puntos de control alrededor de <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>, dependiendo del optimizador clásico elegido.</p>
 </li>
-<li><p>Use a classical optimizer to choose a new set of controls.</p></li>
-<li><p>Continue until <span class="math notranslate nohighlight">\(C(\boldsymbol\theta)\)</span> reaches a minimum, close enough to the solution <span class="math notranslate nohighlight">\(\boldsymbol\theta^*\)</span>.</p></li>
-<li><p>Use the last <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> to generate a final set of samples from the distribution <span class="math notranslate nohighlight">\(|\langle z_i~|\psi(\boldsymbol\theta)\rangle|^2\;\forall i\)</span> to obtain the answer.</p></li>
+<li><p>Utiliza un optimizador clásico para elegir un nuevo conjunto de controles.</p></li>
+<li><p>Continúa hasta que <span class="math notranslate nohighlight">\(C(\boldsymbol\theta)\)</span> alcance un mínimo, lo suficientemente cercano a la solución <span class="math notranslate nohighlight">\(\boldsymbol\theta^*\)</span>.</p></li>
+<li><p>Usa la última <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> para generar un conjunto final de muestras de la distribución <span class="math notranslate nohighlight">\(|\langle z_i~|\psi(\boldsymbol\theta)\rangle|^2\;\forall i\)</span> para obtener la respuesta.</p></li>
 </ol>
-<p>It is our belief the difficulty of finding good heuristic algorithms will come down to the choice of an appropriate trial wavefunction. For example, one could consider a trial function whose entanglement best aligns with the target problem, or simply make the amount of entanglement a variable. In this tutorial, we will consider a simple trial function of the form</p>
+<p>Creemos que la dificultad de encontrar buenos algoritmos heurísticos se reducirá a la elección de una función de onda de prueba adecuada. Por ejemplo, se podría considerar una función de prueba cuyo entrelazamiento se alinee mejor con el problema objetivo, o simplemente hacer que la cantidad de entrelazamiento sea una variable. En este tutorial, consideraremos una función de prueba simple de la forma</p>
 <div class="math notranslate nohighlight">
 \[|\psi(\theta)\rangle  = [U_\mathrm{single}(\boldsymbol\theta) U_\mathrm{entangler}]^m |+\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span> is a collection of C-Phase gates (fully entangling gates), and <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of qubits and <span class="math notranslate nohighlight">\(m\)</span> is the depth of the quantum circuit. The motivation for this choice is that for these classical problems this choice allows us to search over the space of quantum states that have only real coefficients, still exploiting the entanglement to potentially converge faster to the
-solution.</p>
+<p>donde <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span> es una colección de compuertas C-Phase (compuertas completamente entrelazadas), y <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, donde <span class="math notranslate nohighlight">\(n\)</span> es el número de qubits y <span class="math notranslate nohighlight">\(m\)</span> es la profundidad del circuito cuántico. La motivación para esta elección es que para estos problemas clásicos, esta elección nos permite buscar en el espacio de estados cuánticos que solo tienen coeficientes reales, aprovechando el entrelazamiento para converger potencialmente más rápido a la solución.</p>
 <p>One advantage of using this sampling method compared to adiabatic approaches is that the target Ising Hamiltonian does not have to be implemented directly on hardware, allowing this algorithm not to be limited to the connectivity of the device. Furthermore, higher-order terms in the cost function, such as <span class="math notranslate nohighlight">\(Z_iZ_jZ_k\)</span>, can also be sampled efficiently, whereas in adiabatic or annealing approaches they are generally impractical to deal with.</p>
-<p>References: - A. Lucas, Frontiers in Physics 2, 5 (2014) - E. Farhi, J. Goldstone, S. Gutmann e-print arXiv 1411.4028 (2014) - D. Wecker, M. B. Hastings, M. Troyer Phys. Rev. A 94, 022309 (2016) - E. Farhi, J. Goldstone, S. Gutmann, H. Neven e-print arXiv 1703.06199 (2017)</p>
+<p>Referencias: - A. Lucas, Frontiers in Physics 2, 5 (2014) - E. Farhi, J. Goldstone, S. Gutmann e-print arXiv 1411.4028 (2014) - D. Wecker, M. B. Hastings, M. Troyer Phys. Rev. A 94, 022309 (2016) - E. Farhi, J. Goldstone, S. Gutmann, H. Neven e-print arXiv 1703.06199 (2017)</p>
 </div>
-<div class="section" id="Application-classes">
-<h3>Application classes<a class="headerlink" href="#Application-classes" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="Clases-de-aplicación">
+<h3>Clases de aplicación<a class="headerlink" href="#Clases-de-aplicación" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>We use the application classes for the max-cut problem and the traveling salesman problem in this page. There are application classes for other optimization problems available as well. See <a class="reference internal" href="09_application_classes.html"><span class="doc">Application Classes for Optimization Problems</span></a> for details.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -631,9 +627,9 @@ solution.</p>
  [1. 0. 1. 0.]]
 </pre></div></div>
 </div>
-<div class="section" id="Brute-force-approach">
-<h3>Brute force approach<a class="headerlink" href="#Brute-force-approach" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Try all possible <span class="math notranslate nohighlight">\(2^n\)</span> combinations. For <span class="math notranslate nohighlight">\(n = 4\)</span>, as in this example, one deals with only 16 combinations, but for n = 1000, one has 1.071509e+30 combinations, which is impractical to deal with by using a brute force approach.</p>
+<div class="section" id="Enfoque-de-fuerza-bruta">
+<h3>Enfoque de fuerza bruta<a class="headerlink" href="#Enfoque-de-fuerza-bruta" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Prueba todas las <span class="math notranslate nohighlight">\(2^n\)</span> combinaciones posibles. Para <span class="math notranslate nohighlight">\(n = 4\)</span>, como en este ejemplo, uno trata solo con 16 combinaciones, pero para n = 1000, uno tiene 1.071509e+30 combinaciones, lo cual no es práctico de manejar usando un enfoque de fuerza bruta.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -689,8 +685,8 @@ Best solution = [1, 0, 1, 0] cost = 4.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_8_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_8_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="Mapping-to-the-Ising-problem">
-<h3>Mapping to the Ising problem<a class="headerlink" href="#Mapping-to-the-Ising-problem" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="Mapeo-del-problema-de-Ising">
+<h3>Mapeo del problema de Ising<a class="headerlink" href="#Mapeo-del-problema-de-Ising" title="Enlazar permanentemente con este título">¶</a></h3>
 <p>Qiskit provides functionality to generate <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> from the problem specification as well as create the corresponding Ising Hamiltonian.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -777,10 +773,10 @@ optimal value: [1. 0. 1. 0.]
 status: SUCCESS
 </pre></div></div>
 </div>
-<p>Since the problem was cast to a minimization problem, the solution of <span class="math notranslate nohighlight">\(-4\)</span> corresponds to the optimum.</p>
+<p>Dado que el problema se convirtió en un problema de minimización, la solución de <span class="math notranslate nohighlight">\(-4\)</span> corresponde al óptimo.</p>
 </div>
-<div class="section" id="Checking-that-the-full-Hamiltonian-gives-the-right-cost">
-<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#Checking-that-the-full-Hamiltonian-gives-the-right-cost" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="Verificar-que-el-Hamiltoniano-completo-proporcione-el-costo-correcto">
+<h3>Verificar que el Hamiltoniano completo proporcione el costo correcto<a class="headerlink" href="#Verificar-que-el-Hamiltoniano-completo-proporcione-el-costo-correcto" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -819,9 +815,9 @@ solution objective: 4.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_16_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_16_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="Running-it-on-quantum-computer">
-<h3>Running it on quantum computer<a class="headerlink" href="#Running-it-on-quantum-computer" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>We run the optimization routine using a feedback loop with a quantum computer that uses trial functions built with Y single-qubit rotations, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, and entangler steps <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
+<div class="section" id="Ejecutar-en-una-computadora-cuántica">
+<h3>Ejecutar en una computadora cuántica<a class="headerlink" href="#Ejecutar-en-una-computadora-cuántica" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Ejecutamos la rutina de optimización usando un ciclo de retroalimentación con una computadora cuántica que usa funciones de prueba construidas con rotaciones Y de un solo qubit, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, y los pasos de entrelazamiento <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -914,30 +910,29 @@ status: SUCCESS
 </div>
 </div>
 </div>
-<div class="section" id="Traveling-Salesman-Problem">
-<h2>Traveling Salesman Problem<a class="headerlink" href="#Traveling-Salesman-Problem" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="Problema-del-Vendedor-Viajero">
+<h2>Problema del Vendedor Viajero<a class="headerlink" href="#Problema-del-Vendedor-Viajero" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>In addition to being a notorious NP-complete problem that has drawn the attention of computer scientists and mathematicians for over two centuries, the Traveling Salesman Problem (TSP) has important bearings on finance and marketing, as its name suggests. Colloquially speaking, the traveling salesman is a person that goes from city to city to sell merchandise. The objective in this case is to find the shortest path that would enable the salesman to visit all the cities and return to its
 hometown, i.e. the city where he started traveling. By doing this, the salesman gets to maximize potential sales in the least amount of time.</p>
 <p>The problem derives its importance from its “hardness” and ubiquitous equivalence to other relevant combinatorial optimization problems that arise in practice.</p>
 <p>The mathematical formulation with some early analysis was proposed by W.R. Hamilton in the early 19th century. Mathematically the problem is, as in the case of Max-Cut, best abstracted in terms of graphs. The TSP on the nodes of a graph asks for the shortest <em>Hamiltonian cycle</em> that can be taken through each of the nodes. A Hamilton cycle is a closed path that uses every vertex of a graph once. The general solution is unknown and an algorithm that finds it efficiently (e.g., in polynomial time)
 is not expected to exist.</p>
-<p>Find the shortest Hamiltonian cycle in a graph <span class="math notranslate nohighlight">\(G=(V,E)\)</span> with <span class="math notranslate nohighlight">\(n=|V|\)</span> nodes and distances, <span class="math notranslate nohighlight">\(w_{ij}\)</span> (distance from vertex <span class="math notranslate nohighlight">\(i\)</span> to vertex <span class="math notranslate nohighlight">\(j\)</span>). A Hamiltonian cycle is described by <span class="math notranslate nohighlight">\(N^2\)</span> variables <span class="math notranslate nohighlight">\(x_{i,p}\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> represents the node and <span class="math notranslate nohighlight">\(p\)</span> represents its order in a prospective cycle. The decision variable takes the value 1 if the solution occurs at node <span class="math notranslate nohighlight">\(i\)</span> at time order <span class="math notranslate nohighlight">\(p\)</span>. We require that every node can only appear once in
-the cycle, and for each time a node has to occur. This amounts to the two constraints (here and in the following, whenever not specified, the summands run over 0,1,…N-1)</p>
+<p>Encuentra el ciclo Hamiltoniano más corto en un grafo <span class="math notranslate nohighlight">\(G=(V,E)\)</span> con <span class="math notranslate nohighlight">\(n=|V|\)</span> nodos y distancias, <span class="math notranslate nohighlight">\(w_{ij}\)</span> (distancia desde el vértice <span class="math notranslate nohighlight">\(i\)</span> al vértice <span class="math notranslate nohighlight">\(j\)</span>). Un ciclo Hamiltoniano se describe mediante <span class="math notranslate nohighlight">\(N^2\)</span> variables <span class="math notranslate nohighlight">\(x_{i,p}\)</span>, donde <span class="math notranslate nohighlight">\(i\)</span> representa el nodo y <span class="math notranslate nohighlight">\(p\)</span> representa su orden en una perspectiva de ciclo. La variable de decisión toma el valor 1 si la solución ocurre en el nodo <span class="math notranslate nohighlight">\(i\)</span> en el orden de tiempo <span class="math notranslate nohighlight">\(p\)</span>. Requerimos que cada nodo solo pueda aparecer una vez en el ciclo, y por cada vez un nodo tiene que ocurrir. Esto equivale a las dos restricciones (aquí y a continuación, siempre que no se especifique, los sumandos se ejecutan sobre 0,1,…N-1)</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i} x_{i,p} = 1 ~~\forall p\]</div>
 <div class="math notranslate nohighlight">
 \[\sum_{p} x_{i,p} = 1 ~~\forall i.\]</div>
-<p>For nodes in our prospective ordering, if <span class="math notranslate nohighlight">\(x_{i,p}\)</span> and <span class="math notranslate nohighlight">\(x_{j,p+1}\)</span> are both 1, then there should be an energy penalty if <span class="math notranslate nohighlight">\((i,j) \notin E\)</span> (not connected in the graph). The form of this penalty is</p>
+<p>Para los nodos en nuestro ordenamiento prospectivo, si <span class="math notranslate nohighlight">\(x_{i,p}\)</span> y <span class="math notranslate nohighlight">\(x_{j,p+1}\)</span> son ambos 1, entonces debería haber una penalización de energía si <span class="math notranslate nohighlight">\((i,j) \notin E\)</span> (no conectado en el grafo). La forma de esta penalización es</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i,j\notin E}\sum_{p} x_{i,p}x_{j,p+1}&gt;0,\]</div>
-<p>where it is assumed the boundary condition of the Hamiltonian cycles <span class="math notranslate nohighlight">\((p=N)\equiv (p=0)\)</span>. However, here it will be assumed a fully connected graph and not include this term. The distance that needs to be minimized is</p>
+<p>donde se asume la condición de frontera de los ciclos Hamiltonianos <span class="math notranslate nohighlight">\((p=N)\equiv (p=0)\)</span>. Sin embargo, aquí se asumirá un grafo completamente conectado y no incluirá este término. La distancia que debe minimizarse es</p>
 <div class="math notranslate nohighlight">
 \[C(\textbf{x})=\sum_{i,j}w_{ij}\sum_{p} x_{i,p}x_{j,p+1}.\]</div>
-<p>Putting this all together in a single objective function to be minimized, we get the following:</p>
+<p>Poniendo todo esto junto en una única función objetivo para minimizar, obtenemos lo siguiente:</p>
 <div class="math notranslate nohighlight">
 \[C(\textbf{x})=\sum_{i,j}w_{ij}\sum_{p} x_{i,p}x_{j,p+1}+ A\sum_p\left(1- \sum_i x_{i,p}\right)^2+A\sum_i\left(1- \sum_p x_{i,p}\right)^2,\]</div>
-<p>where <span class="math notranslate nohighlight">\(A\)</span> is a free parameter. One needs to ensure that <span class="math notranslate nohighlight">\(A\)</span> is large enough so that these constraints are respected. One way to do this is to choose <span class="math notranslate nohighlight">\(A\)</span> such that <span class="math notranslate nohighlight">\(A &gt; \mathrm{max}(w_{ij})\)</span>.</p>
-<p>Once again, it is easy to map the problem in this form to a quantum computer, and the solution will be found by minimizing a Ising Hamiltonian.</p>
+<p>donde <span class="math notranslate nohighlight">\(A\)</span> es un parámetro libre. Es necesario asegurarse de que <span class="math notranslate nohighlight">\(A\)</span> sea lo suficientemente grande como para que se respeten estas restricciones. Una forma de hacer esto es elegir <span class="math notranslate nohighlight">\(A\)</span> tal que <span class="math notranslate nohighlight">\(A &gt; \mathrm{max}(w_{ij})\)</span>.</p>
+<p>Una vez más, es fácil mapear el problema de esta forma a una computadora cuántica, y la solución se encontrará minimizando un Hamiltoniano de Ising.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -973,8 +968,8 @@ distance
 <div class="output_area docutils container">
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" /></div>
 </div>
-<div class="section" id="id1">
-<h3>Brute force approach<a class="headerlink" href="#id1" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="id2">
+<h3>Enfoque de fuerza bruta<a class="headerlink" href="#id2" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1034,8 +1029,8 @@ Best order from brute force = (0, 1, 2) with total distance = 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Mapping to the Ising problem<a class="headerlink" href="#id2" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="id3">
+<h3>Mapeo del problema de Ising<a class="headerlink" href="#id3" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1177,8 +1172,8 @@ status: SUCCESS
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id3" title="Enlazar permanentemente con este título">¶</a></h3>
+<div class="section" id="id4">
+<h3>Verificar que el Hamiltoniano completo proporcione el costo correcto<a class="headerlink" href="#id4" title="Enlazar permanentemente con este título">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1218,9 +1213,9 @@ solution objective: 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Running it on quantum computer<a class="headerlink" href="#id4" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>We run the optimization routine using a feedback loop with a quantum computer that uses trial functions built with Y single-qubit rotations, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, and entangler steps <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
+<div class="section" id="id5">
+<h3>Ejecutar en una computadora cuántica<a class="headerlink" href="#id5" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Ejecutamos la rutina de optimización usando un ciclo de retroalimentación con una computadora cuántica que usa funciones de prueba construidas con rotaciones Y de un solo qubit, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, y los pasos de entrelazamiento <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -1372,7 +1367,7 @@ solution objective: 202.0
         <a href="07_examples_vehicle_routing.html" class="btn btn-neutral float-right" title="Vehicle Routing" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="05_admm_optimizer.html" class="btn btn-neutral" title="ADMM Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="05_admm_optimizer.html" class="btn btn-neutral" title="Optimizador ADMM" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1405,24 +1400,24 @@ solution objective: 202.0
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Max-Cut and Traveling Salesman Problem</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#Weighted-Max-Cut">Weighted Max-Cut</a></li>
-<li><a class="reference internal" href="#Approximate-Universal-Quantum-Computing-for-Optimization-Problems">Approximate Universal Quantum Computing for Optimization Problems</a></li>
-<li><a class="reference internal" href="#Application-classes">Application classes</a></li>
+<li><a class="reference internal" href="#Introducción">Introducción</a><ul>
+<li><a class="reference internal" href="#Max-Cut-Ponderado">Max-Cut Ponderado</a></li>
+<li><a class="reference internal" href="#Computación-Cuántica-Universal-Aproximada-para-Problemas-de-Optimización">Computación Cuántica Universal Aproximada para Problemas de Optimización</a></li>
+<li><a class="reference internal" href="#Clases-de-aplicación">Clases de aplicación</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Max-Cut-problem">Max-Cut problem</a><ul>
-<li><a class="reference internal" href="#Brute-force-approach">Brute force approach</a></li>
-<li><a class="reference internal" href="#Mapping-to-the-Ising-problem">Mapping to the Ising problem</a></li>
-<li><a class="reference internal" href="#Checking-that-the-full-Hamiltonian-gives-the-right-cost">Checking that the full Hamiltonian gives the right cost</a></li>
-<li><a class="reference internal" href="#Running-it-on-quantum-computer">Running it on quantum computer</a></li>
+<li><a class="reference internal" href="#Enfoque-de-fuerza-bruta">Enfoque de fuerza bruta</a></li>
+<li><a class="reference internal" href="#Mapeo-del-problema-de-Ising">Mapeo del problema de Ising</a></li>
+<li><a class="reference internal" href="#Verificar-que-el-Hamiltoniano-completo-proporcione-el-costo-correcto">Verificar que el Hamiltoniano completo proporcione el costo correcto</a></li>
+<li><a class="reference internal" href="#Ejecutar-en-una-computadora-cuántica">Ejecutar en una computadora cuántica</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Traveling-Salesman-Problem">Traveling Salesman Problem</a><ul>
-<li><a class="reference internal" href="#id1">Brute force approach</a></li>
-<li><a class="reference internal" href="#id2">Mapping to the Ising problem</a></li>
-<li><a class="reference internal" href="#id3">Checking that the full Hamiltonian gives the right cost</a></li>
-<li><a class="reference internal" href="#id4">Running it on quantum computer</a></li>
+<li><a class="reference internal" href="#Problema-del-Vendedor-Viajero">Problema del Vendedor Viajero</a><ul>
+<li><a class="reference internal" href="#id2">Enfoque de fuerza bruta</a></li>
+<li><a class="reference internal" href="#id3">Mapeo del problema de Ising</a></li>
+<li><a class="reference internal" href="#id4">Verificar que el Hamiltoniano completo proporcione el costo correcto</a></li>
+<li><a class="reference internal" href="#id5">Ejecutar en una computadora cuántica</a></li>
 </ul>
 </li>
 </ul>
@@ -1447,7 +1442,7 @@ solution objective: 202.0
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

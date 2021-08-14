@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Application Classes for Optimization Problems &mdash; documentación de Qiskit Optimization - 0.3.0</title>
+  <title>Application Classes for Optimization Problems &mdash; documentación de Qiskit Optimization - 0.2.1</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Buscar" href="../search.html" />
     <link rel="next" title="Warm-starting quantum optimization" href="10_warm_start_qaoa.html" />
-    <link rel="prev" title="Improving Variational Quantum Optimization using CVaR" href="08_cvar_optimization.html" /> 
+    <link rel="prev" title="Mejora de la Optimización Cuántica Variacional mediante CVaR" href="08_cvar_optimization.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Tutoriales de Optimización</a> &gt;</li>
         
       <li>Application Classes for Optimization Problems</li>
     
@@ -480,29 +480,29 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Esta página fue generada a partir de <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/09_application_classes.ipynb">docs/tutorials/09_application_classes.ipynb</a>.</p>
 </div>
 <div class="section" id="Application-Classes-for-Optimization-Problems">
 <h1>Application Classes for Optimization Problems<a class="headerlink" href="#Application-Classes-for-Optimization-Problems" title="Enlazar permanentemente con este título">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="Introducción">
+<h2>Introducción<a class="headerlink" href="#Introducción" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>We introduce application classes for the following optimization problems so that users can easily try various optimization problems on quantum computers.</p>
 <ol class="arabic simple">
-<li><p>Exact cover problem</p></li>
+<li><p>Problema de cobertura exacta</p></li>
 </ol>
 <ul class="simple">
 <li><p>Given a collection of subsets of items, find a subcollection such that each item is covered exactly once.</p></li>
 </ul>
 <ol class="arabic simple" start="2">
-<li><p>Knapsack problem</p></li>
+<li><p>Problema de la mochila (knapsack)</p></li>
 </ol>
 <ul class="simple">
 <li><p>Given a set of items, find a subset of items such that the total weight is within the capacity and the total value is maximized.</p></li>
 </ul>
 <ol class="arabic simple" start="3">
-<li><p>Number partition problem</p></li>
+<li><p>Problema de partición de números</p></li>
 </ol>
 <ul class="simple">
 <li><p>Given a multiset of positive integers, find a partition of the multiset into two subsets such that the sums of the subsets are equal.</p></li>
@@ -515,7 +515,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>Graph problems</p>
 <ol class="arabic simple" start="5">
-<li><p>Clique problem</p></li>
+<li><p>Problema del clan (clique)</p></li>
 </ol>
 <ul class="simple">
 <li><p>Given an undirected graph, find a subset of nodes with a specified number or the maximum number such that the induced subgraph is complete.</p></li>
@@ -524,7 +524,7 @@ div.rendered_html tbody tr:hover {
 <li><p>Graph partition problem</p></li>
 </ol>
 <ul class="simple">
-<li><p>Given an undirected graph, find a partition into two components whose sizes are equal such that the total capacity of the edges between the two components is minimized.</p></li>
+<li><p>Dado un grafo no dirigido, encuentra una partición en dos componentes cuyos tamaños sean iguales de tal manera que la capacidad total de las aristas entre los dos componentes sea mínima.</p></li>
 </ul>
 <ol class="arabic simple" start="7">
 <li><p>Max-cut problem</p></li>
@@ -558,7 +558,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>The application classes for graph problems (<code class="docutils literal notranslate"><span class="pre">GraphOptimizationApplication</span></code>) provide a functionality to draw graphs of an instance and a result. Note that you need to install <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> beforehand to utilize the functionality.</p>
 <p>We introduce examples of the vertex cover problem and the knapsack problem in this page.</p>
-<p>Examples of the max-cut problem and the traveling salesman problem are available in <a class="reference internal" href="06_examples_max_cut_and_tsp.html"><span class="doc">Max-Cut and Traveling Salesman Problem</span></a>.</p>
+<p>Ejemplos del problema max-cut y el problema del vendedor viajero están disponibles en <a class="reference internal" href="06_examples_max_cut_and_tsp.html"><span class="doc">Max-Cut y Problema del Vendedor Viajero</span></a>.</p>
 <p>We first import packages necessary for application classes.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -737,8 +737,8 @@ time: 2.0216140747070312
 <img alt="../_images/tutorials_09_application_classes_13_1.svg" src="../_images/tutorials_09_application_classes_13_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="Knapsack-problem">
-<h2>Knapsack problem<a class="headerlink" href="#Knapsack-problem" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="section" id="Problema-de-la-mochila-(knapsack)">
+<h2>Problema de la mochila (knapsack)<a class="headerlink" href="#Problema-de-la-mochila-(knapsack)" title="Enlazar permanentemente con este título">¶</a></h2>
 <p>The knapsack problem asks us to find a combination of items such that the total weight is within the capacity of the knapsack and maximize the total value of the items. The following examples solve an instance of the knapsack problem with 5 items by Numpy eigensolver and QAOA.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -1069,7 +1069,7 @@ num qubits: 9, offset: 1417.5
         <a href="10_warm_start_qaoa.html" class="btn btn-neutral float-right" title="Warm-starting quantum optimization" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="08_cvar_optimization.html" class="btn btn-neutral" title="Improving Variational Quantum Optimization using CVaR" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="08_cvar_optimization.html" class="btn btn-neutral" title="Mejora de la Optimización Cuántica Variacional mediante CVaR" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1102,9 +1102,9 @@ num qubits: 9, offset: 1417.5
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Application Classes for Optimization Problems</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
+<li><a class="reference internal" href="#Introducción">Introducción</a></li>
 <li><a class="reference internal" href="#Vertex-cover-problem">Vertex cover problem</a></li>
-<li><a class="reference internal" href="#Knapsack-problem">Knapsack problem</a></li>
+<li><a class="reference internal" href="#Problema-de-la-mochila-(knapsack)">Problema de la mochila (knapsack)</a></li>
 <li><a class="reference internal" href="#How-to-check-the-Hamiltonian">How to check the Hamiltonian</a></li>
 </ul>
 </li>
@@ -1128,7 +1128,7 @@ num qubits: 9, offset: 1417.5
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

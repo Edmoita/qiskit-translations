@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Max-Cut and Traveling Salesman Problem &mdash; Qiskit Optimization 0.3.0 belgelendirmesi</title>
+  <title>Max-Cut and Traveling Salesman Problem &mdash; Qiskit Optimization 0.2.1 belgelendirmesi</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="Dizin" href="../genindex.html" />
     <link rel="search" title="Arama" href="../search.html" />
     <link rel="next" title="Vehicle Routing" href="07_examples_vehicle_routing.html" />
-    <link rel="prev" title="ADMM Optimizer" href="05_admm_optimizer.html" /> 
+    <link rel="prev" title="ADMM Optimize edici" href="05_admm_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Optimizasyon Eğitimleri</a> &gt;</li>
         
       <li>Max-Cut and Traveling Salesman Problem</li>
     
@@ -480,70 +480,65 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>Bu sayfa, <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/06_examples_max_cut_and_tsp.ipynb">docs/tutorials/06_examples_max_cut_and_tsp.ipynb</a> sayfasından oluşturulmuştur.</p>
 </div>
 <div class="section" id="Max-Cut-and-Traveling-Salesman-Problem">
 <h1>Max-Cut and Traveling Salesman Problem<a class="headerlink" href="#Max-Cut-and-Traveling-Salesman-Problem" title="Bu başlık için kalıcı bağlantı">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Bu başlık için kalıcı bağlantı">¶</a></h2>
-<p>Many problems in quantitative fields such as finance and engineering are optimization problems. Optimization problems lie at the core of complex decision-making and definition of strategies.</p>
-<p>Optimization (or combinatorial optimization) means searching for an optimal solution in a finite or countably infinite set of potential solutions. Optimality is defined with respect to some criterion function, which is to be minimized or maximized. This is typically called cost function or objective function.</p>
-<p><strong>Typical optimization problems</strong></p>
-<p>Minimization: cost, distance, length of a traversal, weight, processing time, material, energy consumption, number of objects</p>
-<p>Maximization: profit, value, output, return, yield, utility, efficiency, capacity, number of objects</p>
-<p>We consider here max-cut problems of practical interest in many fields, and show how they can be mapped on quantum computers manually and how Qiskit’s optimization module supports this.</p>
-<div class="section" id="Weighted-Max-Cut">
-<h3>Weighted Max-Cut<a class="headerlink" href="#Weighted-Max-Cut" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>Max-Cut is an NP-complete problem, with applications in clustering, network science, and statistical physics. To grasp how practical applications are mapped into given Max-Cut instances, consider a system of many people that can interact and influence each other. Individuals can be represented by vertices of a graph, and their interactions seen as pairwise connections between vertices of the graph, or edges. With this representation in mind, it is easy to model typical marketing problems. For
-example, suppose that it is assumed that individuals will influence each other’s buying decisions, and knowledge is given about how strong they will influence each other. The influence can be modeled by weights assigned on each edge of the graph. It is possible then to predict the outcome of a marketing strategy in which products are offered for free to some individuals, and then ask which is the optimal subset of individuals that should get the free products, in order to maximize revenues.</p>
-<p>The formal definition of this problem is the following:</p>
-<p>Consider an <span class="math notranslate nohighlight">\(n\)</span>-node undirected graph <em>G = (V, E)</em> where <em>|V| = n</em> with edge weights <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span>, <span class="math notranslate nohighlight">\(w_{ij}=w_{ji}\)</span>, for <span class="math notranslate nohighlight">\((i, j)\in E\)</span>. A cut is defined as a partition of the original set V into two subsets. The cost function to be optimized is in this case the sum of weights of edges connecting points in the two different subsets, <em>crossing</em> the cut. By assigning <span class="math notranslate nohighlight">\(x_i=0\)</span> or <span class="math notranslate nohighlight">\(x_i=1\)</span> to each node <span class="math notranslate nohighlight">\(i\)</span>, one tries to maximize the global profit function (here
-and in the following summations run over indices 0,1,…n-1)</p>
+<p>Finans ve mühendislik gibi niceliksel alanlarda pek çok sorun optimizasyon sorunlarıdır. Optimizasyon sorunları karmaşık karar alma ve stratejilerin tanımlarının temelinde yatıyor.</p>
+<p>Optimizasyon (veya kombinatoryal optimizasyon), sonlu veya sayılabilir sonsuz potansiyel çözümler kümesinde en uygun çözümü aramak anlamına gelir. Optimallik, minimize veya maksimize edilecek olan bazı kriter fonksiyonuna göre tanımlanır. Buna genellikle maliyet fonksiyonu veya amaç fonksiyonu denir.</p>
+<p><strong>Tipik optimizasyon sorunları</strong></p>
+<p>Minimizasyon: maliyet, mesafe, geçiş uzunluğu, ağırlık, işlem süresi, malzeme, enerji tüketimi, nesne sayısı</p>
+<p>Maksimizasyon: kar, değer, çıktı, getiri, verim, fayda, verimlilik, kapasite, nesne sayısı</p>
+<p>Burada birçok alanda pratik ilgi çeken maksimum kesim problemlerini ele alıyoruz ve bunların kuantum bilgisayarlarda manuel olarak nasıl haritalanabileceğini ve Qiskit’in optimizasyon modülünün bunu nasıl desteklediğini gösteriyoruz.</p>
+<div class="section" id="Ağırlıklı-Maksimum-Kesim">
+<h3>Ağırlıklı Maksimum Kesim<a class="headerlink" href="#Ağırlıklı-Maksimum-Kesim" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Max-Cut, kümeleme, ağ bilimi ve istatistiksel fizikteki uygulamalarla NP-tam bir problemdir. Pratik uygulamaların belirli Max-Cut örnekleriyle nasıl eşleştirildiğini anlamak için, etkileşimde bulunabilen ve birbirini etkileyebilen birçok insandan oluşan bir sistem düşünün. Bireyler, bir grafiğin köşeleri ile temsil edilebilir ve etkileşimleri, grafiğin köşeleri veya kenarları arasındaki ikili bağlantılar olarak görülebilir. Bu temsili akılda tutarak, tipik pazarlama problemlerini modellemek kolaydır. Örneğin, bireylerin birbirlerinin satın alma kararlarını etkileyeceği varsayıldığını ve birbirlerini ne kadar güçlü etkileyeceği hakkında bilgi verildiğini varsayalım. Etki, grafiğin her bir kenarına atanan ağırlıklarla modellenebilir. Bu durumda, ürünlerin bazı bireylere ücretsiz olarak sunulduğu bir pazarlama stratejisinin sonucunu tahmin etmek ve daha sonra gelirleri maksimize etmek için ücretsiz ürünleri alması gereken bireylerin en uygun alt kümesinin hangisi olduğunu sormak mümkündür.</p>
+<p>Bu sorunun düzgün tanımı şudur:</p>
+<p>Bir <span class="math notranslate nohighlight">\(n\)</span>-node yönsüz grafiğini düşünün <em>G = (V, E)</em> burada <em>|V| = n</em> kenar ağırlıkları ile <span class="math notranslate nohighlight">\(w_{ij}&gt;0\)</span>, <span class="math notranslate nohighlight">\(w_{ij}=w_{ji}\)</span>, for <span class="math notranslate nohighlight">\((i, j)\in E\)</span>. Bir kesim, orijinal V kümesinin iki alt kümeye bölünmesi olarak tanımlanır. Bu durumda optimize edilecek maliyet fonksiyonu, iki farklı alt kümedeki noktaları birleştiren kenarların ağırlıklarının toplamıdır, kesimi <em>keser</em>. Her bir <span class="math notranslate nohighlight">\(i düğümüne :math:\)</span> veya <span class="math notranslate nohighlight">\(x_i=1\)</span> atayarak, kişi global kar fonksiyonunu maksimize etmeye çalışır (burada ve aşağıdaki toplamlarda 0,1 indeksleri üzerinden geçilir) ,…n-1)</p>
 <div class="math notranslate nohighlight">
 \[\tilde{C}(\textbf{x}) = \sum_{i,j} w_{ij} x_i (1-x_j).\]</div>
-<p>In our simple marketing model, <span class="math notranslate nohighlight">\(w_{ij}\)</span> represents the probability that the person <span class="math notranslate nohighlight">\(j\)</span> will buy a product after <span class="math notranslate nohighlight">\(i\)</span> gets a free one. Note that the weights <span class="math notranslate nohighlight">\(w_{ij}\)</span> can in principle be greater than <span class="math notranslate nohighlight">\(1\)</span> (or even negative), corresponding to the case where the individual <span class="math notranslate nohighlight">\(j\)</span> will buy more than one product. Maximizing the total buying probability corresponds to maximizing the total future revenues. In the case where the profit probability will be greater than the
-cost of the initial free samples, the strategy is a convenient one. An extension to this model has the nodes themselves carry weights, which can be regarded, in our marketing model, as the likelihood that a person granted with a free sample of the product will buy it again in the future. With this additional information in our model, the objective function to maximize becomes</p>
+<p>Basit pazarlama modelimizde, <span class="math notranslate nohighlight">\(w_{ij}\)</span>, <span class="math notranslate nohighlight">\(j\)</span> adlı kişinin <span class="math notranslate nohighlight">\(i\)</span> bedava bir ürün aldıktan sonra bir ürün satın alma olasılığını temsil eder. <span class="math notranslate nohighlight">\(w_{ij}\)</span> ağırlıklarının prensipte <span class="math notranslate nohighlight">\(1\)</span> (hatta negatif) değerinden daha büyük olabileceğini ve bireyin <span class="math notranslate nohighlight">\(j\)</span> birden fazla ürün satın alacağı duruma tekabül ettiğini unutmayın.Toplam satın alma olasılığını maksimize etmek, gelecekteki toplam gelirleri maksimize etmeye karşılık gelir. Kar olasılığının ilk ücretsiz örneklerin maliyetinden daha büyük olması durumunda, strateji uygun bir stratejidir. Bu modelin bir uzantısı, pazarlama modelimizde, ürünün ücretsiz bir örneğini verilen bir kişinin gelecekte tekrar satın alma olasılığı olarak kabul edilebilecek düğümlerin kendilerinin ağırlık taşımasına sahiptir. Modelimizdeki bu ek bilgilerle,maksimize etmek için amaç fonksiyonu olur</p>
 <div class="math notranslate nohighlight">
 \[C(\textbf{x}) = \sum_{i,j} w_{ij} x_i (1-x_j)+\sum_i w_i x_i.\]</div>
-<p>In order to find a solution to this problem on a quantum computer, one needs first to map it to an Ising Hamiltonian. This can be done with the assignment <span class="math notranslate nohighlight">\(x_i\rightarrow (1-Z_i)/2\)</span>, where <span class="math notranslate nohighlight">\(Z_i\)</span> is the Pauli Z operator that has eigenvalues <span class="math notranslate nohighlight">\(\pm 1\)</span>. Doing this we find that</p>
+<p>Bir kuantum bilgisayarda bu probleme bir çözüm bulmak için, önce onu bir Ising Hamiltonyeni ile eşleştirmek gerekir. Bu, <span class="math notranslate nohighlight">\(x_i\rightarrow (1-Z_i)/2\)</span> atamasıyla yapılabilir, burada <span class="math notranslate nohighlight">\(Z_i\)</span>, özdeğerleri <span class="math notranslate nohighlight">\(\pm 1\)</span> olan Pauli Z operatörüdür. Bunu yaparak şunu buluyoruz</p>
 <div class="math notranslate nohighlight">
 \[C(\textbf{Z}) = \sum_{i,j} \frac{w_{ij}}{4} (1-Z_i)(1+Z_j) + \sum_i \frac{w_i}{2} (1-Z_i) = -\frac{1}{2}\left( \sum_{i&lt;j} w_{ij} Z_i Z_j +\sum_i w_i Z_i\right)+\mathrm{const},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathrm{const} = \sum_{i&lt;j}w_{ij}/2+\sum_i w_i/2\)</span>. In other terms, the weighted Max-Cut problem is equivalent to minimizing the Ising Hamiltonian</p>
+<p>:math:` mathm{const} = sum_ { i &lt;j } w_{ij}/2 + sum_i w_i/i/2 <a href="#id1"><span class="problematic" id="id2">`</span></a>. Diğer bir açıdan, ağırlıklı Maksimum Kesim sorunu Ising Hamiltonyeni minimuma indirmekle eşdeğerdir</p>
 <div class="math notranslate nohighlight">
 \[H = \sum_i w_i Z_i + \sum_{i&lt;j} w_{ij} Z_iZ_j.\]</div>
-<p>Qiskit’s optimization module can generate the Ising Hamiltonian for the first profit function <span class="math notranslate nohighlight">\(\tilde{C}\)</span>. To this extent, function <span class="math notranslate nohighlight">\(\tilde{C}\)</span> can be modeled as a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>, which provides the <code class="docutils literal notranslate"><span class="pre">to_ising()</span></code> method.</p>
+<p>Qiskit’in optimizasyon modülü, ilk kâr işlevi <span class="math notranslate nohighlight">\(\tilde{C}\)</span> için Ising Hamiltonian’ı oluşturabilir. Bu kapsamda, <span class="math notranslate nohighlight">\(\tilde{C}\)</span> işlevi, <code class="docutils literal notranslate"><span class="pre">to_ising()</span></code> yöntemini sağlayan bir <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> olarak modellenebilir.</p>
 </div>
-<div class="section" id="Approximate-Universal-Quantum-Computing-for-Optimization-Problems">
-<h3>Approximate Universal Quantum Computing for Optimization Problems<a class="headerlink" href="#Approximate-Universal-Quantum-Computing-for-Optimization-Problems" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>There has been a considerable amount of interest in recent times about the use of quantum computers to find a solution to combinatorial optimization problems. It is important to say that, given the classical nature of combinatorial problems, exponential speedup in using quantum computers compared to the best classical algorithms is not guaranteed. However, due to the nature and importance of the target problems, it is worth investigating heuristic approaches on a quantum computer that could
-indeed speed up some problem instances. Here we demonstrate an approach that is based on the <em>Quantum Approximate Optimization Algorithm</em> (QAOA) by Farhi, Goldstone, and Gutmann (2014). We frame the algorithm in the context of <em>approximate quantum computing</em>, given its heuristic nature.</p>
-<p>The algorithm works as follows:</p>
+<div class="section" id="Optimizasyon-Problemleri-için-Yaklaşık-Evrensel-Kuantum-Programlama">
+<h3>Optimizasyon Problemleri için Yaklaşık Evrensel Kuantum Programlama<a class="headerlink" href="#Optimizasyon-Problemleri-için-Yaklaşık-Evrensel-Kuantum-Programlama" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Kombinatoryal optimizasyon problemlerine bir çözüm bulmak için kuantum bilgisayarların kullanımı hakkında son zamanlarda önemli miktarda ilgi artışı olmuştur. Kombinatoryal problemlerin klasik doğası göz önüne alındığında, kuantum bilgisayarların kullanımında en iyi klasik algoritmalara kıyasla üstel hızlanmanın garanti edilmediğini söylemek önemlidir. Ancak, hedef problemlerin doğası ve önemi nedeniyle, bazı problem örneklerini gerçekten hızlandırabilecek bir kuantum bilgisayarda buluşsal yaklaşımları araştırmaya değer. Burada Farhi, Goldstone ve Gutmann’ın (2014) <em>Kuantum Yaklaşık Optimizasyon Algoritmasına</em> (QAOA) dayanan bir yaklaşımı gösteriyoruz. Sezgisel doğası göz önüne alındığında, algoritmayı <em>yaklaşık kuantum hesaplama</em> bağlamında çerçeveliyoruz.</p>
+<p>Algoritma şu şekilde çalışır:</p>
 <ol class="arabic">
-<li><p>Choose the <span class="math notranslate nohighlight">\(w_i\)</span> and <span class="math notranslate nohighlight">\(w_{ij}\)</span> in the target Ising problem. In principle, even higher powers of Z are allowed.</p></li>
-<li><p>Choose the depth of the quantum circuit <span class="math notranslate nohighlight">\(m\)</span>. Note that the depth can be modified adaptively.</p></li>
-<li><p>Choose a set of controls <span class="math notranslate nohighlight">\(\theta\)</span> and make a trial function <span class="math notranslate nohighlight">\(|\psi(\boldsymbol\theta)\rangle\)</span>, built using a quantum circuit made of C-Phase gates and single-qubit Y rotations, parameterized by the components of <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span>.</p></li>
-<li><p>Evaluate</p>
+<li><p>Hedef Ising probleminde <span class="math notranslate nohighlight">\(w_i\)</span> ve <span class="math notranslate nohighlight">\(w_{ij}\)</span> değerini seçin. Prensipte, Z ‘nin daha da yüksek enerjilerine bile izin verilir.</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> kuantum devresi yoğunluğunu seçin. Yoğunluğun uyarlanabilir olarak değiştirilebileceğini unutmayın.</p></li>
+<li><p>Bir dizi kontrol seçin <span class="math notranslate nohighlight">\(\theta\)</span> ve bir deneme işlevi yapın <span class="math notranslate nohighlight">\(|\psi(\boldsymbol\theta)\rangle\)</span>, C-Phase kapıları ve tek kübit Y’den oluşan bir kuantum devresi kullanılarak oluşturulmuş döndürmeler, <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> bileşenleri tarafından parametrelendirildi.</p></li>
+<li><p>Değerlendirmek</p>
 <div class="math notranslate nohighlight">
 \[C(\boldsymbol\theta) = \langle\psi(\boldsymbol\theta)~|H|~\psi(\boldsymbol\theta)\rangle = \sum_i w_i \langle\psi(\boldsymbol\theta)~|Z_i|~\psi(\boldsymbol\theta)\rangle+ \sum_{i&lt;j} w_{ij} \langle\psi(\boldsymbol\theta)~|Z_iZ_j|~\psi(\boldsymbol\theta)\rangle\]</div>
-<p>by sampling the outcome of the circuit in the Z-basis and adding the expectation values of the individual Ising terms together. In general, different control points around <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> have to be estimated, depending on the classical optimizer chosen.</p>
+<p>z temelindeki devrenin sonucunu örnekleyerek ve Bireysel Ising terimlerinin beklenti değerlerini bir arada ekleyerek. Genel olarak, seçilen klasik optimize ediciye bağlı olarak :math:` boldsymbolttheta ` çevresinde farklı denetim noktaları tahmin edilmelidir.</p>
 </li>
 <li><p>Use a classical optimizer to choose a new set of controls.</p></li>
 <li><p>Continue until <span class="math notranslate nohighlight">\(C(\boldsymbol\theta)\)</span> reaches a minimum, close enough to the solution <span class="math notranslate nohighlight">\(\boldsymbol\theta^*\)</span>.</p></li>
-<li><p>Use the last <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> to generate a final set of samples from the distribution <span class="math notranslate nohighlight">\(|\langle z_i~|\psi(\boldsymbol\theta)\rangle|^2\;\forall i\)</span> to obtain the answer.</p></li>
+<li><p>Cevabı elde etmek için <span class="math notranslate nohighlight">\(|\langle z_i~|\psi(\boldsymbol\theta)\rangle|^2\;\forall i\)</span> dağılımından son bir örnek kümesi oluşturmak için son <span class="math notranslate nohighlight">\(\boldsymbol\theta\)</span> öğesini kullanın.</p></li>
 </ol>
-<p>It is our belief the difficulty of finding good heuristic algorithms will come down to the choice of an appropriate trial wavefunction. For example, one could consider a trial function whose entanglement best aligns with the target problem, or simply make the amount of entanglement a variable. In this tutorial, we will consider a simple trial function of the form</p>
+<p>İyi sezgisel algoritmalar bulmanın zorluğunun, uygun bir deneme dalga fonksiyonunun seçimine bağlı olacağına inanıyoruz. Örneğin, dolanıklığı hedef problemle en iyi şekilde örtüşen bir deneme işlevi düşünülebilir veya yalnızca dolaşıklık miktarını bir değişken yapabilir. Bu derste, formun basit bir deneme fonksiyonunu ele alacağız</p>
 <div class="math notranslate nohighlight">
 \[|\psi(\theta)\rangle  = [U_\mathrm{single}(\boldsymbol\theta) U_\mathrm{entangler}]^m |+\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span> is a collection of C-Phase gates (fully entangling gates), and <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, where <span class="math notranslate nohighlight">\(n\)</span> is the number of qubits and <span class="math notranslate nohighlight">\(m\)</span> is the depth of the quantum circuit. The motivation for this choice is that for these classical problems this choice allows us to search over the space of quantum states that have only real coefficients, still exploiting the entanglement to potentially converge faster to the
-solution.</p>
-<p>One advantage of using this sampling method compared to adiabatic approaches is that the target Ising Hamiltonian does not have to be implemented directly on hardware, allowing this algorithm not to be limited to the connectivity of the device. Furthermore, higher-order terms in the cost function, such as <span class="math notranslate nohighlight">\(Z_iZ_jZ_k\)</span>, can also be sampled efficiently, whereas in adiabatic or annealing approaches they are generally impractical to deal with.</p>
-<p>References: - A. Lucas, Frontiers in Physics 2, 5 (2014) - E. Farhi, J. Goldstone, S. Gutmann e-print arXiv 1411.4028 (2014) - D. Wecker, M. B. Hastings, M. Troyer Phys. Rev. A 94, 022309 (2016) - E. Farhi, J. Goldstone, S. Gutmann, H. Neven e-print arXiv 1703.06199 (2017)</p>
+<p>burada <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>, C-Phase kapılarının (tamamen dolaşan kapılar) bir koleksiyonudur ve <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^ n Y(\theta_{i})\)</span>, burada <span class="math notranslate nohighlight">\(n\)</span> kübit sayısıdır ve <span class="math notranslate nohighlight">\(m\)</span> kuantum devresinin derinliğidir. Bu seçimin motivasyonu, bu klasik problemler için bu seçimin, yalnızca gerçek katsayıları olan kuantum durumlarının uzayını araştırmamıza izin vermesidir, yine de potansiyel olarak çözüme daha hızlı yaklaşmak için dolanıklıktan yararlanır.</p>
+<p>Adyabatik yaklaşımlara kıyasla bu örnekleme yöntemini kullanmanın bir avantajı, hedef Ising Hamiltonian’ın doğrudan donanım üzerinde uygulanması gerekmemesi ve bu algoritmanın cihazın bağlanabilirliği ile sınırlı olmamasıdır. Ayrıca, maliyet fonksiyonundaki <span class="math notranslate nohighlight">\(Z_iZ_jZ_k\)</span> gibi daha yüksek dereceli terimler de verimli bir şekilde örneklenebilirken, adyabatik veya tavlama yaklaşımlarında bunlarla uğraşmak genellikle pratik değildir.</p>
+<p>Referanslar: - A. Lucas, Frontiers in Physics 2, 5 (2014) - E. Farhi, J. Goldstone, S. Gutmann e-print arXiv 1411.4028 (2014) - D. Wecker, M. B. Hastings, M. Troyer Phys. Rev. A 94, 022309 (2016) - E. Farhi, J. Goldstone, S. Gutmann, H. Neven e-print arXiv 1703.06199 (2017)</p>
 </div>
-<div class="section" id="Application-classes">
-<h3>Application classes<a class="headerlink" href="#Application-classes" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
-<p>We use the application classes for the max-cut problem and the traveling salesman problem in this page. There are application classes for other optimization problems available as well. See <a class="reference internal" href="09_application_classes.html"><span class="doc">Application Classes for Optimization Problems</span></a> for details.</p>
+<div class="section" id="Uygulama-sınıfları">
+<h3>Uygulama sınıfları<a class="headerlink" href="#Uygulama-sınıfları" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<p>Bu sayfada maksimum kesim problemi ve gezgin satıcı problemi için uygulama sınıflarını kullanıyoruz. Diğer optimizasyon problemleri için de uygulama sınıfları mevcuttur. Ayrıntılar için <a class="reference internal" href="09_application_classes.html"><span class="doc">Application Classes for Optimization Problems</span></a> bölümüne bakınız.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -973,8 +968,8 @@ distance
 <div class="output_area docutils container">
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_22_1.svg" /></div>
 </div>
-<div class="section" id="id1">
-<h3>Brute force approach<a class="headerlink" href="#id1" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<div class="section" id="id2">
+<h3>Brute force approach<a class="headerlink" href="#id2" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1034,8 +1029,8 @@ Best order from brute force = (0, 1, 2) with total distance = 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_24_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Mapping to the Ising problem<a class="headerlink" href="#id2" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<div class="section" id="id3">
+<h3>Mapping to the Ising problem<a class="headerlink" href="#id3" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1177,8 +1172,8 @@ status: SUCCESS
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id3" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<div class="section" id="id4">
+<h3>Checking that the full Hamiltonian gives the right cost<a class="headerlink" href="#id4" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -1218,8 +1213,8 @@ solution objective: 202.0
 <img alt="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" src="../_images/tutorials_06_examples_max_cut_and_tsp_30_1.svg" /></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h3>Running it on quantum computer<a class="headerlink" href="#id4" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
+<div class="section" id="id5">
+<h3>Running it on quantum computer<a class="headerlink" href="#id5" title="Bu başlık için kalıcı bağlantı">¶</a></h3>
 <p>We run the optimization routine using a feedback loop with a quantum computer that uses trial functions built with Y single-qubit rotations, <span class="math notranslate nohighlight">\(U_\mathrm{single}(\theta) = \prod_{i=1}^n Y(\theta_{i})\)</span>, and entangler steps <span class="math notranslate nohighlight">\(U_\mathrm{entangler}\)</span>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1372,7 +1367,7 @@ solution objective: 202.0
         <a href="07_examples_vehicle_routing.html" class="btn btn-neutral float-right" title="Vehicle Routing" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="05_admm_optimizer.html" class="btn btn-neutral" title="ADMM Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="05_admm_optimizer.html" class="btn btn-neutral" title="ADMM Optimize edici" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -1406,9 +1401,9 @@ solution objective: 202.0
               <ul>
 <li><a class="reference internal" href="#">Max-Cut and Traveling Salesman Problem</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#Weighted-Max-Cut">Weighted Max-Cut</a></li>
-<li><a class="reference internal" href="#Approximate-Universal-Quantum-Computing-for-Optimization-Problems">Approximate Universal Quantum Computing for Optimization Problems</a></li>
-<li><a class="reference internal" href="#Application-classes">Application classes</a></li>
+<li><a class="reference internal" href="#Ağırlıklı-Maksimum-Kesim">Ağırlıklı Maksimum Kesim</a></li>
+<li><a class="reference internal" href="#Optimizasyon-Problemleri-için-Yaklaşık-Evrensel-Kuantum-Programlama">Optimizasyon Problemleri için Yaklaşık Evrensel Kuantum Programlama</a></li>
+<li><a class="reference internal" href="#Uygulama-sınıfları">Uygulama sınıfları</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Max-Cut-problem">Max-Cut problem</a><ul>
@@ -1419,10 +1414,10 @@ solution objective: 202.0
 </ul>
 </li>
 <li><a class="reference internal" href="#Traveling-Salesman-Problem">Traveling Salesman Problem</a><ul>
-<li><a class="reference internal" href="#id1">Brute force approach</a></li>
-<li><a class="reference internal" href="#id2">Mapping to the Ising problem</a></li>
-<li><a class="reference internal" href="#id3">Checking that the full Hamiltonian gives the right cost</a></li>
-<li><a class="reference internal" href="#id4">Running it on quantum computer</a></li>
+<li><a class="reference internal" href="#id2">Brute force approach</a></li>
+<li><a class="reference internal" href="#id3">Mapping to the Ising problem</a></li>
+<li><a class="reference internal" href="#id4">Checking that the full Hamiltonian gives the right cost</a></li>
+<li><a class="reference internal" href="#id5">Running it on quantum computer</a></li>
 </ul>
 </li>
 </ul>
@@ -1447,7 +1442,7 @@ solution objective: 202.0
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

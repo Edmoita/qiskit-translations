@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit_optimization.runtime.qaoa_program &mdash; Qiskit Optimization 0.3.0 documentation</title>
+  <title>qiskit_optimization.runtime.qaoa_program &mdash; Qiskit Optimization 0.2.1 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+    <link rel="search" title="Tafuta" href="../../../search.html" /> 
 
   
   <script src="../../../_static/js/modernizr.min.js"></script>
@@ -93,7 +93,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Lugha</dt>
       
         <dd><a class="version" href="/documentation/optimization/_modules/qiskit_optimization/runtime/qaoa_program.html">English</a></dd>
       
@@ -125,7 +125,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -247,6 +247,7 @@
 
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qiskit.algorithms</span> <span class="kn">import</span> <span class="n">MinimumEigensolverResult</span>
+<span class="kn">from</span> <span class="nn">qiskit.algorithms.optimizers</span> <span class="kn">import</span> <span class="n">Optimizer</span>
 <span class="kn">from</span> <span class="nn">qiskit.circuit.library</span> <span class="kn">import</span> <span class="n">QAOAAnsatz</span>
 <span class="kn">from</span> <span class="nn">qiskit.opflow</span> <span class="kn">import</span> <span class="n">OperatorBase</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers</span> <span class="kn">import</span> <span class="n">Provider</span>
@@ -261,7 +262,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">optimizer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">optimizer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Optimizer</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">reps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">initial_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QuantumCircuit</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">mixer</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">OperatorBase</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -275,11 +276,11 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            optimizer: A dictionary specifying a classical optimizer.</span>
-<span class="sd">                Currently only SPSA and QN-SPSA are supported. Per default, SPSA is used.</span>
-<span class="sd">                The dictionary must contain a key ``name`` for the name of the optimizer and may</span>
-<span class="sd">                contain additional keys for the settings.</span>
-<span class="sd">                E.g. ``{&#39;name&#39;: &#39;SPSA&#39;, &#39;maxiter&#39;: 100}``.</span>
+<span class="sd">            optimizer: An optimizer or dictionary specifying a classical optimizer.</span>
+<span class="sd">                If a dictionary, only SPSA and QN-SPSA are supported. The dictionary must contain a</span>
+<span class="sd">                key ``name`` for the name of the optimizer and may contain additional keys for the</span>
+<span class="sd">                settings. E.g. ``{&#39;name&#39;: &#39;SPSA&#39;, &#39;maxiter&#39;: 100}``.</span>
+<span class="sd">                Per default, SPSA is used.</span>
 <span class="sd">            reps: the integer parameter :math:`p` as specified in https://arxiv.org/abs/1411.4028,</span>
 <span class="sd">                Has a minimum valid value of 1.</span>
 <span class="sd">            initial_state: An optional initial state to prepend the QAOA circuit with</span>

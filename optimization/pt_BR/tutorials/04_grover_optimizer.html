@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Grover Optimizer &mdash; documentação Qiskit Optimization 0.3.0</title>
+  <title>Otimizador de Grover &mdash; documentação Qiskit Optimization 0.2.1</title>
   
 
   
@@ -36,9 +36,9 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Índice" href="../genindex.html" />
-    <link rel="search" title="Buscar" href="../search.html" />
-    <link rel="next" title="ADMM Optimizer" href="05_admm_optimizer.html" />
-    <link rel="prev" title="Minimum Eigen Optimizer" href="03_minimum_eigen_optimizer.html" /> 
+    <link rel="search" title="Pesquisar" href="../search.html" />
+    <link rel="next" title="Otimizador ADMM" href="05_admm_optimizer.html" />
+    <link rel="prev" title="Otimizador Eigen mínimo" href="03_minimum_eigen_optimizer.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Idiomas</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/04_grover_optimizer.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Primeiros Passos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">Referências de API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutoriais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Notas da Versão</a></li>
 </ul>
 
             
@@ -202,7 +202,7 @@
         
           <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
         
-      <li>Grover Optimizer</li>
+      <li>Otimizador de Grover</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -480,42 +480,40 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/04_grover_optimizer.ipynb">docs/tutorials/04_grover_optimizer.ipynb</a>.</p>
 </div>
-<div class="section" id="Grover-Optimizer">
-<h1>Grover Optimizer<a class="headerlink" href="#Grover-Optimizer" title="Link permanente para este título">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Link permanente para este título">¶</a></h2>
-<p>Grover Adaptive Search (GAS) has been explored as a possible solution for combinatorial optimization problems, alongside variational algorithms such as Variational Quantum Eigensolver (VQE) and Quantum Approximate Optimization Algorithm (QAOA). The algorithm iteratively applies Grover Search to find the optimum value of an objective function, by using the best-known value from the previous run as a threshold. The adaptive oracle used in GAS recognizes all values above or below the current
-threshold (for max and min respectively), decreasing the size of the search space every iteration the threshold is updated, until an optimum is found.</p>
-<p>In this notebook we will explore each component of the <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code>, which utilizes the techniques described in GAS, by minimizing a Quadratic Unconstrained Binary Optimization (QUBO) problem, as described in [1]</p>
-<div class="section" id="References">
-<h3>References<a class="headerlink" href="#References" title="Link permanente para este título">¶</a></h3>
+<div class="section" id="Otimizador-de-Grover">
+<h1>Otimizador de Grover<a class="headerlink" href="#Otimizador-de-Grover" title="Link permanente para este título">¶</a></h1>
+<div class="section" id="Introdução">
+<h2>Introdução<a class="headerlink" href="#Introdução" title="Link permanente para este título">¶</a></h2>
+<p>O GAS (Grover Adaptive Search) tem sido explorado como uma possível solução para problemas de otimização combinatória, ao lado de algoritmos variacionais como o VQE (Variational Quantum Eigensolver) e o QAOA (Quantum Aproximaximate Optimization Algorithm). O algoritmo aplica iterativamente Grover Search para encontrar o valor ótimo de uma função objetivo, ao utilizar o melhor valor conhecido da execução anterior como um limitante. O oráculo adaptado usado no GAS reconhece todos os valores acima ou abaixo do limitante atual (para máximo e mínimo respectivamente), diminuindo o tamanho do espaço de busca a cada iteração o limitante é atualizado, até que seja encontrado um valor ótimo.</p>
+<p>Neste notebook exploraremos cada componente do ` ` GroverOptimizer ` <a href="#id1"><span class="problematic" id="id2">`</span></a>, que utiliza as técnicas descritas no GAS, minimizando um problema do QUBO (Quadratic Unconstrained Binary Optimization), conforme descrito em [1]</p>
+<div class="section" id="Referências">
+<h3>Referências<a class="headerlink" href="#Referências" title="Link permanente para este título">¶</a></h3>
 <p>[1] <a class="reference external" href="https://arxiv.org/abs/1912.04088">A. Gilliam, S. Woerner, C. Gonciulea, Grover Adaptive Search for Constrained Polynomial Binary Optimization, arXiv preprint arXiv:1912.04088 (2019).</a></p>
 </div>
 </div>
-<div class="section" id="Grover-Adaptive-Search">
-<h2>Grover Adaptive Search<a class="headerlink" href="#Grover-Adaptive-Search" title="Link permanente para este título">¶</a></h2>
-<p>Grover Search, the core element of GAS, needs three ingredients:</p>
+<div class="section" id="Busca-Adaptativa-de-Grover">
+<h2>Busca Adaptativa de Grover<a class="headerlink" href="#Busca-Adaptativa-de-Grover" title="Link permanente para este título">¶</a></h2>
+<p>A busca de Grover, elemento principal do GAS, precisa de três ingredientes:</p>
 <ol class="arabic simple">
-<li><p>A state preparation operator <span class="math notranslate nohighlight">\(A\)</span> to construct a superposition of all states in the search space.</p></li>
-<li><p>An oracle operator <span class="math notranslate nohighlight">\(O\)</span>, that recognizes the states of interest and multiplies their amplitudes by -1.</p></li>
-<li><p>The Grover diffusion operator <span class="math notranslate nohighlight">\(D\)</span>, that multiplies the amplitude of the <span class="math notranslate nohighlight">\(|0\rangle_n\)</span> state by -1.</p></li>
+<li><p>Um operador de preparação de estado <span class="math notranslate nohighlight">\(A\)</span> para construir uma superposição de todos os estados no espaço de busca.</p></li>
+<li><p>Operador do oráculo <span class="math notranslate nohighlight">\(O\)</span>, que reconhece os estados de interesse e multiplica suas amplitudes por -1.</p></li>
+<li><p>O operador de difusão de Grover <span class="math notranslate nohighlight">\(D\)</span>, que multiplica a amplitude do estado de <span class="math notranslate nohighlight">\(|0\rangle_n\)</span>, por -1.</p></li>
 </ol>
-<p>While implementations of GAS vary around the specific use case, the general framework still loosely follows the steps described below.</p>
-<div><p><img alt="9954cb28683b4efe965929f1dcea6f55" class="no-scaled-link" src="../_images/GAS-Algorithm.png" style="width: 400px;" /></p>
-</div><p><code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> uses <code class="docutils literal notranslate"><span class="pre">QuadraticProgramToNegativeValueOracle</span></code> to construct <span class="math notranslate nohighlight">\(A_y\)</span> such that it prepares a <span class="math notranslate nohighlight">\(n\)</span>-qubit register to represent the equal superposition of all <span class="math notranslate nohighlight">\(|x\rangle_n\)</span> and a <span class="math notranslate nohighlight">\(m\)</span>-qubit register to (approximately) represent the corresponding <span class="math notranslate nohighlight">\(|Q(x)-y\rangle_m\)</span>. Then, all states with <span class="math notranslate nohighlight">\((Q(x) - y)\)</span> negative should be flagged by <span class="math notranslate nohighlight">\(O_y\)</span>. Note that in the implementation discussed, the oracle operator is actually independent of <span class="math notranslate nohighlight">\(y\)</span>, but
-this is not a requirement. For clarity, we will refer to the oracle as <span class="math notranslate nohighlight">\(O\)</span> when the oracle is independent of <span class="math notranslate nohighlight">\(y\)</span>.</p>
-<p>Put formally, <code class="docutils literal notranslate"><span class="pre">QuadraticProgramToNegativeValueOracle</span></code> constructs an <span class="math notranslate nohighlight">\(A_y\)</span> and <span class="math notranslate nohighlight">\(O\)</span> such that:</p>
-<div><p><img alt="aaad91de939b4f5c85b543232b8d1f49" class="no-scaled-link" src="../_images/a-o-dfn.png" style="width: 400px;" /></p>
-</div><p>where <span class="math notranslate nohighlight">\(|x\rangle\)</span> is the binary encoding of the integer <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>At each iteration in which the threshold <span class="math notranslate nohighlight">\(y\)</span> is updated, we adapt <span class="math notranslate nohighlight">\(A_y\)</span> such that the function values are shifted up or down (for minimum and maximum respectively) by <span class="math notranslate nohighlight">\(y\)</span>. For example, in the context of finding the minimum, as the value of <span class="math notranslate nohighlight">\(y\)</span> decreases, the search space (negative values) also decreases, until only the minimum value remains. A concrete example will be explored in the next section.</p>
+<p>Enquanto as implementações de GAS variam em torno de um caso de uso específico, o framework geral ainda segue livremente os passos descritos abaixo.</p>
+<div><p><img alt="c9c3425a4e5742d39ab261d85625d89c" class="no-scaled-link" src="../_images/GAS-Algorithm.png" style="width: 400px;" /></p>
+</div><p><code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> usa <code class="docutils literal notranslate"><span class="pre">QuadraticProgramToNegativeValueOracle</span></code> para construir <span class="math notranslate nohighlight">\(A_y\)</span> tal que ele prepara um registo de <span class="math notranslate nohighlight">\(n\)</span>-qubit para representar a superposição igual de todos os <span class="math notranslate nohighlight">\(|x\rangle_n\)</span> e um registo de <span class="math notranslate nohighlight">\(m\)</span>-qubit (aproximadamente) que representa o correspondente <span class="math notranslate nohighlight">\(|Q(x)-y\rangle_m\)</span>. Em seguida, todos os estados com <span class="math notranslate nohighlight">\((Q (x)-y)\)</span> negativos devem ser sinalizados por <span class="math notranslate nohighlight">\(O_y\)</span>. Observe que na implementação discutida, o oráculo operador é efetivamente independente de <span class="math notranslate nohighlight">\(y\)</span>, mas este não é um requisito. Para a clareza, nos referiremos ao oráculo como <span class="math notranslate nohighlight">\(O\)</span> quando o oráculo for independente de <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Formalmente, <code class="docutils literal notranslate"><span class="pre">QuadraticProgramToNegativeValueOracle</span></code> constrói um <span class="math notranslate nohighlight">\(A_y\)</span> e <span class="math notranslate nohighlight">\(O\)</span> tal que:</p>
+<div><p><img alt="185993d124e644aa82fbe88f33d1af48" class="no-scaled-link" src="../_images/a-o-dfn.png" style="width: 400px;" /></p>
+</div><p>onde :math:` <a href="#id1"><span class="problematic" id="id2">|</span></a>xrangle` é a codificação binária do número inteiro :math:` x <a href="#id3"><span class="problematic" id="id4">`</span></a>.</p>
+<p>A cada iteração em que o limitante <span class="math notranslate nohighlight">\(y\)</span> é atualizado, adaptamos <span class="math notranslate nohighlight">\(A_y\)</span> tal que os valores da função são deslocados para cima ou para baixo (para mínimos e máximos, respectivamente) por <span class="math notranslate nohighlight">\(y\)</span>. Por exemplo, no problema de encontrar o mínimo, como o valor de <span class="math notranslate nohighlight">\(y\)</span> diminui, o espaço de busca (valores negativos) também diminui, até que apenas o valor mínimo permaneça. Um exemplo concreto será explorado na próxima seção.</p>
 </div>
-<div class="section" id="Find-the-Minimum-of-a-QUBO-Problem-using-GroverOptimizer">
-<h2>Find the Minimum of a QUBO Problem using GroverOptimizer<a class="headerlink" href="#Find-the-Minimum-of-a-QUBO-Problem-using-GroverOptimizer" title="Link permanente para este título">¶</a></h2>
-<p>The following is a toy example of a minimization problem.</p>
+<div class="section" id="Encontre-o-Mínimo-de-um-Problema-QUBO-usando-o-otimizador-de-Grover">
+<h2>Encontre o Mínimo de um Problema QUBO usando o otimizador de Grover<a class="headerlink" href="#Encontre-o-Mínimo-de-um-Problema-QUBO-usando-o-otimizador-de-Grover" title="Link permanente para este título">¶</a></h2>
+<p>A seguir, um exemplo simples de um problema de minimização.</p>
 <p><span class="math">\begin{eqnarray}
 \min_{x \in \{0, 1\}^3} -2x_1x_3 - x_2x_3 - 1x_1 + 2x_2 - 3x_3.
 \end{eqnarray}</span></p>
@@ -575,7 +573,7 @@ End
 
 </pre></div></div>
 </div>
-<p>Next, we create a <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> that uses 6 qubits to encode the value, and will terminate after there have been 10 iterations of GAS without progress (i.e. the value of <span class="math notranslate nohighlight">\(y\)</span> does not change). The <code class="docutils literal notranslate"><span class="pre">solve()</span></code> function takes the <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> we created earlier, and returns a results object that contains information about the run.</p>
+<p>Em seguida, criamos um <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> que usa 6 qubits para codificar o valor, e terminará depois que houver 10 iterações de GAS sem progresso (ou seja, o valor de <span class="math notranslate nohighlight">\(y\)</span> não muda). A função <code class="docutils literal notranslate"><span class="pre">solve()</span></code> recebe o <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code> que criamos anteriormente, e retorna um objeto resultante que contém informações sobre a execução.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -597,15 +595,15 @@ x=[1. 0. 1.]
 fval=-6.0
 </pre></div></div>
 </div>
-<p>This results in the optimal solution <span class="math notranslate nohighlight">\(x_0=1\)</span>, <span class="math notranslate nohighlight">\(x_1=0\)</span>, <span class="math notranslate nohighlight">\(x_2=1\)</span> and the optimal objective value of <span class="math notranslate nohighlight">\(-6\)</span> (most of the time, since it is a randomized algorithm). In the following, a custom visualization of the quantum state shows a possible run of <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> applied to this QUBO.</p>
-<div><p><img alt="51273e257e8c482c993184b01a9ec434" class="no-scaled-link" src="../_images/GAS-QUBO-Example.png" style="width: 800px;" /></p>
+<p>Este resultado é a solução ótima :math:` x_0 = 1 <cite>, :math:</cite> x_1 = 0 <cite>, :math:</cite> x_2 = 1 ` e o valor objetivo de :math:` -6 ` (na maioria das vezes, considerando que é um algoritmo randomizado). Posteriormente, uma visualização customizada do estado quântico mostra uma possível execução de `` GroverOptimizer `` aplicada a este QUBO.</p>
+<div><p><img alt="79de1d66b964498890acd540b483b302" class="no-scaled-link" src="../_images/GAS-QUBO-Example.png" style="width: 800px;" /></p>
 </div><p>Each graph shows a single iteration of GAS, with the current values of <span class="math notranslate nohighlight">\(r\)</span> (= iteration counter) and <span class="math notranslate nohighlight">\(y\)</span> (= threshold/offset) shown in the title. The X-axis displays the integer equivalent of the input (e.g. ‘101’ <span class="math notranslate nohighlight">\(\rightarrow\)</span> 5), and the Y-axis shows the possible function values. As there are 3 binary variables, there are <span class="math notranslate nohighlight">\(2^3=8\)</span> possible solutions, which are shown in each graph. The color intensity indicates the probability of measuring a certain result (with bright
 intensity being the highest), while the actual color indicates the corresponding phase (see phase color-wheel below). Note that as <span class="math notranslate nohighlight">\(y\)</span> decreases, we shift all of the values up by that amount, meaning there are fewer and fewer negative values in the distribution, until only one remains (the minimum).</p>
-<div><p><img alt="33ca0a1ca81a47cc81d24cd7ef51b2aa" class="no-scaled-link" src="../_images/color-wheel-phase.png" style="width: 200px;" /></p>
+<div><p><img alt="8fed6a05dae043aea17ae0a52717afe2" class="no-scaled-link" src="../_images/color-wheel-phase.png" style="width: 200px;" /></p>
 </div></div>
-<div class="section" id="Check-that-GroverOptimizer-finds-the-correct-value">
-<h2>Check that GroverOptimizer finds the correct value<a class="headerlink" href="#Check-that-GroverOptimizer-finds-the-correct-value" title="Link permanente para este título">¶</a></h2>
-<p>We can verify that the algorithm is working correctly using the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> in Qiskit.</p>
+<div class="section" id="Verifique-se-o-otimizador-de-Grover-encontra-o-valor-correto">
+<h2>Verifique se o otimizador de Grover encontra o valor correto<a class="headerlink" href="#Verifique-se-o-otimizador-de-Grover-encontra-o-valor-correto" title="Link permanente para este título">¶</a></h2>
+<p>Podemos verificar se o algoritmo está funcionando corretamente usando o <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> no Qiskit.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -671,10 +669,10 @@ fval=-6.0
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="05_admm_optimizer.html" class="btn btn-neutral float-right" title="ADMM Optimizer" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="05_admm_optimizer.html" class="btn btn-neutral float-right" title="Otimizador ADMM" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="03_minimum_eigen_optimizer.html" class="btn btn-neutral" title="Minimum Eigen Optimizer" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="03_minimum_eigen_optimizer.html" class="btn btn-neutral" title="Otimizador Eigen mínimo" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -706,14 +704,14 @@ fval=-6.0
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Grover Optimizer</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a><ul>
-<li><a class="reference internal" href="#References">References</a></li>
+<li><a class="reference internal" href="#">Otimizador de Grover</a><ul>
+<li><a class="reference internal" href="#Introdução">Introdução</a><ul>
+<li><a class="reference internal" href="#Referências">Referências</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Grover-Adaptive-Search">Grover Adaptive Search</a></li>
-<li><a class="reference internal" href="#Find-the-Minimum-of-a-QUBO-Problem-using-GroverOptimizer">Find the Minimum of a QUBO Problem using GroverOptimizer</a></li>
-<li><a class="reference internal" href="#Check-that-GroverOptimizer-finds-the-correct-value">Check that GroverOptimizer finds the correct value</a></li>
+<li><a class="reference internal" href="#Busca-Adaptativa-de-Grover">Busca Adaptativa de Grover</a></li>
+<li><a class="reference internal" href="#Encontre-o-Mínimo-de-um-Problema-QUBO-usando-o-otimizador-de-Grover">Encontre o Mínimo de um Problema QUBO usando o otimizador de Grover</a></li>
+<li><a class="reference internal" href="#Verifique-se-o-otimizador-de-Grover-encontra-o-valor-correto">Verifique se o otimizador de Grover encontra o valor correto</a></li>
 </ul>
 </li>
 </ul>
@@ -737,7 +735,7 @@ fval=-6.0
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   

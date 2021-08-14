@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ADMM Optimizer &mdash; Qiskit Optimization 0.3.0 documentazione</title>
+  <title>ADMM Optimizer &mdash; Qiskit Optimization 0.2.1 documentazione</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Indice" href="../genindex.html" />
-    <link rel="search" title="Cerca" href="../search.html" />
+    <link rel="search" title="Ricerca" href="../search.html" />
     <link rel="next" title="Max-Cut and Traveling Salesman Problem" href="06_examples_max_cut_and_tsp.html" />
     <link rel="prev" title="Grover Optimizer" href="04_grover_optimizer.html" /> 
 
@@ -95,7 +95,7 @@
   <div class="rst-other-versions">
     
     <dl>
-      <dt>Languages</dt>
+      <dt>Linguaggi</dt>
       
         <dd><a class="version" href="/documentation/optimization/tutorials/05_admm_optimizer.html">English</a></dd>
       
@@ -127,7 +127,7 @@
               
               
                 <div class="version">
-                  0.3.0
+                  0.2.1
                 </div>
               
             
@@ -156,10 +156,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Come iniziare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidocs/qiskit_optimization.html">Riferimenti API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Note di Rilascio</a></li>
 </ul>
 
             
@@ -200,7 +200,7 @@
       </li>
 
         
-          <li><a href="index.html">Optimization Tutorials</a> &gt;</li>
+          <li><a href="index.html">Tutorial di Ottimizzazione</a> &gt;</li>
         
       <li>ADMM Optimizer</li>
     
@@ -480,52 +480,52 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<br><br><br><div class="admonition note">
+<div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Run interactively in jupyter notebook.</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-optimization/blob/stable/0.2/docs/tutorials/05_admm_optimizer.ipynb">docs/tutorials/05_admm_optimizer.ipynb</a>.</p>
 </div>
 <div class="section" id="ADMM-Optimizer">
 <h1>ADMM Optimizer<a class="headerlink" href="#ADMM-Optimizer" title="Link a questa intestazione">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Link a questa intestazione">¶</a></h2>
-<p>The ADMM Optimizer can solve classes of mixed-binary constrained optimization problems, hereafter (MBCO), which often appear in logistic, finance, and operation research. In particular, the ADMM Optimizer here designed can tackle the following optimization problem <span class="math notranslate nohighlight">\((P)\)</span>:</p>
+<div class="section" id="Introduzione">
+<h2>Introduzione<a class="headerlink" href="#Introduzione" title="Link a questa intestazione">¶</a></h2>
+<p>L’ADMM Optimizer è in grado di risolvere le classi di problemi di ottimizzazione binaria-mista vincolata, (mixed-binary constrained optimization, di seguito riferita come MBCO), che spesso compaiono nella ricerca logistica, finanziaria e operativa. In particolare, l’ADMM Optimizer qui progettato può affrontare il seguente problema di ottimizzazione <span class="math notranslate nohighlight">\((P)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\min_{x \in \mathcal{X},u\in\mathcal{U} \subseteq \mathbb{R}^l } \quad q(x) + \varphi(u),\]</div>
-<p>subject to the constraints:</p>
+<p>soggetto ai vincoli:</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{s.t.:~} \quad G x = b, \quad  g(x) \leq 0, \quad \ell(x, u) \leq 0,\]</div>
-<p>with the corresponding functional assumptions.</p>
+<p>con i corrispondenti postulati funzionali.</p>
 <ol class="arabic simple">
-<li><p>Function <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> is quadratic, i.e., <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> for a given symmetric squared matrix <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, and vector <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
-<li><p>The set <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> enforces the binary constraints;</p></li>
-<li><p>Matrix <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, vector <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, and function <span class="math notranslate nohighlight">\(g: \mathbb{R}^n \to \mathbb{R}\)</span> is convex;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> is convex and <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> is a convex set;</p></li>
-<li><p>Function <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> is <em>jointly</em> convex in <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
+<li><p>Funzione <span class="math notranslate nohighlight">\(q: \mathbb{R}^n \to \mathbb{R}\)</span> è quadratica, cioè <span class="math notranslate nohighlight">\(q(x) = x^{\intercal} Q x + a^{\intercal} x\)</span> per una data matrice quadrata simmetrica <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^n \times \mathbb{R}^n, Q = Q^{\intercal}\)</span>, and vector <span class="math notranslate nohighlight">\(a \in \mathbb{R}^n\)</span>;</p></li>
+<li><p>Il set <span class="math notranslate nohighlight">\(\mathcal{X} = \{0,1\}^n = \{x_{(i)} (1-x_{(i)}) = 0, \forall i\}\)</span> forza i vincoli binari;</p></li>
+<li><p>Matrice <span class="math notranslate nohighlight">\(G\in\mathbb{R}^n \times \mathbb{R}^{n'}\)</span>, vettore <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{n'}\)</span>, e la funzione <span class="math notranslate nohighlight">\(g: \mathbb{R}^n \to \mathbb{R}\)</span> è convessa;</p></li>
+<li><p>Funzione <span class="math notranslate nohighlight">\(\varphi: \mathbb{R}^l \to \mathbb{R}\)</span> è convessa e <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> è un set convesso;</p></li>
+<li><p>Funzione <span class="math notranslate nohighlight">\(\ell: \mathbb{R}^n\times \mathbb{R}^l \to \mathbb{R}\)</span> è <em>congiuntamente</em> convessa in <span class="math notranslate nohighlight">\(x, u\)</span>.</p></li>
 </ol>
-<p>In order to solve MBO problems, [1] proposed heuristics for <span class="math notranslate nohighlight">\((P)\)</span> based on the Alternating Direction Method of Multipliers (ADMM) [2]. ADMM is an operator splitting algorithm with a long history in convex optimization, and it is known to have residual, objective and dual variable convergence properties, provided that convexity assumptions are holding.</p>
-<p>The method of [1] (referred to as 3-ADMM-H) leverages the ADMM operator-splitting procedure to devise a decomposition for certain classes of MBOs into: - a QUBO subproblem to be solved by on the quantum device via variational algorithms, such as VQE or QAOA; - continuous convex constrained subproblem, which can be efficiently solved with classical optimization solvers.</p>
-<p>The algorithm 3-ADMM-H works as follows:</p>
+<p>Per risolvere i problemi di MBO, [1] sono state fatte proposte euristiche per <span class="math notranslate nohighlight">\((P)\)</span> sulla base del Metodo di Direzione Alternata dei Moltiplicatori (ADMM) [2]. ADMM è un algoritmo di suddivisione dell’operatore con una lunga storia nel campo dell’ottimizzazione convessa, ed è noto per avere proprietà di convergenza di variabili residue, oggettive e doppie, a condizione che siano soddisfatte le ipotesi di convessità.</p>
+<p>Il metodo [1] (indicato come 3 - ADMM - H) sfrutta la procedura ADMM di suddivisione dell’operatore per ideare una decomposizione per alcune classi di MBO in: - un sottoproblema QUBO da risolvere sul computer quantistico tramite algoritmi variazionali, come VQE o QAOA; - un sottoproblema continuo convesso, che può essere efficacemente risolto con ottimizzatori classici.</p>
+<p>L’algoritmo 3-ADMM-H funziona come segue:</p>
 <ol class="arabic simple" start="0">
-<li><p>Initialization phase (set the parameters and the QUBO and convex solvers);</p></li>
-<li><p>For each ADMM iterations ($k = 1, 2, <span class="math">\ldots</span>, $) until termination:</p>
+<li><p>Fase di inizializzazione (impostare i parametri e le soluzioni QUBO e convex);</p></li>
+<li><p>Per ogni iterazione ADMM ($k = 1, 2, <span class="math">\ldots</span>, $) fino alla fine:</p>
 <ul class="simple">
-<li><p>Solve a properly defined QUBO subproblem (with a classical or quantum solver);</p></li>
-<li><p>Solve properly defined convex problems (with a classical solver);</p></li>
-<li><p>Update the dual variables.</p></li>
+<li><p>Risolvere un sottoproblema QUBO correttamente definito (con un risolutore classico o quantistico);</p></li>
+<li><p>Risolvere problemi convessi ben definiti (con un risolutore classico);</p></li>
+<li><p>Aggiorna le variabili duali.</p></li>
 </ul>
 </li>
-<li><p>Return optimizers and cost.</p></li>
+<li><p>Ritornare gli ottimizzatori e i costi.</p></li>
 </ol>
-<p>A comprehensive discussion on the conditions for convergence, feasibility and optimality of the algorithm can be found in [1]. A variant with 2 ADMM blocks, namely a QUBO subproblem, and a continuous convex constrained subproblem, is also introduced in [1].</p>
+<p>Una discussione esauriente sulle condizioni di convergenza, fattibilità e ottimizzazione dell’algoritmo si può trovare nella ref. [1]. Nella [1] viene anche introdotta una variante con 2 blocchi ADMM, ovvero un sottoproblema QUBO, e un sottoproblema vincolato, convesso e continuo.</p>
 </div>
-<div class="section" id="References">
-<h2>References<a class="headerlink" href="#References" title="Link a questa intestazione">¶</a></h2>
+<div class="section" id="Riferimenti">
+<h2>Riferimenti<a class="headerlink" href="#Riferimenti" title="Link a questa intestazione">¶</a></h2>
 <p>[1] <a class="reference external" href="https://arxiv.org/abs/2001.02069">C. Gambella and A. Simonetto, Multi-block ADMM heuristics for mixed-binary optimization, on classical and quantum computers, arXiv preprint arXiv:2001.02069 (2020).</a></p>
 <p>[2] <a class="reference external" href="https://web.stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf">S. Boyd, N. Parikh, E. Chu, B. Peleato, and J. Eckstein, Distributed optimization and statistical learning via the alternating direction method of multipliers, Foundations and Trends in Machine learning, 3, 1–122 (2011).</a></p>
 </div>
-<div class="section" id="Initialization">
-<h2>Initialization<a class="headerlink" href="#Initialization" title="Link a questa intestazione">¶</a></h2>
-<p>First of all we load all the packages that we need.</p>
+<div class="section" id="Inizializzazione">
+<h2>Inizializzazione<a class="headerlink" href="#Inizializzazione" title="Link a questa intestazione">¶</a></h2>
+<p>Prima di tutto carichiamo tutti i pacchetti di cui abbiamo bisogno.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -553,10 +553,10 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>We first initialize all the algorithms we plan to use later in this tutorial.</p>
-<p>To solve the QUBO problems we can choose between - <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> using different <code class="docutils literal notranslate"><span class="pre">MinimumEigensolver</span></code>, such as <code class="docutils literal notranslate"><span class="pre">VQE</span></code>, <code class="docutils literal notranslate"><span class="pre">QAOA</span></code> or <code class="docutils literal notranslate"><span class="pre">NumpyMinimumEigensolver</span></code> (classical) - <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> - <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> (classical, if CPLEX is installed)</p>
-<p>and to solve the convex continuous problems we can choose between the following classical solvers: - <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> (if CPLEX is installed) - <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code></p>
-<p>In case CPLEX is not available, the <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> (for convex continuous problems) and the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> using the <code class="docutils literal notranslate"><span class="pre">NumpyMinimumEigensolver</span></code> (for QUBOs) can be used as classical alternatives to CPLEX for testing, validation, and benchmarking.</p>
+<p>Innanzitutto inizializziamo tutti gli algoritmi che prevediamo di utilizzare in questo tutorial.</p>
+<p>Per risolvere i problemi QUBO possiamo scegliere tra - <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> utilizzando diversi <code class="docutils literal notranslate"><span class="pre">MinimumEigensolver</span></code>, come <code class="docutils literal notranslate"><span class="pre">VQE</span> <span class="pre">``,</span> <span class="pre">``QAOA</span></code> o <code class="docutils literal notranslate"><span class="pre">NumpyMinimumEigensolver</span></code> (classico) - <code class="docutils literal notranslate"><span class="pre">GroverOptimizer</span></code> - <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> (classico, se CPLEX è installato)</p>
+<p>e per risolvere i problemi continui convessi possiamo scegliere tra i seguenti risolutori classici: - <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> (se CPLEX è installato) - <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code></p>
+<p>Nel caso in cui CPLEX non sia disponibile, il <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> (per i problemi continui convessi) e <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> utilizzando il <code class="docutils literal notranslate"><span class="pre">NumpyMinimumEigensolver</span></code> (per QUBO) possono essere utilizzati come alternativa classica a CPLEX per test, validazione e benchmarking.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -579,9 +579,9 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </div>
-<div class="section" id="Example">
-<h2>Example<a class="headerlink" href="#Example" title="Link a questa intestazione">¶</a></h2>
-<p>We test 3-ADMM-H algorithm on a simple Mixed-Binary Quadratic Problem with equality and inequality constraints (Example 6 reported in [1]). We first construct a docplex problem and then load it into a <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>.</p>
+<div class="section" id="Esempio">
+<h2>Esempio<a class="headerlink" href="#Esempio" title="Link a questa intestazione">¶</a></h2>
+<p>Testiamo l’algoritmo 3-ADMM-H su un semplice problema Mixed-Binary Quadratic con vincoli di uguaglianza e disuguaglianza (Esempio 6 riportato nel [1]). Prima costruiamo un problema docplex e poi lo carichiamo in un <code class="docutils literal notranslate"><span class="pre">QuadraticProgram</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -634,14 +634,12 @@ End
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="Classical-Solution">
-<h2>Classical Solution<a class="headerlink" href="#Classical-Solution" title="Link a questa intestazione">¶</a></h2>
-<p>3-ADMM-H needs a QUBO optimizer to solve the QUBO subproblem, and a continuous optimizer to solve the continuous convex constrained subproblem. We first solve the problem classically: we use the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> with the <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigenSolver</span></code> as a classical and exact QUBO solver and we use the <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> as a continuous convex solver. 3-ADMM-H supports any other suitable solver available in Qiskit. For instance, VQE, QAOA, and GroverOptimizer can be invoked as quantum
-solvers, as demonstrated later. If CPLEX is installed, the <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> can also be used as both, a QUBO and convex solver.</p>
-<div class="section" id="Parameters">
-<h3>Parameters<a class="headerlink" href="#Parameters" title="Link a questa intestazione">¶</a></h3>
-<p>The 3-ADMM-H are wrapped in class <code class="docutils literal notranslate"><span class="pre">ADMMParameters</span></code>. Customized parameter values can be set as arguments of the class. In this example, parameters <span class="math notranslate nohighlight">\(\rho, \beta\)</span> are initialized to <span class="math notranslate nohighlight">\(1001\)</span> and <span class="math notranslate nohighlight">\(1000\)</span>, respectively. The penalization <code class="docutils literal notranslate"><span class="pre">factor_c</span></code> of equality constraints <span class="math notranslate nohighlight">\(Gx = b\)</span> is set to <span class="math notranslate nohighlight">\(900\)</span>. The tolerance <code class="docutils literal notranslate"><span class="pre">tol</span></code> for primal residual convergence is set to <code class="docutils literal notranslate"><span class="pre">1.e-6</span></code>. In this case, the 3-block implementation is guaranteed to converge for Theorem 4 of [1], because the
-inequality constraint with the continuous variable is always active. The 2-block implementation can be run by setting <code class="docutils literal notranslate"><span class="pre">three_block=False</span></code>, and practically converges to a feasible not optimal solution.</p>
+<div class="section" id="Soluzione-Classica">
+<h2>Soluzione Classica<a class="headerlink" href="#Soluzione-Classica" title="Link a questa intestazione">¶</a></h2>
+<p>3-ADMM-H ha bisogno di un ottimizzatore QUBO per risolvere il sottoproblema QUBO, e di un ottimizzatore continuo per risolvere il sottoproblema convesso continuo. In primo luogo risolviamo il problema classicamente: usiamo il <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> con il <code class="docutils literal notranslate"><span class="pre">NumPyMinimumEigenSolver</span></code>, come risolutore QUBO classico ed esatto, e usiamo il <code class="docutils literal notranslate"><span class="pre">CobylaOptimizer</span></code> come risolutore continuo convesso. 3-ADMM-H supporta qualsiasi altro risolutore adatto disponibile in Qiskit. Per esempio, VQE, QAOA e GroverOptimizer possono essere invocati come risolutori quantistici, come dimostrato più tardi. Se CPLEX è installato, anche il <code class="docutils literal notranslate"><span class="pre">CplexOptimizer</span></code> può essere usato come un risolutore QUBO e convesso.</p>
+<div class="section" id="Parametri">
+<h3>Parametri<a class="headerlink" href="#Parametri" title="Link a questa intestazione">¶</a></h3>
+<p>I 3-ADMM-H sono avvolti nella classe <code class="docutils literal notranslate"><span class="pre">ADMMParameters</span></code>. I valori dei parametri personalizzati possono essere impostati come argomenti della classe. In questo esempio, i parametri <span class="math notranslate nohighlight">\(\rho, \beta\)</span> sono inizializzati rispettivamente a <span class="math notranslate nohighlight">\(1001\)</span> e <span class="math notranslate nohighlight">\(1000\)</span>. La penalizzazione <code class="docutils literal notranslate"><span class="pre">factor_c</span></code> dei vincoli di uguaglianza <span class="math notranslate nohighlight">\(Gx = b\)</span> è impostata a <span class="math notranslate nohighlight">\(900\)</span>. La tolleranza <code class="docutils literal notranslate"><span class="pre">tol</span></code> per la convergenza residua primaria è impostata a <code class="docutils literal notranslate"><span class="pre">1.e-6</span></code>. In questo caso, l’implementazione a 3 blocchi è garantita per convergere per il Teorema 4 di [1], perché il vincolo di disuguaglianza con la variabile continua è sempre attivo. L’implementazione a 2 blocchi può essere eseguita impostando <code class="docutils literal notranslate"><span class="pre">three_block=False</span></code>, che fa convergere in una soluzione non ottimale.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -658,9 +656,9 @@ inequality constraint with the continuous variable is always active. The 2-block
 </div>
 </div>
 </div>
-<div class="section" id="Calling-3-ADMM-H-algorithm">
-<h3>Calling 3-ADMM-H algorithm<a class="headerlink" href="#Calling-3-ADMM-H-algorithm" title="Link a questa intestazione">¶</a></h3>
-<p>To invoke the 3-ADMM-H algorithm, an instance of the <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> class needs to be created. This takes ADMM-specific parameters and the subproblem optimizers separately into the constructor. The solution returned is an instance of <code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code> class.</p>
+<div class="section" id="Invocare-l'algoritmo-3-ADMM-H">
+<h3>Invocare l’algoritmo 3-ADMM-H<a class="headerlink" href="#Invocare-l'algoritmo-3-ADMM-H" title="Link a questa intestazione">¶</a></h3>
+<p>Per invocare l’algoritmo 3-ADMM-H, è necessario creare un’istanza della classe <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code>. Questo richiede parametri specifici per l’ADMM e gli ottimizzatori del sottoproblema separatamente nel costruttore. La soluzione restituita è un’istanza della classe <code class="docutils literal notranslate"><span class="pre">OptimizationResult</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -692,9 +690,9 @@ inequality constraint with the continuous variable is always active. The 2-block
 </div>
 </div>
 </div>
-<div class="section" id="Classical-Solver-Result">
-<h3>Classical Solver Result<a class="headerlink" href="#Classical-Solver-Result" title="Link a questa intestazione">¶</a></h3>
-<p>The 3-ADMM-H solution can be then printed and visualized. The <code class="docutils literal notranslate"><span class="pre">x</span></code> attribute of the solution contains respectively, the values of the binary decision variables and the values of the continuous decision variables. The <code class="docutils literal notranslate"><span class="pre">fval</span></code> is the objective value of the solution.</p>
+<div class="section" id="Risultato-del-Risolutore-Classico">
+<h3>Risultato del Risolutore Classico<a class="headerlink" href="#Risultato-del-Risolutore-Classico" title="Link a questa intestazione">¶</a></h3>
+<p>La soluzione 3-ADMM-H può essere stampata e visualizzata. L’attributo <code class="docutils literal notranslate"><span class="pre">x</span></code> della soluzione contiene, rispettivamente, i valori delle variabili di decisione binaria e i valori delle variabili continue di decisione. <code class="docutils literal notranslate"><span class="pre">fval</span></code> è il valore obiettivo della soluzione.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -714,7 +712,7 @@ x=[1. 0. 0. 2.]
 fval=1.00
 </pre></div></div>
 </div>
-<p>Solution statistics can be accessed in the <code class="docutils literal notranslate"><span class="pre">state</span></code> field and visualized. We here display the convergence of 3-ADMM-H, in terms of primal residuals.</p>
+<p>Le statistiche della soluzione possono essere consultate nel campo <code class="docutils literal notranslate"><span class="pre">state</span></code> e visualizzate. Qui mostriamo la convergenza di 3-ADMM-H, in termini di residui primari.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -736,9 +734,9 @@ fval=1.00
 </div>
 </div>
 </div>
-<div class="section" id="Quantum-Solution">
-<h2>Quantum Solution<a class="headerlink" href="#Quantum-Solution" title="Link a questa intestazione">¶</a></h2>
-<p>We now solve the same optimization problem with QAOA as QUBO optimizer, running on simulated quantum device. First, one need to select the classical optimizer of the eigensolver QAOA. Then, the simulation backend is set. Finally, the eigensolver is wrapped into the <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code> class. A new instance of <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> is populated with QAOA as QUBO optimizer.</p>
+<div class="section" id="Soluzione-Quantistica">
+<h2>Soluzione Quantistica<a class="headerlink" href="#Soluzione-Quantistica" title="Link a questa intestazione">¶</a></h2>
+<p>Ora risolviamo lo stesso problema di ottimizzazione con il QAOA come ottimizzatore QUBO, in esecuzione su dispositivo quantistico simulato. In primo luogo, è necessario selezionare l’ottimizzatore classico dell’eigensolver QAOA. Poi, viene impostato il backend di simulazione. Infine, l’eigensolver è avvolto nella classe <code class="docutils literal notranslate"><span class="pre">MinimumEigenOptimizer</span></code>. Una nuova istanza di <code class="docutils literal notranslate"><span class="pre">ADMMOptimizer</span></code> è popolata con il QAOA come ottimizzatore QUBO.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -768,9 +766,9 @@ fval=1.00
 </pre></div>
 </div>
 </div>
-<div class="section" id="Quantum-Solver-Results">
-<h3>Quantum Solver Results<a class="headerlink" href="#Quantum-Solver-Results" title="Link a questa intestazione">¶</a></h3>
-<p>Here we present the results obtained from the quantum solver. As in the example above <code class="docutils literal notranslate"><span class="pre">x</span></code> stands for the solution, the <code class="docutils literal notranslate"><span class="pre">fval</span></code> is for objective value.</p>
+<div class="section" id="Risultati-ottenuti-dal-Quantum-Solver">
+<h3>Risultati ottenuti dal Quantum Solver<a class="headerlink" href="#Risultati-ottenuti-dal-Quantum-Solver" title="Link a questa intestazione">¶</a></h3>
+<p>Qui presentiamo i risultati ottenuti dal quantum solver. Come nell’esempio sopra <code class="docutils literal notranslate"><span class="pre">x</span></code> sta per soluzione, <code class="docutils literal notranslate"><span class="pre">fval</span></code> per valore oggettivo.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -891,18 +889,18 @@ fval=1.00
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">ADMM Optimizer</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#References">References</a></li>
-<li><a class="reference internal" href="#Initialization">Initialization</a></li>
-<li><a class="reference internal" href="#Example">Example</a></li>
-<li><a class="reference internal" href="#Classical-Solution">Classical Solution</a><ul>
-<li><a class="reference internal" href="#Parameters">Parameters</a></li>
-<li><a class="reference internal" href="#Calling-3-ADMM-H-algorithm">Calling 3-ADMM-H algorithm</a></li>
-<li><a class="reference internal" href="#Classical-Solver-Result">Classical Solver Result</a></li>
+<li><a class="reference internal" href="#Introduzione">Introduzione</a></li>
+<li><a class="reference internal" href="#Riferimenti">Riferimenti</a></li>
+<li><a class="reference internal" href="#Inizializzazione">Inizializzazione</a></li>
+<li><a class="reference internal" href="#Esempio">Esempio</a></li>
+<li><a class="reference internal" href="#Soluzione-Classica">Soluzione Classica</a><ul>
+<li><a class="reference internal" href="#Parametri">Parametri</a></li>
+<li><a class="reference internal" href="#Invocare-l'algoritmo-3-ADMM-H">Invocare l’algoritmo 3-ADMM-H</a></li>
+<li><a class="reference internal" href="#Risultato-del-Risolutore-Classico">Risultato del Risolutore Classico</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Quantum-Solution">Quantum Solution</a><ul>
-<li><a class="reference internal" href="#Quantum-Solver-Results">Quantum Solver Results</a></li>
+<li><a class="reference internal" href="#Soluzione-Quantistica">Soluzione Quantistica</a><ul>
+<li><a class="reference internal" href="#Risultati-ottenuti-dal-Quantum-Solver">Risultati ottenuti dal Quantum Solver</a></li>
 </ul>
 </li>
 </ul>
@@ -927,7 +925,7 @@ fval=1.00
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
      
 
   
