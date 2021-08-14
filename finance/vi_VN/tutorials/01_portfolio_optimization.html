@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Portfolio Optimization &mdash; Tài liệu Qiskit Finance 0.2.0</title>
+  <title>Tối ưu hóa danh mục &mdash; Tài liệu Qiskit Finance 0.2.0</title>
   
 
   
@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
     <link rel="index" title="Mục lục" href="../genindex.html" />
     <link rel="search" title="Tìm kiếm" href="../search.html" />
-    <link rel="next" title="Portfolio Diversification" href="02_portfolio_diversification.html" />
-    <link rel="prev" title="Finance Tutorials" href="index.html" /> 
+    <link rel="next" title="Da dạng hóa danh mục đầu tư" href="02_portfolio_diversification.html" />
+    <link rel="prev" title="Quantum Amplitude Estimation" href="00_amplitude_estimation.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Portfolio Optimization</li>
+      <li>Tối ưu hóa danh mục</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -484,24 +484,24 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">Ghi chú</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a>.</p>
+<p>Trang này được tạo từ <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/01_portfolio_optimization.ipynb">docs/tutorials/01_portfolio_optimization.ipynb</a>.</p>
 </div>
-<div class="section" id="Portfolio-Optimization">
-<h1>Portfolio Optimization<a class="headerlink" href="#Portfolio-Optimization" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="Introduction">
-<h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Tối-ưu-hóa-danh-mục">
+<h1>Tối ưu hóa danh mục<a class="headerlink" href="#Tối-ưu-hóa-danh-mục" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Giới-thiệu">
+<h2>Giới thiệu<a class="headerlink" href="#Giới-thiệu" title="Permalink to this headline">¶</a></h2>
 <p>Hướng dẫn này cho phép giải quyết vấn đề tối ưu hóa phương sai trung bình danh mục vốn đầu tư cho <span class="math notranslate nohighlight">\(n\)</span> tài sản:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \min_{x \in \{0, 1\}^n}  q x^T \Sigma x - \mu^T x\\
 \text{subject to: } 1^T x = B
 \end{aligned}\end{split}\]</div>
-<p>trong đó chúng ta sử dụng ký hiệu sau:</p>
+<p>chúng ta sử dụng bộ kí hiệu sau:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x \in \{0, 1\}^n\)</span> thể hiện véc-tơ của các biến quyết định nhị phân, thứ mà chỉ ra tài sản nào nên chọn (<span class="math notranslate nohighlight">\(x[i] = 1\)</span>) và không nên chọn (<span class="math notranslate nohighlight">\(x[i] = 0\)</span>),</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mu \in \mathbb{R}^n\)</span> được định nghĩa là kết quả trông đợi cho các tài sản,</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Sigma \in \mathbb{R}^{n \times n}\)</span> chỉ hiệp phương sai phương sai giữa hai tài sản,</p></li>
-<li><p><span class="math notranslate nohighlight">\(q&gt;0\)</span> điều khiển độ cần rủi ro của bộ ra quyết định,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q&gt;0\)</span> điều khiển độ rủi ro mà người ra quyết định mong muốn,</p></li>
 <li><p>và <span class="math notranslate nohighlight">\(B\)</span> thể hiện khoản tiền, tức số tài sản được chọn từ <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 </ul>
 <p>We assume the following simplifications: - all assets have the same price (normalized to 1), - the full budget <span class="math notranslate nohighlight">\(B\)</span> has to be spent, i.e. one has to select exactly <span class="math notranslate nohighlight">\(B\)</span> assets.</p>
@@ -534,8 +534,8 @@ div.rendered_html tbody tr:hover {
 <p>Lưu ý: Nếu bạn chưa lưu trữ token của bạn, thì sử dụng <code class="docutils literal notranslate"><span class="pre">IBMQ.save_account('MY_API_TOKEN')</span></code> để lưu nó trước.</p>
 </div>
 </div>
-<div class="section" id="Định-nghĩa-thực-thể-của-vấn-đề">
-<h2>Định nghĩa thực thể của vấn đề<a class="headerlink" href="#Định-nghĩa-thực-thể-của-vấn-đề" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Định-nghĩa-yêu-cầu-của-vấn-đề">
+<h2>Định nghĩa yêu cầu của vấn đề<a class="headerlink" href="#Định-nghĩa-yêu-cầu-của-vấn-đề" title="Permalink to this headline">¶</a></h2>
 <p>Here an Operator instance is created for our Hamiltonian. In this case the paulis are from an Ising Hamiltonian translated from the portfolio problem. We use a random portfolio problem for this notebook. It is straight-forward to extend this to using real financial data as illustrated here: <a class="reference internal" href="11_time_series.html"><span class="doc">Loading and Processing Stock-Market Time-Series Data</span></a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -620,7 +620,7 @@ Binaries
 End
 </pre></div></div>
 </div>
-<p>Chúng tôi xác định một số phương pháp tiện ích để in các kết quả theo định dạng tốt.</p>
+<p>Chúng tôi xác định một số phương pháp tiện ích để in các kết quả theo định dạng đẹp.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -702,7 +702,7 @@ selection       value           probability
 </div>
 <div class="section" id="Giải-pháp-sử-dụng-VQE">
 <h2>Giải pháp sử dụng VQE<a class="headerlink" href="#Giải-pháp-sử-dụng-VQE" title="Permalink to this headline">¶</a></h2>
-<p>Bây giờ chúng ta có thể sử dụng Phương án Quantum Eigensolver (VQE) để giải bài toán. Chúng tôi sẽ xác định bộ tối ưu và dạng biến sẽ được sử dụng.</p>
+<p>Bây giờ chúng ta có thể sử dụng Variational Quantum Eigensolver (VQE) để giải bài toán. Chúng tôi sẽ xác định bộ tối ưu và dạng biến sẽ được sử dụng.</p>
 <p>Lưu ý: Bạn có thể chuyển sang phần sau khác nhau bằng cách cung cấp tên của phần sau.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -849,10 +849,10 @@ selection       value           probability
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="02_portfolio_diversification.html" class="btn btn-neutral float-right" title="Portfolio Diversification" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="02_portfolio_diversification.html" class="btn btn-neutral float-right" title="Da dạng hóa danh mục đầu tư" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Finance Tutorials" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="00_amplitude_estimation.html" class="btn btn-neutral" title="Quantum Amplitude Estimation" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -884,12 +884,12 @@ selection       value           probability
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Portfolio Optimization</a><ul>
-<li><a class="reference internal" href="#Introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#">Tối ưu hóa danh mục</a><ul>
+<li><a class="reference internal" href="#Giới-thiệu">Giới thiệu</a><ul>
 <li><a class="reference internal" href="#[Optional]-Thiết-lập-để-chạy-thử-nghiệm-trên-một-thiết-bị-thật">[Optional] Thiết lập để chạy thử nghiệm trên một thiết bị thật</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Định-nghĩa-thực-thể-của-vấn-đề">Định nghĩa thực thể của vấn đề</a></li>
+<li><a class="reference internal" href="#Định-nghĩa-yêu-cầu-của-vấn-đề">Định nghĩa yêu cầu của vấn đề</a></li>
 <li><a class="reference internal" href="#NumPyimimumEigensolver-(như-một-tham-khảo-cổ-điển)">NumPyimimumEigensolver (như một tham khảo cổ điển)</a></li>
 <li><a class="reference internal" href="#Giải-pháp-sử-dụng-VQE">Giải pháp sử dụng VQE</a><ul>
 <li><a class="reference internal" href="#Giải-pháp-sử-dụng-QAOA">Giải pháp sử dụng QAOA</a></li>
@@ -918,7 +918,7 @@ selection       value           probability
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
      
 
   

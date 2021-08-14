@@ -608,7 +608,8 @@ the following:</p>
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_07_asian_barrier_spread_pricing_5_0.svg" src="../_images/tutorials_07_asian_barrier_spread_pricing_5_0.svg" /></div>
+<img alt="../_images/tutorials_07_asian_barrier_spread_pricing_5_0.png" src="../_images/tutorials_07_asian_barrier_spread_pricing_5_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="Payoff-Function">
@@ -851,7 +852,8 @@ objective qubit index 4
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_07_asian_barrier_spread_pricing_12_0.svg" src="../_images/tutorials_07_asian_barrier_spread_pricing_12_0.svg" /></div>
+<img alt="../_images/tutorials_07_asian_barrier_spread_pricing_12_0.png" src="../_images/tutorials_07_asian_barrier_spread_pricing_12_0.png" />
+</div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -884,7 +886,8 @@ objective qubit index 4
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_07_asian_barrier_spread_pricing_13_0.svg" src="../_images/tutorials_07_asian_barrier_spread_pricing_13_0.svg" /></div>
+<img alt="../_images/tutorials_07_asian_barrier_spread_pricing_13_0.png" src="../_images/tutorials_07_asian_barrier_spread_pricing_13_0.png" />
+</div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -932,7 +935,7 @@ exact expected value:   0.8023
 <div class="highlight"><pre>
 state qubits:  5
 circuit width: 14
-circuit depth: 6375
+circuit depth: 6370
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -1011,7 +1014,7 @@ Exact Expected Payoff: 0.8023
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">conf_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">confidence_interval</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">num_uncertainty_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">high_</span> <span class="o">-</span> <span class="n">low_</span><span class="p">)</span>
+<span></span><span class="n">conf_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">confidence_interval_processed</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">num_uncertainty_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">high_</span> <span class="o">-</span> <span class="n">low_</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exact value:    </span><span class="se">\t</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">exact_value</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Estimated value:</span><span class="se">\t</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">estimation_processed</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">num_uncertainty_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">high_</span> <span class="o">-</span> <span class="n">low_</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Confidence interval: </span><span class="se">\t</span><span class="s1">[</span><span class="si">%.4f</span><span class="s1">, </span><span class="si">%.4f</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">conf_int</span><span class="p">))</span>
@@ -1024,8 +1027,8 @@ Exact Expected Payoff: 0.8023
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Exact value:            0.8023
-Estimated value:        0.8324
-Confidence interval:    [0.3361, 0.3385]
+Estimated value:        0.8328
+Confidence interval:    [0.8268, 0.8388]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1042,9 +1045,18 @@ Confidence interval:    [0.3361, 0.3385]
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/jul/Qiskit/qiskit-aqua/qiskit/aqua/__init__.py:86: DeprecationWarning: The package qiskit.aqua is deprecated. It was moved/refactored to qiskit-terra For more information see &lt;https://github.com/Qiskit/qiskit-aqua/blob/main/README.md#migration-guide&gt;
+  warn_package(&#39;aqua&#39;, &#39;qiskit-terra&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
 <div class="output_area rendered_html docutils container">
-<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td>Qiskit</td><td>None</td></tr><tr><td>Terra</td><td>0.17.0.dev0+8fd3b2c</td></tr><tr><td>Aer</td><td>0.7.4</td></tr><tr><td>Ignis</td><td>0.5.2</td></tr><tr><td>Aqua</td><td>None</td></tr><tr><td>IBM Q Provider</td><td>0.11.1</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.8.6 (default, Mar 10 2021, 14:41:09)
-[Clang 12.0.0 (clang-1200.0.32.29)]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>8</td></tr><tr><td>Memory (Gb)</td><td>32.0</td></tr><tr><td colspan='2'>Sat Mar 27 00:14:49 2021 JST</td></tr></table></div>
+<h3>Version Information</h3><table><tr><th>Qiskit Software</th><th>Version</th></tr><tr><td><code>qiskit-terra</code></td><td>0.19.0.dev0+3ac1081</td></tr><tr><td><code>qiskit-aer</code></td><td>0.9.0</td></tr><tr><td><code>qiskit-ignis</code></td><td>0.7.0.dev0+9201ed8</td></tr><tr><td><code>qiskit-ibmq-provider</code></td><td>0.16.0.dev0+80f9d8e</td></tr><tr><td><code>qiskit-aqua</code></td><td>0.10.0.dev0+bf26214</td></tr><tr><td><code>qiskit</code></td><td>0.25.1</td></tr><tr><td><code>qiskit-nature</code></td><td>0.2.0</td></tr><tr><td><code>qiskit-finance</code></td><td>0.2.0</td></tr><tr><td><code>qiskit-optimization</code></td><td>0.3.0</td></tr><tr><td><code>qiskit-machine-learning</code></td><td>0.2.0</td></tr><tr><th>System information</th></tr><tr><td>Python</td><td>3.7.9 (default, Aug 31 2020, 07:22:35)
+[Clang 10.0.0 ]</td></tr><tr><td>OS</td><td>Darwin</td></tr><tr><td>CPUs</td><td>4</td></tr><tr><td>Memory (Gb)</td><td>32.0</td></tr><tr><td colspan='2'>Tue Aug 10 10:35:00 2021 CEST</td></tr></table></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -1135,7 +1147,7 @@ Confidence interval:    [0.3361, 0.3385]
          <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
          <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
          <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
      
 
   
