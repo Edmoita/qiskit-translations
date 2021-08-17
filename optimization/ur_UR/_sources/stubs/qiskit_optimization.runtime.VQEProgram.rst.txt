@@ -41,6 +41,7 @@ VQEProgram
       :toctree: ../stubs/
    
             ~VQEProgram.compute_minimum_eigenvalue
+            ~VQEProgram.supports_aux_operators
 
    
    
