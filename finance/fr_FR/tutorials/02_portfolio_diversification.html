@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Portfolio Diversification &mdash; Documentation Qiskit Finance 0.2.0</title>
+  <title>Diversification du portefeuille &mdash; Documentation Qiskit Finance 0.2.0</title>
   
 
   
@@ -204,7 +204,7 @@
         
           <li><a href="index.html">Finance Tutorials</a> &gt;</li>
         
-      <li>Portfolio Diversification</li>
+      <li>Diversification du portefeuille</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -484,64 +484,57 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-finance/blob/stable/0.2/docs/tutorials/02_portfolio_diversification.ipynb">docs/tutorials/02_portfolio_diversification.ipynb</a>.</p>
+<p>Cette page a été générée à partir de <cite>docs/tutorials/02_portfolio_diversification.ipynb</cite> __.</p>
 </div>
-<div class="section" id="Portfolio-Diversification">
-<h1>Portfolio Diversification<a class="headerlink" href="#Portfolio-Diversification" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="Diversification-du-portefeuille">
+<h1>Diversification du portefeuille<a class="headerlink" href="#Diversification-du-portefeuille" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Lien permanent vers ce titre">¶</a></h2>
-<p>In asset management, there are broadly two approaches: active and passive investment management. Within passive investment management, there are index-tracking funds and there are approaches based on portfolio diversification, which aim at representing a portfolio with a large number of assets by a smaller number of representative stocks. This notebook illustrates a portfolio diversification problem, which has recently become popular for two reasons: 1. it makes it possible to mimic the
-performance of an index (or a similarly large set of assets) with a limited budget, at limited transaction costs. That is: traditional index-tracking may purchase all assets in the index, ideally with the same weights as in the index. This may be impractical for a number of reasons: the total of even a single round lot per asset may amount to more than the assets under management, the large scale of the index-tracking problem with integrality constraints may render the optimization problem
-difficult, and the transaction costs of the frequent rebalancing to adjust the positions to the weights in the index may render the approach expensive. Thus, a popular approach is to select a portfolio of <span class="math notranslate nohighlight">\(q\)</span> assets that represent the market with <span class="math notranslate nohighlight">\(n\)</span> assets, where <span class="math notranslate nohighlight">\(q\)</span> is significantly smaller than <span class="math notranslate nohighlight">\(n\)</span>, but where the portfolio replicates the behavior of the underlying market. To determine how to group assets into <span class="math notranslate nohighlight">\(q\)</span> clusters and how to determine which <span class="math notranslate nohighlight">\(q\)</span>
-assets should represent the <span class="math notranslate nohighlight">\(q\)</span> clusters amounts to solving a large-scale optimization problem. In the following we describe the mathematical model for the portfolio diversification problem as introduced in [Cornuejols &amp; Tutuncu, 2006] 2. it allows for similarity measures between time-series beyond the covariance matrix. Notice that traditionally, modern portfolio theory considers the covariance matrix as a measure of similarity between the assets. As such, however, the covariance matrix
-is imperfect. Consider, for instance, a company listed both in London and New York. Although both listings should be very similar, only parts of the time series of the prices of the two listings will overlap, because of the partial overlap of the times the markets open. Instead of covariance, one can consider, for example, dynamic time warping of [Berndt and Clifford, 1994] as a measure of similarity between two time series, which allows for the fact that for some time periods, the data are
-captured by only one of the time series, while for others, both time series exhibit the similarity due to the parallel evolution of the stock price.</p>
-<p>The overall workflow we demonstrate comprises:</p>
+<p>Dans la gestion des actifs, il y a généralement deux approches: la gestion active et passive de l’investissement. Dans le cadre de la gestion passive des investissements, il existe des fonds de suivi des indices et des approches basées sur la diversification des portefeuilles, qui visent à représenter un portefeuille avec un grand nombre d’actifs par un plus petit nombre de stocks représentatifs. Ce bloc-notes illustre un problème de diversification de portefeuille, qui est récemment devenu populaire pour deux raisons : 1. Il permet d’imiter la performance d’un indice (ou d’un ensemble similaire d’actifs) avec un budget limité, à des coûts de transaction limités. C’est-à-dire que l’indice traditionnel peut acheter tous les actifs de l’indice, idéalement avec les mêmes poids que ceux de l’indice. Cela peut être peu pratique pour un certain nombre de raisons : la valeur totale d’un lot à tour unique par actif peut être supérieur à l’actif sous gestion, la grande échelle du problème de suivi de l’indice avec des contraintes d’intégration peut rendre le problème d’optimisation difficile, et les coûts de transaction du rééquilibrage fréquent pour ajuster les positions aux pondérations de l’indice peuvent rendre l’approche coûteuse. Ainsi, une approche populaire consiste à sélectionner un portefeuille de <span class="math notranslate nohighlight">\(q\)</span> actifs qui représentent le marché avec <span class="math notranslate nohighlight">\(n\)</span> actifs, où <span class="math notranslate nohighlight">\(q\)</span> est significativement plus petit que <span class="math notranslate nohighlight">\(n\)</span>, mais où le portefeuille reproduit le comportement du marché sous-jacent. Pour déterminer comment regrouper des actifs dans <span class="math notranslate nohighlight">\(q\)</span> groupes et comment déterminer quels sont les <span class="math notranslate nohighlight">\(q\)</span> actifs qui doivent les représenter, il s’agit de résoudre un problème d’optimisation à grande échelle. Dans ce qui suit, nous décrirons le modèle mathématique du problème de diversification des portefeuilles tel qu’il a été introduit dans [Cornuejols &amp; Tutuncu, 2006] 2. Il permet des mesures de similarité entre les séries chronologiques au-delà de la matrice de covariance. Notez que, traditionnellement, la théorie moderne du portefeuille considère la matrice de covariance comme une mesure de similitude entre les actifs. Par conséquent, la matrice de covariance est imparfaite. Prenons par exemple une société cotée à la fois à Londres et à New York. Même si les deux listes devraient être très semblables, seules des parties de la série chronologique des prix des deux listes se chevaucheront, en raison du chevauchement partiel des périodes d’ouverture des marchés. Au lieu de covariance, on peut considérer, par exemple, un gauchissement dynamique de [Berndt et Clifford, 1994] comme une mesure de la similarité entre deux séries temporelles, ce qui permet au fait que pour certaines périodes, les données ne sont capturées que par une seule série temporelle, alors que pour d’autres, les deux séries temporelles présentent une similitude en raison de l’évolution parallèle du cours boursier.</p>
+<p>Le workflow global que nous démontrons comprend :</p>
 <ol class="arabic simple">
-<li><p>pick the ground set of assets. In our case, this is a small number of US stocks.</p></li>
-<li><p>load the time series capturing the evolution of the prices of assets. In our case, this is a simplistic load of adjusted daily closing price data from Wikipedia or Nasdaq or LSE or EuroNext, whereas in a real asset management, a much higher frequency may be considered.</p></li>
-<li><p>compute the pair-wise similarity among the time series. In our case, we run a linear-time approximation of the dynamic time warping, still on the classical computer.</p></li>
-<li><p>compute the actual portfolio of <span class="math notranslate nohighlight">\(q\)</span> representative assets, based on the similarity measure. This step is run twice, actually. First, we obtain a reference value by a run of an IBM solver (IBM ILOG CPLEX or the Exact Eigensolver) on the classical computer. Second, we run an alternative, hybrid algorithm partly on the quantum computer.</p></li>
-<li><p>visualization of the results. In our case, this is again a simplistic plot.</p></li>
+<li><p>choisir l’ensemble des actifs de base. Dans notre cas, il s’agit d’un petit nombre d’actions américaines.</p></li>
+<li><p>charger la série temporelle représentant l’évolution des prix des actifs. Dans notre cas, il s’agit de données simplistes de clôture journalière ajustées depuis Wikipédia ou Nasdaq ou LSE ou EuroNext, alors que dans une gestion réelle des actifs, une fréquence beaucoup plus élevée peut être envisagée.</p></li>
+<li><p>calculer la similitude par paire au sein de la série chronologique. Dans notre cas, nous exécutons une approximation linéaire, toujours sur l’ordinateur classique.</p></li>
+<li><p>calculer le portefeuille réel de <span class="math notranslate nohighlight">\(q\)</span> actifs représentatifs, en se basant sur la mesure de similarité. Cette étape est exécutée deux fois, en fait. Tout d’abord, nous obtenons une valeur de référence par l’exécution d’un solveur IBM (IBM ILOG CPLEX ou l’exact Eigensolver) sur l’ordinateur classique. Ensuite, nous exécutons un algorithme alternatif hybride en partie sur l’ordinateur quantique.</p></li>
+<li><p>visualisation des résultats, dans notre cas, il s’agit à nouveau d’un graphique simpliste.</p></li>
 </ol>
-<p>In the following, we first explain the model used in (4) above, before we proceed with the installation of the pre-requisites and the data loading.</p>
+<p>Dans ce qui suit, nous expliquons d’abord le modèle utilisé ci-dessus (4), avant de procéder à l’installation des pré-requis et au chargement des données.</p>
 </div>
-<div class="section" id="The-Model">
-<h2>The Model<a class="headerlink" href="#The-Model" title="Lien permanent vers ce titre">¶</a></h2>
-<p>As discussed in [Cornuejols &amp; Tutuncu, 2006], we describe a mathematical model that clusters assets into groups of similar ones and selects one representative asset from each group to be included in the index fund portfolio. The model is based on the following data, which we will discuss in more detail later:</p>
+<div class="section" id="Le-modèle">
+<h2>Le modèle<a class="headerlink" href="#Le-modèle" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Comme discuté dans [Cornuejols &amp; Tutuncu, 2006], nous décrivons un modèle mathématique qui regroupe les actifs en groupes d’actifs similaires et sélectionne un actif représentatif de chaque groupe à inclure dans le portefeuille de fonds. Le modèle est basé sur les données suivantes, dont nous discuterons plus en détail plus tard :</p>
 <div class="math notranslate nohighlight">
 \[\rho_{ij} = \textrm{similarity}\, \textrm{between}\, \textrm{stock}\, i \, \textrm{and}\, \textrm{stock}\, j.\]</div>
-<p>For example, <span class="math notranslate nohighlight">\(\rho_{ii} = 1\)</span>, <span class="math notranslate nohighlight">\(\rho_{ij} \leq 1\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> is larger for more similar stocks. An example of this is the correlation between the returns of stocks <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>. But one could choose other similarity indices <span class="math notranslate nohighlight">\(\rho_{ij}\)</span>.</p>
-<p>The problem that we are interested in solving is:</p>
+<p>Par exemple, <span class="math notranslate nohighlight">\(\rho_{ii} = 1\)</span>, <span class="math notranslate nohighlight">\(\rho_{ij} \leq 1\)</span> pour <span class="math notranslate nohighlight">\(i \neq j\)</span> et <span class="math notranslate nohighlight">\(\rho_{ij}\)</span> est plus grand pour des actions plus similaires. Un exemple de ceci est la corrélation entre les retours des actions <span class="math notranslate nohighlight">\(i\)</span> et <span class="math notranslate nohighlight">\(j\)</span>. Mais on pourrait choisir d’autres indices de similitude <span class="math notranslate nohighlight">\(\rho_{ij}\)</span>.</p>
+<p>Le problème que nous voulons résoudre est :</p>
 <div class="math notranslate nohighlight">
 \[(M) \quad  f = \max_{x_{ij}, y_{j}} \,\, \sum_{i=1}^n \sum_{j=1}^n \rho_{ij} x_{ij}\]</div>
-<p>subject to the clustering constraint:</p>
+<p>sous réserve de la contrainte de mise en cluster :</p>
 <div class="math notranslate nohighlight">
-\[\sum_{j=1}^n y_j = q,\]</div>
-<p>to consistency constraints:</p>
+\[\sum_ { j= 1 } ^ n y_j = q,\]</div>
+<p>aux contraintes de cohérence :</p>
 <div class="math notranslate nohighlight">
-\[\sum_{j=1}^n x_{ij} = 1, \,\textrm{ for }\,  i = 1,\ldots, n,
-\quad x_{ij} \leq y_j,\,\textrm{ for }\,  i = 1,\ldots, n; \, j = 1,\ldots, n,
-\quad x_{jj} = y_j,\,\textrm{ for }\,  j = 1,\ldots, n,\]</div>
-<p>and integral constraints:</p>
+\[\sum_{j=1}^n x_{ij} = 1, \,\textrm{ for }\,  i = 1,\ldots, n, \quad x_{ij} \leq y_j,\,\textrm{ for }\,  i = 1,\ldots, n; \, j = 1,\ldots, n, \quad x_{jj} = y_j,\,\textrm{ for }\,  j = 1,\ldots, n,\]</div>
+<p>et les contraintes intégrales :</p>
 <div class="math notranslate nohighlight">
-\[\quad  x_{ij}, y_j \in\{0,1\}, \,\textrm{ for }\,  i = 1,\ldots, n; \, j = 1,\ldots, n.\]</div>
-<p>The variables <span class="math notranslate nohighlight">\(y_j\)</span> describe which stocks <span class="math notranslate nohighlight">\(j\)</span> are in the index fund (<span class="math notranslate nohighlight">\(y_j = 1\)</span> if <span class="math notranslate nohighlight">\(j\)</span> is selected in the fund, <span class="math notranslate nohighlight">\(0\)</span> otherwise). For each stock <span class="math notranslate nohighlight">\(i = 1,\dots,n\)</span>, the variable <span class="math notranslate nohighlight">\(x_{ij}\)</span> indicates which stock <span class="math notranslate nohighlight">\(j\)</span> in the index fund is most similar to <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(x_{ij} = 1\)</span> if <span class="math notranslate nohighlight">\(j\)</span> is the most similar stock in the index fund, <span class="math notranslate nohighlight">\(0\)</span> otherwise).</p>
-<p>The first constraint selects <span class="math notranslate nohighlight">\(q\)</span> stocks in the fund. The second constraint imposes that each stock <span class="math notranslate nohighlight">\(i\)</span> has exactly one representative stock <span class="math notranslate nohighlight">\(j\)</span> in the fund. The third and fourth constraints guarantee that stock <span class="math notranslate nohighlight">\(i\)</span> can be represented by stock <span class="math notranslate nohighlight">\(j\)</span> only if <span class="math notranslate nohighlight">\(j\)</span> is in the fund. The objective of the model maximizes the similarity between the <span class="math notranslate nohighlight">\(n\)</span> stocks and their representatives in the fund. Different cost functions can also be considered.</p>
-<p>Let us concatenate the decision variables in one vector</p>
+\[\quad x_{ij}, y_j \in\{0,1\}, \,\textrm{ for }\, i = 1,\ldots, n; \, j = 1,\ldots, n.\]</div>
+<p>Les variables <span class="math notranslate nohighlight">\(y_j\)</span> décrivent quelles actions <span class="math notranslate nohighlight">\(j\)</span> sont dans le fonds d’index (<span class="math notranslate nohighlight">\(y_j = 1\)</span> si <span class="math notranslate nohighlight">\(j\)</span> est sélectionné dans le fonds, <span class="math notranslate nohighlight">\(0\)</span> autrement). Pour chaque action <span class="math notranslate nohighlight">\(i = 1,\dots,n\)</span>, la variable <span class="math notranslate nohighlight">\(x_{ij}\)</span> indique quelle action <span class="math notranslate nohighlight">\(j\)</span> dans le fonds d’index est la plus similaire à <span class="math notranslate nohighlight">\(i\)</span> (<span class="math notranslate nohighlight">\(x_{ij} = 1\)</span> si <span class="math notranslate nohighlight">\(j\)</span> est le titre le plus similaire dans le fonds d’index, <span class="math notranslate nohighlight">\(0\)</span> autrement).</p>
+<p>La première contrainte sélectionne <span class="math notranslate nohighlight">\(q\)</span> actions dans le fonds. La seconde contrainte impose que chaque stock <span class="math notranslate nohighlight">\(i\)</span> ait exactement une action représentative <span class="math notranslate nohighlight">\(j\)</span> dans le fonds. Les troisième et quatrième contraintes garantissent que le stock <span class="math notranslate nohighlight">\(i\)</span> peut être représenté par le stock <span class="math notranslate nohighlight">\(j\)</span> seulement si <span class="math notranslate nohighlight">\(j\)</span> est dans le fonds. L’objectif du modèle maximise la similitude entre les stocks <span class="math notranslate nohighlight">\(n\)</span> et leurs représentants dans le fonds. Différentes fonctions de coût peuvent également être envisagées.</p>
+<p>Concaténons les variables de décision dans un seul vecteur</p>
 <div class="math notranslate nohighlight">
 \[{\bf z} = [x_{11},x_{12},\ldots,x_{1n}, x_{22},\ldots,x_{nn}, y_{1},\ldots,y_{n}],\]</div>
-<p>whose dimension is <span class="math notranslate nohighlight">\({\bf z} \in \{0,1\}^N\)</span>, with <span class="math notranslate nohighlight">\(N = n (n+1)\)</span> and denote the optimal solution with <span class="math notranslate nohighlight">\({\bf z}^*\)</span>, and the optimal cost <span class="math notranslate nohighlight">\(f^*\)</span>.</p>
+<p>dont la dimension est <span class="math notranslate nohighlight">\({ \bf z } \in \ { 0 ,1 \ } ^ N\)</span>, avec <span class="math notranslate nohighlight">\(N = n (n + 1)\)</span> et dénote la solution optimale avec <span class="math notranslate nohighlight">\({ \bf z } ^ * \)</span> f ^ * <a href="#id1"><span class="problematic" id="id2">`</span></a>.</p>
 </div>
-<div class="section" id="A-Hybrid-Approach">
-<h2>A Hybrid Approach<a class="headerlink" href="#A-Hybrid-Approach" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Here, we demonstrate an approach that combines classical and quantum computing steps, following the quantum approximate optimization approach of Farhi, Goldstone, and Gutmann (2014).</p>
-<div class="section" id="Construct-a-binary-polynomial-optimization">
-<h3>Construct a binary polynomial optimization<a class="headerlink" href="#Construct-a-binary-polynomial-optimization" title="Lien permanent vers ce titre">¶</a></h3>
-<p>From <span class="math notranslate nohighlight">\((M)\)</span> one can construct a binary polynomial optimization with equality constraints only, by substituting the <span class="math notranslate nohighlight">\(x_{ij} \leq y_j\)</span> inequality constraints with the equivalent equality constraints <span class="math notranslate nohighlight">\(x_{ij} (1- y_j) = 0\)</span>. Then the problem becomes:</p>
+<div class="section" id="Une-approche-hybride">
+<h2>Une approche hybride<a class="headerlink" href="#Une-approche-hybride" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ici, nous démontrons une approche qui combine des étapes d’informatique classique et quantique, et nous suivons l’approche d’optimisation quantique approximative de Farhi, Goldstone et Gutman (2014).</p>
+<div class="section" id="Construction-d'une-optimisation-polynomiale-binaire">
+<h3>Construction d’une optimisation polynomiale binaire<a class="headerlink" href="#Construction-d'une-optimisation-polynomiale-binaire" title="Lien permanent vers ce titre">¶</a></h3>
+<p>A partir de :math:` (M) ` on peut construire une optimisation polynomiale binaire avec des contraintes d’égalité seulement, en substituant les contraintes d’inégalité :math:` x_{ij} leq y_j` avec les contraintes d’égalité équivalentes :math:` x_{ij} (1-y_j) = 0 <a href="#id1"><span class="problematic" id="id2">`</span></a>. Le problème devient alors:</p>
 <div class="math notranslate nohighlight">
 \[(BPO) \quad  f = \max_{x_{ij}, y_{j}} \,\, \sum_{i=1}^n \sum_{j=1}^n \rho_{ij} x_{ij}\]</div>
-<p>subject to the clustering constraint, the integral constraints, and the following modified consistency constraints:</p>
+<p>sous réserve de la contrainte de mise en cluster, des contraintes intégrales et des contraintes de cohérence modifiées suivantes :</p>
 <div class="math notranslate nohighlight">
 \[\sum_{j=1}^n x_{ij} = 1, \,\textrm{ for }\,  i = 1,\ldots, n,\]</div>
 <div class="math notranslate nohighlight">
@@ -549,9 +542,9 @@ captured by only one of the time series, while for others, both time series exhi
 <div class="math notranslate nohighlight">
 \[\quad x_{jj} = y_j,\,\textrm{ for }\,  j = 1,\ldots, n.\]</div>
 </div>
-<div class="section" id="Construct-the-Ising-Hamiltonian">
-<h3>Construct the Ising Hamiltonian<a class="headerlink" href="#Construct-the-Ising-Hamiltonian" title="Lien permanent vers ce titre">¶</a></h3>
-<p>We can now construct the Ising Hamiltonian (QUBO) by penalty methods (introducing a penalty coefficient <span class="math notranslate nohighlight">\(A\)</span> for each equality constraint) as</p>
+<div class="section" id="Construction-de-l'hamiltonien-Ising">
+<h3>Construction de l’hamiltonien Ising<a class="headerlink" href="#Construction-de-l'hamiltonien-Ising" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Nous pouvons maintenant construire l’hamiltonien Ising (QUBO) par des méthodes de pénalité (introduisant un coefficient de pénalité <span class="math notranslate nohighlight">\(A\)</span> pour chaque contrainte d’égalité) en tant que</p>
 <div class="math notranslate nohighlight">
 \[(IH) \quad H = \sum_{i=1}^n \sum_{j=1}^n \rho_{ij} x_{ij} + A\Big( \sum_{j=1}^n y_j - q\Big)^2 + \sum_{i=1}^n A\Big( \sum_{j=1}^n x_{ij} - 1\Big)^2 + \sum_{j=1}^n A (x_{jj}-y_j)^2 +\sum_{i=1}^n \sum_{j=1}^n A \left(x_{ij} (1- y_j)\right).\]</div>
 </div>
@@ -1103,12 +1096,12 @@ finding optimal solutions of the ILP is harder than finding local optima of the 
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Portfolio Diversification</a><ul>
+<li><a class="reference internal" href="#">Diversification du portefeuille</a><ul>
 <li><a class="reference internal" href="#Introduction">Introduction</a></li>
-<li><a class="reference internal" href="#The-Model">The Model</a></li>
-<li><a class="reference internal" href="#A-Hybrid-Approach">A Hybrid Approach</a><ul>
-<li><a class="reference internal" href="#Construct-a-binary-polynomial-optimization">Construct a binary polynomial optimization</a></li>
-<li><a class="reference internal" href="#Construct-the-Ising-Hamiltonian">Construct the Ising Hamiltonian</a></li>
+<li><a class="reference internal" href="#Le-modèle">Le modèle</a></li>
+<li><a class="reference internal" href="#Une-approche-hybride">Une approche hybride</a><ul>
+<li><a class="reference internal" href="#Construction-d'une-optimisation-polynomiale-binaire">Construction d’une optimisation polynomiale binaire</a></li>
+<li><a class="reference internal" href="#Construction-de-l'hamiltonien-Ising">Construction de l’hamiltonien Ising</a></li>
 <li><a class="reference internal" href="#From-Hamiltonian-to-Quadratic-Programming-(QP)-formulation">From Hamiltonian to Quadratic Programming (QP) formulation</a></li>
 </ul>
 </li>
