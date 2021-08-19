@@ -979,8 +979,8 @@ array([[0.81  , 0.2495, 0.218 , 0.0605],
 </div>
 </section>
 </section>
-<section id="Tensored-mitigation">
-<h2>Tensored mitigation<a class="headerlink" href="#Tensored-mitigation" title="本標題的永久連結">¶</a></h2>
+<section id="張量化的緩解">
+<h2>張量化的緩解<a class="headerlink" href="#張量化的緩解" title="本標題的永久連結">¶</a></h2>
 <p>The calibration can be simplified if the error is known to be local. By “local error” we mean that the error can be tensored to subsets of qubits. In this case, less than <span class="math notranslate nohighlight">\(2^n\)</span> states are needed for the computation of the calibration matrix.</p>
 <p>Assume that the error acts locally on qubit 2 and the pair of qubits 3 and 4. Construct the calibration circuits by using the function <code class="docutils literal notranslate"><span class="pre">tensored_meas_cal</span></code>. Unlike before we need to explicitly divide the qubit list up into subset regions.</p>
 <div class="nbinput nblast docutils container">
@@ -1018,7 +1018,7 @@ mcalcal_111
 </pre></div></div>
 </div>
 <p>Let us elaborate on the circuit names. We see that there are only four circuits, instead of eight. The total number of required circuits is <span class="math notranslate nohighlight">\(2^m\)</span> where <span class="math notranslate nohighlight">\(m\)</span> is the number of qubits in the target subset (here <span class="math notranslate nohighlight">\(m=2\)</span>).</p>
-<p>Each basis state of qubits 3 and 4 appears exactly once. Only two basis states are required for qubit 2, so these are split equally across the four experiments. For example, state ‘0’ of qubit 2 appears in state labels ‘000’ and ‘010’.</p>
+<p>量子位元 3 和 4 的每個基底態確切地出現一次。量子位元 2 只需要兩個基底態，所以這些基底態平均分配到四個實驗。 例如，量子位元 2 的狀態 『0』 出現在狀態標籤 『000』 及 『010’中。</p>
 <p>We now execute the calibration circuits on an Aer simulator, using the same noise model as before. This noise is in fact local to qubits 3 and 4 separately, but assume that we don’t know it, and that we only know that it is local for qubit 2.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
@@ -1273,7 +1273,7 @@ Q3/Q4 Calibration Matrix
 </pre></div>
 </div>
 </div>
-<p>Then, we initialize the instances that are required to execute the algorithm.</p>
+<p>然後，我們初始化運行算法所需的實例 (instances)。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
@@ -1422,7 +1422,7 @@ OrderedDict([   (&#39;aux_operator_eigenvalues&#39;, None),
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/13。
+      最後更新於 2021/08/19。
 
     </p>
   </div>
@@ -1452,7 +1452,7 @@ OrderedDict([   (&#39;aux_operator_eigenvalues&#39;, None),
 <li><a class="reference internal" href="#Applying-to-a-reduced-subset-of-qubits">Applying to a reduced subset of qubits</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Tensored-mitigation">Tensored mitigation</a></li>
+<li><a class="reference internal" href="#張量化的緩解">張量化的緩解</a></li>
 <li><a class="reference internal" href="#Running-Qiskit-Algorithms-with-Measurement-Error-Mitigation">Running Qiskit Algorithms with Measurement Error Mitigation</a></li>
 </ul>
 </li>

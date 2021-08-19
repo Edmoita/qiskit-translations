@@ -578,7 +578,7 @@ div.rendered_html tbody tr:hover {
 <h1>建構雜訊模型<a class="headerlink" href="#建構雜訊模型" title="本標題的永久連結">¶</a></h1>
 <section id="簡介">
 <h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
-<p>此筆記本介紹如何使用 Qiskit Aer <code class="docutils literal notranslate"><span class="pre">雜訊</span></code> 模組，以建立用於具有雜訊模擬的自訂雜訊模型。</p>
+<p>此筆記本介紹如何使用 Qiskit Aer <code class="docutils literal notranslate"><span class="pre">noise</span></code> 模組，以建立用於具有雜訊模擬的自訂雜訊模型。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -600,14 +600,14 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="Qiskit-Aer-噪音模組">
-<h2>Qiskit Aer 噪音模組<a class="headerlink" href="#Qiskit-Aer-噪音模組" title="本標題的永久連結">¶</a></h2>
+<section id="Qiskit-Aer-雜訊模組">
+<h2>Qiskit Aer 雜訊模組<a class="headerlink" href="#Qiskit-Aer-雜訊模組" title="本標題的永久連結">¶</a></h2>
 <p>The Qiskit Aer <code class="docutils literal notranslate"><span class="pre">noise</span></code> module contains Python classes to build customized noise models for simulation. There are three key classes:</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> 類別是用來儲存具有雜訊模擬的雜訊模型。</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">QuantumError</span></code> class which describes CPTP gate errors. These can be applied:</p>
 <ul class="simple">
-<li><p>After <em>gate</em> or <em>reset</em> instructions</p></li>
+<li><p>在 <em>閘 (gate)</em> 或 * 重設 (reset)* 指令之後</p></li>
 <li><p>Before <em>measure</em> instructions.</p></li>
 </ul>
 </li>
@@ -1269,7 +1269,7 @@ NoiseModel:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/13。
+      最後更新於 2021/08/19。
 
     </p>
   </div>
@@ -1290,7 +1290,7 @@ NoiseModel:
               <ul>
 <li><a class="reference internal" href="#">建構雜訊模型</a><ul>
 <li><a class="reference internal" href="#簡介">簡介</a></li>
-<li><a class="reference internal" href="#Qiskit-Aer-噪音模組">Qiskit Aer 噪音模組</a></li>
+<li><a class="reference internal" href="#Qiskit-Aer-雜訊模組">Qiskit Aer 雜訊模組</a></li>
 <li><a class="reference internal" href="#量子誤差">量子誤差</a><ul>
 <li><a class="reference internal" href="#結合量子誤差">結合量子誤差</a></li>
 <li><a class="reference internal" href="#範例">範例</a></li>

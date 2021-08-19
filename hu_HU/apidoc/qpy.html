@@ -377,13 +377,13 @@ file format is as follows:</p>
 <p>A QPY file (or memory object) always starts with the following 7
 byte UTF8 string: <code class="docutils literal notranslate"><span class="pre">QISKIT</span></code> which is immediately followed by the overall
 file header. The contents of thie file header as defined as a C struct are:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">qpy_version</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">qiskit_major_version</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">qiskit_minor_version</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">qiskit_patch_version</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">num_circuits</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">qpy_version</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">qiskit_major_version</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">qiskit_minor_version</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">qiskit_patch_version</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">num_circuits</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>All values use network byte order <a class="footnote-reference brackets" href="#f1" id="id1">1</a> (big endian) for cross platform
@@ -397,16 +397,16 @@ circuits in the data.</p>
 <section id="header">
 <h3>HEADER<a class="headerlink" href="#header" title="Hivatkozás erre a fejezetcímre">¶</a></h3>
 <p>The contents of HEADER as defined as a C struct are:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="n">unit16_t</span> <span class="n">name_size</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">global_phase</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">num_qubits</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">num_clbits</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">metadata_size</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">num_registers</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">num_instructions</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">num_custom_gates</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">unit16_t</span><span class="w"> </span><span class="n">name_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">global_phase</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">num_qubits</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">num_clbits</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">metadata_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">num_registers</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">num_instructions</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">num_custom_gates</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This is immediately followed by <code class="docutils literal notranslate"><span class="pre">name_size</span></code> bytes of utf8 data for the name
@@ -424,12 +424,12 @@ the metadata for the circuit.</p>
 <p>The contents of REGISTERS is a number of REGISTER object. If num_registers is
 &gt; 0 then after reading METADATA you read that number of REGISTER structs defined
 as:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="n">type</span><span class="p">;</span>
-    <span class="kt">_Bool</span> <span class="n">standalone</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">size</span><span class="p">;</span>
-    <span class="n">unit16_t</span> <span class="n">name_size</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">_Bool</span><span class="w"> </span><span class="n">standalone</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">unit16_t</span><span class="w"> </span><span class="n">name_size</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">type</span></code> can be <code class="docutils literal notranslate"><span class="pre">'q'</span></code> or <code class="docutils literal notranslate"><span class="pre">'c'</span></code>.</p>
@@ -459,19 +459,19 @@ as part of it, for example:</p>
 <p>If the circuit contains custom defitions for any of the instruction in the circuit.
 this section</p>
 <p>CUSTOM_DEFINITION_HEADER contents are defined as:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">uint64_t</span> <span class="n">size</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>If size is greater than 0 that means the circuit contains custom instruction(s).
 Each custom instruction is defined with a CUSTOM_INSTRUCTION block defined as:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">uint16_t</span> <span class="n">name_size</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">type</span><span class="p">;</span>
-    <span class="kt">_Bool</span> <span class="n">custom_definition</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">size</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">name_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">_Bool</span><span class="w"> </span><span class="n">custom_definition</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">size</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Immediately following the CUSTOM_INSTRUCTION struct is the utf8 encoded name
@@ -484,16 +484,16 @@ instruction can be considered opaque (ie no definition).</p>
 <section id="instructions">
 <h3>INSTRUCTIONS<a class="headerlink" href="#instructions" title="Hivatkozás erre a fejezetcímre">¶</a></h3>
 <p>The contents of INSTRUCTIONS is a list of INSTRUCTION metadata objects</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">uint16_t</span> <span class="n">name_size</span><span class="p">;</span>
-    <span class="kt">uint16_t</span> <span class="n">label_size</span><span class="p">;</span>
-    <span class="kt">uint16_t</span> <span class="n">num_parameters</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">num_qargs</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">num_cargs</span><span class="p">;</span>
-    <span class="kt">_Bool</span> <span class="n">has_conditionl</span>
-    <span class="kt">uint16_t</span> <span class="n">conditonal_reg_name_size</span><span class="p">;</span>
-    <span class="kt">long</span> <span class="kt">long</span> <span class="n">conditional_value</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">name_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">label_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">num_parameters</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">num_qargs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">num_cargs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">_Bool</span><span class="w"> </span><span class="n">has_conditionl</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">conditonal_reg_name_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">conditional_value</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This metadata object is immediately followed by <code class="docutils literal notranslate"><span class="pre">name_size</span></code> bytes of utf8 bytes
@@ -512,20 +512,20 @@ arguments of that instruction. These are in the order of all quantum arguments
 (there are num_qargs of these) followed by all classical arguments (num_cargs
 of these).</p>
 <p>The contents of each INSTRUCTION_ARG is:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="n">type</span><span class="p">;</span>
-    <span class="n">unisgned</span> <span class="kt">int</span> <span class="n">index</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">unisgned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">type</span></code> can be <code class="docutils literal notranslate"><span class="pre">'q'</span></code> or <code class="docutils literal notranslate"><span class="pre">'c'</span></code>.</p>
 <p>After all arguments for an instruction the parameters are specified with
 <code class="docutils literal notranslate"><span class="pre">num_parameters</span></code> INSTRUCTION_PARAM structs.</p>
 <p>The contents of each INSTRUCTION_PARAM is:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="n">type</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">size</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>After each INSTRUCTION_PARAM the next <code class="docutils literal notranslate"><span class="pre">size</span></code> bytes are the parameter’s data.
@@ -544,10 +544,10 @@ or a numpy type) which means the data is .npy format <a class="footnote-referenc
 <h3>PARAMETER<a class="headerlink" href="#parameter" title="Hivatkozás erre a fejezetcímre">¶</a></h3>
 <p>A PARAMETER represents a <a class="reference internal" href="../stubs/qiskit.circuit.Parameter.html#qiskit.circuit.Parameter" title="qiskit.circuit.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a> object the data for
 a INSTRUCTION_PARAM. The contents of the PARAMETER are defined as:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">uint16_t</span> <span class="n">name_size</span><span class="p">;</span>
-    <span class="kt">char</span> <span class="n">uuid</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">name_size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">uuid</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>which is immediately followed by <code class="docutils literal notranslate"><span class="pre">name_size</span></code> utf8 bytes representing the
@@ -559,20 +559,20 @@ parameter name.</p>
 object that the data for an INSTRUCTION_PARAM. The contents of a PARAMETER_EXPR
 are defined as:</p>
 <p>The PARAMETER_EXPR data starts with a header:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">uint64_t</span> <span class="n">map_elements</span><span class="p">,</span>
-    <span class="kt">uint64_t</span> <span class="n">expr_size</span><span class="p">,</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">map_elements</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">expr_size</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Immediately following the header is <code class="docutils literal notranslate"><span class="pre">expr_size</span></code> bytes of utf8 data containing
 the expression string, which is the sympy srepr of the expression for the
 parameter expression. Follwing that is a symbol map which contains
 <code class="docutils literal notranslate"><span class="pre">map_elements</span></code> elements with the format</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">char</span> <span class="n">type</span><span class="p">;</span>
-    <span class="kt">uint64_t</span> <span class="n">size</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Which is followed immediately by <code class="docutils literal notranslate"><span class="pre">PARAMETER</span></code> object (both the struct and utf8
@@ -582,10 +582,10 @@ data of the symbol. The data format is dependent on the value of <code class="do
 size will be 0, the value will just be the same as the key. If
 <code class="docutils literal notranslate"><span class="pre">type</span></code> is <code class="docutils literal notranslate"><span class="pre">f</span></code> then it represents a double precision float. If <code class="docutils literal notranslate"><span class="pre">type</span></code> is
 <code class="docutils literal notranslate"><span class="pre">c</span></code> it represents a double precision complex, which is represented by:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">real</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">imag</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">real</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">imag</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>this matches the internal C representation of Python’s complex type. <a class="footnote-reference brackets" href="#f3" id="id3">3</a>
@@ -630,7 +630,7 @@ Finally, if type is <code class="docutils literal notranslate"><span class="pre"
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Utolsó frissítés 2021/08/13.
+      Utolsó frissítés 2021/08/19.
 
     </p>
   </div>

@@ -582,10 +582,10 @@ div.rendered_html tbody tr:hover {
 <p>重複碼是量子誤差修正的一個簡單例子，其中是邏輯 <em>位元</em> 被儲存，而不是邏輯 <em>量子位元</em>。重複碼的一個實例是由兩個數字定義的，我們稱之為 <span class="math notranslate nohighlight">\(d\)</span> 和 <span class="math notranslate nohighlight">\(T\)</span>。</p>
 <p>此參數 <span class="math notranslate nohighlight">\(d\)</span> 決定被使用的實體量子位元數目。 邏輯位元的實際資訊會儲存在 <span class="math notranslate nohighlight">\(d\)</span> 個量子位元內 （我們將之稱為 <em>代碼量子位元</em>）。 其編碼可以很簡單的方式完成：若要編一個 <code class="docutils literal notranslate"><span class="pre">0</span></code>，我們可以將所有的量子位元設定在此狀態 <span class="math notranslate nohighlight">\(|0\rangle\)</span>，若要編一個 <code class="docutils literal notranslate"><span class="pre">1</span></code>，我們可以將所有的量子位元設定在此狀態 <span class="math notranslate nohighlight">\(|1\rangle\)</span>。 若要重新讀取該數值，您只需查看任何一個量子位元。 如果要以防止量子位元誤差的方式來讀取該數值，您可以讀取所有量子位元並進行多數決。</p>
 <p>我們不僅可以在讀取的時候汲取能幫助我們修正誤差的有用資訊，還能在該邏輯位元閒置時汲取資訊，或甚至是在該邏輯位元正在運算的時候。</p>
-<p>Since this is an exercise in quantum error correction, we will do this in a way that would also work for logical <em>qubits</em>. Specifically, our method of extracting information about errors must not extract any information regarding the stored logical information. In the quantum case, this is required so that we do not disturb superposition states of the stored qubits.</p>
+<p>由於這是一個量子誤差修正的工作，我們將會以符合邏輯 <a href="#id1"><span class="problematic" id="id2">*</span></a>量子位元*的方式來做這一工作。 尤其，我們汲取關於誤差的資訊之方法不得汲取關於已經儲存的任何邏輯資訊。 在量子的情況下，這是必需的，因為這樣我們就不會干擾已經儲存的量子位元的疊加狀態。</p>
 <p>We will extract information over <span class="math notranslate nohighlight">\(T\)</span> rounds of <em>syndrome measurements</em>. For the repetition code, these are based on the fact that all code qubits should be in the same state (all <span class="math notranslate nohighlight">\(|0\rangle\)</span> or all <span class="math notranslate nohighlight">\(|1\rangle\)</span>). Any departure from this is therefore a signature of error. Specifically, we imagine our <span class="math notranslate nohighlight">\(d\)</span> code qubits sitting along a line. We will then perform a measurement on each pair of neighboring code qubits. This will tell us whether they are the same or different,
 without extracting any information on what their values are.</p>
-<p>The implementation of these measurements requires <span class="math notranslate nohighlight">\(d-1\)</span> additional qubits, which we will call <em>link qubits</em> for the repetition code. By performing two CNOTs between the pair of code qubits and a corresponding link qubit, the required information (and only the required information) is placed on the link qubit and can then be measured.</p>
+<p>這些測量的實作需要 <span class="math notranslate nohighlight">\(d-1\)</span> 個額外的量子位元，我們將這些額外的量子位元稱作 <em>連結量子位元 (link qubits)</em> 。 通過在相鄰編碼量子位元對和相應的結量子位元之間執行兩個 CNOTs ，需要的資訊（且僅需要此資訊）被放置在此結量子位元上，然後可以被測量。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -615,7 +615,7 @@ link_qubit_0: |0&gt;┤ X ├┤ X ├
                  └───┘└───┘
 </pre></div></div>
 </div>
-<p>Here we provide tools for creating and testing repetition codes. The first thing we need to do is import them.</p>
+<p>在這裡，我們提供工具來建立和測試重複碼。 我們要做的第一件事就是輸入它們。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -680,7 +680,7 @@ link_qubit_0: |0&gt;┤ X ├┤ X ├
 QuantumRegister(3, &#39;code_qubit&#39;)
 </pre></div></div>
 </div>
-<p>You can also access the quantum circuits that implement the code. Two of these are produced: one for each of the two possible logical bit values.</p>
+<p>你也可以存取執行程式碼的量子電路。 會產生其中兩個：兩個可能的邏輯位元值各一個。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -868,7 +868,7 @@ code_qubit_2: |0&gt;┤ X ├─░─
                  └───┘ ░
 </pre></div></div>
 </div>
-<p>We can add a round using the <code class="docutils literal notranslate"><span class="pre">syndrome_measurement()</span></code> method.</p>
+<p>我們可以使用 <code class="docutils literal notranslate"><span class="pre">syndrome_measurement()</span></code> 方法來新增一次測量。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -922,7 +922,7 @@ round_0_link_bit_1: 0 ═══════════════════�
 
 </pre></div></div>
 </div>
-<p>A logical <code class="docutils literal notranslate"><span class="pre">X</span></code> operation can be added using the <code class="docutils literal notranslate"><span class="pre">x()</span></code> method.</p>
+<p>我們可以使用 <code class="docutils literal notranslate"><span class="pre">x()</span></code> 方法來新增一步邏輯 <code class="docutils literal notranslate"><span class="pre">X</span></code> 操作 。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -976,8 +976,8 @@ round_0_link_bit_1: 0 ═══════════════════�
 
 </pre></div></div>
 </div>
-<p>This also has a <code class="docutils literal notranslate"><span class="pre">logs</span></code> kwarg, which is a list of the circuits for which <code class="docutils literal notranslate"><span class="pre">X</span></code> is applied. This is <code class="docutils literal notranslate"><span class="pre">['0','1']</span></code> by default.</p>
-<p>Final readout is then done with the <code class="docutils literal notranslate"><span class="pre">readout()</span></code> method.</p>
+<p>這也有 <code class="docutils literal notranslate"><span class="pre">logs</span></code> kwarg，它是已套用 <code class="docutils literal notranslate"><span class="pre">X</span></code> 的電路清單。 其預設為 <code class="docutils literal notranslate"><span class="pre">['0','1']</span></code> 。</p>
+<p>然後，最終的讀取可以被 <code class="docutils literal notranslate"><span class="pre">readout()</span></code> 的方法完成。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -1100,7 +1100,7 @@ round_0_link_bit_1: 0 ═══════════════════�
 </pre></div></div>
 </div>
 <p>Here the strings from right to left represent the outputs of the syndrome measurement rounds, followed by the final measurement of the code qubits.</p>
-<p>These results need to be rewritten in a different form in order to be decoded. To do this we can use the <code class="docutils literal notranslate"><span class="pre">process_results</span></code> method of the code object.</p>
+<p>這些結果需要以不同的格式重新編寫，才能被解碼。 為了這樣做，我們可以使用程式碼物件的 <code class="docutils literal notranslate"><span class="pre">process_results</span></code> 方法。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1119,8 +1119,8 @@ round_0_link_bit_1: 0 ═══════════════════�
 {&#39;0&#39;: {&#39;0 0  00 00 00&#39;: 1024}, &#39;1&#39;: {&#39;1 1  00 00 00&#39;: 1024}}
 </pre></div></div>
 </div>
-<p>The result is a dictionary whose keys are bit strings that represent outputs of the circuit, and the values represent the number of shots for which this output occurred.</p>
-<p>The strings are not the direct output from the circuits. They have been processed to take the form that helps us correct errors. Here’s a short guided tour.</p>
+<p>結果是一個字典，其索引鍵是代表電路的輸出的位元字串，且其值代表最後貢獻到其輸出的量測次數。</p>
+<p>這些字串不是該電路的直接輸出。 它們已被轉換成可以協助我們更正誤差的形式。 以下是一個簡短的導覽。</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">0</span></code> to the far left for the logical <code class="docutils literal notranslate"><span class="pre">0</span></code> result, and the <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">1</span></code> to the far left of the logical <code class="docutils literal notranslate"><span class="pre">1</span></code>, are the logical readout. Any code qubit could be used for this readout, since they should (without errors) all be equal. So we could have just one result here, for one arbitrarily chosen code qubit. Or we could have <span class="math notranslate nohighlight">\(d\)</span>, one for each qubit. Instead we have two, from the two qubits at either end of the line. This is because it works best with the decoder (which we’ll use
 later). In the absence of errors, these two values will always be equal.</p></li>
@@ -1134,7 +1134,7 @@ have caused this syndrome, but they would need to be more complex and so presuma
 <p><strong>Example 2:</strong> <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">0</span>&#160; <span class="pre">0010</span> <span class="pre">0010</span> <span class="pre">0000</span></code> would represent a <span class="math notranslate nohighlight">\(d=5\)</span>, <span class="math notranslate nohighlight">\(T=2\)</span> repetition code with encoded <code class="docutils literal notranslate"><span class="pre">0</span></code>. Here one of the syndrome measurements reported a difference between two code qubits in the first round, leading to a <code class="docutils literal notranslate"><span class="pre">1</span></code>. The next round did not see the same effect, and so resulted in a <code class="docutils literal notranslate"><span class="pre">0</span></code>. However, since this disagreed with the previous result for the same syndrome measurement, and since we track syndrome changes, this change results in another <code class="docutils literal notranslate"><span class="pre">1</span></code>. Subsequent rounds
 also do not detect anything, but this no longer represents a change and hence results in a <code class="docutils literal notranslate"><span class="pre">0</span></code> in the same position. Most likely the measurement result leading to the first <code class="docutils literal notranslate"><span class="pre">1</span></code> was an error.</p>
 <p><strong>Example 3:</strong> <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">1</span>&#160; <span class="pre">0000</span> <span class="pre">0001</span> <span class="pre">0000</span></code> would represent a <span class="math notranslate nohighlight">\(d=5\)</span>, <span class="math notranslate nohighlight">\(T=2\)</span> repetition code with encoded <code class="docutils literal notranslate"><span class="pre">1</span></code>. A code qubit on the end of the line is flipped before the second round of syndrome measurements. This is detected by only a single syndrome measurement, because it is on the end of the line. For the same reason, it also disturbs one of the logical readouts.</p>
-<p>Note that in all these examples, a single error causes exactly two characters in the string to change from the value it would have with no errors. This is, in fact, the reason why the logical output consists of both endpoints. It is a property that will be used by the decoder.</p>
+<p>請注意，在所有這些範例中，單一誤差會導致字串中準確地有兩個字元的數值改變(變得跟原本沒有誤差的數值不同)。 這事實上是邏輯輸出由兩個端點所組成的原因。 這個性質將會被解碼器所使用。</p>
 <p>To see the effects of noise, we need to specify a noise model. For example, let’s set up a simple noise model with gate and measurement errors.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -1307,8 +1307,8 @@ also do not detect anything, but this no longer represents a change and hence re
 </div>
 <p>Here the non-noisy results are the most likely. The rest of the samples are distributed among other possibilities with non-trivial syndromes.</p>
 </section>
-<section id="Decoding-a-repetition-code">
-<h2>Decoding a repetition code<a class="headerlink" href="#Decoding-a-repetition-code" title="本標題的永久連結">¶</a></h2>
+<section id="解碼重複碼">
+<h2>解碼重複碼<a class="headerlink" href="#解碼重複碼" title="本標題的永久連結">¶</a></h2>
 <p>具有雜訊的結果可以在讀出時改變邏輯值，從而影響我們讀出邏輯量子位元的能力。通過查看症狀值可以減緩這種影響。 這些症狀值可以告訴我們哪些邏輯值是否最有可能發生改變，因此允許我們更正錯誤。 對錯誤進行分析和處理的過程稱為「解碼」。 我們通過為我們的程式碼建立一個解碼物件來完成這一任務。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1319,8 +1319,8 @@ also do not detect anything, but this no longer represents a change and hence re
 </pre></div>
 </div>
 </div>
-<p>This analyzes the code by seeing how different kinds of error change the output. With this information, along with a decoding algorithm, we can determine what the logical value is most likely to have been.</p>
-<p>For example, let’s use the ‘matching’ algorithm to decode, which is based on minimum weight perfect matching. This takes specific output strings as input. We’ll give it the simple example string <code class="docutils literal notranslate"><span class="pre">'1</span> <span class="pre">0</span>&#160; <span class="pre">001</span> <span class="pre">100</span> <span class="pre">100'</span></code>, for a logical <code class="docutils literal notranslate"><span class="pre">1</span></code> that has suffered two errors.</p>
+<p>這會透過查看不同類型的誤差改變其輸出的方式來分析程式碼。 有了這些資訊，加上解碼演算法，我們就可以判斷該邏輯值最有可能是什麼了。</p>
+<p>例如，讓我們使用 『matching』 演算法來解碼（以最小加權完美匹配為基礎）。 這會以特定的輸出字串作為輸入。 我們將提供一個簡單範例字串 <code class="docutils literal notranslate"><span class="pre">'1</span> <span class="pre">0</span>&#160; <span class="pre">001</span> <span class="pre">100</span> <span class="pre">100'</span></code>，對於邏輯 <code class="docutils literal notranslate"><span class="pre">1</span></code> ，此字串有兩個誤差。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -1339,7 +1339,7 @@ also do not detect anything, but this no longer represents a change and hence re
 &#39;1 1&#39;
 </pre></div></div>
 </div>
-<p>The output is what the logical part should have been. As you can see, the decoder correctly determined that the readout should have been of a logical <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>該邏輯部分先前應該要和該輸出相同。 如您所見，解碼器正確地判斷讀出先前應該要是邏輯的 <code class="docutils literal notranslate"><span class="pre">1</span></code> 。</p>
 <p>When we take many samples, we can determine the probability with which the decoder is incorrect. This should decrease exponentially as the code size is increased, since the configurations of noise that fool the decoder become less likely. The probability of a logical error is calculated using the <code class="docutils literal notranslate"><span class="pre">logical_prob()</span></code> method. This runs matching by default, but other algorithms can be specified by the <code class="docutils literal notranslate"><span class="pre">algorithm</span></code> kwarg.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
@@ -1482,7 +1482,7 @@ logical error probability for postselection = 0.0
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/13。
+      最後更新於 2021/08/19。
 
     </p>
   </div>
@@ -1506,7 +1506,7 @@ logical error probability for postselection = 0.0
 <li><a class="reference internal" href="#Creating-a-repetition-code">Creating a repetition code</a></li>
 <li><a class="reference internal" href="#Building-a-custom-repetition-code">Building a custom repetition code</a></li>
 <li><a class="reference internal" href="#Running-a-repetition-code">Running a repetition code</a></li>
-<li><a class="reference internal" href="#Decoding-a-repetition-code">Decoding a repetition code</a></li>
+<li><a class="reference internal" href="#解碼重複碼">解碼重複碼</a></li>
 </ul>
 </li>
 </ul>

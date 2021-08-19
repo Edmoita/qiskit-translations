@@ -608,8 +608,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="Overview">
-<h2>Overview<a class="headerlink" href="#Overview" title="本標題的永久連結">¶</a></h2>
+<section id="概述">
+<h2>概述<a class="headerlink" href="#概述" title="本標題的永久連結">¶</a></h2>
 <p>A 1-qubit quantum channel is a function <span class="math notranslate nohighlight">\(\mathcal{C}:\mathbb{C}^{2\times2}\to\mathbb{C}^{2\times2}\)</span> mapping density operators to density operators (to ensure the image is a density operator <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> is required to be completely positive and trace preserving, <strong>CPTP</strong>).</p>
 <p>Given quantum channels <span class="math notranslate nohighlight">\(\mathcal{E}_{1},\dots,\mathcal{E}_{r}\)</span>, and probabilities <span class="math notranslate nohighlight">\(p_1, p_2, \dots, p_r\)</span> such that <span class="math notranslate nohighlight">\(0\le p_i \le 1\)</span> and <span class="math notranslate nohighlight">\(p_1+\dots +p_r = 1\)</span>, a new quantum channel <span class="math notranslate nohighlight">\(\mathcal{C}_\mathcal{E}\)</span> can be constructed such that <span class="math notranslate nohighlight">\(\mathcal{C}_\mathcal{E}(\rho)\)</span> has the effect of choosing the channel <span class="math notranslate nohighlight">\(\mathcal{E}_i\)</span> with probability <span class="math notranslate nohighlight">\(p_i\)</span> and applying it to <span class="math notranslate nohighlight">\(\rho\)</span>.</p>
 <p>The noise transformation function solves the following optimization problem: Given a channel <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> (“goal”) and a list of channels <span class="math notranslate nohighlight">\(\mathcal{E}_{1},\dots,\mathcal{E}_{r}\)</span>, find the probabilities <span class="math notranslate nohighlight">\(p_1, p_2, \dots, p_r\)</span> minimizing <span class="math notranslate nohighlight">\(D(\mathcal{C}, \mathcal{C}_\mathcal{E})\)</span> according to some distance metric <span class="math notranslate nohighlight">\(D\)</span> (the Hilbert-Schmidt metric is currently used).</p>
@@ -808,7 +808,7 @@ QuantumError on 1 qubits. Noise circuits:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/13。
+      最後更新於 2021/08/19。
 
     </p>
   </div>
@@ -829,7 +829,7 @@ QuantumError on 1 qubits. Noise circuits:
               <ul>
 <li><a class="reference internal" href="#">Noise Transformation</a><ul>
 <li><a class="reference internal" href="#簡介">簡介</a></li>
-<li><a class="reference internal" href="#Overview">Overview</a></li>
+<li><a class="reference internal" href="#概述">概述</a></li>
 <li><a class="reference internal" href="#Example:-Approximating-amplitude-damping-noise-with-reset-noise.">Example: Approximating amplitude damping noise with reset noise.</a></li>
 <li><a class="reference internal" href="#Different-input-types">Different input types</a></li>
 </ul>

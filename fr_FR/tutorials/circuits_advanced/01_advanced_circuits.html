@@ -231,7 +231,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing_to_qiskit.html">Contribuer à Qiskit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../configuration.html">Configuration locale</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Questions fréquentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Foire aux Questions</a></li>
 </ul>
 <p><span class="caption-text">Bibliothèques</span></p>
 <ul>
@@ -755,7 +755,7 @@ ParameterView([Parameter(θ)])
 </div>
 <section id="Lier-les-paramètres-aux-valeurs">
 <h3>Lier les paramètres aux valeurs<a class="headerlink" href="#Lier-les-paramètres-aux-valeurs" title="Lien permanent vers ce titre">¶</a></h3>
-<p>All circuit parameters must be bound before sending the circuit to a backend. This can be done as follows: - The <code class="docutils literal notranslate"><span class="pre">bind_parameters</span></code> method accepts a dictionary mapping <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>s to values, and returns a new circuit with each parameter replaced by its corresponding value. Partial binding is supported, in which case the returned circuit will be parameterized by any <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>s that were not mapped to a value.</p>
+<p>Tous les paramètres du circuit doivent être liés avant d’envoyer le circuit à un système d’execution. Cela peut se faire de l’une des deux manières suivantes: - La méthode <code class="docutils literal notranslate"><span class="pre">bind_parameters</span></code> prend un dictionnaire de <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> s fournissant les valeurs, et retourne un nouveau circuit où chaque paramètre est remplacé par sa valeur correspondante. Une liaison -bind- partielle est prise en charge, auquel cas le circuit retourné aura comme paramètre(s) les <code class="docutils literal notranslate"><span class="pre">Parameter</span></code>s pour lesquels une valeur n’a pas été fournie.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -1097,7 +1097,7 @@ q24_8: ────────────────────────�
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Mis à jour le 2021/08/13.
+      Mis à jour le 2021/08/19.
 
     </p>
   </div>

@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>將噪音作用於自訂的的么正閘 &mdash; Qiskit 0.29.0 說明文件</title>
+  <title>將雜訊作用於自定義的么正閘 &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -292,7 +292,7 @@
       </li>
 
         
-      <li>將噪音作用於自訂的的么正閘</li>
+      <li>將雜訊作用於自定義的么正閘</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -574,11 +574,11 @@ div.rendered_html tbody tr:hover {
 <p class="admonition-title">備註</p>
 <p>此頁面是從 <a href="#id1"><span class="problematic" id="id2">`</span></a>tutorials/simulators/4_custom_gate_noise.ipynb`__產生的。</p>
 </div>
-<section id="將噪音作用於自訂的的么正閘">
-<h1>將噪音作用於自訂的的么正閘<a class="headerlink" href="#將噪音作用於自訂的的么正閘" title="本標題的永久連結">¶</a></h1>
+<section id="將雜訊作用於自定義的么正閘">
+<h1>將雜訊作用於自定義的么正閘<a class="headerlink" href="#將雜訊作用於自定義的么正閘" title="本標題的永久連結">¶</a></h1>
 <section id="簡介">
 <h2>簡介<a class="headerlink" href="#簡介" title="本標題的永久連結">¶</a></h2>
-<p>此筆記本會演示如何將自訂的么正閘新增至一個量子電路，並在 Qiskit Aer 中用它們進行噪音模擬。</p>
+<p>This notebook shows how to add custom unitary gates to a quantum circuit, and use them for noise simulations in Qiskit Aer.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -595,8 +595,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="建立矩陣運算子">
-<h2>建立矩陣運算子<a class="headerlink" href="#建立矩陣運算子" title="本標題的永久連結">¶</a></h2>
+<section id="Creating-matrix-operators">
+<h2>Creating matrix operators<a class="headerlink" href="#Creating-matrix-operators" title="本標題的永久連結">¶</a></h2>
 <p>We can use the <code class="docutils literal notranslate"><span class="pre">Operator</span></code> class in <code class="docutils literal notranslate"><span class="pre">qiskit.quantum_info</span></code> to represent arbitrary matrix operators. If the operator is unitary it can then be added to a quantum circuit and used for simulation on Qiskit Aer.</p>
 <p>Lets create two operators below for a CNOT gate and an iSWAP gate:</p>
 <div class="math notranslate nohighlight">
@@ -633,9 +633,9 @@ div.rendered_html tbody tr:hover {
 </div>
 <p><strong>Note:</strong> The matrix is specified with respect to the tensor product <span class="math notranslate nohighlight">\(U_{b}\otimes U_{a}\)</span> for qubits specified by list <code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b]</span></code>.</p>
 </section>
-<section id="在電路中使用運算子">
-<h2>在電路中使用運算子<a class="headerlink" href="#在電路中使用運算子" title="本標題的永久連結">¶</a></h2>
-<p>讓我們演示如何在電路中使用這些方法。 我們將考慮執行一個以單量子位元閘和 iSWAP 閘分解的 CNOT 閘，如下所示。</p>
+<section id="Using-operators-in-circuits">
+<h2>Using operators in circuits<a class="headerlink" href="#Using-operators-in-circuits" title="本標題的永久連結">¶</a></h2>
+<p>Let us demonstrate how these can be used in a circuit. We will consider an example of implementing a CNOT gate decomposed in terms of single-qubit gates and the iSWAP gate as follows.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -672,7 +672,7 @@ q_1: ┤ SDG ├┤ H ├┤1       ├─────────────�
 </pre></div></div>
 </div>
 <p>Note that we have assigned an optional <em>label</em> of <code class="docutils literal notranslate"><span class="pre">&quot;iswap&quot;</span></code> to the unitary when it is inserted. This allows us to identify this unitary in a Qiskit Aer <code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> so that we can add errors to these custom unitary gates in noisy circuit simulations.</p>
-<p>We can confirm this circuit returns the correct output using the <code class="docutils literal notranslate"><span class="pre">Operator</span></code> class as a simulator for the circuit:</p>
+<p>我們可以確認，作為該電路的模擬器，此電路使用 <code class="docutils literal notranslate"><span class="pre">Operator</span></code> 類別傳回正確的輸出：</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -696,7 +696,7 @@ Operator([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
          input_dims=(2, 2), output_dims=(2, 2))
 </pre></div></div>
 </div>
-<p>And to confirm the output is correct we can compute the average gate fidelity:</p>
+<p>要確認該輸出是正確的，我們可以計算其平均閘保真度：</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -811,9 +811,9 @@ c: 2/════════════════════╩══╩═
                          0  1
 </pre></div></div>
 </div>
-<section id="Ideal-output">
-<h3>Ideal output<a class="headerlink" href="#Ideal-output" title="本標題的永久連結">¶</a></h3>
-<p>Let’s first see the ideal output. Since this generates a Bell-state we expect two peaks for 00 and 11.</p>
+<section id="理想輸出">
+<h3>理想輸出<a class="headerlink" href="#理想輸出" title="本標題的永久連結">¶</a></h3>
+<p>讓我們先看看理想的輸出。 因為這會產生 Bell 狀態，我們預期在 00 和 11會有兩個峰。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -920,7 +920,7 @@ c: 2/════════════════════╩══╩═
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/13。
+      最後更新於 2021/08/19。
 
     </p>
   </div>
@@ -939,13 +939,13 @@ c: 2/════════════════════╩══╩═
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">將噪音作用於自訂的的么正閘</a><ul>
+<li><a class="reference internal" href="#">將雜訊作用於自定義的么正閘</a><ul>
 <li><a class="reference internal" href="#簡介">簡介</a></li>
-<li><a class="reference internal" href="#建立矩陣運算子">建立矩陣運算子</a></li>
-<li><a class="reference internal" href="#在電路中使用運算子">在電路中使用運算子</a></li>
+<li><a class="reference internal" href="#Creating-matrix-operators">Creating matrix operators</a></li>
+<li><a class="reference internal" href="#Using-operators-in-circuits">Using operators in circuits</a></li>
 <li><a class="reference internal" href="#Creating-a-custom-unitary-in-a-noise-model">Creating a custom unitary in a noise model</a></li>
 <li><a class="reference internal" href="#Simulating-a-custom-unitary-noise-model">Simulating a custom unitary noise model</a><ul>
-<li><a class="reference internal" href="#Ideal-output">Ideal output</a></li>
+<li><a class="reference internal" href="#理想輸出">理想輸出</a></li>
 <li><a class="reference internal" href="#Noisy-circuit-execution">Noisy circuit execution</a></li>
 </ul>
 </li>

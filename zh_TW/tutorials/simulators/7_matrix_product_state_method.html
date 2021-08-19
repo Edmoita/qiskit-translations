@@ -572,7 +572,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">備註</p>
-<p>此頁面是從 <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/simulators/7_matrix_product_state_method.ipynb">tutorials/simulators/1_aer_provider.ipynb</a> 產生的。</p>
+<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/simulators/7_matrix_product_state_method.ipynb">tutorials/simulators/7_matrix_product_state_method.ipynb</a>.</p>
 </div>
 <section id="Matrix-product-state-的模擬方法">
 <h1>Matrix product state 的模擬方法<a class="headerlink" href="#Matrix-product-state-的模擬方法" title="本標題的永久連結">¶</a></h1>
@@ -674,7 +674,7 @@ swap gates to bring the two qubits next to each other and then the reverse swaps
 </div>
 <p>Running circuits using the matrix product state simulation method can be fast, relative to other methods. However, if we generate the state vector during the execution, then the conversion to state vector is, of course, exponential in memory and time, and therefore we don’t benefit from using this method. We can benefit if we only do operations that don’t require printing the full state vector. For example, if we run a circuit and then take measurement. The circuit below has 200 qubits. We
 create an <code class="docutils literal notranslate"><span class="pre">EPR</span> <span class="pre">state</span></code> involving all these qubits. Although this state is highly entangled, it is handled well by the matrix product state method, because there are effectively only two states.</p>
-<p>我們可以處理更多的量子位元，但可能需要花幾分鐘來執行。試試用 500 個量子位元執行一個類似的電路！ 或者甚至 1000 個位元（你可以在等待的時候弄杯咖啡來喝)。</p>
+<p>We can handle more qubits than this, but execution may take a few minutes. Try running a similar circuit with 500 qubits! Or maybe even 1000 (you can get a cup of coffee while waiting).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -768,7 +768,7 @@ Time taken: 0.31022214889526367 sec
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/13。
+      最後更新於 2021/08/19。
 
     </p>
   </div>

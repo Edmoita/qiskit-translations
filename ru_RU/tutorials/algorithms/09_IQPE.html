@@ -576,11 +576,11 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="Итерационный-квантовый-алгоритм-оценки-фазы">
 <h1>Итерационный квантовый алгоритм оценки фазы<a class="headerlink" href="#Итерационный-квантовый-алгоритм-оценки-фазы" title="Ссылка на этот заголовок">¶</a></h1>
-<p>The goal of this tutorial is to understand how the Iterative Phase Estimation (IPE) algorithm works, why would we use the IPE algorithm instead of the QPE (Quantum Phase Estimation) algorithm and how to build it with Qiskit using the same circuit exploiting reset gate and the <code class="docutils literal notranslate"><span class="pre">c_if</span></code> method that allows to apply gates conditioned by the values stored in a classical register, resulting from previous measurements.</p>
+<p>Цель этого урока - понять, как работает алгоритм итеративной оценки фазы (ИОФ), почему мы используем алгоритм ИОФ вместо алгоритма КОФ (квантовой оценки фазы) и как реализовать его с помощью Qiskit, используя одну и ту же схему с использованием операции сброса кубита и метода <code class="docutils literal notranslate"><span class="pre">c_if</span></code>, который позволяет применять вентили, зависящие от значений, полученных в результате предыдущих измерений и хранящихся в классическом регистре.</p>
 <p>Дополнительные материалы</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://qiskit.org/textbook/ch-labs/Lab04_IterativePhaseEstimation.html#2-iterative-phase-estimation-ipe-algorithm">Section 2 of Lab 4: Iterative Phase Estimation (IPE) Algorithm</a></p></li>
-<li><p><a class="reference external" href="https://qiskit.org/textbook/ch-algorithms/quantum-phase-estimation.html">Ch.3.6 Quantum Phase Estimation</a></p></li>
+<li><p><a class="reference external" href="https://qiskit.org/textbook/ch-labs/Lab04_IterativePhaseEstimation.html#2-iterative-phase-estimation-ipe-algorithm">Раздел 2 Лабораторной работы 4: Итерационный алгоритм оценки фазы (Iterative Phase Estimation Algorithm, IPE)</a></p></li>
+<li><p><a class="reference external" href="https://qiskit.org/textbook/ch-algorithms/quantum-phase-estimation.html">Глава 3.6 Квантовая оценка фазы (Quantum Phase Estimation, QPE)</a></p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
@@ -595,11 +595,11 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
-<section id="Conditioned-gates:-the-c_if-method">
-<h1>Conditioned gates: the c_if method<a class="headerlink" href="#Conditioned-gates:-the-c_if-method" title="Ссылка на этот заголовок">¶</a></h1>
-<p>Before starting the IPE algorithm, we will give a brief tutorial about the Qiskit conditional method, c_if, as it goes into building the IPE circuit.</p>
-<p><code class="docutils literal notranslate"><span class="pre">c_if</span></code> is a function (actually a method of the gate class) to perform conditioned operations based on the value stored previously in a classical register. With this feature you can apply gates after a measurement in the same circuit conditioned by the measurement outcome.</p>
-<p>For example, the following code will execute the <span class="math notranslate nohighlight">\(X\)</span> gate if the value of the classical register is <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<section id="Условные-вентили:-метод-c_if">
+<h1>Условные вентили: метод c_if<a class="headerlink" href="#Условные-вентили:-метод-c_if" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Прежде чем приступить к алгоритму IPE, мы дадим краткое руководство по условному методу Qiskit, c_if, поскольку он используется для построения схемы IPE.</p>
+<p><code class="docutils literal notranslate"><span class="pre">c_if</span></code> является функцией (а точнее методом класса Gate) для выполнения условных операций, зависящих от значения классического регистра. Это дает возможность управления гейтами, используя данные предыдущих измерений в этой же цепи.</p>
+<p>Например, следующий код применит вентиль :math:“X’__, только если значение классического регистра равно <span class="math notranslate nohighlight">\(0\)</span>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
@@ -653,7 +653,7 @@ div.rendered_html tbody tr:hover {
 <p>We want to apply the <span class="math notranslate nohighlight">\(X\)</span> gate, only if both the results of the measurement of <span class="math notranslate nohighlight">\(q_1\)</span> and <span class="math notranslate nohighlight">\(q_2\)</span> are <span class="math notranslate nohighlight">\(1\)</span>. We can do this using the c_if method, conditioning the application of <span class="math notranslate nohighlight">\(X\)</span> depending on the value passed as argument to c_if.</p>
 <p>We will have to encode the value to pass to the c_if method such that it will check the values 011 and 111 (in binary representation), since it does not matter what is in the rightmost position.</p>
 <p>The 2 integer values in decimal representation:</p>
-<p><img alt="c8a75b625af4411daa83d30ad92915c7" class="no-scaled-link" src="tutorials/algorithms/../../images/binary.png" style="width: 50%;" /></p>
+<p><img alt="22b9f3488aee46e2940f51f9dcd031cf" class="no-scaled-link" src="tutorials/algorithms/../../images/binary.png" style="width: 50%;" /></p>
 <p>We can check the solutions using the bin() method in python (the prefix <code class="docutils literal notranslate"><span class="pre">0b</span></code> indicates the binary format).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
@@ -1266,7 +1266,7 @@ div.rendered_html tbody tr:hover {
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      Обновлено: 2021/08/13.
+      Обновлено: 2021/08/19.
 
     </p>
   </div>
@@ -1286,7 +1286,7 @@ div.rendered_html tbody tr:hover {
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
 <li><a class="reference internal" href="#">Итерационный квантовый алгоритм оценки фазы</a></li>
-<li><a class="reference internal" href="#Conditioned-gates:-the-c_if-method">Conditioned gates: the c_if method</a></li>
+<li><a class="reference internal" href="#Условные-вентили:-метод-c_if">Условные вентили: метод c_if</a></li>
 <li><a class="reference internal" href="#IPE">IPE</a><ul>
 <li><a class="reference internal" href="#IPE-example-with-a-1-qubit-gate-for-U">IPE example with a 1-qubit gate for <span class="math notranslate nohighlight">\(U\)</span></a><ul>
 <li><a class="reference internal" href="#First-step">First step</a><ul>
