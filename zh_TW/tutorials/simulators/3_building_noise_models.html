@@ -605,10 +605,10 @@ div.rendered_html tbody tr:hover {
 <p>The Qiskit Aer <code class="docutils literal notranslate"><span class="pre">noise</span></code> module contains Python classes to build customized noise models for simulation. There are three key classes:</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">NoiseModel</span></code> 類別是用來儲存具有雜訊模擬的雜訊模型。</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">QuantumError</span></code> class which describes CPTP gate errors. These can be applied:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">`QuantumError</span></code> 類別用於描述 CPTP 閘誤差。 可套用以下項目：</p>
 <ul class="simple">
 <li><p>在 <em>閘 (gate)</em> 或 * 重設 (reset)* 指令之後</p></li>
-<li><p>Before <em>measure</em> instructions.</p></li>
+<li><p>在 <em>測量 (measure)</em> 指令之前。</p></li>
 </ul>
 </li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">ReadoutError</span></code> class which describes classical readout errors.</p></li>
@@ -616,7 +616,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="量子誤差">
 <h2>量子誤差<a class="headerlink" href="#量子誤差" title="本標題的永久連結">¶</a></h2>
-<p>Rather than deal with the <code class="docutils literal notranslate"><span class="pre">QuantumError</span></code> object directly, many helper functions exist to automatically generate a specific type of parameterized quantum error. These are contained in the <code class="docutils literal notranslate"><span class="pre">noise</span></code> module and include functions for many common errors types used in quantum computing research. The function names and the type of error they return are:</p>
+<p>與其直接處理 <code class="docutils literal notranslate"><span class="pre">QuantumError</span></code> 物件，其實有許多輔助函數可以用來自動產生特定類型的參數化量子誤差。 這些都包含在 「雜訊 (noise)」 模組中，這模組中包括許多用於量子計算研究的常見誤差類型的函數。 函數名稱及傳回的誤差類型為：</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 50%" />
@@ -1269,7 +1269,7 @@ NoiseModel:
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/19。
+      最後更新於 2021/08/23。
 
     </p>
   </div>

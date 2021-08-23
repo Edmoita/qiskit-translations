@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Summary of Quantum Operations &mdash; Qiskit 0.29.0 說明文件</title>
+  <title>量子操作摘要 &mdash; Qiskit 0.29.0 說明文件</title>
   
 
   
@@ -292,7 +292,7 @@
       </li>
 
         
-      <li>Summary of Quantum Operations</li>
+      <li>量子操作摘要</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -572,24 +572,24 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="admonition note">
 <p class="admonition-title">備註</p>
-<p>This page was generated from <a class="reference external" href="https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/circuits/3_summary_of_quantum_operations.ipynb">tutorials/circuits/3_summary_of_quantum_operations.ipynb</a>.</p>
+<p>這個頁面是由`tutorials/circuits/3_summary_of_quantum_operations.ipynb`產生。</p>
 </div>
-<section id="Summary-of-Quantum-Operations">
-<h1>Summary of Quantum Operations<a class="headerlink" href="#Summary-of-Quantum-Operations" title="本標題的永久連結">¶</a></h1>
-<p>In this section we will go into the different operations that are available in Qiskit Terra. These are:</p>
+<section id="量子操作摘要">
+<h1>量子操作摘要<a class="headerlink" href="#量子操作摘要" title="本標題的永久連結">¶</a></h1>
+<p>本節我們將介紹 Qiskit Terra 提供不同的操作，包括：</p>
 <ul class="simple">
-<li><p>Single-qubit quantum gates</p></li>
-<li><p>Multi-qubit quantum gates</p></li>
+<li><p>單量子閘</p></li>
+<li><p>多量子閘</p></li>
 <li><p>Measurements</p></li>
-<li><p>Reset</p></li>
-<li><p>Conditionals</p></li>
-<li><p>State initialization</p></li>
+<li><p>重置</p></li>
+<li><p>條件</p></li>
+<li><p>量子態初始化</p></li>
 </ul>
 <p>我們也會向您展示如何使用三種不同的模擬器：</p>
 <ul class="simple">
-<li><p>unitary_simulator</p></li>
-<li><p>qasm_simulator</p></li>
-<li><p>statevector_simulator</p></li>
+<li><p>unitary_模擬器</p></li>
+<li><p>qasm_模擬器</p></li>
+<li><p>statevector_模擬器</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -617,44 +617,44 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<section id="Single-Qubit-Quantum-states">
-<h2>Single Qubit Quantum states<a class="headerlink" href="#Single-Qubit-Quantum-states" title="本標題的永久連結">¶</a></h2>
-<p>A single qubit quantum state can be written as</p>
+<section id="單量子位元量子態">
+<h2>單量子位元量子態<a class="headerlink" href="#單量子位元量子態" title="本標題的永久連結">¶</a></h2>
+<p>單一量子態可以寫成</p>
 <div class="math notranslate nohighlight">
 \[\left|\psi\right\rangle = \alpha\left|0\right\rangle + \beta \left|1\right\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are complex numbers. In a measurement the probability of the bit being in <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> is <span class="math notranslate nohighlight">\(|\alpha|^2\)</span> and <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span> is <span class="math notranslate nohighlight">\(|\beta|^2\)</span>. As a vector this is</p>
+<p>其中 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\beta\)</span> 是複數。測量後量子態處於 <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> 的機率是 <span class="math notranslate nohighlight">\(|\alpha|^2\)</span>，處於 <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span> 的機率則為 <span class="math notranslate nohighlight">\(|\beta|^2\)</span>。寫成向量的型式則為：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left|\psi\right\rangle =
 \begin{pmatrix}
 \alpha \\
 \beta
 \end{pmatrix}.\end{split}\]</div>
-<p>Note, due to the conservation of probability <span class="math notranslate nohighlight">\(|\alpha|^2+ |\beta|^2 = 1\)</span> and since global phase is undetectable <span class="math notranslate nohighlight">\(\left|\psi\right\rangle := e^{i\delta} \left|\psi\right\rangle\)</span> we only require two real numbers to describe a single qubit quantum state.</p>
-<p>A convenient representation is</p>
+<p>另外，因為各事件的機率加總會是 <span class="math notranslate nohighlight">\(|\alpha|^2+ |\beta|^2 = 1\)</span> 且共同相位測量不到 <span class="math notranslate nohighlight">\(\left|\psi\right\rangle := e^{i\delta} \left|\psi\right\rangle\)</span>，因此我們只需要兩個實數來描述單量子位元的量子態。</p>
+<p>一種比較方便的表示方法是</p>
 <div class="math notranslate nohighlight">
 \[\left|\psi\right\rangle = \cos(\theta/2)\left|0\right\rangle + \sin(\theta/2)e^{i\phi}\left|1\right\rangle\]</div>
-<p>where <span class="math notranslate nohighlight">\(0\leq \phi &lt; 2\pi\)</span>, and <span class="math notranslate nohighlight">\(0\leq \theta \leq \pi\)</span>. From this, it is clear that there is a one-to-one correspondence between qubit states (<span class="math notranslate nohighlight">\(\mathbb{C}^2\)</span>) and the points on the surface of a unit sphere (<span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>). This is called the Bloch sphere representation of a qubit state.</p>
-<p>Quantum gates/operations are usually represented as matrices. A gate which acts on a qubit is represented by a <span class="math notranslate nohighlight">\(2\times 2\)</span> unitary matrix <span class="math notranslate nohighlight">\(U\)</span>. The action of the quantum gate is found by multiplying the matrix representing the gate with the vector which represents the quantum state.</p>
+<p>其中 <span class="math notranslate nohighlight">\(0\leq \phi &lt; 2\pi\)</span> 和 <span class="math notranslate nohighlight">\(0\leq \theta \leq \pi\)</span>。從前面的表示法可以得知量子態(<span class="math notranslate nohighlight">\(\mathbb{C}^2\)</span>)能一一對應到單位球表面上的點(<span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span>)，這被稱為量子態的布洛赫球面表示法。</p>
+<p>量子閘/操作我們通常會用矩陣做表示；對量子位元做操作的量子邏輯閘可以用 <span class="math notranslate nohighlight">\(2\times 2\)</span> 的么正矩陣 <span class="math notranslate nohighlight">\(U\)</span> 做表示；量子邏輯閘對量子位元操作則是代表量子邏輯閘的矩陣與代表量子態的向量相乘。</p>
 <div class="math notranslate nohighlight">
 \[\left|\psi'\right\rangle = U\left|\psi\right\rangle\]</div>
-<p>A general unitary must be able to take the <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> to the above state. That is</p>
+<p>一般么正必須能夠將:math:<cite>left|0rightrangle</cite> 用到上述狀態。 就是</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}U = \begin{pmatrix}
 \cos(\theta/2) &amp; a \\
 e^{i\phi}\sin(\theta/2) &amp; b
 \end{pmatrix}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are complex numbers constrained such that <span class="math notranslate nohighlight">\(U^\dagger U = I\)</span> for all <span class="math notranslate nohighlight">\(0\leq\theta\leq\pi\)</span> and <span class="math notranslate nohighlight">\(0\leq \phi&lt;2\pi\)</span>. This gives 3 constraints and as such <span class="math notranslate nohighlight">\(a\rightarrow -e^{i\lambda}\sin(\theta/2)\)</span> and <span class="math notranslate nohighlight">\(b\rightarrow e^{i\lambda+i\phi}\cos(\theta/2)\)</span> where <span class="math notranslate nohighlight">\(0\leq \lambda&lt;2\pi\)</span> giving</p>
+<p>其中 <span class="math notranslate nohighlight">\(a\)</span> 和 <span class="math notranslate nohighlight">\(b\)</span> 是複數且在 <span class="math notranslate nohighlight">\(0\leq\theta\leq\pi\)</span> 與 <span class="math notranslate nohighlight">\(0\leq \phi&lt;2\pi\)</span> 這個範圍內，以下條件一定會成立： <span class="math notranslate nohighlight">\(U^\dagger U = I\)</span>。滿足這個條件需要三個限制，像是 <span class="math notranslate nohighlight">\(a\rightarrow -e^{i\lambda}\sin(\theta/2)\)</span> 與 <span class="math notranslate nohighlight">\(b\rightarrow e^{i\lambda+i\phi}\cos(\theta/2)\)</span>，其中 <span class="math notranslate nohighlight">\(0\leq \lambda&lt;2\pi\)</span>，如此 U 可以重新表示為：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}U = \begin{pmatrix}
 \cos(\theta/2) &amp; -e^{i\lambda}\sin(\theta/2) \\
 e^{i\phi}\sin(\theta/2) &amp; e^{i\lambda+i\phi}\cos(\theta/2)
 \end{pmatrix}.\end{split}\]</div>
-<p>This is the most general form of a single qubit unitary.</p>
+<p>這是一個單量子位元最一般的形式。</p>
 </section>
 <section id="單量子位元閘">
 <h2>單量子位元閘<a class="headerlink" href="#單量子位元閘" title="本標題的永久連結">¶</a></h2>
 <p>可使用的單量子閘是： - u 閘門- 單位閘 - Pauli閘 - Clifford閘 - <span class="math notranslate nohighlight">\(C3\)</span> 門 - 標準旋轉閘</p>
-<p>We have provided a backend: <code class="docutils literal notranslate"><span class="pre">unitary_simulator</span></code> to allow you to calculate the unitary matrices.</p>
+<p>我們提供了一個後端： <code class="docutils literal notranslate"><span class="pre">unitary_模擬器</span></code> ，可讓您計算么正矩陣。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -664,9 +664,9 @@ e^{i\phi}\sin(\theta/2) &amp; e^{i\lambda+i\phi}\cos(\theta/2)
 </pre></div>
 </div>
 </div>
-<section id="u-gates">
-<h3>u gates<a class="headerlink" href="#u-gates" title="本標題的永久連結">¶</a></h3>
-<p>In Qiskit we give you access to the general unitary using the <span class="math notranslate nohighlight">\(u3\)</span> gate</p>
+<section id="u-閘">
+<h3>u 閘<a class="headerlink" href="#u-閘" title="本標題的永久連結">¶</a></h3>
+<p>在 Qiskit 中，我們提供您使用 <span class="math notranslate nohighlight">\(u3\)</span> 閘的一般么正。</p>
 <div class="math notranslate nohighlight">
 \[u3(\theta, \phi, \lambda) = U(\theta, \phi, \lambda)\]</div>
 <div class="nbinput docutils container">
@@ -709,14 +709,14 @@ array([[ 0.707+0.j   , -0.   -0.707j],
        [ 0.   +0.707j, -0.707+0.j   ]])
 </pre></div></div>
 </div>
-<p>The <span class="math notranslate nohighlight">\(u2(\phi, \lambda) =u3(\pi/2, \phi, \lambda)\)</span> gate has the matrix form</p>
+<p><span class="math notranslate nohighlight">\(u2(\phi, \lambda) =u3(\pi/2, \phi, \lambda)\)</span> 閘具有矩陣型式</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}u2(\phi, \lambda) =
 \frac{1}{\sqrt{2}} \begin{pmatrix}
 1 &amp; -e^{i\lambda} \\
 e^{i\phi} &amp; e^{i(\phi + \lambda)}
 \end{pmatrix}.\end{split}\]</div>
-<p>This is a useful gate as it allows us to create superpositions.</p>
+<p>這是一個有用的閘，因為它讓我們建立了疊加態。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -757,14 +757,14 @@ array([[ 0.707+0.j   , -0.   -0.707j],
        [ 0.   +0.707j, -0.707+0.j   ]])
 </pre></div></div>
 </div>
-<p>The <span class="math notranslate nohighlight">\(p(\lambda)= u(0, 0, \lambda)\)</span> gate has the matrix form</p>
+<p><span class="math notranslate nohighlight">\(p(\lambda)= u(0, 0, \lambda)\)</span> 閘有矩陣型式</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}p(\lambda) =
 \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; e^{i \lambda}
 \end{pmatrix},\end{split}\]</div>
-<p>which is useful as it allows us to apply a quantum phase.</p>
+<p>這很有用因為它能讓我們應用量子相位</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -806,8 +806,8 @@ array([[1.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Identity-gate">
-<h3>Identity gate<a class="headerlink" href="#Identity-gate" title="本標題的永久連結">¶</a></h3>
+<section id="單位閘">
+<h3>單位閘<a class="headerlink" href="#單位閘" title="本標題的永久連結">¶</a></h3>
 <p>單位閘為 <span class="math notranslate nohighlight">\(Id = u0（1）\)</span>。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -850,8 +850,8 @@ array([[1.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Pauli-gates">
-<h3>Pauli gates<a class="headerlink" href="#Pauli-gates" title="本標題的永久連結">¶</a></h3>
+<section id="Pauli-閘">
+<h3>Pauli 閘<a class="headerlink" href="#Pauli-閘" title="本標題的永久連結">¶</a></h3>
 <section id="X：位元翻轉閘">
 <h4><span class="math notranslate nohighlight">\(X\)</span>：位元翻轉閘<a class="headerlink" href="#X：位元翻轉閘" title="本標題的永久連結">¶</a></h4>
 <p>位元翻轉閘 <span class="math notranslate nohighlight">\(X\)</span> 定義為：</p>
@@ -1003,10 +1003,10 @@ array([[ 1.+0.j,  0.+0.j],
 </div>
 </section>
 </section>
-<section id="Clifford-gates">
-<h3>Clifford gates<a class="headerlink" href="#Clifford-gates" title="本標題的永久連結">¶</a></h3>
-<section id="Hadamard-gate">
-<h4>Hadamard gate<a class="headerlink" href="#Hadamard-gate" title="本標題的永久連結">¶</a></h4>
+<section id="Clifford-閘">
+<h3>Clifford 閘<a class="headerlink" href="#Clifford-閘" title="本標題的永久連結">¶</a></h3>
+<section id="Hadamard-閘">
+<h4>Hadamard 閘<a class="headerlink" href="#Hadamard-閘" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}H =
 \frac{1}{\sqrt{2}}
@@ -1055,8 +1055,8 @@ array([[ 0.707+0.j,  0.707-0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="S-(or,-\sqrt{Z}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(S\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate<a class="headerlink" href="#S-(or,-\sqrt{Z}-phase)-gate" title="本標題的永久連結">¶</a></h4>
+<section id="S-（或-\sqrt{Z}-相位）閘">
+<h4><span class="math notranslate nohighlight">\(S\)</span> （或 <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> 相位）閘<a class="headerlink" href="#S-（或-\sqrt{Z}-相位）閘" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}S =
 \begin{pmatrix}
@@ -1104,8 +1104,8 @@ array([[1.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="S^{\dagger}-(or,-conjugate-of-\sqrt{Z}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate<a class="headerlink" href="#S^{\dagger}-(or,-conjugate-of-\sqrt{Z}-phase)-gate" title="本標題的永久連結">¶</a></h4>
+<section id="S^{\dagger}-（或-\sqrt{Z}-的共軛之相位）閘">
+<h4><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> （或 <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> 的共軛之相位）閘<a class="headerlink" href="#S^{\dagger}-（或-\sqrt{Z}-的共軛之相位）閘" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}S^{\dagger} =
 \begin{pmatrix}
@@ -1154,10 +1154,10 @@ array([[1.+0.j, 0.+0.j],
 </div>
 </section>
 </section>
-<section id="C3-gates">
-<h3><span class="math notranslate nohighlight">\(C3\)</span> gates<a class="headerlink" href="#C3-gates" title="本標題的永久連結">¶</a></h3>
-<section id="T-(or,-\sqrt{S}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(T\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate<a class="headerlink" href="#T-(or,-\sqrt{S}-phase)-gate" title="本標題的永久連結">¶</a></h4>
+<section id="C3-閘">
+<h3><span class="math notranslate nohighlight">\(C3\)</span> 閘<a class="headerlink" href="#C3-閘" title="本標題的永久連結">¶</a></h3>
+<section id="T-（或，-\sqrt{S}-相位）閘">
+<h4><span class="math notranslate nohighlight">\(T\)</span> （或， <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> 相位）閘<a class="headerlink" href="#T-（或，-\sqrt{S}-相位）閘" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}T =
 \begin{pmatrix}
@@ -1205,8 +1205,8 @@ array([[1.   +0.j   , 0.   +0.j   ],
 </pre></div></div>
 </div>
 </section>
-<section id="T^{\dagger}-(or,-conjugate-of-\sqrt{S}-phase)-gate">
-<h4><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate<a class="headerlink" href="#T^{\dagger}-(or,-conjugate-of-\sqrt{S}-phase)-gate" title="本標題的永久連結">¶</a></h4>
+<section id="T^{\dagger}-（或，共軛-of-\sqrt{S}-相位）閘">
+<h4><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> （或，共軛 of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> 相位）閘<a class="headerlink" href="#T^{\dagger}-（或，共軛-of-\sqrt{S}-相位）閘" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}T^{\dagger} =
 \begin{pmatrix}
@@ -1260,8 +1260,8 @@ array([[1.   +0.j   , 0.   +0.j   ],
 <p>The standard rotation gates are those that define rotations around the Paulis <span class="math notranslate nohighlight">\(P=\{X,Y,Z\}\)</span>. They are defined as</p>
 <div class="math notranslate nohighlight">
 \[R_P(\theta) = \exp(-i \theta P/2) = \cos(\theta/2)I -i \sin(\theta/2)P\]</div>
-<section id="Rotation-around-X-axis">
-<h4>Rotation around X-axis<a class="headerlink" href="#Rotation-around-X-axis" title="本標題的永久連結">¶</a></h4>
+<section id="繞-X-軸旋轉">
+<h4>繞 X 軸旋轉<a class="headerlink" href="#繞-X-軸旋轉" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}R_x(\theta) =
 \begin{pmatrix}
@@ -1309,8 +1309,8 @@ array([[ 0.707+0.j   , -0.   -0.707j],
 </pre></div></div>
 </div>
 </section>
-<section id="Rotation-around-Y-axis">
-<h4>Rotation around Y-axis<a class="headerlink" href="#Rotation-around-Y-axis" title="本標題的永久連結">¶</a></h4>
+<section id="繞-Y-軸旋轉">
+<h4>繞 Y 軸旋轉<a class="headerlink" href="#繞-Y-軸旋轉" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}R_y(\theta) =
 \begin{pmatrix}
@@ -1358,15 +1358,15 @@ array([[ 0.707+0.j, -0.707+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Rotation-around-Z-axis">
-<h4>Rotation around Z-axis<a class="headerlink" href="#Rotation-around-Z-axis" title="本標題的永久連結">¶</a></h4>
+<section id="繞-Z-軸旋轉">
+<h4>繞 Z 軸旋轉<a class="headerlink" href="#繞-Z-軸旋轉" title="本標題的永久連結">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[\begin{split}R_z(\phi) =
 \begin{pmatrix}
 e^{-i \phi/2} &amp; 0 \\
 0 &amp; e^{i \phi/2}
 \end{pmatrix}\equiv u1(\phi)\end{split}\]</div>
-<p>Note that here we have used an equivalent as it is different to u1 by a global phase <span class="math notranslate nohighlight">\(e^{-i \phi/2}\)</span>.</p>
+<p>備註，在這裡我們使用一個等效，但不同於u1球相位 <span class="math notranslate nohighlight">\(e^{-i \phi/2}\)</span>。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
@@ -1407,16 +1407,16 @@ array([[0.707-0.707j, 0.   +0.j   ],
        [0.   +0.j   , 0.707+0.707j]])
 </pre></div></div>
 </div>
-<p>Note this is different due only to a global phase.</p>
+<p>備註，這與球相位不同。</p>
 </section>
 </section>
 </section>
-<section id="Multi-Qubit-Gates">
-<h2>Multi-Qubit Gates<a class="headerlink" href="#Multi-Qubit-Gates" title="本標題的永久連結">¶</a></h2>
+<section id="多量子位元閘">
+<h2>多量子位元閘<a class="headerlink" href="#多量子位元閘" title="本標題的永久連結">¶</a></h2>
 <section id="Mathematical-Preliminaries">
 <h3>Mathematical Preliminaries<a class="headerlink" href="#Mathematical-Preliminaries" title="本標題的永久連結">¶</a></h3>
-<p>The space of a quantum computer grows exponentially with the number of qubits. For <span class="math notranslate nohighlight">\(n\)</span> qubits the complex vector space has dimension <span class="math notranslate nohighlight">\(d=2^n\)</span>. To describe states of a multi-qubit system, the tensor product is used to “glue together” operators and basis vectors.</p>
-<p>Let’s start by considering a 2-qubit system. Given two operators <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> that each act on one qubit, the joint operator <span class="math notranslate nohighlight">\(A \otimes B\)</span> acting on two qubits is</p>
+<p>量子計算機的空間以量子位元的數量呈指數增長。 對於 <span class="math notranslate nohighlight">\(n\)</span>，為描述多量子系統的狀態，張量積用於將運算子和基底向量 「膠合 」 。</p>
+<p>讓我們從考慮雙量子位元系統開始。 給定兩個單量子位元的運算子:math:<cite>A`和:math:`B</cite>， 而共同的雙量子位元運算子:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>A otimes B`是</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{equation}
     A\otimes B =
@@ -1437,7 +1437,7 @@ array([[0.707-0.707j, 0.   +0.j   ],
                         \end{pmatrix}
     \end{pmatrix},
 \end{equation}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(A_{jk}\)</span> and <span class="math notranslate nohighlight">\(B_{lm}\)</span> are the matrix elements of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, respectively.</p>
+<p>個別是:math:<cite>A_{jk}</cite> 和 <span class="math notranslate nohighlight">\(B_{lm}\)</span>，而這兩個是 <span class="math notranslate nohighlight">\(A\)</span> 和 :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>B`矩陣的元素。</p>
 <p>Analogously, the basis vectors for the 2-qubit system are formed using the tensor product of basis vectors for a single qubit:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{equation}\begin{split}
@@ -1497,8 +1497,8 @@ controlled u3 gate - swap gate</p>
 <p>The three-qubit gates are: - Toffoli gate - Fredkin gate</p>
 </section>
 </section>
-<section id="Two-qubit-gates">
-<h2>Two-qubit gates<a class="headerlink" href="#Two-qubit-gates" title="本標題的永久連結">¶</a></h2>
+<section id="雙量子閘">
+<h2>雙量子閘<a class="headerlink" href="#雙量子閘" title="本標題的永久連結">¶</a></h2>
 <p>Most of the two-qubit gates are of the controlled type (the SWAP gate being the exception). In general, a controlled two-qubit gate <span class="math notranslate nohighlight">\(C_{U}\)</span> acts to apply the single-qubit unitary <span class="math notranslate nohighlight">\(U\)</span> to the second qubit when the state of the first qubit is in <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span>. Suppose <span class="math notranslate nohighlight">\(U\)</span> has a matrix representation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}U = \begin{pmatrix} u_{00} &amp; u_{01} \\ u_{10} &amp; u_{11}\end{pmatrix}.\end{split}\]</div>
@@ -1913,9 +1913,9 @@ array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Controlled-u-rotation">
-<h3>Controlled <span class="math notranslate nohighlight">\(u\)</span> rotation<a class="headerlink" href="#Controlled-u-rotation" title="本標題的永久連結">¶</a></h3>
-<p>Perform controlled-<span class="math notranslate nohighlight">\(u3\)</span> rotation on the target qubit if the control qubit (here LSB) is <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span>.</p>
+<section id="Controlled-u-旋轉">
+<h3>Controlled <span class="math notranslate nohighlight">\(u\)</span> 旋轉<a class="headerlink" href="#Controlled-u-旋轉" title="本標題的永久連結">¶</a></h3>
+<p>如果控制量子位元（這裡 LSB）是:math:<cite>left|1rightrangle</cite>，則在目標 量子位元上執行控制-<span class="math notranslate nohighlight">\(u3\)</span> 旋轉。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}C_{u}(\theta, \phi, \lambda) \equiv
 \begin{pmatrix}
@@ -1969,12 +1969,12 @@ array([[ 1.   +0.j   ,  0.   +0.j   ,  0.   +0.j   ,  0.   +0.j   ],
 </pre></div></div>
 </div>
 </section>
-<section id="SWAP-gate">
-<h3>SWAP gate<a class="headerlink" href="#SWAP-gate" title="本標題的永久連結">¶</a></h3>
-<p>The SWAP gate exchanges the two qubits. It transforms the basis vectors as</p>
+<section id="SWAP閘">
+<h3>SWAP閘<a class="headerlink" href="#SWAP閘" title="本標題的永久連結">¶</a></h3>
+<p>SWAP 閘交換兩個量子位元。 它會將基底向量轉換為</p>
 <div class="math notranslate nohighlight">
 \[\left|00\right\rangle \rightarrow \left|00\right\rangle~,~\left|01\right\rangle \rightarrow \left|10\right\rangle~,~\left|10\right\rangle \rightarrow \left|01\right\rangle~,~\left|11\right\rangle \rightarrow \left|11\right\rangle,\]</div>
-<p>which gives a matrix representation of the form</p>
+<p>這給出了一種形式的矩陣表示</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathrm{SWAP} =
 \begin{pmatrix}
@@ -2031,18 +2031,18 @@ array([[1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 </section>
 <section id="Three-qubit-gates">
 <h2>Three-qubit gates<a class="headerlink" href="#Three-qubit-gates" title="本標題的永久連結">¶</a></h2>
-<p>There are two commonly-used three-qubit gates. For three qubits, the basis vectors are ordered as</p>
+<p>有兩個常用的三量子閘。 對於 3 個量子位元，基礎向量被排序為</p>
 <div class="math notranslate nohighlight">
 \[\left|000\right\rangle, \left|001\right\rangle, \left|010\right\rangle, \left|011\right\rangle, \left|100\right\rangle, \left|101\right\rangle, \left|110\right\rangle, \left|111\right\rangle,\]</div>
 <p>which, as bitstrings, represent the integers <span class="math notranslate nohighlight">\(0,1,2,\cdots, 7\)</span>. Again, Qiskit uses a representation in which the first qubit is on the right-most side of the tensor product and the third qubit is on the left-most side:</p>
 <div class="math notranslate nohighlight">
 \[\left|abc\right\rangle : \underset{\text{qubit 2}}{\left|a\right\rangle}\otimes \underset{\text{qubit 1}}{\left|b\right\rangle}\otimes \underset{\text{qubit 0}}{\left|c\right\rangle}.\]</div>
-<section id="Toffoli-gate-(ccx-gate)">
-<h3>Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)<a class="headerlink" href="#Toffoli-gate-(ccx-gate)" title="本標題的永久連結">¶</a></h3>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_logic_gate#Toffoli_(CCNOT)_gate">Toffoli gate</a> flips the third qubit if the first two qubits (LSB) are both <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span>:</p>
+<section id="Toffoli-閘（ccx-閘）">
+<h3>Toffoli 閘（<span class="math notranslate nohighlight">\(ccx\)</span> 閘）<a class="headerlink" href="#Toffoli-閘（ccx-閘）" title="本標題的永久連結">¶</a></h3>
+<p>「Toffoli 閘 &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_logic_gate#Toffoli_(CCNOT)_gate">https://en.wikipedia.org/wiki/Quantum_logic_gate#Toffoli_(CCNOT)_gate</a>&gt;`__ 如果前兩個量子位元（LSB）都是:math:<cite>left|1rightrangle</cite>，則會翻轉第三個量子位元：</p>
 <div class="math notranslate nohighlight">
 \[\left|abc\right\rangle \rightarrow \left|bc\oplus a\right\rangle \otimes \left|b\right\rangle \otimes \left|c\right\rangle.\]</div>
-<p>In matrix form, the Toffoli gate is</p>
+<p>在矩陣形式中，Toffoli 閘是</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}C_{CX} =
 \begin{pmatrix}
@@ -2115,12 +2115,12 @@ array([[1.-0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 </pre></div></div>
 </div>
 </section>
-<section id="Controlled-swap-gate-(Fredkin-Gate)">
-<h3>Controlled swap gate (Fredkin Gate)<a class="headerlink" href="#Controlled-swap-gate-(Fredkin-Gate)" title="本標題的永久連結">¶</a></h3>
-<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_logic_gate#Fredkin_(CSWAP)_gate">Fredkin gate</a>, or the <em>controlled swap gate</em>, exchanges the second and third qubits if the first qubit (LSB) is <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span>:</p>
+<section id="控制的swap閘（-Fredkin-閘）">
+<h3>控制的swap閘（ Fredkin 閘）<a class="headerlink" href="#控制的swap閘（-Fredkin-閘）" title="本標題的永久連結">¶</a></h3>
+<p>如果第一個量子位元（LSB）是:math:<cite>left|1rightrangle</cite>，則 『 Fredkin 閘&lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Quantum_logic_gate#Fredkin_(CSWAP)_gate">https://en.wikipedia.org/wiki/Quantum_logic_gate#Fredkin_(CSWAP)_gate</a>&gt;`__ 或 <em>控制的swap閘</em> 交換第二個和第三個量子位元：</p>
 <div class="math notranslate nohighlight">
 \[\left|abc\right\rangle \rightarrow \begin{cases} \left|bac\right\rangle~~\text{if}~c=1 \cr \left|abc\right\rangle~~\text{if}~c=0 \end{cases}.\]</div>
-<p>In matrix form, the Fredkin gate is</p>
+<p>以矩陣形式，Fredkin 閘是</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}C_{\mathrm{SWAP}} =
 \begin{pmatrix}
@@ -2200,7 +2200,7 @@ array([[1.-0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
 </div>
 <section id="Measurements">
 <h3>Measurements<a class="headerlink" href="#Measurements" title="本標題的永久連結">¶</a></h3>
-<p>We don’t have access to all the information when we make a measurement in a quantum computer. The quantum state is projected onto the standard basis. Below are two examples showing a circuit that is prepared in a basis state and the quantum computer prepared in a superposition state.</p>
+<p>當我們在量子計算機中進行測量時，我們無法存取所有資訊。 量子態會被投射到標準基底上。 下面有兩個例子，顯示在一個基底狀態下準備的電路，以及在疊加狀態下製備的量子計算機。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
 </pre></div>
@@ -2243,7 +2243,7 @@ q155_0: ┤M├
 {&#39;0&#39;: 1024}
 </pre></div></div>
 </div>
-<p>The simulator predicts that 100 percent of the time the classical register returns 0.</p>
+<p>模擬器預測古典寄存器返回 0 的概率為 100%。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
 </pre></div>
@@ -2286,11 +2286,11 @@ q155_0: ┤ H ├┤M├
 {&#39;1&#39;: 532, &#39;0&#39;: 492}
 </pre></div></div>
 </div>
-<p>The simulator predicts that 50 percent of the time the classical register returns 0 or 1.</p>
+<p>模擬器預測，古典暫存器傳回 0 或 1的機率為 50 % 。</p>
 </section>
-<section id="Reset">
-<h3>Reset<a class="headerlink" href="#Reset" title="本標題的永久連結">¶</a></h3>
-<p>It is also possible to <code class="docutils literal notranslate"><span class="pre">reset</span></code> qubits to the <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> state in the middle of computation. Note that <code class="docutils literal notranslate"><span class="pre">reset</span></code> is not a Gate operation, since it is irreversible.</p>
+<section id="重置">
+<h3>重置<a class="headerlink" href="#重置" title="本標題的永久連結">¶</a></h3>
+<p>可以在計算過程中將量子位元“重置”到 <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> 狀態。備註，這裡的“reset”不是閘操作，因為它是不可逆的。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
 </pre></div>
@@ -2376,11 +2376,11 @@ q155_0: ┤ H ├─|0>─┤M├
 {&#39;0&#39;: 1024}
 </pre></div></div>
 </div>
-<p>Here we see that for both of these circuits the simulator always predicts that the output is 100 percent in the 0 state.</p>
+<p>在這裡您可以看到，在兩個電路中，模擬器總是預測輸出為 0 狀態是 100% 的概率。</p>
 </section>
-<section id="Conditional-operations">
-<h3>Conditional operations<a class="headerlink" href="#Conditional-operations" title="本標題的永久連結">¶</a></h3>
-<p>It is also possible to do operations conditioned on the state of the classical register</p>
+<section id="條件運算子">
+<h3>條件運算子<a class="headerlink" href="#條件運算子" title="本標題的永久連結">¶</a></h3>
+<p>也可以在古典暫存器的狀態下進行操作</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
 </pre></div>
@@ -2405,7 +2405,7 @@ q155_0: ─┤ X ├─┤M├
   c0: 1/╡ = 0 ╞═╩═
         └─────┘ 0 </pre></div>
 </div>
-<p>Here the classical bit always takes the value 0 so the qubit state is always flipped.</p>
+<p>在這裡，古典位元的值一律採用0 ，因此量子位元的狀態一律會翻轉。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
 </pre></div>
@@ -2470,12 +2470,12 @@ q155_0: ┤ H ├┤M├─┤ X ├─┤M├
 {&#39;1&#39;: 1024}
 </pre></div></div>
 </div>
-<p>Here the classical bit by the first measurement is random but the conditional operation results in the qubit being deterministically put into <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span>.</p>
+<p>在這裡，第一項測量的古典位元是隨機的，但條件式操作結果被確定為 <span class="math notranslate nohighlight">\(\left|1\right\rangle\)</span>。</p>
 </section>
 </section>
-<section id="Arbitrary-initialization">
-<h2>Arbitrary initialization<a class="headerlink" href="#Arbitrary-initialization" title="本標題的永久連結">¶</a></h2>
-<p>What if we want to initialize a qubit register to an arbitrary state? An arbitrary state for <span class="math notranslate nohighlight">\(n\)</span> qubits may be specified by a vector of <span class="math notranslate nohighlight">\(2^n\)</span> amplitudes, where the sum of amplitude-norms-squared equals 1. For example, the following three-qubit state can be prepared:</p>
+<section id="任意起始設定">
+<h2>任意起始設定<a class="headerlink" href="#任意起始設定" title="本標題的永久連結">¶</a></h2>
+<p>那如果我們想要使一個量子位元暫存器初始化成任意狀態呢?任意狀態為:math:<cite>n</cite> 量子位元可能被向量:math:<a href="#id1"><span class="problematic" id="id2">`</span></a>2^n`幅度所指定，而此向量的幅度範數平方總和為1。例如，可以準備以下三量子位元狀態:</p>
 <div class="math notranslate nohighlight">
 \[\left|\psi\right\rangle = \frac{i}{4}\left|000\right\rangle + \frac{1}{\sqrt{8}}\left|001\right\rangle + \frac{1+i}{4}\left|010\right\rangle + \frac{1+2i}{\sqrt{8}}\left|101\right\rangle + \frac{1}{4}\left|110\right\rangle\]</div>
 <div class="nbinput docutils container">
@@ -2542,10 +2542,11 @@ array([6.93889390e-17+2.50000000e-01j, 3.53553391e-01+4.16333634e-17j,
        2.50000000e-01-6.93889390e-18j, 0.00000000e+00+0.00000000e+00j])
 </pre></div></div>
 </div>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Fidelity_of_quantum_states">Fidelity</a> is useful to check whether two states are the same or not. For quantum (pure) states <span class="math notranslate nohighlight">\(\left|\psi_1\right\rangle\)</span> and <span class="math notranslate nohighlight">\(\left|\psi_2\right\rangle\)</span>, the fidelity is</p>
+<p><cite>Fidelity &lt;https://en.wikipedia.org/wiki/Fidelity_of_quantum_states&gt;`可以很好去檢查兩個狀態是否相同。對於量子(純)狀態:math:</cite>left|psi_1rightrangle`ˋ和:math:<cite>left|psi_2rightrangle</cite>，
+其保真度為</p>
 <div class="math notranslate nohighlight">
 \[F\left(\left|\psi_1\right\rangle,\left|\psi_2\right\rangle\right) = \left|\left\langle\psi_1\middle|\psi_2\right\rangle\right|^2.\]</div>
-<p>The fidelity is equal to <span class="math notranslate nohighlight">\(1\)</span> if and only if two states are equal.</p>
+<p>如果僅在兩個狀態相等時，保真度等於 <span class="math notranslate nohighlight">\(1\)</span> 。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[85]:
 </pre></div>
@@ -2564,20 +2565,20 @@ array([6.93889390e-17+2.50000000e-01j, 3.53553391e-01+4.16333634e-17j,
 1.0
 </pre></div></div>
 </div>
-<section id="Further-details:">
-<h3>Further details:<a class="headerlink" href="#Further-details:" title="本標題的永久連結">¶</a></h3>
-<p>How does the desired state get generated behind the scenes? There are multiple methods for doing this. Qiskit uses a <a class="reference external" href="https://arxiv.org/abs/quant-ph/0406176">method proposed by Shende et al</a>. Here, the idea is to assume the quantum register to have started from our desired state, and construct a circuit that takes it to the <span class="math notranslate nohighlight">\(\left|00..0\right\rangle\)</span> state. The initialization circuit is then the reverse of such circuit.</p>
-<p>To take an arbitrary quantum state to the zero state in the computational basis, we perform an iterative procedure that disentangles qubits from the register one-by-one. We know that any arbitrary single-qubit state <span class="math notranslate nohighlight">\(\left|\rho\right\rangle\)</span> can be taken to the <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> state using a <span class="math notranslate nohighlight">\(\phi\)</span>-degree rotation about the Z axis followed by a <span class="math notranslate nohighlight">\(\theta\)</span>-degree rotation about the Y axis:</p>
+<section id="更多詳情">
+<h3>更多詳情<a class="headerlink" href="#更多詳情" title="本標題的永久連結">¶</a></h3>
+<p>在場景背後要如何產生想要的狀態？ 有多種方法可以這樣做。 Qiskit 採用了 Shende et al &lt;<a class="reference external" href="https://arxiv.org/abs/quant-ph/0406176">https://arxiv.org/abs/quant-ph/0406176</a>&gt;` 提出的方法。這裡的想法是假設量子暫存器是從我們想要的狀態開始的，並建構一個電路，將它帶至 <span class="math notranslate nohighlight">\(\left|00..0\right\rangle\)</span> 狀態。 該初始化電路則是該電路的反向。</p>
+<p>我們採取反覆步驟將寄存器中的量子位元一一解開，以將任何量子狀態帶到計算基礎的零狀態。我們知道任何一個單量子位元狀態：<span class="math notranslate nohighlight">\(\left|\rho\right\rangle\)</span>phi`繞 Z 軸旋轉度數和：<span class="math notranslate nohighlight">\(\theta\)</span>left|0rightrangle` 使用度數旋轉的狀態。</p>
 <div class="math notranslate nohighlight">
 \[R_y(-\theta)R_z(-\phi)\left|\rho\right\rangle = re^{it}\left|0\right\rangle\]</div>
-<p>Since now we are dealing with <span class="math notranslate nohighlight">\(n\)</span> qubits instead of just 1, we must factorize the state vector to separate the Least Significant Bit (LSB):</p>
+<p>現在我們處理的是 <span class="math notranslate nohighlight">\(n\)</span> 量子位元，而不是單量子位元，我們必須將狀態向量分解，以分離最不重要的位元（ LSB ）：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
  \left|\psi\right\rangle =&amp; \alpha_{0_0}\left|00..00\right\rangle + \alpha_{0_1}\left|00..01\right\rangle + \alpha_{1_0}\left|00..10\right\rangle + \alpha_{1_1}\left|00..11\right\rangle + ... \\&amp;+ \alpha_{(2^{n-1}-1)_0}\left|11..10\right\rangle + \alpha_{(2^{n-1}-1)_1}\left|11..11\right\rangle \\
 =&amp; \left|00..0\right\rangle (\alpha_{0_0}\left|0\right\rangle + \alpha_{0_1}\left|1\right\rangle) + \left|00..1\right\rangle (\alpha_{1_0}\left|0\right\rangle + \alpha_{1_1}\left|1\right\rangle) + ... \\&amp;+ \left|11..1\right\rangle (\alpha_{(2^{n-1}-1)_0}(\left|0\right\rangle + \alpha_{(2^{n-1}-1)_1}\left|1\right\rangle) \\
 =&amp; \left|00..0\right\rangle\left|\rho_0\right\rangle + \left|00..1\right\rangle\left|\rho_1\right\rangle + ... + \left|11..1\right\rangle\left|\rho_{2^{n-1}-1}\right\rangle
 \end{align*}\end{split}\]</div>
-<p>Now each of the single-qubit states <span class="math notranslate nohighlight">\(\left|\rho_0\right\rangle, ..., \left|\rho_{2^{n-1}-1}\right\rangle\)</span> can be taken to <span class="math notranslate nohighlight">\(\left|0\right\rangle\)</span> by finding appropriate <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span> angles per the equation above. Doing this simultaneously on all states amounts to the following unitary, which disentangles the LSB:</p>
+<p>其中每1個量子位元狀態 <span class="math notranslate nohighlight">\(\left|\rho_0\right\rangle, ..., \left|\rho_{2^{n-1}-1}\right\rangle\)</span>left|0rightrangle`通過找到合適的角度:math:<cite>phi</cite> 和 <span class="math notranslate nohighlight">\(\theta\)</span> 得到，根據上述公式。在所有狀態下同時執行此操作可讓么正矩陣解開LSB：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}U = \begin{pmatrix}
 R_{y}(-\theta_0)R_{z}(-\phi_0) &amp; &amp; &amp; &amp;\\
@@ -2586,7 +2587,7 @@ R_{y}(-\theta_0)R_{z}(-\phi_0) &amp; &amp; &amp; &amp;\\
 &amp; &amp; . &amp; &amp;\\
 &amp; &amp; &amp; &amp; R_y(-\theta_{2^{n-1}-1})R_z(-\phi_{2^{n-1}-1})
 \end{pmatrix}\end{split}\]</div>
-<p>Hence,</p>
+<p>所以，</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}U\left|\psi\right\rangle = \begin{pmatrix} r_0e^{it_0}\\ r_1e^{it_1}\\ . \\ . \\ r_{2^{n-1}-1}e^{it_{2^{n-1}-1}} \end{pmatrix}\otimes\left|0\right\rangle\end{split}\]</div>
 <p>U can be implemented as a “quantum multiplexor” gate, since it is a block diagonal matrix. In the quantum multiplexor formalism, a block diagonal matrix of size <span class="math notranslate nohighlight">\(2^n \times 2^n\)</span>, and consisting of <span class="math notranslate nohighlight">\(2^s\)</span> blocks, is equivalent to a multiplexor with <span class="math notranslate nohighlight">\(s\)</span> select qubits and <span class="math notranslate nohighlight">\(n-s\)</span> data qubits. Depending on the state of the select qubits, the corresponding blocks are applied to the data qubits. A multiplexor of this kind can be implemented after recursive decomposition to
@@ -2644,7 +2645,7 @@ primitive gates of cx, rz and ry.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2021, Qiskit Development Team.
-      最後更新於 2021/08/19。
+      最後更新於 2021/08/23。
 
     </p>
   </div>
@@ -2663,43 +2664,43 @@ primitive gates of cx, rz and ry.</p>
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">Summary of Quantum Operations</a><ul>
-<li><a class="reference internal" href="#Single-Qubit-Quantum-states">Single Qubit Quantum states</a></li>
+<li><a class="reference internal" href="#">量子操作摘要</a><ul>
+<li><a class="reference internal" href="#單量子位元量子態">單量子位元量子態</a></li>
 <li><a class="reference internal" href="#單量子位元閘">單量子位元閘</a><ul>
-<li><a class="reference internal" href="#u-gates">u gates</a></li>
-<li><a class="reference internal" href="#Identity-gate">Identity gate</a></li>
-<li><a class="reference internal" href="#Pauli-gates">Pauli gates</a><ul>
+<li><a class="reference internal" href="#u-閘">u 閘</a></li>
+<li><a class="reference internal" href="#單位閘">單位閘</a></li>
+<li><a class="reference internal" href="#Pauli-閘">Pauli 閘</a><ul>
 <li><a class="reference internal" href="#X：位元翻轉閘"><span class="math notranslate nohighlight">\(X\)</span>：位元翻轉閘</a></li>
 <li><a class="reference internal" href="#Y：位元和相位翻轉閘"><span class="math notranslate nohighlight">\(Y\)</span>：位元和相位翻轉閘</a></li>
 <li><a class="reference internal" href="#Z：相位翻轉閘"><span class="math notranslate nohighlight">\(Z\)</span>：相位翻轉閘</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Clifford-gates">Clifford gates</a><ul>
-<li><a class="reference internal" href="#Hadamard-gate">Hadamard gate</a></li>
-<li><a class="reference internal" href="#S-(or,-\sqrt{Z}-phase)-gate"><span class="math notranslate nohighlight">\(S\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
-<li><a class="reference internal" href="#S^{\dagger}-(or,-conjugate-of-\sqrt{Z}-phase)-gate"><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> phase) gate</a></li>
+<li><a class="reference internal" href="#Clifford-閘">Clifford 閘</a><ul>
+<li><a class="reference internal" href="#Hadamard-閘">Hadamard 閘</a></li>
+<li><a class="reference internal" href="#S-（或-\sqrt{Z}-相位）閘"><span class="math notranslate nohighlight">\(S\)</span> （或 <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> 相位）閘</a></li>
+<li><a class="reference internal" href="#S^{\dagger}-（或-\sqrt{Z}-的共軛之相位）閘"><span class="math notranslate nohighlight">\(S^{\dagger}\)</span> （或 <span class="math notranslate nohighlight">\(\sqrt{Z}\)</span> 的共軛之相位）閘</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#C3-gates"><span class="math notranslate nohighlight">\(C3\)</span> gates</a><ul>
-<li><a class="reference internal" href="#T-(or,-\sqrt{S}-phase)-gate"><span class="math notranslate nohighlight">\(T\)</span> (or, <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
-<li><a class="reference internal" href="#T^{\dagger}-(or,-conjugate-of-\sqrt{S}-phase)-gate"><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> (or, conjugate of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> phase) gate</a></li>
+<li><a class="reference internal" href="#C3-閘"><span class="math notranslate nohighlight">\(C3\)</span> 閘</a><ul>
+<li><a class="reference internal" href="#T-（或，-\sqrt{S}-相位）閘"><span class="math notranslate nohighlight">\(T\)</span> （或， <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> 相位）閘</a></li>
+<li><a class="reference internal" href="#T^{\dagger}-（或，共軛-of-\sqrt{S}-相位）閘"><span class="math notranslate nohighlight">\(T^{\dagger}\)</span> （或，共軛 of <span class="math notranslate nohighlight">\(\sqrt{S}\)</span> 相位）閘</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Standard-Rotations">Standard Rotations</a><ul>
-<li><a class="reference internal" href="#Rotation-around-X-axis">Rotation around X-axis</a></li>
-<li><a class="reference internal" href="#Rotation-around-Y-axis">Rotation around Y-axis</a></li>
-<li><a class="reference internal" href="#Rotation-around-Z-axis">Rotation around Z-axis</a></li>
+<li><a class="reference internal" href="#繞-X-軸旋轉">繞 X 軸旋轉</a></li>
+<li><a class="reference internal" href="#繞-Y-軸旋轉">繞 Y 軸旋轉</a></li>
+<li><a class="reference internal" href="#繞-Z-軸旋轉">繞 Z 軸旋轉</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Multi-Qubit-Gates">Multi-Qubit Gates</a><ul>
+<li><a class="reference internal" href="#多量子位元閘">多量子位元閘</a><ul>
 <li><a class="reference internal" href="#Mathematical-Preliminaries">Mathematical Preliminaries</a></li>
 <li><a class="reference internal" href="#Basis-vector-ordering-in-Qiskit">Basis vector ordering in Qiskit</a></li>
 <li><a class="reference internal" href="#Controlled-operations-on-qubits">Controlled operations on qubits</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Two-qubit-gates">Two-qubit gates</a><ul>
+<li><a class="reference internal" href="#雙量子閘">雙量子閘</a><ul>
 <li><a class="reference internal" href="#Controlled-Pauli-Gates">Controlled Pauli Gates</a><ul>
 <li><a class="reference internal" href="#Controlled-X-(or,-controlled-NOT)-gate">Controlled-X (or, controlled-NOT) gate</a></li>
 <li><a class="reference internal" href="#Controlled-Y-gate">Controlled <span class="math notranslate nohighlight">\(Y\)</span> gate</a></li>
@@ -2712,23 +2713,23 @@ primitive gates of cx, rz and ry.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#Controlled-phase-rotation">Controlled phase rotation</a></li>
-<li><a class="reference internal" href="#Controlled-u-rotation">Controlled <span class="math notranslate nohighlight">\(u\)</span> rotation</a></li>
-<li><a class="reference internal" href="#SWAP-gate">SWAP gate</a></li>
+<li><a class="reference internal" href="#Controlled-u-旋轉">Controlled <span class="math notranslate nohighlight">\(u\)</span> 旋轉</a></li>
+<li><a class="reference internal" href="#SWAP閘">SWAP閘</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Three-qubit-gates">Three-qubit gates</a><ul>
-<li><a class="reference internal" href="#Toffoli-gate-(ccx-gate)">Toffoli gate (<span class="math notranslate nohighlight">\(ccx\)</span> gate)</a></li>
-<li><a class="reference internal" href="#Controlled-swap-gate-(Fredkin-Gate)">Controlled swap gate (Fredkin Gate)</a></li>
+<li><a class="reference internal" href="#Toffoli-閘（ccx-閘）">Toffoli 閘（<span class="math notranslate nohighlight">\(ccx\)</span> 閘）</a></li>
+<li><a class="reference internal" href="#控制的swap閘（-Fredkin-閘）">控制的swap閘（ Fredkin 閘）</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#Non-unitary-operations">Non-unitary operations</a><ul>
 <li><a class="reference internal" href="#Measurements">Measurements</a></li>
-<li><a class="reference internal" href="#Reset">Reset</a></li>
-<li><a class="reference internal" href="#Conditional-operations">Conditional operations</a></li>
+<li><a class="reference internal" href="#重置">重置</a></li>
+<li><a class="reference internal" href="#條件運算子">條件運算子</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#Arbitrary-initialization">Arbitrary initialization</a><ul>
-<li><a class="reference internal" href="#Further-details:">Further details:</a></li>
+<li><a class="reference internal" href="#任意起始設定">任意起始設定</a><ul>
+<li><a class="reference internal" href="#更多詳情">更多詳情</a></li>
 </ul>
 </li>
 </ul>
