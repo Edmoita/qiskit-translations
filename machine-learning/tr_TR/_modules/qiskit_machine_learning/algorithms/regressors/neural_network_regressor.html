@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>qiskit_machine_learning.algorithms.regressors.neural_network_regressor &mdash; Qiskit Machine Learning 0.2.0 belgelendirmesi</title>
+  <title>qiskit_machine_learning.algorithms.regressors.neural_network_regressor &mdash; Qiskit Machine Learning 0.2.1 belgelendirmesi</title>
   
 
   
@@ -151,7 +151,7 @@
               
               
                 <div class="version">
-                  0.2.0
+                  0.2.1
                 </div>
               
             
@@ -294,9 +294,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">function</span> <span class="o">=</span> <span class="n">MultiClassObjectiveFunction</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neural_network</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss</span><span class="p">)</span>
 
+        <span class="n">objective</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_objective</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_fit_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_neural_network</span><span class="o">.</span><span class="n">num_weights</span><span class="p">,</span>
-            <span class="n">function</span><span class="o">.</span><span class="n">objective</span><span class="p">,</span>
+            <span class="n">objective</span><span class="p">,</span>
             <span class="n">function</span><span class="o">.</span><span class="n">gradient</span><span class="p">,</span>
             <span class="n">initial_point</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_choose_initial_point</span><span class="p">(),</span>
         <span class="p">)</span>
